@@ -19,16 +19,22 @@
                     </li>
     
                     <li>
-                        <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Individual Verifications</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Identity Verification</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
-                             <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Verify Phone Number</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>International Passport</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Verify National ID</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Verify Address</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Verify Driver's License</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Educational Check</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Driving License</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Guarantors Address Check</a></li>
+                             <li class="nav-item"><a class="nav-link" href="{{route('verify_phone')}}"><i class="ti-control-record"></i>NIP</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>PVC</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>BVN</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>NDL</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>NIN</a></li>
+                        </ul>
+                    </li> 
+
+                         <li>
+                        <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Address Verification</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                             <li class="nav-item"><a class="nav-link" href="{{route('verify_phone')}}"><i class="ti-control-record"></i>Individual Address</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Reference Address</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Business Address </a></li>
                         </ul>
                     </li> 
 
@@ -58,9 +64,6 @@
                     <li>
                         <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Transactions</span></a>
                     </li> 
-                    <li>
-                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Sessions</span></a>
-                    </li>
                     </li>  <hr class="hr-dashed hr-menu">
                     <li class="menu-label my-2">Administrative Task</li>
                     <li>

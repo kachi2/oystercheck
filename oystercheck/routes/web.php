@@ -22,5 +22,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/user/verification/{slug}', [HomeController::class, 'VerifyIndex'])->name('verifyIndex');
-Route::post('/user/verification/verify/', [IdentityController::class, ' StoreVerify']);
+Route::get('/home', [HomeController::class, 'index'])->name('index');
+Route::get('/user/identities/check/{slug}', [HomeController::class, 'VerifyIndex'])->name('verifyIndex');
+Route::post('/user/identities/verify/', [IdentityController::class, ' StoreVerify']);

@@ -14,11 +14,14 @@ class InputFieldSeeder extends Seeder
     public function run()
     {
         $run = [
-            ['slug' => 'NIN', 'name'=>'reference', 'placeholder'=>'Enter NIN number', 'type'=>'text', 'is_required'=>'1'],  
-            ['slug' => 'NIP', 'name'=>'reference', 'placeholder'=>'Enter NIP number', 'type'=>'text', 'is_required'=>'1'],
-            ['slug' => 'PVc', 'name'=>'reference', 'placeholder'=>'Enter PVC number', 'type'=>'text', 'is_required'=>'1'],
-            ['slug' => 'BVN', 'name'=>'reference', 'placeholder'=>'Enter BVN number', 'type'=>'text', 'is_required'=>'1']   
-         
+            ['slug' => 'NIN', 'name'=>'last_name', 'placeholder'=>'Enter Last Name', 'type'=>'text', 'is_required'=>'1'],  
+            ['slug' => 'NIP', 'name'=>'last_name', 'placeholder'=>'Enter Last Name', 'type'=>'text', 'is_required'=>'1'],
+            ['slug' => 'PVc', 'name'=>'last_name', 'placeholder'=>'Enter Last Name', 'type'=>'text', 'is_required'=>'1'],
+            ['slug' => 'BVN', 'name'=>'last_name', 'placeholder'=>'Enter Last Name', 'type'=>'text', 'is_required'=>'1'], 
+            ['slug' => 'NIN', 'name'=>'first_name', 'placeholder'=>'Enter  First Name', 'type'=>'text', 'is_required'=>'0'],  
+            ['slug' => 'NIP', 'name'=>'first_name', 'placeholder'=>'Enter  First Name ', 'type'=>'text', 'is_required'=>'0'],
+            ['slug' => 'PVc', 'name'=>'first_name', 'placeholder'=>'Enter First Namer', 'type'=>'text', 'is_required'=>'0'],
+            ['slug' => 'BVN', 'name'=>'first_name', 'placeholder'=>'Enter First Name', 'type'=>'text', 'is_required'=>'0']   
        
         ];
 

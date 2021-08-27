@@ -89,23 +89,30 @@
                         </div>
         </div>
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">{{$slug->name}} Verification</h4>
+                        <h4 class="card-title">{{$slug->name}} ({{$slug->slug}})Verification</h4>
                        
                     </div><!--end card-header-->
                     <div class="card-body bootstrap-select-1">
                         <div class="row">
                         @foreach($fields as $input)
-                            <div class="col-md-12">
-                                <label class="mb-3"></label>
+                       
+                            <div class="col-md-6">
+                                <label class="mb-3" style="font-weight:bolder">{{$input->label}}</label> @if($input->is_required == 1) <span style="color:red; font-weight:bolder"> * </span> @endif
                                 <input type="{{$input->type}}" name="{{$input->name}}" class="form-control mb-3 custom-select" placeholder="{{$input->placeholder}}" @if($input->is_required == 1) required @endif> 
                             </div><!-- end col -->                                     
                              <!-- end col -->
+                        
                              @endforeach
+                             
                              <div class="col-md-12">
-                            <span class="float-end"><button type="submit" class="btn btn-primary w-100"> Verify {{$slug->slug}}</button> </span> 
+                             <div class="col-md-6"> 
+                             <input type="checkbox" required> 
+                             <span style="font-size:11px;"> By checking this box you acknowledge that you have gotten consent from that data subject to use their data for verification purposes on our platform in accourdance to our Privacy Policy</span>
+                             </div>
+                            <span class="float-end"><button type="submit" class="btn btn-primary w-100"> Verify Candidate {{$slug->slug}}</button> </span> 
                             </div>                                               
                         </div><!-- end row --> 
                     </div><!-- end card-body --> 

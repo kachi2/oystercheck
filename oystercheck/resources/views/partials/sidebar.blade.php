@@ -5,7 +5,7 @@
             <div class="brand">
                 <a href="index.html" class="logo">
                     <span>
-                        <img src="assets/images/logo.png"  width="150px" alt="logo-large" class="logo-light"> 
+                        <img src="{{asset('/assets/images/logo.png')}}"  width="150px" alt="logo-large" class="logo-light"> 
                     </span>  
                 </a>
             </div>
@@ -21,18 +21,16 @@
                     <li>
                         <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Identity Verification</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
-                             <li class="nav-item"><a class="nav-link" href="{{route('verify_phone')}}"><i class="ti-control-record"></i>NIP</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>PVC</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>BVN</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>NDL</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>NIN</a></li>
+                            @foreach($sidebar as $menu)
+                             <li class="nav-item"><a class="nav-link" href="{{route('verifyIndex',$menu->slug)}}"><i class="ti-control-record"></i>{{$menu->slug}}</a></li>
+                             @endforeach
                         </ul>
                     </li> 
 
                          <li>
                         <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Address Verification</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
-                             <li class="nav-item"><a class="nav-link" href="{{route('verify_phone')}}"><i class="ti-control-record"></i>Individual Address</a></li>
+                             <li class="nav-item"><a class="nav-link" href="{{route('verifyIndex','nin')}}"><i class="ti-control-record"></i>Individual Address</a></li>
                             <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Reference Address</a></li>
                             <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Business Address </a></li>
                         </ul>

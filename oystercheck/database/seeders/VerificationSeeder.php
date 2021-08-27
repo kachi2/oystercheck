@@ -17,10 +17,10 @@ class VerificationSeeder extends Seeder
     
         $data = [
 
-            ['type' => 'passport', 'name'=>'Nigeria International Passport', 'report_type'=>'identity', 'slug'=>'NIP'], 
-            ['type' => 'inec', 'name'=>'Permanent Voters Card', 'report_type'=>'identity', 'slug'=>'PVC'], 
-            ['type' => 'ibvn', 'name'=>'Bank Verification Number', 'report_type'=>'identity', 'slug'=>'BVN'], 
-            ['type' => 'nin', 'name'=>'National Identity Number', 'report_type'=>'identity', 'slug'=>'NIN']
+            ['slug' => 'passport', 'name'=>'Nigeria International Passport', 'report_type'=>'identity', 'slug'=>'NIP'], 
+            ['slug' => 'inec', 'name'=>'Permanent Voters Card', 'report_type'=>'identity', 'slug'=>'PVC'], 
+            ['slug' => 'ibvn', 'name'=>'Bank Verification Number', 'report_type'=>'identity', 'slug'=>'BVN'], 
+            ['slug' => 'nin', 'name'=>'National Identity Number', 'report_type'=>'identity', 'slug'=>'NIN']
         ];
 
     foreach($data as $daa){

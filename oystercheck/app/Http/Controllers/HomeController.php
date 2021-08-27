@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Verification;
+use App\Models\IdentityVerification;
+use App\Models\FieldInput;
 class HomeController extends Controller
 {
     /**
@@ -26,7 +28,14 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function phoneVerify(){
-        return view('users.individual.bvn');
+    public function VerifyIndex($slug){
+        $slug = strtoupper($slug);
+        $slug = Verification::where('slug', $slug)->first();
+        $data['slug'] = Verification::where('slug', $slug->slug)->first();
+        $data['success'] = IdentityVerification::where(['status'=>'success', 'verification_id'=>$slug->id])->get();
+        $data['failed'] = IdentityVerification::where(['status'=>'failed', 'verification_id'=>$slug->id])->get();
+        $data['pending'] = IdentityVerification::where(['status'=>'pending', 'verification_id'=>$slug->id])->get();
+        $data['fields'] = FieldInput::where(['slug'=>$slug->slug])->get();
+        return view('users.individual.identityVerify', $data);
     }
 }

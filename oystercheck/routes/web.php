@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IdentityController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,4 +22,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/user/verification/phone', [HomeController::class, 'phoneVerify'])->name('verify_phone');
+Route::get('/user/verification/{slug}', [HomeController::class, 'VerifyIndex'])->name('verifyIndex');
+Route::post('/user/verification/verify/', [IdentityController::class, ' StoreVerify']);

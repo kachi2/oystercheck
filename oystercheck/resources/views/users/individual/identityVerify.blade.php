@@ -7,7 +7,7 @@
                             <div class="page-title-box">
                                 <div class="row">
                                     <div class="col">
-                                        <h4 class="page-title">Phone Verifications</h4>
+                                        <h4 class="page-title">{{$slug->slug}} Verification</h4>
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"></li>
                                         </ol>
@@ -34,8 +34,8 @@
                                         <div class="card-body" style="background:rgb(36, 16, 82)">
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
-                                                    <p class="mb-0 fw-semibold text-white">Successful verifications</p>
-                                                    <h3 class="m-0 text-white">50000</h3>
+                                                    <p class="mb-0 fw-semibold text-white">Successful {{$slug->slug}} verifications</p>
+                                                    <h3 class="m-0 text-white">{{count($success)}}</h3>
                                                     <p class="mb-0 text-truncate text-white"><span class="text-success">+50</span> this week</p>
                                                 </div>
                                                 <div class="col-auto align-self-center">
@@ -52,8 +52,8 @@
                                         <div class="card-body" style="background:rgb(36, 16, 82)">
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
-                                                    <p class="text-white mb-0 fw-semibold">Failed verifications</p>
-                                                    <h3 class="m-0 text-white">200</h3>
+                                                    <p class="text-white mb-0 fw-semibold">Failed {{$slug->slug}}  verifications</p>
+                                                    <h3 class="m-0 text-white">{{count($failed)}}</h3>
                                                     <p class="mb-0 text-truncate text-white"><span class="text-danger">+5</span> this week</p>
                                                 </div>
                                                 <div class="col-auto align-self-center">
@@ -71,7 +71,7 @@
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
                                                     <p class="text-white mb-0 fw-semibold">Pending Request</p>
-                                                    <h3 class="m-0 text-white">500</h3>
+                                                    <h3 class="m-0 text-white">{{count($pending)}}</h3>
                                                     <p class="mb-0 text-truncate text-white"><span class="text-success">+20</span> this week</p>
                                                 </div>
                                                 <div class="col-auto align-self-center">
@@ -82,57 +82,33 @@
                                             </div>
                                         </div><!--end card-body--> 
                                     </div><!--end card--> 
-                                </div> <!--end col--> 
+                              </div> <!--end col--> 
                               
                               <!--end col-->                               
-                            </div><!--end row-->
-                          
+                            </div><!--end row-->                
                         </div>
         </div>
-
         <div class="row">
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Phone Number Verify</h4>
-                        <p class="text-muted mb-0">Our phone number verification allows you to verify details used in regestring the phone number.
-                        </p>
+                        <h4 class="card-title">{{$slug->name}} Verification</h4>
+                       
                     </div><!--end card-header-->
                     <div class="card-body bootstrap-select-1">
                         <div class="row">
+                        @foreach($fields as $input)
                             <div class="col-md-12">
-                                <label class="mb-3">Enter Phone number</label>
-                                <input type="text" class="form-control mb-3 custom-select" placeholder="phone number"> 
+                                <label class="mb-3"></label>
+                                <input type="{{$input->type}}" name="{{$input->name}}" class="form-control mb-3 custom-select" placeholder="{{$input->placeholder}}" @if($input->is_required == 1) required @endif> 
                             </div><!-- end col -->                                     
                              <!-- end col -->
-                             
+                             @endforeach
                              <div class="col-md-12">
-                            <span class="float-end"><button type="submit" class="btn btn-primary w-100"> Verify Phone</button> </span> 
+                            <span class="float-end"><button type="submit" class="btn btn-primary w-100"> Verify {{$slug->slug}}</button> </span> 
                             </div>                                               
                         </div><!-- end row --> 
                     </div><!-- end card-body --> 
-                </div> <!-- end card -->                               
-            </div> <!-- end col -->
-            <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Note!</h4>
-                        <p class="text-muted mb-0">Phone Number verification is an instant verification, you will be charged N500 per verification </p>
-                    </div><!--end card-header-->
-                    <div class="card-body bootstrap-select-1">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label class="mb-3">Wallet Balance</label> 
-                                <button class="btn btn-soft-primary"> N3000</button>  
-                            </div>
-                            <hr>  <!-- end row -->  
-                            <div class="col-md-12">
-
-                                <label class="mb-3 text-danger">Your wallet balance is too low for this transaction</label>  
-                            </div>                                
-                            <!-- end row -->
-                        </div><!-- end row -->
-                    </div> <!-- end card-body -->
                 </div> <!-- end card -->                               
             </div> <!-- end col -->
         </div>
@@ -141,7 +117,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Phone Verification log</h4>
+                        <h4 class="card-title">{{$slug->slug}} Verification log</h4>
                       
                     </div><!--end card-header-->
                     <div class="card-body">  

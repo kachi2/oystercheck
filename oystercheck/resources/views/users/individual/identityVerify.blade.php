@@ -117,7 +117,7 @@
                             </div>                                               
                         </div><!-- end row --> 
                     </div><!-- end card-body --> 
-                    {{Form::close()}}
+                    </form>
                 </div> <!-- end card -->                               
             </div> <!-- end col -->
         </div>

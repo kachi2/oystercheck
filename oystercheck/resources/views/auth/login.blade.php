@@ -127,7 +127,7 @@
                                     <div class="slider-item">
                                         <div class="nk-feature nk-feature-center">
                                             <div class="nk-feature-img">
-                                                <img class="round" src="{{asset('/assets/images/login.png')}}" srcset="{{asset('/assets/images/login.png')}} 2x" alt="">
+                                                <img class="round" src="{{asset('/assets/images/login2.png')}}" srcset="{{asset('/assets/images/login2.png')}} 2x" alt="">
                                             </div>
                                             <div class="nk-feature-content py-4 p-sm-5">
                                                 <h6>Comprehensive Background Checks</h6>
@@ -139,7 +139,7 @@ Relax and get to enjoy comprehensive background checks from us. Oysterchecks is 
                                     <div class="slider-item">
                                         <div class="nk-feature nk-feature-center">
                                             <div class="nk-feature-img">
-                                                <img class="round" src="{{asset('/assets/images/login2.png')}}" srcset="{{asset('/assets/images/login2.png')}} 2x" alt="">
+                                                <img class="round" src="{{asset('/assets/images/login.png')}}" srcset="{{asset('/assets/images/login.png')}} 2x" alt="">
                                             </div>
                                             <div class="nk-feature-content py-4 p-sm-5">
                                                 <h4>Had Enough Of Inconsistent KYC Check Results?</h4>

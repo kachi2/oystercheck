@@ -78,7 +78,7 @@
                         </li> 
                         <li class="creat-btn">
                             <div class="nav-link">
-                                <a class=" btn btn-sm btn-soft-primary" href="#" role="button">Supr Admin Account</a>
+                                <a class=" btn btn-sm btn-soft-primary" href="#" role="button">Admin Account</a>
                             </div>                                
                         </li>                           
                     </ul>

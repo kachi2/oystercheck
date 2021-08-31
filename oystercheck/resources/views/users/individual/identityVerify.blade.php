@@ -93,29 +93,31 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">{{$slug->name}} ({{$slug->slug}})Verification</h4>
-                       
                     </div><!--end card-header-->
+                       <form method="POST" action="{{route('StoreVerify',$slug->slug)}}">
+            @csrf
                     <div class="card-body bootstrap-select-1">
                         <div class="row">
                         @foreach($fields as $input)
-                       
                             <div class="col-md-6">
                                 <label class="mb-3" style="font-weight:bolder">{{$input->label}}</label> @if($input->is_required == 1) <span style="color:red; font-weight:bolder"> * </span> @endif
                                 <input type="{{$input->type}}" name="{{$input->name}}" class="form-control mb-3 custom-select" placeholder="{{$input->placeholder}}" @if($input->is_required == 1) required @endif> 
                             </div><!-- end col -->                                     
                              <!-- end col -->
-                        
-                             @endforeach
-                             
+                             @endforeach 
                              <div class="col-md-12">
-                             <div class="col-md-6 p-3" > 
+                             <div class="col-md-6 p-3">
+                             <span style="color:red; font-size:11px;"> Note: You will be charged  ₦{{number_format($slug->fee, 2)}} for each {{$slug->slug}} Verification</span> <br> 
+                              <span style="color:darkblue; font-size:11px;">Your wallet Balance is  ₦{{number_format($wallet, 2)}}</span> <br> 
+                            
                              <input type="checkbox" required> 
-                             <span style="font-size:11px;" > By checking this box you acknowledge that you have gotten consent from that data subject to use their data for verification purposes on our platform in accourdance to our Privacy Policy</span>
+                             <span style="font-size:11px;" > By checking this box you acknowledge that you have gotten consent from that data subject to use their data for verification purposes on our platform in accourdance to our <a href="#"> Privacy Policy</a></span>
                              </div>
                             <span class="float-center p-2"><button type="submit" class="btn btn-primary w-23"> Verify Candidate {{$slug->slug}}</button> </span> 
                             </div>                                               
                         </div><!-- end row --> 
                     </div><!-- end card-body --> 
+                    {{Form::close()}}
                 </div> <!-- end card -->                               
             </div> <!-- end col -->
         </div>
@@ -132,65 +134,29 @@
                             <thead>
                             <tr>
                                 <th>#S/N</th>
-                                <th>Phone</th>
-                                <th>verified by</th>
+                                <th>{{$slug->slug}} Verification</th>
+                                <th>Verified by</th>
                                 <th>Fee</th>
                                 <th>Status</th>
                                 <th>Date</th>
+                                 <th>Action</th>
                             </tr>
                             </thead>
 
 
                             <tbody>
-                           
+                      
+                        @foreach ($logs as $trans )
                             <tr>
-                                <td>1</td>
-                                <td>2348039366207</td>
-                                <td>Kachi</td>
-                                <td>N400</td>
-                                <td><span class="text-success">success</span></td>
-                                <td>24/6/2021</td>
+                                <td>{{$trans->id}}</td>
+                                <td>{{$trans->service_reference}}</td>
+                                <td>{{$trans->user->name}}</td>
+                                <td>{{$trans->fee}}</td>
+                                <td>@if($trans->status == 'success') <span class="text-success"> {{$trans->status}}</span> @elseif($trans->status == 'pending')<span class="text-warning"> {{$trans->status}}</span>  @else <span class="text-danger"> {{$trans->status}}</span> @endif  </td>
+                                <td>{{$trans->created_at}}</td>
+                                <td><a href="#">View Details</a></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>2348039366207</td>
-                                <td>Kachi</td>
-                                <td>N400</td>
-                                <td><span class="text-info">pending</span></td>
-                                <td>24/6/2021</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>2348039366207</td>
-                                <td>Kachi</td>
-                                <td>N400</td>
-                                <td><span class="text-danger">failed</span></td>
-                                <td>24/6/2021</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>2348039366207</td>
-                                <td>Kachi</td>
-                                <td>N400</td>
-                                <td><span class="text-info">pending</span></td>
-                                <td>24/6/2021</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>2348039366207</td>
-                                <td>Kachi</td>
-                                <td>N400</td>
-                                <td><span class="text-success">success</span></td>
-                                <td>24/6/2021</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>2348039366207</td>
-                                <td>Kachi</td>
-                                <td>N400</td>
-                                <td><span class="text-danger">failed</span></td>
-                                <td>24/6/2021</td>
-                            </tr>
+                             @endforeach
                       
                             </tbody>
                         </table>        

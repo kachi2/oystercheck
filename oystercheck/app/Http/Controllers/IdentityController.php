@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\FAcades\Session;
-use illuminate\support\Facades\Validator;
+use Illuminate\support\Facades\Validator;
 use App\Traits\GenerateRef;
 use App\Models\Transaction;
 use App\Models\ApiResponse;
 use App\Models\IdentityVerification;
 use App\Models\Verification;
+use App\Models\User;
 
 class IdentityController extends Controller
 {
@@ -19,6 +20,11 @@ class IdentityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+     {
+       // return $this->user = auth()->user();
+     }
     public function index()
     {
         //
@@ -98,7 +104,7 @@ class IdentityController extends Controller
             'reference' => 'required'
         ]);
         $ref = $this->GenerateRef();
-        $slug = Verification::where($slug, $slug)->first();
+        $slug = Verification::where('slug', $slug)->first();
 
             if($validate->fails()){
                 Session::flash('alert', 'error');
@@ -110,15 +116,21 @@ class IdentityController extends Controller
                     'verification_id' => $slug->id,
                     'ref' => $ref,
                     'service_reference' => $request->reference,
-                    'initiate_by' => auth()->user()->id,
+                    'initiate_by' => 1,
                     'fee' => $slug->fee,
                     'discount'=>$slug->discount,
                     'status' => 'pending'
         ]);
         
         if($createVerify){
-            return "saved";
+        
+            return "this is the user".auth()->user();
         }
     }
 
+
+    public function chargeUser($amount){
+        $user = User::where('id', auth()->user()->id)->first();
+        if($user->wallet)
+    }
 }

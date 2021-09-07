@@ -15,6 +15,16 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            
+            $table->string('ref')->nullable();
+            $table->foreignId('user_id')->constrained();
+            $table->string('external_ref')->nullable();
+            $table->string('purpose')->nullable();
+            $table->string('service_type')->nullable();
+            $table->string('type')->nullable();
+            $table->double('amount')->nullable();
+            $table->double('prev_balance')->nullable();
+            $table->double('avail_balance')->nullable();
             $table->timestamps();
         });
     }

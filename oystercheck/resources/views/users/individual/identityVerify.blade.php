@@ -108,7 +108,7 @@
                              <div class="col-md-12">
                              <div class="col-md-6 p-3">
                              <span style="color:red; font-size:11px;"> Note: You will be charged  ₦{{number_format($slug->fee, 2)}} for each {{$slug->slug}} Verification</span> <br> 
-                              <span style="color:darkblue; font-size:11px;">Your wallet Balance is  ₦{{number_format($wallet, 2)}}</span> <br> 
+                              <span style="color:darkblue; font-size:11px;">Your wallet Balance is  ₦{{number_format($wallet->total_balance, 2)}}</span> <br> 
                             
                              <input type="checkbox" required> 
                              <span style="font-size:11px;" > By checking this box you acknowledge that you have gotten consent from that data subject to use their data for verification purposes on our platform in accourdance to our <a href="#"> Privacy Policy</a></span>

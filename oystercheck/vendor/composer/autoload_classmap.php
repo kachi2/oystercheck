@@ -171,6 +171,7 @@ return array(
     'Database\\Seeders\\IdentityVerificationSeeder' => $baseDir . '/database/seeders/IdentityVerificationSeeder.php',
     'Database\\Seeders\\InputFieldSeeder' => $baseDir . '/database/seeders/InputFieldSeeder.php',
     'Database\\Seeders\\VerificationSeeder' => $baseDir . '/database/seeders/VerificationSeeder.php',
+    'Database\\Seeders\\WalletSeeder' => $baseDir . '/database/seeders/WalletSeeder.php',
     'DeepCopy\\DeepCopy' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
     'DeepCopy\\Exception\\CloneException' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',
     'DeepCopy\\Exception\\PropertyException' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/Exception/PropertyException.php',

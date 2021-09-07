@@ -54,13 +54,13 @@
                                         <div class="form-label-group">
                                             <label class="form-label" for="default-01">Email or Username</label>
                                         </div>
-                                        <input type="text" name="email" class="form-control form-control-lg @errors('email') is-invalid @enderrors" id="default-01" placeholder="Enter your email address or username">
+                                        <input type="text" name="email" class="form-control form-control-lg @error('email') is-invalid @enderror" id="default-01" placeholder="Enter your email address or username">
 
                                          @error('email')
                                     <span class="btn-danger" role="alert">
                                         <strong class="">{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                         @enderror
 
                                     </div><!-- .foem-group -->
                                     <div class="form-group">
@@ -132,7 +132,7 @@
                                             <div class="nk-feature-content py-4 p-sm-5">
                                                 <h6>Comprehensive Background Checks</h6>
                                                 <p>Tired Of Poor And Shallow Background Checks?
-Relax and get to enjoy comprehensive background checks from us. Oysterchecks is dedicated in conducting extensive background checks which are essential in the recruitment process. We use advanced technology to ensure that we provide extensive information which is verified and validated in order to deliver quality solutions.</p>
+                                              Relax and get to enjoy comprehensive background checks from us. Oysterchecks is dedicated in conducting extensive background checks which are essential in the recruitment process. We use advanced technology to ensure that we provide extensive information which is verified and validated in order to deliver quality solutions.</p>
                                             </div>
                                         </div>
                                     </div><!-- .slider-item -->

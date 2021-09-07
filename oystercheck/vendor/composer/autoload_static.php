@@ -686,6 +686,7 @@ class ComposerStaticInit17d1bf47096578a8a643b5b384cb8d2f
         'Database\\Seeders\\IdentityVerificationSeeder' => __DIR__ . '/../..' . '/database/seeders/IdentityVerificationSeeder.php',
         'Database\\Seeders\\InputFieldSeeder' => __DIR__ . '/../..' . '/database/seeders/InputFieldSeeder.php',
         'Database\\Seeders\\VerificationSeeder' => __DIR__ . '/../..' . '/database/seeders/VerificationSeeder.php',
+        'Database\\Seeders\\WalletSeeder' => __DIR__ . '/../..' . '/database/seeders/WalletSeeder.php',
         'DeepCopy\\DeepCopy' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
         'DeepCopy\\Exception\\CloneException' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',
         'DeepCopy\\Exception\\PropertyException' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Exception/PropertyException.php',

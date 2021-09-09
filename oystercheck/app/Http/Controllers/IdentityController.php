@@ -129,6 +129,7 @@ class IdentityController extends Controller
         }else{
             $amount = $slug->fee;
         }
+         
         if($userWallet->total_balance < $amount){
             Session::flash('alert', 'error');
             Session::flash('msg', 'Your walllet is too low for this transaction');
@@ -136,20 +137,19 @@ class IdentityController extends Controller
             $chargeUser = $this->chargeUser($amount, $ref, $slug->report_type);
         }
         }
-        if($chargeUser){
             //check if the reference exist on the local data
-            $check = IdentityVerification::where('service_reference', $slug->service_refernce)->first();
-            if($check){
-               $referece = IdentityVerification::where('service_reference', $slug->service_refernce)->get();
+            $check = IdentityVerification::where('service_reference', $request->reference)->first();           
+            if(!$check){
+              $referece = IdentityVerification::where('service_reference', $slug->service_refernce)->get();
+              return $referece;
             }else{
                 //call the API from 3rd party to validate the reference sent
-              //  dd('calling the api endpoint');
+                //dd('calling the api endpoint');
               $cc =  $this->getIdentityVerify($request, $slug->report_type);
-
-              return $cc;
+            
+               dd($cc);
             }
         }
-    }
 
     public function chargeUser($amount, $ext_ref, $type){
         $user = User::where('id', auth()->user()->id)->first();
@@ -179,39 +179,39 @@ class IdentityController extends Controller
 
     public function getIdentityVerify($request, $type){
         $curl = curl_init();
-
-        return $type;
             $data = [
                 "report_type" => "identity", 
                 "type" => $type, 
                 "reference" => $request['reference'],
                 "last_name" => $request['last_name'], 
-                "first_name" => $request['first_name'],
+                //"first_name" => $request['first_name'],
                 "dob" => null, 
                 "subject_consent" => true,  
             ];
-
             $datas = json_encode($data, true);
 
-           // return $datas;
+            //return $datas;
         curl_setopt_array($curl, [
-          CURLOPT_URL => "https://api.staging.youverify.co/v1/identities/candidates/check",
+          CURLOPT_URL => "https://api.youverify.co/v1/identities/candidates/check",
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => "",
           CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 30,
+          CURLOPT_TIMEOUT => 280,
           CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
           CURLOPT_CUSTOMREQUEST => "POST",
           CURLOPT_POSTFIELDS => $datas,
           CURLOPT_HTTPHEADER => [
             "Content-Type: application/json",
-            "Token: a00ab3e6537fdf1e4e4c39fa355de3ec"
+            "Token: 49c11a7ef799f5695c943ba4d3d1ddcc"
           ],
         ]);
         
         $response = curl_exec($curl);
-        $err = curl_error($curl);
-        return $response;
+       // $err = curl_error($curl);
+        $res = json_decode($response, true);
+
+        
+        return $res;
 
     }
 

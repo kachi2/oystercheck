@@ -40,6 +40,7 @@ return array(
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\FieldInput' => $baseDir . '/app/Models/FieldInput.php',
     'App\\Models\\IdentityVerification' => $baseDir . '/app/Models/IdentityVerification.php',
+    'App\\Models\\IdentityVerificationDetail' => $baseDir . '/app/Models/IdentityVerificationDetail.php',
     'App\\Models\\Profile' => $baseDir . '/app/Models/Profile.php',
     'App\\Models\\Role' => $baseDir . '/app/Models/Role.php',
     'App\\Models\\Service' => $baseDir . '/app/Models/Service.php',

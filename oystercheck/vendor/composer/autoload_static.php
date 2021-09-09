@@ -555,6 +555,7 @@ class ComposerStaticInit17d1bf47096578a8a643b5b384cb8d2f
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\FieldInput' => __DIR__ . '/../..' . '/app/Models/FieldInput.php',
         'App\\Models\\IdentityVerification' => __DIR__ . '/../..' . '/app/Models/IdentityVerification.php',
+        'App\\Models\\IdentityVerificationDetail' => __DIR__ . '/../..' . '/app/Models/IdentityVerificationDetail.php',
         'App\\Models\\Profile' => __DIR__ . '/../..' . '/app/Models/Profile.php',
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
         'App\\Models\\Service' => __DIR__ . '/../..' . '/app/Models/Service.php',

@@ -38,8 +38,8 @@
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
                                                     <p class="text-white mb-0 fw-semibold">Successful verifications</p>
-                                                    <h3 class="m-0 text-white">50000</h3>
-                                                    <p class="mb-0 text-truncate text-white"><span class="text-success">+50</span> this week</p>
+                                                    <h3 class="m-0 text-white">{{count($success)}}</h3>
+                                                    <p class="mb-0 text-truncate text-white"><span class="text-success">+1</span> this week</p>
                                                 </div>
                                                 <div class="col-auto align-self-center">
                                                     <div class="report-main-icon bg-light-alt">
@@ -56,8 +56,8 @@
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
                                                     <p class="text-white mb-0 fw-semibold">Failed verifications</p>
-                                                    <h3 class="m-0 text-white">200</h3>
-                                                    <p class="mb-0 text-truncate text-white"><span class="text-danger">+5</span> this week</p>
+                                                    <h3 class="m-0 text-white">{{count($failed)}}</h3>
+                                                    <p class="mb-0 text-truncate text-white"><span class="text-danger">+1</span> this week</p>
                                                 </div>
                                                 <div class="col-auto align-self-center">
                                                     <div class="report-main-icon bg-light-alt">
@@ -74,8 +74,8 @@
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
                                                     <p class="text-white mb-0 fw-semibold">Pending Request</p>
-                                                    <h3 class="m-0 text-white">500</h3>
-                                                    <p class="mb-0 text-truncate text-white"><span class="text-success">+20</span> this week</p>
+                                                    <h3 class="m-0 text-white">{{count($pending)}}</h3>
+                                                    <p class="mb-0 text-truncate text-white"><span class="text-success">+2</span> this week</p>
                                                 </div>
                                                 <div class="col-auto align-self-center">
                                                     <div class="report-main-icon bg-light-alt">

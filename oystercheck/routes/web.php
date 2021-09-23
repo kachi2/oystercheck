@@ -29,3 +29,5 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/user/identities/check/{slug}', [HomeController::class, 'VerifyIndex'])->name('verifyIndex');
 Route::post('/user/identities/verify/{slug}', [IdentityController::class, 'StoreVerify'])->name('StoreVerify');
+Route::get('/test', [IdentityController::class, 'test']);
+Route::get('/user/identities/details/{id}', [IdentityController::class, 'verifyDetails'])->name('verify.details');

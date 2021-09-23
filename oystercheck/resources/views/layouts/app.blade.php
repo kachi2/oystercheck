@@ -44,6 +44,7 @@
         <script src="{{asset('/assets/js/moment.js')}}"></script>
         <script src="{{asset('/plugins/daterangepicker/daterangepicker.js')}}"></script>
         <!-- Required datatable js -->
+        
         <script src="{{asset('/plugins/datatables/jquery.dataTables.min.js')}}"></script>
         <script src="{{asset('/plugins/datatables/dataTables.bootstrap5.min.js')}}"></script>
         <!-- Buttons examples -->
@@ -61,5 +62,6 @@
         <script src="{{asset('/assets/pages/jquery.datatable.init.js')}}"></script>
         <!-- App js -->
         <script src="{{asset('/assets/js/app.js')}}"></script>  
+        @yield('script')
     </body>
 </html>

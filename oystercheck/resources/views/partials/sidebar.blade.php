@@ -22,7 +22,7 @@
                         <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Identity Verification</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
                             @foreach($sidebar as $menu)
-                             <li class="nav-item"><a class="nav-link" href="{{route('verifyIndex',$menu->slug)}}"><i class="ti-control-record"></i>{{$menu->slug}}</a></li>
+                             <li class="nav-item"><a class="nav-link" href="{{route('verifyIndex',$menu->slug)}}"><i class="ti-control-record"></i>{{$menu->slug}} Verification</a></li>
                              @endforeach
                         </ul>
                     </li> 

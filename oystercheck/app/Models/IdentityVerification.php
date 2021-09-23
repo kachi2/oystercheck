@@ -19,4 +19,8 @@ class IdentityVerification extends Model
 
         return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
+
+    public function verification(){
+        return $this->belongsTo(Verification::class, 'verification_id', 'id');
+    }
 }

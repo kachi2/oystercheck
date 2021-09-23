@@ -7,6 +7,7 @@ use App\Models\Verification;
 use App\Models\Wallet;
 use App\Models\IdentityVerification;
 use App\Models\FieldInput;
+use App\Models\IdentityVerificationDetail;
 class HomeController extends Controller
 {
     /**
@@ -26,7 +27,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = auth()->user();
+        $data['success'] = IdentityVerification::where(['status'=>'successful',  'user_id'=> $user->id])->get();
+        $data['failed'] = IdentityVerification::where(['status'=>'failed', 'user_id'=> $user->id])->get();
+        $data['pending'] = IdentityVerification::where(['status'=>'pending', 'user_id'=> $user->id])->get();
+        $data['wallet']= Wallet::where('user_id', $user->id)->first();
+        $data['logs'] = IdentityVerification::where(['user_id' => $user->id])->latest()->get();
+        return view('users.home', $data);
     }
 
     public function VerifyIndex($slug){
@@ -34,12 +41,32 @@ class HomeController extends Controller
         $slug = strtoupper($slug);
         $slug = Verification::where('slug', $slug)->first();
         $data['slug'] = Verification::where('slug', $slug->slug)->first();
-        $data['success'] = IdentityVerification::where(['status'=>'success', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+        $data['success'] = IdentityVerification::where(['status'=>'successful', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
         $data['failed'] = IdentityVerification::where(['status'=>'failed', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
         $data['pending'] = IdentityVerification::where(['status'=>'pending', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
         $data['fields'] = FieldInput::where(['slug'=>$slug->slug])->get();
         $data['wallet']= Wallet::where('user_id', $user->id)->first();
-        $data['logs'] = IdentityVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id])->get();
+        $data['verified'] = IdentityVerificationDetail::where(['first_name'=>'IBIYEMI'])->latest()->first();           
+       
+        $data['logs'] = IdentityVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id])->latest()->get();
         return view('users.individual.identityVerify', $data);
+    }
+
+
+    public function VerifyIndexReturn($slug)
+    {
+        $user = auth()->user();
+        $slug = strtoupper($slug);
+        $slug = Verification::where('slug', $slug)->first();
+        $data['slug'] = Verification::where('slug', $slug->slug)->first();
+        $data['success'] = IdentityVerification::where(['status'=>'successful', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+        $data['failed'] = IdentityVerification::where(['status'=>'failed', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+        $data['pending'] = IdentityVerification::where(['status'=>'pending', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+        $data['fields'] = FieldInput::where(['slug'=>$slug->slug])->get();
+        $data['wallet']= Wallet::where('user_id', $user->id)->first();
+        $data['verified'] = IdentityVerificationDetail::where(['first_name'=>'IBIYEMI'])->latest()->first();           
+       
+        $data['logs'] = IdentityVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id])->latest()->get();
+        return $data;
     }
 }

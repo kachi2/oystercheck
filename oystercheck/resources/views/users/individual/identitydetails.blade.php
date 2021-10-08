@@ -104,9 +104,12 @@
                                                 <h3 class="pro-title">{{$verified->last_name.', '.$verified->first_name.' '.$verified->middle_name}}</h3>
                                                 <ul class="list-unstyled pro-features border-0">
 
+                                                 
+
                                                  @if(isset($verified->dob))
                                                  <li class="mt-2"> <b> Date of Birth </b> : {{$verified->dob}}</li>
                                                  @endif
+
                                                    @if(isset($verified->phone))
                                                  <li class=""><b> Phone number</b> : {{$verified->phone}}</li>
                                                    @endif
@@ -140,6 +143,21 @@
                                                     @if(isset($verified->tracking_id))
                                                     <li class="mt-2"><b> Tracking ID </b> : {{$verified->tracking_id}}</li>
                                                     @endif
+                                                      @if(isset($verified->tax_identification_number))
+                                                 <li class="mt-2"> <b> Tax Identification Number</b> : {{$tax_identification_number}}</li>
+                                                 @endif
+                                                   @if(isset($verified->religion))
+                                                 <li class="mt-2"> <b> Religion</b> : {{$religion}}</li>
+                                                 @endif
+                                                  @if(isset($verified->document_number))
+                                                 <li class="mt-2"> <b> Religion</b> : {{$document_number}}</li>
+                                                 @endif
+                                                  @if(isset($verified->document_number))
+                                                 <li class="mt-2"> <b> Religion</b> : {{$document_number}}</li>
+                                                 @endif
+                                                  @if(isset($verified->first_state_of_issuance))
+                                                 <li class="mt-2"> <b> First State of Issuance</b> : {{$first_state_of_issuance}}</li>
+                                                 @endif
                                                 </ul>                                             
                                             </div>
                                         </div><!--end col-->                                            

@@ -26,26 +26,27 @@
                              @endforeach
                         </ul>
                     </li> 
+
+                     <li>
+                        <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Business Verifications</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                        @foreach($business as $biz )
+                             <li class="nav-item"><a class="nav-link" href="{{route('businessIndex',$biz->slug)}}"><i class="ti-control-record"></i>{{$biz->name}}</a></li>
+                           @endforeach
+                        </ul>
+                    </li> 
                          <li>
                         <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Address Verification</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
-                             <li class="nav-item"><a class="nav-link" href="{{route('verifyIndex','nin')}}"><i class="ti-control-record"></i>Individual Address</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Reference Address</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Business Address </a></li>
+                        @foreach ($address as $add)
+                             <li class="nav-item"><a class="nav-link" href="{{route('addressIndex',$add->slug)}}"><i class="ti-control-record"></i>{{$add->name}}</a></li>
+                         @endforeach
                         </ul>
                     </li> 
 
-                    <li>
-                        <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Business Verifications</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
-                        <ul class="nav-second-level" aria-expanded="false">
-                             <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Tax Identification Number</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Business Address</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Company Search (CAC)</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Bank Account Verification</a></li>
-                        </ul>
-                    </li> 
+                   
 
-                    <li>
+         <!--           <li>
                         <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Organisations</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
                              <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Police / Criminal Record </a></li>
@@ -54,6 +55,7 @@
              
                         </ul>
                     </li>  <hr class="hr-dashed hr-menu">
+                    -->
                     <li class="menu-label my-2">Account</li>
                     <li>
                         <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Wallet</span></a>

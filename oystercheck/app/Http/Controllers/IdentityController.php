@@ -11,6 +11,7 @@ use App\Models\FieldInput;
 use \Illuminate\Support\Arr;
 use App\Models\ApiResponse;
 use Illuminate\Support\Facades\Storage;
+use App\Traits\generateHeaderReports;
 use App\Models\IdentityVerification;
 use App\Models\Verification;
 use App\Models\IdentityVerificationDetail;
@@ -21,6 +22,7 @@ use Carbon\Carbon;
 class IdentityController extends Controller
 {
     use GenerateRef;
+    use GenerateHeaderReports;
     /**
      * Display a listing of the resource.
      *
@@ -126,7 +128,6 @@ class IdentityController extends Controller
                     'discount'=>$slug->discount,
                     'status' => 'pending'
         ]);
-        
         if($createVerify){
         if(isset($slug->discount) && $slug->discount > 0){
             $amount = ($slug->discount * $slug->fee)/100;
@@ -146,40 +147,20 @@ class IdentityController extends Controller
             if($res){
                 IdentityVerification::where(['user_id'=> auth()->user()->id])->latest()->first()
                 ->update(['status' => 'successful']);
-                $user = auth()->user();;
-                $data['slug'] = Verification::where('slug', $slug->slug)->first();
-                $data['success'] = IdentityVerification::where(['status'=>'successful', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
-                $data['failed'] = IdentityVerification::where(['status'=>'failed', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
-                $data['pending'] = IdentityVerification::where(['status'=>'pending', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
-                $data['fields'] = FieldInput::where(['slug'=>$slug->slug])->get();
-                $data['wallet']= Wallet::where('user_id', $user->id)->first();
-                $data['verified'] = IdentityVerificationDetail::where(['user_id'=>auth()->user()->id])->latest()->first();           
-                $data['logs'] = IdentityVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id])->latest()->get();
-                $data['res'] = $res;
-                Session::flash('alert', 'success');
-                Session::flash('message', 'Verification completed successfully');
+                $data = $this->generateIdentityReport($slug);
+               // $data['res'] = $res;
+              //  dd($data);
                 return view('users.individual.identityVerify', $data); 
             }else{
               $res =  $this->getIdentityVerify($request, $slug, $request->reference);
-             return $res;
+          //   return $res;
               if($res['message'] == 'Successful'){
                 IdentityVerification::where(['user_id'=> auth()->user()->id])->latest()->first()
-                         ->update(['status' => 'successful']);
-                         $user = auth()->user();;
-                         $data['slug'] = Verification::where('slug', $slug->slug)->first();
-                         $data['success'] = IdentityVerification::where(['status'=>'successful', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
-                         $data['failed'] = IdentityVerification::where(['status'=>'failed', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
-                         $data['pending'] = IdentityVerification::where(['status'=>'pending', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
-                         $data['fields'] = FieldInput::where(['slug'=>$slug->slug])->get();
-                         $data['wallet']= Wallet::where('user_id', $user->id)->first();
-                         $data['verified'] = IdentityVerificationDetail::where(['user_id'=>auth()->user()->id])->latest()->first();           
-                         $data['logs'] = IdentityVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id])->latest()->get(); 
-                         $data['res'] = $res;
-                        Session::flash('alert', 'success');
-                        Session::flash('message', 'Verification completed successfully');
+                        ->update(['status' => 'successful']);
+                        $data = $this->generateIdentityReport($slug);
+                      //  $data['res'] = $res;
                 return view('users.individual.identityVerify', $data);
               }else{
-                  //dd('hkjkjk');
                   Session::flash('alert', 'danger');
                   Session::flash('message', 'Verification failed, please confirm input');
                 return redirect()->back();
@@ -192,7 +173,7 @@ class IdentityController extends Controller
         $user = User::where('id', auth()->user()->id)->first();
         $wallet = Wallet::where('user_id', $user->id)->first();
         $newWallet = $user->wallet->total_balance - $amount;
-       $update = Wallet::where('user_id', $user->id)
+         Wallet::where('user_id', $user->id)
         ->update([
                 'prev_balance' => $wallet->total_balance,
                 'avail_balance' => $newWallet,
@@ -225,7 +206,6 @@ class IdentityController extends Controller
                 "subject_consent" => true,  
             ];
             $datas = json_encode($data, true);
-
             //return $datas;
         curl_setopt_array($curl, [
           CURLOPT_URL => "https://api.staging.youverify.co/v1/identities/candidates/check",
@@ -347,6 +327,11 @@ class IdentityController extends Controller
             }else{
                 $tax_identification_number = null;
             }
+            if(isset($res['data']['response']['first_state_of_issuance'])){
+                $first_state_of_issuance = $res['data']['response']['first_state_of_issuance'];
+            }else{
+                $first_state_of_issuance  = null;
+            }
             $payload = json_encode($res['data']['response']);
             if(isset($res['data']['response']['photo'])){
              $image = $res['data']['response']['photo']; // image base64 encoded
@@ -367,7 +352,7 @@ class IdentityController extends Controller
                 'phone' => $phone,
                 'reference'=>$reference,
                 'image_path'=> $safeName ,
-                'slug' => $slug->report_type,
+                'slug' => $slug->slug,
                 'user_id' => auth()->user()->id,
                 'expires_at' => Carbon::now()->addDay(30),
                 'payload' => $payload,
@@ -384,7 +369,8 @@ class IdentityController extends Controller
                 'birth_state'=> $birth_state,
                 'residence_state'=> $residence_state, 
                 'tracking_id' => $tracking_id,
-                'tax_identification_number' => $tax_identification_number
+                'tax_identification_number' => $tax_identification_number,
+                'first_state_of_issuance' =>$first_state_of_issuance
             ]);     
             return $res;
         }

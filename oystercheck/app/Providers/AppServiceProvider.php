@@ -27,8 +27,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-            $sidebar = Verification::all();
-            view::share('sidebar', $sidebar);
+            $data['sidebar'] = Verification::where('report_type', '!=', 'business')->where('report_type', '!=', 'address')->get();
+            $data['business'] = Verification::where('report_type', '=', 'business')->get();
+            $data['address'] = Verification::where('report_type', '=', 'address')->get();
+            view::share($data);
 
     }
 }

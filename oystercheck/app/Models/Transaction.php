@@ -19,6 +19,9 @@ class Transaction extends Model
         'amount' , 
        'prev_balance', 
        'avail_balance'
-
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

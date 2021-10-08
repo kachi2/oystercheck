@@ -11,7 +11,6 @@ class IdentityVerificationDetail extends Model
 
     protected $fillable = [
         'identity_verification_id', 'external_ref', 'first_name', 'middle_name', 'last_name', 'dob', 'phone', 'image_path', 'payload', 'reference', 'slug', 'expires_at',
-        'expires_at',
                 'payload',
                 'place_of_issue' ,
                 'issue_date',
@@ -25,7 +24,7 @@ class IdentityVerificationDetail extends Model
                 'profession' ,
                 'birth_state',
                 'residence_state', 
-                'tracking_id','user_id'
+                'tracking_id','user_id', 'tax_identification_number','first_state_of_issuance'
     ];
     public function identityVerification(){
         return $this->belongsTo('App\Models\IdentityVerification', 'id', 'identity_verification_id');

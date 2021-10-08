@@ -7,7 +7,7 @@
                             <div class="page-title-box">
                                 <div class="row">
                                     <div class="col">
-                                        <h4 class="page-title">{{$slug->slug}} Verification</h4>
+                                        <h4 class="page-title">{{$slug['slug']}} Verification</h4>
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"></li>
                                         </ol>
@@ -34,7 +34,7 @@
                                         <div class="card-body" style="background:rgb(36, 16, 82)">
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
-                                                    <p class="mb-0 fw-semibold text-white">Successful {{$slug->slug}} verifications</p>
+                                                    <p class="mb-0 fw-semibold text-white">Successful {{$slug['slug']}} verifications</p>
                                                     <h3 class="m-0 text-white">{{count($success)}}</h3>
                                                     <p class="mb-0 text-truncate text-white"><span class="text-success"></span> this week</p>
                                                 </div>
@@ -52,7 +52,7 @@
                                         <div class="card-body" style="background:rgb(36, 16, 82)">
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
-                                                    <p class="text-white mb-0 fw-semibold">Failed {{$slug->slug}}  verifications</p>
+                                                    <p class="text-white mb-0 fw-semibold">Failed {{$slug['slug']}}  verifications</p>
                                                     <h3 class="m-0 text-white">{{count($failed)}}</h3>
                                                     <p class="mb-0 text-truncate text-white"><span class="text-danger">+5</span> this week</p>
                                                 </div>
@@ -131,9 +131,9 @@
             </div> <!-- end col -->
         </div>
     
-      @if(isset($res))
+      @if(isset($verified))
                  <div class="row">
-                  <p class="dastone-user-name">{{$verified->last_name. ', '. $verified->first_name}}  <span class=" btn btn-success btn-sm "> Verified</span></p> 
+                  <p class="dastone-user-name">{{$verified->last_name. ' '. $verified->first_name}}  <span class=" btn btn-success btn-sm "> <i class="fa fa-check"></i>Verified</span></p> 
                                                
                         <div class="col-12">
                             <div class="card">                        
@@ -146,8 +146,14 @@
                                                         <img src="{{asset('/assets/profile/'.$verified->image_path)}}" alt="" height="110" class="">    
                                                     </div>
                                                     <div class="dastone-profile_user-detail">
+                                                    @if(isset($verified->last_name))
                                                         <h6 class="dastone-user"><b>{{$verified->last_name. ', '. $verified->first_name}}  {{$verified->middle_name}}</b></h6>                                                        
-                                                            <b> Reference </b> : {{$verified->reference}}                                                         
+                                                            <b> Reference </b> : {{$verified->reference}} 
+                                                    @else
+                                                     <h6 class="dastone-user"><b>{{$verified->last_name. ' '. $verified->first_name}}  {{$verified->middle_name}}</b></h6>                                                        
+                                                           <b>Type: {{strtoupper($verified->slug)}} Verification <br> <b> Reference </b> : {{$verified->reference}} 
+
+                                                    @endif                                                    
                                                     </div>
                                                 </div>                                                
                                             </div><!--end col-->
@@ -175,10 +181,22 @@
                                                      @if(isset($verified->place_of_issue))
                                                     <li class="mt-2"></i> <b> Place of Issue </b> : {{$verified->place_of_issue}}</li>
                                                     @endif                                           
-                                               
-                                                                                                
+                                                 @if(isset($verified->tax_identification_number))
+                                                 <li class="mt-2"> <b> Tax Identification Number</b> : {{$tax_identification_number}}</li>
+                                                 @endif
+                                                   @if(isset($verified->religion))
+                                                 <li class="mt-2"> <b> Religion</b> : {{$religion}}</li>
+                                                 @endif
+                                                  @if(isset($verified->document_number))
+                                                 <li class="mt-2"> <b> Religion</b> : {{$document_number}}</li>
+                                                 @endif
+                                                  @if(isset($verified->document_number))
+                                                 <li class="mt-2"> <b> Religion</b> : {{$document_number}}</li>
+                                                 @endif
+                                                  @if(isset($verified->first_state_of_issuance))
+                                                 <li class="mt-2"> <b> First State of Issuance</b> : {{$first_state_of_issuance}}</li>
+                                                 @endif                                                
                                                 </ul>
-                                               
                                             </div><!--end col-->
                                             <div class="col-lg-3">
                                                 <div class="row">
@@ -199,6 +217,7 @@
                                                     @if(isset($verified->tracking_id))
                                                     <li class="mt-2"><b> Tracking ID </b> : {{$verified->tracking_id}}</li>
                                                     @endif
+                                                    
                                                      </ul>
                                                     </div><!--end col-->
                                                    

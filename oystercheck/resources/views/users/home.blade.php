@@ -224,33 +224,25 @@
                                                 </tr><!--end tr-->
                                             </thead>
                                             <tbody>
+                                            @foreach ($recents as $recent )
                                                 <tr>                                                        
-                                                    <td><a href="#" class="text-primary">Address verification</a></td>
-                                                    <td>Michael</td>
-                                                    <td class="text-success">Paid</td>
-                                                    <td  class="text-warning">Pending</td>
-                                                    <td >2hrs ago</td>
-                                                </tr><!--end tr-->     
-                                                <tr>                                                        
-                                                    <td><a href="#" class="text-primary">NIC verification</a></td>
-                                                    <td>Kachi</td>
-                                                    <td class="text-success">Paid</td>
-                                                    <td  class="text-success ">Successful</td>
-                                                    <td >8hrs ago</td>
-                                                </tr> <tr>                                                        
-                                                    <td><a href="#" class="text-primary">BVN verification</a></td>
-                                                    <td>Dave</td>
-                                                    <td class=" text-success">Paid</td>
-                                                    <td  class="text-success ">Successful</td>
-                                                    <td >10hrs ago</td>
+                                                    <td><a href="#" class="text-primary">{{$recent->verification->name}}</a></td>
+                                                    <td>{{$recent->user->name}}</td>
+                                                 @if($recent->status == 'successful')   <td class="text-success">Charged</td>
+                                                 @else
+                                                 <td class="text-warning">Pending</td> 
+                                                 @endif
+                                                 @if($recent->status == 'successful')   <td class="text-success">Successful</td>
+                                                 @elseif($recent->status == 'pending')
+                                                 <td class="text-warning">Pending</td> 
+                                                 @else
+                                                  <td class="text-danger">Failed</td> 
+                                                 @endif
+                                                    
+                                                    <td>{{$recent->created_at->DiffForHumans()}}</td>
                                                 </tr>
-                                                <tr>                                                        
-                                                    <td><a href="#" class="text-primary">Phone Number verification</a></td>
-                                                    <td>Mike</td>
-                                                    <td class="text-success">Paid</td>
-                                                    <td  class="text-success ">Successful</td>
-                                                    <td >12hrs ago</td>
-                                                </tr><!--end tr-->                            
+                                                @endforeach
+                                                <!--end tr-->                            
                                             </tbody>
                                         </table> <!--end table-->                                               
                                     </div><!--end /div-->
@@ -274,32 +266,23 @@
                                                 <tr>
                                                     <th class="border-top-0">Type</th>
                                                     <th class="border-top-0">User</th>
-                                                    <th class="border-top-0">Description</th>
-                                                    <th class="border-top-0">Status</th>
-                                                    <th class="border-top-0">Date</th>
+                                                    <th class="border-top-0">Purpose</th>
+                                                    <th class="border-top-0">Type</th>
+                                                    <th class="border-top-0">Amount</th>
+                                                    <th class="border-top-0">Created At</th>
                                                 </tr><!--end tr-->
                                             </thead>
                                             <tbody>
-                                                <tr>                                                        
-                                                    <td><a href="#" class="text-primary">Wallet Top-up</a></td>
-                                                    <td>Michael</td>
-                                                    <td class="text-success">OSYw129891298</td>
-                                                    <td  class="text-success">sucess</td>
-                                                    <td >2hrs ago</td>
-                                                </tr><!--end tr-->     
-                                                <tr>                                                        
-                                                    <td><a href="#" class="text-primary">New Account Created</a></td>
-                                                    <td>Kachi</td>
-                                                    <td class="text-success">Kachi</td>
-                                                    <td  class="text-success ">Success</td>
-                                                    <td >8hrs ago</td>
-                                                </tr> <tr>                                                        
-                                                    <td><a href="#" class="text-primary">Admin block Agent account </a></td>
-                                                    <td>Dave</td>
-                                                    <td class=" text-success">Blocked for fake transactions</td>
-                                                    <td  class="text-success ">Success</td>
-                                                    <td >10hrs ago</td>
-                                                </tr>
+                                            @foreach ($transactions as $trans )
+                                                  <tr>                                                        
+                                                    <td><a href="#" class="text-primary">{{substr($trans->ref,0,10)}} </a></td>
+                                                    <td>{{$trans->user->name}}</td>
+                                                    <td>{{$trans->purpose}}</td>
+                                                    <td>{{$trans->type}}</td>
+                                                    <td>{{$trans->amount}}</td>
+                                                    <td >{{$trans->created_at->DiffForHumans()}}</td>
+                                                </tr>       
+                                            @endforeach
                                                 <!--end tr-->                            
                                             </tbody>
                                         </table> <!--end table-->                                               

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBusinessVerificationDetailsTable extends Migration
+class AddNewFieldToBusinessVerifications extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateBusinessVerificationDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('business_verification_details', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('business_verifications', function (Blueprint $table) {
+            $table->double('fee')->nullable();
+            $table->double('discount')->nullable();
         });
     }
 
@@ -26,6 +26,8 @@ class CreateBusinessVerificationDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('business_verification_details');
+        Schema::table('business_verifications', function (Blueprint $table) {
+            //
+        });
     }
 }

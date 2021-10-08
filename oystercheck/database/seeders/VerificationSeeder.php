@@ -17,10 +17,7 @@ class VerificationSeeder extends Seeder
     
         $data = [
 
-            ['slug' => 'passport', 'name'=>'Nigeria International Passport', 'report_type'=>'identity', 'slug'=>'NIP'], 
-            ['slug' => 'inec', 'name'=>'Permanent Voters Card', 'report_type'=>'identity', 'slug'=>'PVC'], 
-            ['slug' => 'ibvn', 'name'=>'Bank Verification Number', 'report_type'=>'identity', 'slug'=>'BVN'], 
-            ['slug' => 'nin', 'name'=>'National Identity Number', 'report_type'=>'identity', 'slug'=>'NIN']
+            ['slug' => 'individual_address', 'name'=>'Individual Address verification', 'report_type'=>'addree'], 
         ];
 
     foreach($data as $daa){

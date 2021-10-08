@@ -15,6 +15,11 @@ class CreateBusinessVerificationsTable extends Migration
     {
         Schema::create('business_verifications', function (Blueprint $table) {
             $table->id();
+            $table->string('verification_id')->nullable();
+            $table->string('ref')->nullable();
+            $table->string('user_id')->nullable();
+            $table->string('status')->nullable();
+            $table->string('service_ref')->nullable();
             $table->timestamps();
         });
     }

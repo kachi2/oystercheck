@@ -1,4 +1,7 @@
 <?php
+
+use App\Http\Controllers\AddressController;
+use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IdentityController;
 use Illuminate\Support\Facades\Route;
@@ -31,3 +34,7 @@ Route::get('/user/identities/check/{slug}', [HomeController::class, 'VerifyIndex
 Route::post('/user/identities/verify/{slug}', [IdentityController::class, 'StoreVerify'])->name('StoreVerify');
 Route::get('/test', [IdentityController::class, 'test']);
 Route::get('/user/identities/details/{id}', [IdentityController::class, 'verifyDetails'])->name('verify.details');
+Route::get('/user/business/check/{slug}', [BusinessController::class, 'Index'])->name('businessIndex');
+Route::post('/user/business/verify/{slug}', [BusinessController::class, 'BusinessStore'])->name('businessStore');
+Route::get('/user/address/verification/{slug}', [AddressController::class,'AddressIndex'])->name('addressIndex');
+Route::post('/user/candidate/create/{slug}', [AddressController::class,'createCandidate'])->name('createCandidate');

@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class BusinessVerification extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+
+        'verification_id', 'ref', 'service_ref', 'user_id', 'fee', 'discount', 'status'
+    ];
+
+    public function user(){
+    
+        return $this->belongsTo(User::class);
+    }
 }

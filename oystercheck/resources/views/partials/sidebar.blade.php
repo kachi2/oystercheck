@@ -43,10 +43,19 @@
                          @endforeach
                         </ul>
                     </li> 
-
+ 
+ <hr class="hr-dashed hr-menu">
+                <li>
+                        <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Staff Onboarding</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                             <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Onboard New Staff </a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Staff List</a></li>
+             
+                        </ul>
+                    </li>  <hr class="hr-dashed hr-menu">
                    
 
-         <!--           <li>
+                <li>
                         <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Organisations</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
                              <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Police / Criminal Record </a></li>
@@ -55,7 +64,7 @@
              
                         </ul>
                     </li>  <hr class="hr-dashed hr-menu">
-                    -->
+                    
                     <li class="menu-label my-2">Account</li>
                     <li>
                         <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Wallet</span></a>

@@ -20,6 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
+        'user_type'
     ];
 
     /**
@@ -43,5 +45,9 @@ class User extends Authenticatable
 
     public function wallet(){
         return $this->hasOne('App\Models\Wallet');
+    }
+
+    public function client(){
+        return $this->hasOne(Client::class, );
     }
 }

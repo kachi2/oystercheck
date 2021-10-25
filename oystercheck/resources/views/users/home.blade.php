@@ -130,70 +130,36 @@
                                 <div class="card-body"> 
                                     <div class="analytic-dash-activity" data-simplebar>
                                         <div class="activity">
+
+                                            @if(count($activity) > 0)
+                                            @foreach ($activity as  $logs)
+                                            
                                             <div class="activity-info">
                                                 <div class="icon-info-activity">
                                                     <i class="las la-user-clock bg-soft-primary"></i>
                                                 </div>
                                                 <div class="activity-info-text">
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <p class="text-muted mb-0 font-13 w-75"><span>Michael's</span> 
-                                                           address verification has been confirm as Successful
+                                                        <p class="text-muted mb-0 font-13 w-75"> 
+                                                           {{$logs->activity}}
                                                         </p>
-                                                        <small class="text-muted">10 Min ago</small>
+                                                        <small class="text-muted">{{$logs->created_at}}</small>
                                                     </div>    
                                                 </div>
                                             </div>   
-
+                                            @endforeach
+                                            @else
                                             <div class="activity-info">
-                                                <div class="icon-info-activity">
-                                                    <i class="mdi mdi-timer-off bg-soft-primary"></i>
-                                                </div>
+                                                
                                                 <div class="activity-info-text">
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <p class="text-muted mb-0 font-13 w-75"><span>Sarah's</span> was confirmed failed 
+                                                        <p class="text-muted mb-0 font-13 w-75"> 
+                                                         No Activity log at this time
                                                         </p>
-                                                        <small class="text-muted">50 Min ago</small>
                                                     </div>    
                                                 </div>
-                                            </div>   
-
-                                            <div class="activity-info">
-                                                <div class="icon-info-activity">
-                                                    <i class="mdi mdi-timer-off bg-soft-primary"></i>
-                                                </div>
-                                                <div class="activity-info-text">
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <p class="text-muted mb-0 font-13 w-75"><span>Joseph</span> wallet topup was Successful
-                                                        </p>
-                                                        <small class="text-muted">10 hours ago</small>
-                                                    </div>    
-                                                </div>
-                                            </div>   
-
-                                            <div class="activity-info">
-                                                <div class="icon-info-activity">
-                                                    <i class="mdi mdi-clock-outline bg-soft-primary"></i>
-                                                </div>
-                                                <div class="activity-info-text">
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <p class="text-muted mb-0 font-13 w-75"><span>Michael</span> added another payment method
-                                                        </p>
-                                                        <small class="text-muted">23hrs ago</small>
-                                                    </div>    
-                                                </div>
-                                            </div>   
-                                            <div class="activity-info">
-                                                <div class="icon-info-activity">
-                                                    <i class="mdi mdi-alert-outline bg-soft-primary"></i>
-                                                </div>
-                                                <div class="activity-info-text">
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <p class="text-muted mb-0 font-13 w-75"><span>Kachi</span> verified a driving license, status pending
-                                                        </p>
-                                                        <small class="text-muted">1 day ago</small>
-                                                    </div>    
-                                                </div>
-                                            </div> 
+                                            </div>
+                                            @endif
                                                                                                                                                                              
                                         </div><!--end activity-->
                                     </div><!--end analytics-dash-activity-->

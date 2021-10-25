@@ -21,4 +21,8 @@ class AddressVerification extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function verification(){
+        return $this->belongsTo(Verification::class, 'verification_id', 'id');
+    }
 }

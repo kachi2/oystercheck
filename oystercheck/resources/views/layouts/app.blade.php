@@ -9,9 +9,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.png">
+          <link href="{{asset('/plugins/sweet-alert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('/plugins/animate/animate.css')}}" rel="stylesheet" type="text/css">
+
         <!-- jvectormap -->
         <link href="../plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
         <!-- App css -->
+         <link href="{{asset('/plugins/dropify/css/dropify.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('/assets/css/metisMenu.min.css')}}" rel="stylesheet" type="text/css" />
@@ -24,10 +28,7 @@
 @include('partials.navbar')
 
 @yield('content')
-
-   </div>
-
-        <footer class="footer text-center text-sm-start">
+              <footer class="footer text-center text-sm-start">
                     &copy; <script>
                         document.write(new Date().getFullYear())
                     </script> All Rights Reserved, Oysterchecks.com <span class="text-muted d-none d-sm-inline-block float-end"> 
@@ -35,10 +36,15 @@
                 </footer><!--end footer-->
  </div>
  </div>
+
+ 
   <script src="{{asset('/assets/js/jquery.min.js')}}"></script>
         <script src="{{asset('/assets/js/bootstrap.bundle.min.js')}}"></script>
         <script src="{{asset('/assets/js/metismenu.min.js')}}"></script>
         <script src="{{asset('/assets/js/waves.js')}}"></script>
+        <script src="{{asset('/assets/pages/jquery.datatable.init.js')}}"></script>
+        <script src="{{asset('/assets/pages/jquery.form-upload.init.js')}}"></script>
+         <script src="{{asset('/plugins/dropify/js/dropify.min.js')}}"></script>
         <script src="{{asset('/assets/js/feather.min.js')}}"></script>
         <script src="{{asset('/assets/js/simplebar.min.js')}}"></script>
         <script src="{{asset('/assets/js/moment.js')}}"></script>
@@ -59,9 +65,12 @@
         <!-- Responsive examples -->
         <script src="{{asset('/plugins/datatables/dataTables.responsive.min.js')}}"></script>
         <script src="{{asset('/plugins/datatables/responsive.bootstrap4.min.js')}}"></script>
-        <script src="{{asset('/assets/pages/jquery.datatable.init.js')}}"></script>
+        <script src="{{asset('/plugins/sweet-alert2/sweetalert2.min.js')}}"></script>
+        <script src="{{asset('/assets/pages/jquery.sweet-alert.init.js')}}"></script>
+       
         <!-- App js -->
-        <script src="{{asset('/assets/js/app.js')}}"></script>  
+        <script src="{{asset('/assets/js/app.js')}}"></script> 
+
         @yield('script')
     </body>
 </html>

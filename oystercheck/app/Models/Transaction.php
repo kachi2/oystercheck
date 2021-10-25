@@ -24,4 +24,11 @@ class Transaction extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function moneyFormat($data, $currency){
+        $data = number_format($data);
+        $currency = '₦';
+        $data = $currency.$data;
+        return $data;
+    }
 }

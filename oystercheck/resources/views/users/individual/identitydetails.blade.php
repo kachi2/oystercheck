@@ -89,6 +89,7 @@
                         </div>
         </div>
          <!-- end page title end breadcrumb -->
+         @if(isset($verified))
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
@@ -166,6 +167,7 @@
                             </div><!--end card-->
                         </div><!--end col-->
                     </div><!--end row-->
+            @endif
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">

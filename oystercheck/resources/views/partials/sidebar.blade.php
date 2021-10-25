@@ -10,6 +10,7 @@
                 </a>
             </div>
             <!--end logo-->
+            @if(auth()->user()->role_id != 1)
             <div class="menu-content h-100" data-simplebar>
                 <ul class="metismenu left-sidenav-menu">
                     <li class="menu-label mt-0">Main</li>
@@ -17,26 +18,27 @@
                         <a href="#"> <i data-feather="home" class="align-self-center menu-icon"></i><span>Dashboard</span></a>
                         
                     </li>
-    
+                    <hr class="hr-dashed hr-menu">
                     <li>
-                        <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Identity Verification</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <a href="javascript: void(0);"><i data-feather="user" class="align-self-center menu-icon"></i><span>Identity Verification</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
                             @foreach($sidebar as $menu)
                              <li class="nav-item"><a class="nav-link" href="{{route('verifyIndex',$menu->slug)}}"><i class="ti-control-record"></i>{{$menu->slug}} Verification</a></li>
                              @endforeach
                         </ul>
                     </li> 
-
+                     
                      <li>
-                        <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Business Verifications</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <a href="javascript: void(0);"><i data-feather="layers" class="align-self-center menu-icon"></i><span>Business Verifications</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
                         @foreach($business as $biz )
                              <li class="nav-item"><a class="nav-link" href="{{route('businessIndex',$biz->slug)}}"><i class="ti-control-record"></i>{{$biz->name}}</a></li>
                            @endforeach
                         </ul>
                     </li> 
+                  
                          <li>
-                        <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Address Verification</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <a href="javascript: void(0);"><i data-feather="map-pin" class="align-self-center menu-icon"></i><span>Address Verification</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
                         @foreach ($address as $add)
                              <li class="nav-item"><a class="nav-link" href="{{route('addressIndex',$add->slug)}}"><i class="ti-control-record"></i>{{$add->name}}</a></li>
@@ -44,55 +46,52 @@
                         </ul>
                     </li> 
  
- <hr class="hr-dashed hr-menu">
-                <li>
-                        <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Staff Onboarding</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
-                        <ul class="nav-second-level" aria-expanded="false">
-                             <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Onboard New Staff </a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Staff List</a></li>
-             
-                        </ul>
-                    </li>  <hr class="hr-dashed hr-menu">
-                   
-
-                <li>
-                        <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Organisations</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
-                        <ul class="nav-second-level" aria-expanded="false">
-                             <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Police / Criminal Record </a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Political Exposed Persons </a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Professional Certificate</a></li>
-             
-                        </ul>
-                    </li>  <hr class="hr-dashed hr-menu">
+                 
                     
-                    <li class="menu-label my-2">Account</li>
-                    <li>
-                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Wallet</span></a>
-                    </li> 
-                    <li>
-                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Transactions</span></a>
-                    </li> 
-                    </li>  <hr class="hr-dashed hr-menu">
+                    <li class="menu-label my-2">Candidate Onboarding</li>
+                       <hr class="hr-dashed hr-menu">
+                <li>
+                        <a href="javascript: void(0);"><i data-feather="user-plus" class="align-self-center menu-icon"></i><span>Candidate Onboarding</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                             <li class="nav-item"><a class="nav-link" href="{{route('candidate.index')}}"><i class="ti-control-record"></i> Onboard Candidate</a></li>
+             
+                        </ul>
+                   
+                 
+                  <div class="pt-5"> </div>
+                
                     <li class="menu-label my-2">Administrative Task</li>
+                       <hr class="hr-dashed hr-menu">
+                   
                     <li>
-                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Reports</span></a>
+                        <a href="{{route('users.report')}}"><i data-feather="trending-up" class="align-self-center menu-icon"></i><span>Reports</span></a>
                     </li> 
                     <li>
-                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Settings</span></a>
+                        <a href="{{route('user.profile')}}"><i data-feather="settings" class="align-self-center menu-icon"></i><span>Settings</span></a>
                     </li> 
                     <li>
-                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Users</span></a>
-                    </li> 
-                    <li>
-                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Activity Log</span></a>
-                    </li> 
-                    <li>
-                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Manage Verifications</span></a>
-                    </li> 
+                        <a href="javascript: void(0);"><i data-feather="activity" class="align-self-center menu-icon"></i><span>Activity Log</span></a>
+                    </li>  
+                     <li>
+                        <a href="{{route('user.transactions')}}"><i data-feather="credit-card" class="align-self-center menu-icon"></i><span>Wallets Transactions</span></a>
+                    </li>
                             
                 </ul>
-    
-              
             </div>
+
+            @else
+             <div class="menu-content h-100" data-simplebar>
+                <ul class="metismenu left-sidenav-menu">
+                    <li class="menu-label mt-0">Main</li>
+                    <li>
+                        <a href="{{route('candidate.homepage')}}"> <i data-feather="home" class="align-self-center menu-icon"></i><span>Dashboard</span></a>
+                    </li>
+                    <li>
+                        <a href="{{route('candidate.homepage')}}"> <i data-feather="home" class="align-self-center menu-icon"></i><span>My Documents</span></a>
+                    </li>
+
+                    </ul>
+                </div>
+            @endif
         </div>
         <!-- end left-sidenav-->

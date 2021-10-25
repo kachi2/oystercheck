@@ -18,4 +18,8 @@ class BusinessVerification extends Model
     
         return $this->belongsTo(User::class);
     }
+
+    public function verification(){
+        return $this->belongsTo(Verification::class, 'verification_id', 'id');
+    }
 }

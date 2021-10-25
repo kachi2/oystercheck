@@ -149,7 +149,7 @@ class IdentityController extends Controller
                 ->update(['status' => 'successful']);
                 $data = $this->generateIdentityReport($slug);
                // $data['res'] = $res;
-              //  dd($data);
+              // dd($data);
                 return view('users.individual.identityVerify', $data); 
             }else{
               $res =  $this->getIdentityVerify($request, $slug, $request->reference);

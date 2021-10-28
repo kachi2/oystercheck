@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg fixed-top bg-transparent">
         <div class="container">
             <a class="navbar-brand pl-2 pr-2" href="{{route('landing')}}">
-                <img src="{{asset('/landing_assets/images/logo-white.png')}}" width="200px" alt="logo" class="img-fluid"/>
+                <img src="{{asset('/landing_assets/img/logo-white.png')}}" width="200px" alt="logo" class="img-fluid"/>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

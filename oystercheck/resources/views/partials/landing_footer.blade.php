@@ -8,7 +8,7 @@
                     <div class="row footer-top-wrap">
                         <div class="col-md-4 col-sm-6">
                             <div class="footer-nav-wrap text-white">
-                                <h4 class="text-white">      <img src="{{asset('/landing_assets/images/logo-white.png')}}" width="200px" alt="logo" class="img-fluid"/></h4>
+                                <h4 class="text-white">      <img src="{{asset('/landing_assets/img/logo-white.png')}}" width="200px" alt="logo" class="img-fluid"/></h4>
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">We are an award-winning multinational company. We believe in quality and international standard.</a>

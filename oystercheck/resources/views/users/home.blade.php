@@ -142,56 +142,12 @@
                                             </div>   
                                             @endforeach
                                             @else
-                                            <div class="activity-info">
-                                                
-                                                <div class="activity-info-text">
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <p class=" mb-0 font-13 w-75"> 
-                                                         Your Address verification completed successful
-                                                        </p>
-                                                           <small class="text-muted">5 mins ago</small>
-                                                    </div>    
-                                                </div>
-                                                </div>
-                                                 <div class="activity-info">
-                                                <div class="activity-info-text">
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <p class="mb-0 font-13 w-75"> 
-                                                        Last login 24th Oct, 2021 at Lagos Nigeria
-                                                        </p>
-                                                           <small class="text-muted">10 mins ago</small>
-                                                    </div>    
-                                                </div>
-                                                 </div>
-                                                 <div class="activity-info">
-                                                <div class="activity-info-text">
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <p class=" mb-0 font-13 w-75"> 
-                                                        Your request fund request approved successful
-                                                        </p>
-                                                           <small class="text-muted">20 mins ago</small>
-                                                    </div>  
-                                                    </div>
-
-                                                </div>
-                                                             <div class="activity-info">
-                                                <div class="activity-info-text">
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <p class=" mb-0 font-13 w-75"> 
-                                                        You have a unread notifications
-                                                        </p>
-                                                           <small class="text-muted">50 mins ago</small>
-                                                    </div>  </div>
-
-                                                </div>
-
                                                 <div class="activity-info">
                                                 <div class="activity-info-text">
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <p class=" mb-0 font-13 w-75"> 
-                                                        A new user created, verify details
+                                                        You dont have any activity at this moment
                                                         </p>
-                                                           <small class="text-muted">1hr  ago</small>
                                                     </div>  </div>
 
                                                 </div>

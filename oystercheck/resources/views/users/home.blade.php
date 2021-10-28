@@ -104,8 +104,10 @@
                                         </div><!--end col-->
                                     </div>  <!--end row-->                                  
                                 </div><!--end card-header-->
-                                     <div class="card-body">          
-                                    <canvas id="doughnut" class="drop-shadow" height="300"></canvas>            
+                                   <div class="card-body">
+                                    <div class="chart-demo">
+                                        <div id="apex_column1" class="apex-charts"></div>
+                                    </div>                                        
                                 </div>
                         
                             </div><!--end card--> 

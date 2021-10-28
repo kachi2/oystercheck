@@ -148,8 +148,6 @@ class IdentityController extends Controller
                 IdentityVerification::where(['user_id'=> auth()->user()->id])->latest()->first()
                 ->update(['status' => 'successful']);
                 $data = $this->generateIdentityReport($slug);
-               // $data['res'] = $res;
-              // dd($data);
                 return view('users.individual.identityVerify', $data); 
             }else{
               $res =  $this->getIdentityVerify($request, $slug, $request->reference);
@@ -161,6 +159,7 @@ class IdentityController extends Controller
                       //  $data['res'] = $res;
                 return view('users.individual.identityVerify', $data);
               }else{
+                $this->RefundUser($amount, $ref, $slug->report_type);
                   Session::flash('alert', 'danger');
                   Session::flash('message', 'Verification failed, please confirm input');
                 return redirect()->back();
@@ -192,6 +191,29 @@ class IdentityController extends Controller
                  'avail_balance' => $newWallet
         ]);
    }
+
+   public function RefundUser($amount, $ext_ref, $type){
+    $user = User::where('id', auth()->user()->id)->first();
+    $wallet = Wallet::where('user_id', $user->id)->first();
+    $newWallet = $user->wallet->total_balance + $amount;
+     Wallet::where('user_id', $user->id)
+    ->update([
+            'prev_balance' => $wallet->total_balance,
+            'avail_balance' => $newWallet,
+    ]);
+    $refs = $this->GenerateRef();
+    Transaction::create([
+             'ref' => $refs,
+              'user_id' => $user->id,
+              'external_ref' => $ext_ref,
+              'purpose' => 'Payment for '.$type,
+               'service_type' => $type,
+              'type'  => 'CREDIT', 
+              'amount' => $amount, 
+             'prev_balance' => $wallet->total_balance, 
+             'avail_balance' => $newWallet
+    ]);
+}
 
     public function getIdentityVerify($request, $slug, $reference){
         $identity = IdentityVerification::where('user_id', auth()->user()->id)->latest()->first();

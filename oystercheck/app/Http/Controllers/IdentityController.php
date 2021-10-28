@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\FAcades\Session;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Traits\GenerateRef;
 use App\Models\Transaction;
@@ -31,7 +31,7 @@ class IdentityController extends Controller
 
      public function __construct()
      {
-        return $this->user = auth()->user();
+      //  return $this->user = auth()->user();
      }
     public function index()
     {

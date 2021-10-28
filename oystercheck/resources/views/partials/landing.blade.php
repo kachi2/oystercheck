@@ -2,7 +2,7 @@
     <!--start navbar-->
     <nav class="navbar navbar-expand-lg fixed-top bg-transparent">
         <div class="container">
-            <a class="navbar-brand pl-2 pr-2" href="">
+            <a class="navbar-brand pl-2 pr-2" href="{{route('landing')}}">
                 <img src="{{asset('/assets/images/logo-white.png')}}" width="200px" alt="logo" class="img-fluid"/>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

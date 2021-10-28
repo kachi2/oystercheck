@@ -38,7 +38,7 @@ Route::get('/aml', [LandingPages::class, 'AML'])->name('aml');
 Route::get('/services', [LandingPages::class, 'Services'])->name('services');
 Route::get('/technology', [LandingPages::class, 'Technology'])->name('technology');
 Route::get('/industry', [LandingPages::class, 'Industry'])->name('industry');
-Route::get('/resources', [LandingPages::class, 'Resource'])->name('resource');
+Route::get('/resources', [LandingPages::class, 'Resources'])->name('resource');
 Route::middleware('auth')->group(function() {
 Route::get('/dashboard', [HomeController::class, 'Home'])->name('index');
 Route::get('/home', [HomeController::class, 'Home'])->name('home');

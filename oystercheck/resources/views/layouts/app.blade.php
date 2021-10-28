@@ -8,7 +8,7 @@
         <meta content="" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.png">
+        <link rel="shortcut icon" href="{{asset('/assets/images/favicon.png')}}">
           <link href="{{asset('/plugins/sweet-alert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css">
         <link href="{{asset('/plugins/animate/animate.css')}}" rel="stylesheet" type="text/css">
 
@@ -21,6 +21,7 @@
         <link href="{{asset('/assets/css/metisMenu.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('/plugins/daterangepicker/daterangepicker.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
   <body class="dark-sidenav navy-sidenav">
 @include('partials.sidebar')
@@ -67,6 +68,9 @@
         <script src="{{asset('/plugins/datatables/responsive.bootstrap4.min.js')}}"></script>
         <script src="{{asset('/plugins/sweet-alert2/sweetalert2.min.js')}}"></script>
         <script src="{{asset('/assets/pages/jquery.sweet-alert.init.js')}}"></script>
+          <script src="{{asset('/plugins/chartjs/chart.min.js')}}"></script>
+        <script src="{{asset('/assets/pages/jquery.chartjs.init.js')}}"></script>
+
        
         <!-- App js -->
         <script src="{{asset('/assets/js/app.js')}}"></script> 

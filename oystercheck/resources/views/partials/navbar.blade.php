@@ -44,7 +44,9 @@
                             <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-bs-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="false" aria-expanded="false">
                                 <span class="ms-1 nav-user-name hidden-sm ">Michael Kachi</span>
-                                <i class="las la-user-clock bg-soft-primary  rounded-circle"></i>                                 
+                                  
+                                     <img src="{{asset('/assets/michael.png')}}"  width="40px" height="30px" alt="logo-large" class="rounded-circle"> 
+                                                 
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <a class="dropdown-item" href="#"><i data-feather="user" class="align-self-center icon-xs icon-dual me-1"></i> Profile</a>
@@ -66,7 +68,7 @@
                         </li> 
                         <li class="creat-btn">
                             <div class="nav-link">
-                                <a class=" btn btn-sm btn-soft-primary" href="#" role="button">Admin Account</a>
+                                <a class=" btn btn-sm btn-soft-primary" href="#" role="button">Client Dashboard</a>
                             </div>                                
                         </li>                           
                     </ul>

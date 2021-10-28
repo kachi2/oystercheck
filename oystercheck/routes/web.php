@@ -4,6 +4,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IdentityController;
+use App\Http\Controllers\LandingPages;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CandidateController;
 
@@ -26,11 +27,21 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-
-
+Route::get('/', [LandingPages::class, 'index'])->name('landing');
+Route::get('/who-we-are', [LandingPages::class, 'WhoWeAre'])->name('who-we-are');
+Route::get('/core-values', [LandingPages::class, 'CoreValues'])->name('core-values');
+Route::get('/mission', [LandingPages::class, 'Mission'])->name('mission');
+Route::get('/contact', [LandingPages::class, 'ContactUs'])->name('contact-us');
+Route::get('/about', [LandingPages::class, 'AboutUs'])->name('about-us');
+Route::get('/kyc', [LandingPages::class, 'KYC'])->name('kyc');
+Route::get('/aml', [LandingPages::class, 'AML'])->name('aml');
+Route::get('/services', [LandingPages::class, 'Services'])->name('services');
+Route::get('/technology', [LandingPages::class, 'Technology'])->name('technology');
+Route::get('/industry', [LandingPages::class, 'Industry'])->name('industry');
+Route::get('/resources', [LandingPages::class, 'Resource'])->name('resource');
 Route::middleware('auth')->group(function() {
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/dashboard', [HomeController::class, 'Home'])->name('index');
+Route::get('/home', [HomeController::class, 'Home'])->name('home');
 Route::get('/user/identities/check/{slug}', [HomeController::class, 'VerifyIndex'])->name('verifyIndex');
 Route::post('/user/identities/verify/{slug}', [IdentityController::class, 'StoreVerify'])->name('StoreVerify');
 Route::get('/test', [IdentityController::class, 'test']);
@@ -54,5 +65,6 @@ Route::get('/user/reports/get/', [HomeController::class, 'getReports'])->name('u
 Route::get('/user/profile', [HomeController::class, 'Profile'])->name('user.profile');
 Route::post('user/updates/details', [HomeController::class, 'updateUserDetails'])->name('users.updateDetails');
 Route::post('/user/password/update', [HomeController::class, 'passwordUpdate'])->name('users.passwordUpdate');
+Route::post('/user/get/data', [HomeController::class, 'GetData'])->name('query.data');
 
 });

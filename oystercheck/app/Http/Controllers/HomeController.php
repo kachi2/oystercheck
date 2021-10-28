@@ -30,7 +30,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-       $this->middleware('auth');
+       //$this->middleware('auth');
        $this->API_Token = 'FLWSECK_TEST-b754b22c91f541503f75b0d74d29a034-X';
     }
 
@@ -39,7 +39,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+
+    
+    public function Home()
     {
         $user = auth()->user();
         if($user->role_id == 1){   
@@ -54,7 +56,14 @@ class HomeController extends Controller
         $data['recents'] = IdentityVerification::where(['user_id' => $user->id])->latest()->take(5)->get();
         $data['transactions'] = Transaction::latest()->take(5)->get();
         $data['activity'] = ActivityLog::where('user_id', $user->id)->take(10)->get();
+        
         return view('users.home', $data);
+    }
+
+    public function GetData()
+    {
+        $data['data'] = IdentityVerification::latest()->take(5)->get();
+        return response()->json($data);
     }
 
     public function VerifyIndex($slug){

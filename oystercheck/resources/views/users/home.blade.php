@@ -34,7 +34,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card report-card">
-                                        <div class="card-body " style="background:rgb(36, 16, 82)">
+                                        <div class="card-body " style="background:#303e67">
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
                                                     <p class="text-white mb-0 fw-semibold">Successful verifications</p>
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card report-card">
-                                        <div class="card-body" style="background:rgb(36, 16, 82)">
+                                        <div class="card-body" style="background:#303e67">
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
                                                     <p class="text-white mb-0 fw-semibold">Failed verifications</p>
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card report-card">
-                                        <div class="card-body" style="background:rgb(36, 16, 82)">
+                                        <div class="card-body" style="background:#303e67">
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
                                                     <p class="text-white mb-0 fw-semibold">Pending Request</p>
@@ -100,21 +100,14 @@
                                                 <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                    This Year<i class="las la-angle-down ms-1"></i>
                                                 </a>
-                                                <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item" href="#">Today</a>
-                                                    <a class="dropdown-item" href="#">Last Week</a>
-                                                    <a class="dropdown-item" href="#">Last Month</a>
-                                                    <a class="dropdown-item" href="#">This Year</a>
-                                                </div>
                                             </div>               
                                         </div><!--end col-->
                                     </div>  <!--end row-->                                  
                                 </div><!--end card-header-->
-                                <div class="card-body">
-                                    <div class="">
-                                        <div id="ana_dash_1" class="apex-charts"></div>
-                                    </div> 
-                                </div><!--end card-body--> 
+                                     <div class="card-body">          
+                                    <canvas id="doughnut" class="drop-shadow" height="300"></canvas>            
+                                </div>
+                        
                             </div><!--end card--> 
                         </div><!--end col-->
                         <div class="col-lg-3">
@@ -153,12 +146,56 @@
                                                 
                                                 <div class="activity-info-text">
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <p class="text-muted mb-0 font-13 w-75"> 
-                                                         No Activity log at this time
+                                                        <p class=" mb-0 font-13 w-75"> 
+                                                         Your Address verification completed successful
                                                         </p>
+                                                           <small class="text-muted">5 mins ago</small>
                                                     </div>    
                                                 </div>
-                                            </div>
+                                                </div>
+                                                 <div class="activity-info">
+                                                <div class="activity-info-text">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <p class="mb-0 font-13 w-75"> 
+                                                        Last login 24th Oct, 2021 at Lagos Nigeria
+                                                        </p>
+                                                           <small class="text-muted">10 mins ago</small>
+                                                    </div>    
+                                                </div>
+                                                 </div>
+                                                 <div class="activity-info">
+                                                <div class="activity-info-text">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <p class=" mb-0 font-13 w-75"> 
+                                                        Your request fund request approved successful
+                                                        </p>
+                                                           <small class="text-muted">20 mins ago</small>
+                                                    </div>  
+                                                    </div>
+
+                                                </div>
+                                                             <div class="activity-info">
+                                                <div class="activity-info-text">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <p class=" mb-0 font-13 w-75"> 
+                                                        You have a unread notifications
+                                                        </p>
+                                                           <small class="text-muted">50 mins ago</small>
+                                                    </div>  </div>
+
+                                                </div>
+
+                                                <div class="activity-info">
+                                                <div class="activity-info-text">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <p class=" mb-0 font-13 w-75"> 
+                                                        A new user created, verify details
+                                                        </p>
+                                                           <small class="text-muted">1hr  ago</small>
+                                                    </div>  </div>
+
+                                                </div>
+                                            
                                             @endif
                                                                                                                                                                              
                                         </div><!--end activity-->
@@ -260,6 +297,4 @@
                     
 
                 </div><!-- container -->
-
-
 @endsection

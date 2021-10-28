@@ -20,7 +20,7 @@
                 </div>
                 <div class="col-md-12 col-lg-6">
                     <div class="img-wrap counter-number d-inline-flex align-items-center mb-4" >
-                        <img src="{{asset('/assets/landing1.png')}}" alt="hero single" class="custom-width img-fluid">
+                        <img src="{{asset('/landing_assets/img/landing1.png')}}" alt="hero single" class="custom-width img-fluid">
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@ help our clients stay ahead of the rapidly evolving issues. </p>
             <div class="row justify-content-around">
                 <div class="col-md-12 col-lg-6">
                     <div class="about-img-wrap">
-                        <img src="{{asset('/assets/landing5.jpg')}}" width="400px" alt="video" class="img-fluid rounded shadow-sm color-bip shadow">
+                        <img src="{{asset('/landing_assets/img/landing5.jpg')}}" width="400px" alt="video" class="img-fluid rounded shadow-sm color-bip shadow">
                         
                     </div>
                 </div>
@@ -93,7 +93,7 @@ help our clients stay ahead of the rapidly evolving issues. </p>
             <div class="row justify-content-around">
                 <div class="col-md-12 col-lg-6">
                     <div class="about-img-wrap">
-                        <img src="{{asset('/assets/landing2.png')}}" alt="video" class="img-fluid rounded shadow-sm">
+                        <img src="{{asset('/landing_assets/img/landing2.png')}}" alt="video" class="img-fluid rounded shadow-sm">
                         
                     </div>
                 </div>

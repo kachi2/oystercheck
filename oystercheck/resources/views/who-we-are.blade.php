@@ -35,7 +35,12 @@
     <section class="about-us-section ptb-100">
         <div class="container">
             <div class="row justify-content-between align-items-center">
-                <div class="col-md-12 col-lg-12">
+             <div class="col-lg-4">
+                    <div class="video-promo-content mb-md-4 mb-lg-0">
+                        <h2><img src="{{asset('/landing_assets/img/who.png')}}"></h2>
+                        </div>
+                </div>
+                <div class="col-md-12 col-lg-8">
                     <div class="video-promo-content mb-md-4 mb-lg-0">
                         <h2>Who We Are</h2>
                         <p>Oysterchecks trade as The Morgans Consortium Consulting Limited (TMC) a private registered company with a registration number 09045481 We specialize in providing comprehensive automated Background Screening, KYC , Transaction Monitoring & AML solutions across the globe. We are part of the UK fastest growing companies in providing overall and extensive recruitment solutions all in one platform. Our services are extensive and secure which helps in managing potential risks and improve your recruitment process. We are a team of professionals who are ready to walk with you throughout your journey. At first, we start by learning about your business needs in a great depth, the risk factors your business is exposed to and provide tailor made solutions to suit your business needs. Our platform runs on modern technology which allows access to thousands of databases across the world in order to provide international background screening services. We offer KYC and AML checks which help in ensuring that your business is safe from potential financial crimes. It also saves you from risks associated with failures to comply to set rules and regulations.

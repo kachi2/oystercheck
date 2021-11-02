@@ -35,7 +35,13 @@
     <section class="about-us-section ptb-100">
         <div class="container">
             <div class="row justify-content-between align-items-center">
-                <div class="col-md-12 col-lg-12">
+              <div class="col-md-12  col-lg-4">
+                    <div class="video-promo-content mb-md-4 mb-lg-0">
+                        <h2><img src="{{asset('/landing_assets/img/core.png')}}" width="300px"></h2>
+  
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-8">
                     <div class="video-promo-content mb-md-4 mb-lg-0">
                         <h2>Core Values</h2>
                         <p>Oysterchecks believes in integrity and honesty principles in order to build trust. Integrity and honesty are one of the fundamental values that we seek in any client before we could carry out a business. We believe practicing honesty and integrity builds trust which is an essential pillar in helping us deliver successful results to our clients. As a part of our business process, we always require truthful information which is treated as confidential in order to deliver optimal solutions.</p>

@@ -35,7 +35,14 @@
     <section class="about-us-section ptb-100">
         <div class="container">
             <div class="row justify-content-between align-items-center">
-                <div class="col-md-12 col-lg-12">
+            <div class="col-md-12 col-lg-4">
+                    <div class="video-promo-content mb-md-4 mb-lg-0">
+                          <h2><img src="{{asset('/landing_assets/img/mission.jpg')}}" width="300px"></h2>
+                      
+                        
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-8">
                     <div class="video-promo-content mb-md-4 mb-lg-0">
                         <h2>Mission</h2>
                         <p>To Achieve Market Dominance In Providing Exceptional And Extensive Background, KYC And AML Screening Services Across The World..</p>

@@ -1,11 +1,11 @@
-    <body class="dark-sidenav navy-sidenav">
+ <body class="dark-sidenav navy-sidenav">
         <!-- Left Sidenav -->
         <div class="left-sidenav">
             <!-- LOGO -->
             <div class="brand">
-                <a href="index.html" class="logo">
+                <a href="{{route('index')}}" class="logo">
                     <span>
-                        <img src="assets/images/logo.png"  width="150px" alt="logo-large" class="logo-light"> 
+                        <img src="{{asset('/assets/images/logo.png')}}"  width="150px" alt="logo-large" class="logo-light"> 
                     </span>  
                 </a>
             </div>
@@ -17,71 +17,64 @@
                         <a href="#"> <i data-feather="home" class="align-self-center menu-icon"></i><span>Dashboard</span></a>
                         
                     </li>
-    
+                    <hr class="hr-dashed hr-menu">
                     <li>
-                        <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Individual Verifications</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <a href="javascript: void(0);"><i data-feather="user" class="align-self-center menu-icon"></i><span>Identity Verification</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
-                             <li class="nav-item"><a class="nav-link" href="verifyphone.html"><i class="ti-control-record"></i>Verify Phone Number</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Verify Bank Information</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Verify National ID</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Verify Address</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Verify Driver's License</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Educational Check</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Driving License</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Guarantors Address Check</a></li>
+                            @foreach($sidebar as $menu)
+                             <li class="nav-item"><a class="nav-link" href="{{route('admin.verify',$menu->slug)}}"><i class="ti-control-record"></i>{{$menu->slug}} Verification</a></li>
+                             @endforeach
                         </ul>
                     </li> 
-
-                    <li>
-                        <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Business Verifications</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                     
+                     <li>
+                        <a href="javascript: void(0);"><i data-feather="layers" class="align-self-center menu-icon"></i><span>Business Verifications</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
-                             <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Tax Identification Number</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Business Address</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Company Search (CAC)</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Bank Account Verification</a></li>
+                        @foreach($business as $biz )
+                             <li class="nav-item"><a class="nav-link" href="{{route('businessIndex',$biz->slug)}}"><i class="ti-control-record"></i>{{$biz->name}}</a></li>
+                           @endforeach
                         </ul>
                     </li> 
-
-                    <li>
-                        <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Organisations</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                  
+                         <li>
+                        <a href="javascript: void(0);"><i data-feather="map-pin" class="align-self-center menu-icon"></i><span>Address Verification</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
-                             <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Police / Criminal Record </a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Political Exposed Persons </a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Professional Certificate</a></li>
-             
+                        @foreach ($address as $add)
+                             <li class="nav-item"><a class="nav-link" href="{{route('addressIndex',$add->slug)}}"><i class="ti-control-record"></i>{{$add->name}}</a></li>
+                         @endforeach
                         </ul>
-                    </li>  <hr class="hr-dashed hr-menu">
-                    <li class="menu-label my-2">Account</li>
-                    <li>
-                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Wallet</span></a>
                     </li> 
-                    <li>
-                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Transactions</span></a>
-                    </li> 
-                    <li>
-                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Sessions</span></a>
-                    </li>
-                    </li>  <hr class="hr-dashed hr-menu">
+ 
+                  <hr class="hr-dashed hr-menu">
+                    
+                    <li class="menu-label my-2">Candidate Onboarding</li>
+                       <hr class="hr-dashed hr-menu">
+                <li>
+                        <a href="javascript: void(0);"><i data-feather="user-plus" class="align-self-center menu-icon"></i><span>Candidate Onboarding</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                             <li class="nav-item"><a class="nav-link" href="{{route('candidate.index')}}"><i class="ti-control-record"></i> Onboard Candidate</a></li>
+                        </ul>
+                  <div class="pt-5"> </div>
+                
                     <li class="menu-label my-2">Administrative Task</li>
+                       <hr class="hr-dashed hr-menu">
+                   
                     <li>
-                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Reports</span></a>
+                        <a href="{{route('users.report')}}"><i data-feather="trending-up" class="align-self-center menu-icon"></i><span>Audit Reports</span></a>
                     </li> 
                     <li>
-                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Settings</span></a>
+                        <a href="{{route('user.profile')}}"><i data-feather="settings" class="align-self-center menu-icon"></i><span>Settings</span></a>
                     </li> 
                     <li>
-                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Users</span></a>
-                    </li> 
-                    <li>
-                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Activity Log</span></a>
-                    </li> 
-                    <li>
-                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Manage Verifications</span></a>
-                    </li> 
+                        <a href="javascript: void(0);"><i data-feather="activity" class="align-self-center menu-icon"></i><span>Activity Log</span></a>
+                    </li>  
+                     <li>
+                        <a href="{{route('user.transactions')}}"><i data-feather="credit-card" class="align-self-center menu-icon"></i><span>Wallets Transactions</span></a>
+                    </li>
                             
                 </ul>
-    
-              
             </div>
+          
         </div>
+       
         <!-- end left-sidenav-->

@@ -48,6 +48,6 @@ class User extends Authenticatable
     }
 
     public function client(){
-        return $this->hasOne(Client::class, );
+        return $this->hasOne(Client::class);
     }
 }

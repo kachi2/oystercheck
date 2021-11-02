@@ -71,7 +71,7 @@ help our clients stay ahead of the rapidly evolving issues. </p>
             <div class="row justify-content-around">
                 <div class="col-md-12 col-lg-6">
                     <div class="about-img-wrap">
-                        <img src="{{asset('/landing_assets/img/landing5.jpg')}}" width="400px" alt="video" class="img-fluid rounded shadow-sm color-bip shadow">
+                        <img src="{{asset('/landing_assets/img/landing6.jpg')}}" width="400px" alt="video" class="img-fluid rounded shadow-sm color-bip shadow">
                         
                     </div>
                 </div>

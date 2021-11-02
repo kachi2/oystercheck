@@ -30,8 +30,11 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-       //$this->middleware('auth');
+       $this->middleware('admin');
        $this->API_Token = 'FLWSECK_TEST-b754b22c91f541503f75b0d74d29a034-X';
+       if(request()->user->user_type != 1){
+           return redirect()->back();
+       }
     }
 
     /**
@@ -44,7 +47,7 @@ class HomeController extends Controller
     public function Home()
     {
         $user = auth()->user();
-        if($user->role_id == 1){   
+        if($user->user_type == 1){   
         $service = CandidateVerification::where('user_id', $user->id)->get();
         return view('users.onboarding.uploads', compact('service', $service));
         }

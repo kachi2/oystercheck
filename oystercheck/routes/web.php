@@ -7,6 +7,7 @@ use App\Http\Controllers\IdentityController;
 use App\Http\Controllers\LandingPages;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CandidateController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +22,7 @@ use App\Http\Controllers\CandidateController;
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 require __DIR__.'/auth.php';
-
 Route::get('/', [LandingPages::class, 'index'])->name('landing');
 Route::get('/who-we-are', [LandingPages::class, 'WhoWeAre'])->name('who-we-are');
 Route::get('/core-values', [LandingPages::class, 'CoreValues'])->name('core-values');
@@ -66,5 +62,13 @@ Route::get('/user/profile', [HomeController::class, 'Profile'])->name('user.prof
 Route::post('user/updates/details', [HomeController::class, 'updateUserDetails'])->name('users.updateDetails');
 Route::post('/user/password/update', [HomeController::class, 'passwordUpdate'])->name('users.passwordUpdate');
 Route::post('/user/get/data', [HomeController::class, 'GetData'])->name('query.data');
+});
+
+
+Route::middleware('admin')->prefix('admin')->group( function() { 
+Route::get('/', [AdminController::class, 'Index'])->name('admin.index');
+Route::get('/index', [AdminController::class, 'Index'])->name('admin.index');
+Route::get('/identity/{slug}', [AdminController::class, 'getVerify'])->name('admin.verify');
+
 
 });

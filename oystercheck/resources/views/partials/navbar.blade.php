@@ -43,7 +43,7 @@
                         <li class="dropdown">
                             <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-bs-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="false" aria-expanded="false">
-                                <span class="ms-1 nav-user-name hidden-sm ">Michael Kachi</span>
+                                <span class="ms-1 nav-user-name hidden-sm ">{{auth()->user()->name}}</span>
                                   
                                      <img src="{{asset('/assets/michael.png')}}"  width="40px" height="30px" alt="logo-large" class="rounded-circle"> 
                                                  

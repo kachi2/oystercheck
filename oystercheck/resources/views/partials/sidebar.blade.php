@@ -10,12 +10,12 @@
                 </a>
             </div>
             <!--end logo-->
-            @if(auth()->user()->role_id != 1)
+            @if(auth()->user()->user_type != 1)
             <div class="menu-content h-100" data-simplebar>
                 <ul class="metismenu left-sidenav-menu">
                     <li class="menu-label mt-0">Main</li>
                     <li>
-                        <a href="#"> <i data-feather="home" class="align-self-center menu-icon"></i><span>Dashboard</span></a>
+                        <a href="{{route('index')}}"> <i data-feather="home" class="align-self-center menu-icon"></i><span>Dashboard</span></a>
                         
                     </li>
                     <hr class="hr-dashed hr-menu">
@@ -72,10 +72,14 @@
                      <li>
                         <a href="{{route('user.transactions')}}"><i data-feather="credit-card" class="align-self-center menu-icon"></i><span>Wallets Transactions</span></a>
                     </li>
+                    @if(auth()->user()->user_type == 3)
+                    <li>
+                        <a href="{{route('admin.index')}}"><i data-feather="credit-card" class="align-self-center menu-icon"></i><span>Switch to Admin</span></a>
+                    </li>
+                    @endif
                             
                 </ul>
             </div>
-
             @else
              <div class="menu-content h-100" data-simplebar>
                 <ul class="metismenu left-sidenav-menu">

@@ -28,7 +28,7 @@
                     </li>
                     <li><a  href="{{route('services')}}">Services</a></li>
                      <li><a  href="{{route('industry')}}">Industry</a></li>
-                      <li><a  href="{{route('industry')}}">Technology</a></li>
+                      <li><a  href="{{route('technology')}}">Technology</a></li>
                        <li><a  href="{{route('resource')}}">Resources</a></li>
                     <li><a  href="{{route('contact-us')}}" >Contact Us</a></li>
                 </ul>

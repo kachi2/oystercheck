@@ -13,7 +13,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-7">
                     <div class="page-header-content text-white text-center pt-sm-5 pt-md-5 pt-lg-0">
-                        <h1 class="text-white mb-0">Technolog</h1>
+                        <h1 class="text-white mb-0">Technology</h1>
                         <div class="custom-breadcrumb">
                             <ol class="breadcrumb d-inline-block bg-transparent list-inline py-0">
                                 <li class="list-inline-item breadcrumb-item"><a href="#">Home</a></li>
@@ -41,7 +41,7 @@
 
 Some of the clients might want to use the platform while on transit and we have made this easier by making the platform easily accessible from a wide range of devices such as PCs, tablets and smartphones. We also have a mobile app which makes the interaction easier by allowing access to our services via smart phones and tablets. Within a click of a button from your smart phone, you can initiate a screening process on an individual and get rapid responses in real time.
 
-Our IT team has made our platform in a way that it can be integrated easily with other onboarding applications ensuring easy and quicker access to our services. Our platform is also customizable allowing room for addition of more features to suit your specific needs in a more effective way while still maintaining high level of performance. Let us be part of the solutions you are looking for ad you will always delight on our services</p>
+Our IT team has made our platform in a way that it can be integrated easily with other onboarding applications ensuring easy and quicker access to our services. Our platform is also customizable allowing room for addition of more features to suit your specific needs in a more effective way while still maintaining high level of performance. Let us be part of the solutions you are looking for ad you will always delight on our services.</p>
                         
                     </div>
                 </div>

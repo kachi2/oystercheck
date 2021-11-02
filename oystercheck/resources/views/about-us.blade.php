@@ -83,6 +83,27 @@
                         <p>When you become our client, we assign you a supportive team that will keep close interaction and follow up to ensure that you get the best from our services. The team is able to know about your changing needs and modify earlier solutions to suit your new requirements in a more efficient way. Working with Oysterchecks will never make you feel alone</p></div>
                </div>
                </div>
+
+
+               
+               <div class="row justify-content-between align-items-center">
+                <div class="col-md-12 col-lg-4">
+                    <div class="video-promo-content mb-md-4 mb-lg-0">
+                        <h5><img src="{{asset('/landing_assets/img/icon_2.png')}}" width="50px"> Operations On Global Basis</h5>
+                        <p>We have collaborated with other international bodies which have provided us with global access and processing of data. This has enabled us to conduct various checks on any employee on a global basis. This should eliminate your worry of hiring employees from other countries because our services will provide global background check report.</p></div>
+                </div>
+                 <div class="col-md-12 col-lg-4">
+                    <div class="video-promo-content mb-md-4 mb-lg-0">
+                        <h5><img src="{{asset('/landing_assets/img/icon_1.png')}}" width="50px">Oysterchecks Team</h5>
+                        <p>Meet the Oyster Check team Building an exceptional background screening, KYC & AML compliance Solutions We are a team of dedicated experts who are determined in offering exceptional and quality services to our clients.</p> </div>
+                
+            </div>
+
+             <div class="col-md-12 col-lg-4">
+                    <div class="video-promo-content mb-md-4 mb-lg-0">
+                            <h5><img src="{{asset('/landing_assets/img/icon_3.png')}}" width="50px"> Automated Services</h5>
+                        <p>Our platform provides automated services which can be accessed easily by our clients and provide results in a faster way.</p></div>
+               </div>
         </div>
     </section>
     <!--about us section end-->

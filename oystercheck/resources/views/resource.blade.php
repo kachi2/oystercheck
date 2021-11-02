@@ -36,19 +36,19 @@
             <div class="row justify-content-between align-items-center">
                 <div class="col-md-12 col-lg-6">
                     <div class="video-promo-content mb-md-4 mb-lg-0">
-                        <h2>Screening Regulations</h2>
+                        <h4><img src="{{asset('/landing_assets/img/screening.jpg')}}" width="100px">Screening Regulations</h4>
                         <p>Compliance knowledge and expertise is very important for organizations which provide employee screening services. At Oysterchecks we are always at the fore front ensuring that our screening services are in compliance with the dynamic regulatory requirements. We are committed and dedicated to ensure that we are in compliance with the latest regulatory programs in the industry.</p></div>
                 </div>
                 <div class="col-md-12 col-lg-6">
                     <div class="video-promo-content mb-md-4 mb-lg-0">
-                        <h2>Data Protection Compliance</h2>
+                        <h4><img src="{{asset('/landing_assets/img/data.jpg')}}" width="100px"> Data Protection Compliance</h4>
                         <p>Oysterchecks is registered with the Information Commissioner’s Office and strictly operates in compliance with rules stipulated under the Data Act 1998. This act regulates how a company gathers, handles, stores, retains and disposes personal information.</p>
             </div>
         </div>
 
           <div class="col-md-12 col-lg-12 pt-2">
                     <div class="video-promo-content mb-md-4 mb-lg-0">
-                        <h2>Data Protection Compliance</h2>
+                        <h4><img src="{{asset('/landing_assets/img/com.jpg')}}" width="100px">Data Protection Compliance</h4>
                         <p>Oysterchecks is registered with the Information Commissioner’s Office and strictly operates in compliance with rules stipulated under the Data Act 1998. This act regulates how a company gathers, handles, stores, retains and disposes personal information.</p>
                          <ul class="list-unstyled tech-feature-list">
                          <li class="py-1"><span class="ti-check-box mr-2 color-secondary"> Anonymity of collected data to protect privacy</span> </li>
@@ -63,13 +63,13 @@
 
          <div class="col-md-12 col-lg-6 pt-2">
                     <div class="video-promo-content mb-md-4 mb-lg-0">
-                        <h2>Criminal Checks Records Compliance</h2>
+                        <h4><img src="{{asset('/landing_assets/img/criminal.jpg')}}" width="100px"> Criminal Checks Records Compliance</h4>
                         <p>Oysterchecks ensures that any data collected about an individual or company is treated with at most confidentiality as required in Police Act 1997 and Data Act 1998. We have access to global databases and we will help you in conducting global employment screening with a lot of ease.</p></div>
                 </div>
 
              <div class="col-md-12 col-lg-6 pt-2">
                     <div class="video-promo-content mb-md-4 mb-lg-0">
-                        <h2>Compliance Standards</h2>
+                        <h2><img src="{{asset('/landing_assets/img/com.jpg')}}" width="100px">Compliance Standards</h2>
                         <p>We offer a wide range of screening packages which you can chose from to meet your requirements. In addition, we provide custom packages tailor-made to suit your specific needs and requirements. Our payment gateways for purchasing these packages are secure and are in compliance with HMG Baseline Personnel Security Standard, the Payment Card Industry Data Security Standard and the British Standard 7858:2012.</p></div>
                 </div>
         </div>

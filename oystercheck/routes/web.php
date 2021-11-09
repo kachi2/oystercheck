@@ -41,7 +41,7 @@ Route::get('/resources', [LandingPages::class, 'Resources'])->name('resource');
 
 #===================== USERS ROUTE ===============================
 Route::middleware('auth')->group(function() {
-Route::get('/dashboard', [HomeController::class, 'Home'])->name('home');
+Route::get('/dashboard', [HomeController::class, 'Home'])->name('index');
 Route::get('/user/identities/check/{slug}', [HomeController::class, 'VerifyIndex'])->name('verifyIndex');
 Route::post('/user/identities/verify/{slug}', [IdentityController::class, 'StoreVerify'])->name('StoreVerify');
 Route::get('/test', [IdentityController::class, 'test']);

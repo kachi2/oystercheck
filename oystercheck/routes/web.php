@@ -23,6 +23,8 @@ use App\Http\Controllers\AdminController;
 
 
 require __DIR__.'/auth.php';
+
+#=====================LANDING PAGES ===========================
 Route::get('/', [LandingPages::class, 'index'])->name('landing');
 Route::get('/who-we-are', [LandingPages::class, 'WhoWeAre'])->name('who-we-are');
 Route::get('/core-values', [LandingPages::class, 'CoreValues'])->name('core-values');
@@ -35,9 +37,11 @@ Route::get('/services', [LandingPages::class, 'Services'])->name('services');
 Route::get('/technology', [LandingPages::class, 'Technology'])->name('technology');
 Route::get('/industry', [LandingPages::class, 'Industry'])->name('industry');
 Route::get('/resources', [LandingPages::class, 'Resources'])->name('resource');
+
+
+#===================== USERS ROUTE ===============================
 Route::middleware('auth')->group(function() {
-Route::get('/dashboard', [HomeController::class, 'Home'])->name('index');
-Route::get('/home', [HomeController::class, 'Home'])->name('home');
+Route::get('/dashboard', [HomeController::class, 'Home'])->name('home');
 Route::get('/user/identities/check/{slug}', [HomeController::class, 'VerifyIndex'])->name('verifyIndex');
 Route::post('/user/identities/verify/{slug}', [IdentityController::class, 'StoreVerify'])->name('StoreVerify');
 Route::get('/test', [IdentityController::class, 'test']);
@@ -64,7 +68,7 @@ Route::post('/user/password/update', [HomeController::class, 'passwordUpdate'])-
 Route::post('/user/get/data', [HomeController::class, 'GetData'])->name('query.data');
 });
 
-
+#====================ADMIN ROUTES ============================
 Route::middleware('admin')->prefix('admin')->group( function() { 
 Route::get('/', [AdminController::class, 'Index'])->name('admin.index');
 Route::get('/index', [AdminController::class, 'Index'])->name('admin.index');

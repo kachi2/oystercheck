@@ -30,7 +30,6 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-       $this->middleware('admin');
        $this->API_Token = 'FLWSECK_TEST-b754b22c91f541503f75b0d74d29a034-X';
     }
 

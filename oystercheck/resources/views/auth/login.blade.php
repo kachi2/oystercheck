@@ -127,21 +127,23 @@
                                     <div class="slider-item">
                                         <div class="nk-feature nk-feature-center">
                                             <div class="nk-feature-img">
-                                                <img class="round" src="{{asset('/assets/images/login2.png')}}" srcset="{{asset('/assets/images/login2.png')}} 2x" alt="">
+                                                <img class="round" src="{{asset('/landing_assets/img/landing1.png')}}" srcset="{{asset('/landing_assets/img/landing1.png')}} 2x" alt="">
                                             </div>
-                                            <div class="nk-feature-content py-4 p-sm-5">
-                                                <h6>Comprehensive Background Checks</h6>
+                                            <div class="nk-feature-content py-1 p-sm-3">
+                                                <h4>Comprehensive Background Checks</h4>
                                                 <p>Tired Of Poor And Shallow Background Checks?
-                                              Relax and get to enjoy comprehensive background checks from us. Oysterchecks is dedicated in conducting extensive background checks which are essential in the recruitment process. We use advanced technology to ensure that we provide extensive information which is verified and validated in order to deliver quality solutions.</p>
+                                              Relax and get to enjoy comprehensive background checks from us. Oysterchecks is dedicated in 
+                                              conducting extensive background checks which are
+                                               essential in the recruitment process. </p>
                                             </div>
                                         </div>
                                     </div><!-- .slider-item -->
                                     <div class="slider-item">
                                         <div class="nk-feature nk-feature-center">
                                             <div class="nk-feature-img">
-                                                <img class="round" src="{{asset('/assets/images/login.png')}}" srcset="{{asset('/assets/images/login.png')}} 2x" alt="">
+                                                <img class="round" src="{{asset('/landing_assets/img/landing2.png')}}" srcset="{{asset('/landing_assets/img/landing2.png')}} 2x" alt="">
                                             </div>
-                                            <div class="nk-feature-content py-4 p-sm-5">
+                                            <div class="nk-feature-content py-2 p-sm-3">
                                                 <h4>Had Enough Of Inconsistent KYC Check Results?</h4>
                                                 <p>Oysterchecks addresses these shortcomings by performing KYC checks on people, ID documents and companies in a more effective way. .</p>
                                             </div>

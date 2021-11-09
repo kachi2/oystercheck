@@ -141,25 +141,25 @@ help our clients stay ahead of the rapidly evolving issues. </p>
                 <div class="col-md-6 col-lg-3">
                     <div class="single-counter rounded p-4 text-center text-white">
                         <span class="ti-medall-alt icon-md"></span>
-                        <p>Zero bottlenecks</p>
+                        <h4 class=" text-white">Zero bottlenecks</h4>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="single-counter rounded p-4 text-center text-white">
                         <span class="ti-headphone-alt icon-md"></span>
-                        <p>Reliable Database</p>
+                        <h4 class=" text-white">Reliable Database</h4>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="single-counter rounded p-4 text-center text-white">
                         <span class="ti-cup icon-md"></span>
-                        <p>Wide Verification Capacity</p>
+                        <h4 class=" text-white">Wide Verification Capacity</h4>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="single-counter rounded p-4 text-center text-white">
                         <span class="ti-user icon-md"></span>
-                        <p>Ease of Enrollment</p>
+                        <h4 class=" text-white">Ease of Enrollment</h4>
                     </div>
                 </div>
             </div>

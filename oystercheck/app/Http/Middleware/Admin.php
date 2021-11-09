@@ -17,7 +17,7 @@ class Admin
     public function handle(Request $request, Closure $next)
     {
         if ($request->user()->user_type != 3) {
-            return redirect('home');
+            return redirect()->intended('home');
         }
         return $next($request);
     }

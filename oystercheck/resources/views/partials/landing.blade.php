@@ -30,7 +30,7 @@
                      <li><a  href="{{route('industry')}}">Industry</a></li>
                       <li><a  href="{{route('technology')}}">Technology</a></li>
                        <li><a  href="{{route('resource')}}">Resources</a></li>
-                    <li><a  href="{{route('contact-us')}}" >Contact Us</a></li>
+                    <li><a class="btn btn-danger p-2" href="{{route('login')}}" >Get Started</a></li>
                 </ul>
             </div>
         </div>

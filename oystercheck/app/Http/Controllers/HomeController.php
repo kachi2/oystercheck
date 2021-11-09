@@ -32,9 +32,6 @@ class HomeController extends Controller
     {
        $this->middleware('admin');
        $this->API_Token = 'FLWSECK_TEST-b754b22c91f541503f75b0d74d29a034-X';
-       if(request()->user->user_type != 1){
-           return redirect()->back();
-       }
     }
 
     /**

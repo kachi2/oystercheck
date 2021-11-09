@@ -34,7 +34,7 @@ class AdminController extends Controller
     public function __construct(User $user )
     {
         $user = request()->user;
-        $this->middleware('admin');
+        $this->middleware('auth');
     }
 
     public function Index(){

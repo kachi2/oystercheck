@@ -43,6 +43,9 @@ class HomeController extends Controller
     public function Home()
     {
         $user = auth()->user();
+        if(auth()->user()->user_type == 3)
+        return redirect()->route('admin.index');
+
         if($user->user_type == 1){   
         $service = CandidateVerification::where('user_id', $user->id)->get();
         return view('users.onboarding.uploads', compact('service', $service));

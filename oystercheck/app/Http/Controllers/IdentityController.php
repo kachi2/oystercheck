@@ -107,6 +107,9 @@ class IdentityController extends Controller
 
 
     public function StoreVerify(Request $request, $slug){
+        if(auth()->user()->user_type == 3)
+        return redirect()->route('admin.index');
+        
         $validate = Validator::make($request->all(),[
             'reference' => 'required'
         ]);

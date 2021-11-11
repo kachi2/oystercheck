@@ -23,6 +23,9 @@ class BusinessController extends Controller
     use generateHeaderReports;
 
     public function Index($name){
+        if(auth()->user()->user_type == 3)
+        return redirect()->route('admin.index');
+        
         $user = User::where('id', auth()->user()->id)->first();
        $slug = Verification::where(['slug' => $name])->first();
        $data['slug'] = Verification::where(['slug' => $name])->first();

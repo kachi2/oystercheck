@@ -21,6 +21,9 @@ class AddressController extends Controller
     //
 
     public function AddressIndex($slug){
+        if(auth()->user()->user_type == 3)
+        return redirect()->route('admin.index');
+        
         $data = $this->generateAddressReport($slug);
         return view('users.address.index', $data);
     }

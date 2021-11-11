@@ -49,16 +49,14 @@
                   <hr class="hr-dashed hr-menu">
                     
                     <li class="menu-label my-2">Candidate Onboarding</li>
-                       <hr class="hr-dashed hr-menu">
                 <li>
                         <a href="javascript: void(0);"><i data-feather="user-plus" class="align-self-center menu-icon"></i><span>Candidate Onboarding</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
                              <li class="nav-item"><a class="nav-link" href="{{route('candidate.index')}}"><i class="ti-control-record"></i> Onboard Candidate</a></li>
                         </ul>
-                  <div class="pt-5"> </div>
-                
+                 <hr class="hr-dashed hr-menu">
                     <li class="menu-label my-2">Administrative Task</li>
-                       <hr class="hr-dashed hr-menu">
+                      
                    
                     <li>
                         <a href="{{route('users.report')}}"><i data-feather="trending-up" class="align-self-center menu-icon"></i><span>Audit Reports</span></a>

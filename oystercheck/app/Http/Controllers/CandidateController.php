@@ -22,6 +22,9 @@ class CandidateController extends Controller
         return $pass;
     }
     public function CandidateIndex(){
+        if(auth()->user()->user_type == 3)
+        return redirect()->route('admin.index');
+        
         $candidate['candidate'] = Candidate::where('client_id', auth()->user()->id)->get();
         $candidate['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'verified'])->get();
         $candidate['pending'] = Candidate::where(['client_id'=> auth()->user()->id, 'status'=>'pending'])->get();

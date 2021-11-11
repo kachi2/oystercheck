@@ -82,8 +82,7 @@
                                             </div>
                                         </div><!--end card-body--> 
                                     </div><!--end card--> 
-                              </div> <!--end col--> 
-                              
+                              </div> <!--end col-->          
                               <!--end col-->                               
                             </div><!--end row-->                
                         </div>
@@ -92,7 +91,6 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">{{$slug->slug}} Verification log</h4>
-                      
                     </div><!--end card-header-->
                     <div class="card-body">  
                         <table id="datatable-buttons" class=" orders table table-striped table-bordered dt-responsive nowrap " style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -101,7 +99,6 @@
                                 <th>SN</th>
                                 <th>{{$slug->slug}} Verification</th>
                                 <th>Verified by</th>
-                                 <th>Company</th>
                                 <th>Fee</th>
                                 <th>Status</th>
                                 <th>Date</th>
@@ -109,22 +106,18 @@
                             </tr>
                             </thead>
                             <tbody>
-                      
                         @foreach ($logs as $trans )
                             <tr>
                                 <td>{{$trans->id}}</td>
-                                <td>{{$trans->service_reference}}</td>
-                                <td>{{$trans->user->email}}</td>
-                                  <td>{{$trans->user->client['company_name']}}</td>
+                                <td>{{$trans->service_ref}}</td>
+                                <td>{{$trans->user->name}}</td>
                                 <td>{{$trans->fee}}</td>
                                 <td>@if($trans->status == 'successful') <span class="text-success"> {{$trans->status}}</span> @elseif($trans->status == 'pending')<span class="text-warning"> {{$trans->status}}</span>  @else <span class="text-danger"> {{$trans->status}}</span> @endif  </td>
                                 <td>{{$trans->created_at}}</td>
-                               
                                 <td> @if($trans->status == 'successful')
-                                <a href="{{route('verify.details', encrypt($trans->id))}}">View Details</a>
+                                <a href="{{route('admin.business.details', encrypt($trans->id))}}">View Details</a>
                                  @endif
                                 </td>
-                               
                             </tr>
                              @endforeach
                             </tbody>
@@ -132,6 +125,5 @@
                     </div>
                 </div>
             </div> <!-- end col -->
-        </div> 
-                    
+        </div>                  
 @endsection

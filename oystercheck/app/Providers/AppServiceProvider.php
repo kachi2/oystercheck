@@ -37,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
 
             });
             $data['sidebar'] = Verification::where('report_type', '!=', 'business')->where('report_type', '!=', 'address')->get();
+            $data['sidebars'] = Verification::get();
             $data['business'] = Verification::where('report_type', '=', 'business')->get();
             $data['address'] = Verification::where('report_type', '=', 'address')->get();
             view::share($data);

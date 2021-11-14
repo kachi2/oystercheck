@@ -10,7 +10,7 @@ class Client extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'company_name', 'company_email', 'company_address', 'company_phone'
+        'user_id', 'company_name', 'company_email', 'company_address', 'company_phone', 'image'
     ];
 
     public function candidate(){

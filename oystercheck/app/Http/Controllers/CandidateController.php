@@ -132,7 +132,6 @@ class CandidateController extends Controller
     }
 
     public function candidateHomePage(){
-
         $service = CandidateVerification::where('user_id', auth()->user()->id)->get();
         return view('users.onboarding.index', compact('service', $service));
         

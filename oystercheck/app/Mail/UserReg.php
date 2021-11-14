@@ -6,7 +6,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class UserMail extends Mailable
+class UserReg extends Mailable
 {
     use Queueable, SerializesModels;
     private $data;
@@ -28,6 +28,6 @@ class UserMail extends Mailable
      */
     public function build()
     {
-        return $this->from(['oysterchecks.com', 'Oystechecks'])->subject('Registration Details')->view('mail.user.usermail')->with('data', $this->data);
+        return $this->from('info@oysterchecks.com', 'Oysterchecks')->subject('Registration Details')->view('emails.usermail')->with('data', $this->data);
     }
 }

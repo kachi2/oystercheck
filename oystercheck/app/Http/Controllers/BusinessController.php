@@ -66,7 +66,7 @@ class BusinessController extends Controller
             }else{
                 $amount = $slug->fee;
             }
-            if($userWallet->total_balance < $amount){
+            if($userWallet->avail_balance < $amount){
                 Session::flash('alert', 'error');
                 Session::flash('msg', 'Your walllet is too low for this transaction');
                 return back();
@@ -106,12 +106,11 @@ class BusinessController extends Controller
     public function chargeUser($amount, $ext_ref, $type){
         $user = User::where('id', auth()->user()->id)->first();
         $wallet = Wallet::where('user_id', $user->id)->first();
-        $newWallet = $user->wallet->total_balance - $amount;
+        $newWallet = $user->wallet->avail_balance - $amount;
          $update = Wallet::where('user_id', $user->id)
         ->update([
-                'prev_balance' => $wallet->total_balance,
+                'prev_balance' => $wallet->avail_balance,
                 'avail_balance' => $newWallet,
-                'total_balance' => $newWallet,
         ]);
         $refs = $this->GenerateRef();
         Transaction::create([
@@ -122,7 +121,7 @@ class BusinessController extends Controller
                    'service_type' => $type,
                   'type'  => 'DEBIT', 
                   'amount' => $amount, 
-                 'prev_balance' => $wallet->total_balance, 
+                 'prev_balance' => $wallet->avail_balance, 
                  'avail_balance' => $newWallet
         ]);
         return $update;

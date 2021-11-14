@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Notification;
+use App\Models\Client;
 use Illuminate\Support\Composer;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,8 +33,18 @@ class AppServiceProvider extends ServiceProvider
         //
         view()->composer('*', function($view){
             if (Auth::check()) {
-                $notification = Notification::where(['user_id' => auth()->user()->id])->latest()->take(4)->get();
-                $view->with('notify', $notification);
+                $data['notify'] = Notification::where(['user_id' => auth()->user()->id])->latest()->take(4)->get();
+                $user = User::where('id', auth()->user()->id)->first();
+                if($user->id == 1){
+                    $data['profile_image'] = 'default.png';
+                }elseif($user->id == 2){
+                    $img = Client::where('user_id', $user->id)->first();
+                    $data['profile_image'] = $img->image;
+                }else{
+                    $data['profile_image'] ='default.png';
+                }
+                $view->with($data);
+               
             }
 
             });
@@ -41,6 +53,7 @@ class AppServiceProvider extends ServiceProvider
             $data['business'] = Verification::where('report_type', '=', 'business')->get();
             $data['address'] = Verification::where('report_type', '=', 'address')->get();
             view::share($data);
+
 
     }
 }

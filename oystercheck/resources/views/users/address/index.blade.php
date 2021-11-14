@@ -112,7 +112,7 @@
                              @endif 
                                <div class="col-md-6 p-3">
                              <span style="color:red; font-size:11px;"> Note: You will be charged  ₦{{number_format($slug->fee, 2)}} for each {{$slug->name}}</span> <br> 
-                              <span style="color:darkblue; font-size:11px;">Your wallet Balance is  ₦{{number_format($wallet->total_balance, 2)}}</span> <br> 
+                              <span style="color:darkblue; font-size:11px;">Your wallet Balance is  ₦{{number_format($wallet->avail_balance, 2)}}</span> <br> 
                      
                              <input type="checkbox" required> 
 

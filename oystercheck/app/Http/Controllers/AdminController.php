@@ -21,6 +21,7 @@ use App\Models\CandidateService;
 use App\Models\FundRequest;
 use App\Models\Verification;
 use App\Models\Role;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Wallet;
 use App\Models\Notification;
 use App\Models\Business;
@@ -29,6 +30,7 @@ use App\Models\Client;
 use App\Models\Profile;
 use App\Models\Service;
 use App\Models\UserActivity;
+use App\Mail\UserReg;
 use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
@@ -40,6 +42,10 @@ class AdminController extends Controller
     {
         $this->middleware('admin');
  
+    }
+
+    public function sendMail($data){
+        Mail::to($data['email'])->send(new UserReg($data));
     }
 
     public function RedirectUser(){
@@ -149,17 +155,103 @@ class AdminController extends Controller
         }
 
         //create a client account 
-        $pass = Hash::make($this->generatePass($request->name));
+        $pass = $this->generatePass($request->name);
         $data = [
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $pass,
+            'password' => Hash::make($pass),
             'user_type' => 2
         ];
-        User::create($data);
+        $create = User::create($data);
+        if($create){
+            $data['password'] = $pass;
+            $this->sendMail($data);
+        }
+        sleep(2);
+       $user = User::latest()->first();
+        Wallet::create([
+            'user_id' => $user->id,
+            'prev_balance' => 0,
+            'avail_balance' => 0
+        ]);
+           if(request()->file('image')){
+            $image = request()->file('image');
+            $name =  $image->getClientOriginalName();
+            $FileName = \pathinfo($name, PATHINFO_FILENAME);
+            $ext =  $image->getClientOriginalExtension();
+            $time = time().$FileName;
+            $dd = md5($time);
+            $fileName = $dd.'.'.$ext;
+            $image->move('/images/profile', $fileName);
+           $image = $fileName;
+           }else{
+            $image = 'default.png';
+           }
+        Client::create([
+            'company_name' => $request->company_name,
+            'company_email' => $request->company_email,
+            'company_address' => $request->company_address,
+            'company_phone' => $request->company_phone,
+            'user_id' => $user->id,
+            'image'=>$image
+        ]);
 
-        return $data;
+        Session::flash('alert', 'success');
+        Session::flash('message', 'Client created successfully');
+        return back();
 
+
+    }
+
+    public function administratorIndex(){
+        return view('admin.admin.index')->with('admins', Admin::get());
+    }
+
+    public function AdministratorCreate(){
+
+            return view('admin.admin.create')->with('roles', Role::get());
+    }
+
+    public function AdministratorStore(Request $request){
+
+        $valid = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|unique:users',
+            'company_name' => 'required',
+            'company_email' =>'required',
+        ]);
+
+        if($valid->fails()){
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Some Fields are missing');
+            return redirect()->back()->withInput($request->all())->withErrors($valid);
+        }
+
+        $pass = $this->generatePass($request->name);
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($pass),
+            'user_type' => 2
+        ];
+        $create = User::create($data);
+        if($create){
+            $data['password'] = $pass;
+            $this->sendMail($data);
+        }
+        sleep(2);
+        $user = User::latest()->first();
+        Admin::create([
+            'company_name' => $request->company_name,
+            'company_email' => $request->company_email,
+            'company_address' => $request->company_address,
+            'company_phone' => $request->company_phone,
+            'role' => $request->role,
+            'user_id' => $user->id,
+        ]);
+        Session::flash('alert', 'success');
+        Session::flash('message', 'Administrator created successfully');
+        return back();
 
     }
 }

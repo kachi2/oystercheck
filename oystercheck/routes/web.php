@@ -84,6 +84,8 @@ Route::get('/users/clients/candidate/{id}', [AdminController::class, 'ClientCand
 Route::get('/user/clients/', [AdminController::class, 'UserClients'])->name('admin.user.clients');
 Route::get('/clients/create', [AdminController::class, 'createClient'])->name('admin.client.create');
 Route::post('/clients/store', [AdminController::class, 'ClientStore'])->name('admin.client.store');
-
+Route::get('/administrators/index', [AdminController::class, 'AdministratorIndex'])->name('administratorIndex');
+Route::get('/administrators/create', [AdminController::class, 'AdministratorCreate'])->name('administratorCreate');
+Route::post('/administrators/store', [AdminController::class, 'AdministratorStore'])->name('administratorStore');
 
 });

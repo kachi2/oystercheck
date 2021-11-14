@@ -67,7 +67,7 @@
                     
                            <li><a class="nav-link" href="{{route('admin.user.candidates')}}"> <i data-feather="users" class="align-self-center menu-icon"></i>Candidates</a></li>
                             <li><a class="nav-link" href="{{route('admin.user.clients')}}"> <i data-feather="user" class="align-self-center menu-icon"></i>Clients</a></li>
-                                     <li><a class="nav-link" href="{{route('admin.user.clients')}}"> <i data-feather="user" class="align-self-center menu-icon"></i>Administrators</a></li>
+                                     <li><a class="nav-link" href="{{route('administratorIndex')}}"> <i data-feather="user" class="align-self-center menu-icon"></i>Administrators</a></li>
                         
                         
                  </ul>

@@ -42,6 +42,7 @@ Route::get('/resources', [LandingPages::class, 'Resources'])->name('resource');
 #===================== USERS ROUTE ===============================
 Route::middleware('auth')->group(function() {
 Route::get('/dashboard', [HomeController::class, 'Home'])->name('index');
+Route::get('/home', [HomeController::class, 'Home'])->name('home');
 Route::get('/user/identities/check/{slug}', [HomeController::class, 'VerifyIndex'])->name('verifyIndex');
 Route::post('/user/identities/verify/{slug}', [IdentityController::class, 'StoreVerify'])->name('StoreVerify');
 Route::get('/test', [IdentityController::class, 'test']);
@@ -75,7 +76,7 @@ Route::get('/index', [AdminController::class, 'Index'])->name('admin.index');
 Route::get('/identity/{slug}', [AdminController::class, 'getVerify'])->name('admin.verify');
 Route::get('/business/{slug}', [AdminController::class, 'businessIndex'])->name('admin.businessIndex');
 Route::get('/business/details/{id}', [AdminController::class, 'businessDetails'])->name('admin.business.details');
-Route::get('/address', [AdminController::class, 'getVerify'])->name('admin.addressIndex');
+Route::get('/address', [AdminController::class, 'AddressIndex'])->name('admin.addressIndex');
 Route::get('/candidate', [AdminController::class, 'getVerify'])->name('admin.candidate.index');
 Route::get('/candidate/index', [AdminController::class, 'CandidateIndex'])->name('admin.candidate.index');
 Route::get('/candidate/details/{id}', [AdminController::class, 'CandidateDetails'])->name('admin.candidate.details');

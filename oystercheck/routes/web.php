@@ -77,7 +77,7 @@ Route::get('/index', [AdminController::class, 'Index'])->name('admin.index');
 Route::get('/identity/{slug}', [AdminController::class, 'getVerify'])->name('admin.verify');
 Route::get('/business/{slug}', [AdminController::class, 'businessIndex'])->name('admin.businessIndex');
 Route::get('/business/details/{id}', [AdminController::class, 'businessDetails'])->name('admin.business.details');
-Route::get('/address', [AdminController::class, 'AddressIndex'])->name('admin.addressIndex');
+Route::get('/address/{slug}', [AdminController::class, 'AddressIndex'])->name('admin.addressIndex');
 Route::get('/candidate', [AdminController::class, 'getVerify'])->name('admin.candidate.index');
 Route::get('/candidate/index', [AdminController::class, 'CandidateIndex'])->name('admin.candidate.index');
 Route::get('/candidate/details/{id}', [AdminController::class, 'CandidateDetails'])->name('admin.candidate.details');

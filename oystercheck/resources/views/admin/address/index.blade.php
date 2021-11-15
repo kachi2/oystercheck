@@ -97,7 +97,7 @@
                             <thead>
                             <tr>
                                 <th>SN</th>
-                                <th>{{$slug->slug}} Verification</th>
+                                <th>{{$slug->name}} Verification</th>
                                 <th>Verified by</th>
                                 <th>Fee</th>
                                 <th>Status</th>
@@ -109,7 +109,7 @@
                         @foreach ($logs as $trans )
                             <tr>
                                 <td>{{$trans->id}}</td>
-                                <td>{{$trans->service_ref}}</td>
+                                <td>{{$trans->service_reference}}</td>
                                 <td>{{$trans->user->name}}</td>
                                 <td>{{$trans->fee}}</td>
                                 <td>@if($trans->status == 'successful') <span class="text-success"> {{$trans->status}}</span> @elseif($trans->status == 'pending')<span class="text-warning"> {{$trans->status}}</span>  @else <span class="text-danger"> {{$trans->status}}</span> @endif  </td>

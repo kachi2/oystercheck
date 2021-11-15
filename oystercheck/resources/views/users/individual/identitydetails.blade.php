@@ -36,7 +36,6 @@
                                                 <div class="col">
                                                     <p class="mb-0 fw-semibold text-white">Successful {{$slug->verification->slug}} verifications</p>
                                                     <h3 class="m-0 text-white">{{count($success)}}</h3>
-                                                    <p class="mb-0 text-truncate text-white"><span class="text-success"></span> this week</p>
                                                 </div>
                                                 <div class="col-auto align-self-center">
                                                     <div class="report-main-icon bg-light-alt">
@@ -54,7 +53,6 @@
                                                 <div class="col">
                                                     <p class="text-white mb-0 fw-semibold">Failed {{$slug->verification->slug}}  verifications</p>
                                                     <h3 class="m-0 text-white">{{count($failed)}}</h3>
-                                                    <p class="mb-0 text-truncate text-white"><span class="text-danger">+5</span> this week</p>
                                                 </div>
                                                 <div class="col-auto align-self-center">
                                                     <div class="report-main-icon bg-light-alt">
@@ -72,7 +70,6 @@
                                                 <div class="col">
                                                     <p class="text-white mb-0 fw-semibold">Pending Request</p>
                                                     <h3 class="m-0 text-white">{{count($pending)}}</h3>
-                                                    <p class="mb-0 text-truncate text-white"><span class="text-success">+20</span> this week</p>
                                                 </div>
                                                 <div class="col-auto align-self-center">
                                                     <div class="report-main-icon bg-light-alt">

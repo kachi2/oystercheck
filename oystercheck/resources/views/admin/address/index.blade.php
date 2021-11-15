@@ -97,7 +97,7 @@
                             <thead>
                             <tr>
                                 <th>SN</th>
-                                <th>{{$slug->name}} Verification</th>
+                                <th>Candidate Id</th>
                                 <th>Verified by</th>
                                 <th>Fee</th>
                                 <th>Status</th>

@@ -7,6 +7,7 @@ use App\Models\AddressVerification;
 use App\Models\Verification;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Models\Client;
 use App\Traits\generateHeaderReports;
 use App\Traits\GenerateRef;
 use Illuminate\Support\Facades\DB;
@@ -77,7 +78,11 @@ class AddressController extends Controller
                 'ref' => $ref,
                 'user_id' => auth()->user()->id,
                 'status' => 'pending',
-                'service_reference' => $service_ref
+                'service_reference' => $service_ref,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'last_name' => $request->phone,
+                'country' => $request->country
                 ]);
               // return $res;
               $data = $this->generateAddressReportVerify($slug);
@@ -93,29 +98,74 @@ class AddressController extends Controller
             }
     }
 
-    public function submitAddressVerify(Request $request, $service_ref, $slug){
+    public function submitAddressVerify(Request $request, $service_ref){
+      //  dd($service_ref);
         if(!isset($service_ref)){
             Session::flash('alert', 'error');
             Session::flash('message', 'Bad payload, reload page');
             return redirect()->back();
         }
 
-        if($slug == 'individual_address'){
+       //$logo =  Client::first();
+       $logo_image = base64_encode(asset('/images/logo.png'));
+       if($request->slug == 'individual_address'){
+            $host = 'https://api.staging.youverify.co/v1/candidates/'.$service_ref.'/references';
             $data = [
                 "description" => "Individual Adddress verification",
                 "address" => [
-                    $host = 'https://api.staging.youverify.co/v1/candidates/'.$service_ref.'/references',
                     "house_number" => $request->house_number,
                     'landmark' => $request->landmark,
+                    'street' => $request->street,
+                    'city' => $request->city,
+                    'country'=>'Nigeria',
+                    'images' =>  $logo_image,
                 ],
                
             ];
-        }
-
+       }elseif($request->slug == 'reference_address'){
+        $host = 'https://api.staging.youverify.co/v1/candidates/'.$service_ref.'/references';
+        $data = [
+            "notes" => "Reference Adddress verification",
+            "reference" => [
+              "first_name" => $request->first_name,
+              'last_name' => $request->last_name,
+              'mobile' => $request->phone,
+              'email' => $request->email,
+              'country'=>'Nigeria',
+              'images' =>  $logo_image,
+          ], 
+            "address" => [
+                "house_number" => $request->house_number,
+                'landmark' => $request->landmark,
+                'street' => $request->street,
+                'city' => $request->city,
+                'country'=>'Nigeria',
+                'images' =>  $logo_image,
+            ], 
+        ];
+       }else{
+        $host = 'https://api.staging.youverify.co/v1/candidates/'.$service_ref.'/references';
+        $data = [
+            "merchant" => [
+              "name" => $request->name,
+              'registration_number' => $request->registration_number,
+              'mobile' => $request->phone,
+              'email' => $request->email,
+            ], 
+            "address" => [
+                "house_number" => $request->house_number,
+                'landmark' => $request->landmark,
+                'street' => $request->street,
+                'city' => $request->city,
+                'country'=>'Nigeria',
+                'images' =>  $logo_image,
+          ],
+          ];
+       }
         $curl = curl_init();
-        $datas = json_encode($data, true);
+        $datas = json_encode($data);
         //return $datas;
-    curl_setopt_array($curl, [
+       curl_setopt_array($curl, [
       CURLOPT_URL => $host,
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => "",
@@ -131,5 +181,6 @@ class AddressController extends Controller
     ]);
     $response = curl_exec($curl);
     $res = json_decode($response, true);
+    return back();
     }
 }

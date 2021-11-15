@@ -575,6 +575,7 @@ class ComposerStaticInit17d1bf47096578a8a643b5b384cb8d2f
         'App\\Http\\Requests\\Auth\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/LoginRequest.php',
         'App\\Mail\\UserAccount' => __DIR__ . '/../..' . '/app/Mail/UserAccount.php',
         'App\\Mail\\UserOnboard' => __DIR__ . '/../..' . '/app/Mail/UserOnboard.php',
+        'App\\Mail\\UserReg' => __DIR__ . '/../..' . '/app/Mail/UserReg.php',
         'App\\Models\\ActivityLog' => __DIR__ . '/../..' . '/app/Models/ActivityLog.php',
         'App\\Models\\AddressVerification' => __DIR__ . '/../..' . '/app/Models/AddressVerification.php',
         'App\\Models\\AddressVerificationDetail' => __DIR__ . '/../..' . '/app/Models/AddressVerificationDetail.php',

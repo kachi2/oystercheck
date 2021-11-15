@@ -43,6 +43,7 @@ return array(
     'App\\Http\\Requests\\Auth\\LoginRequest' => $baseDir . '/app/Http/Requests/Auth/LoginRequest.php',
     'App\\Mail\\UserAccount' => $baseDir . '/app/Mail/UserAccount.php',
     'App\\Mail\\UserOnboard' => $baseDir . '/app/Mail/UserOnboard.php',
+    'App\\Mail\\UserReg' => $baseDir . '/app/Mail/UserReg.php',
     'App\\Models\\ActivityLog' => $baseDir . '/app/Models/ActivityLog.php',
     'App\\Models\\AddressVerification' => $baseDir . '/app/Models/AddressVerification.php',
     'App\\Models\\AddressVerificationDetail' => $baseDir . '/app/Models/AddressVerificationDetail.php',

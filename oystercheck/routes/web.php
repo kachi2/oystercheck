@@ -50,6 +50,7 @@ Route::get('/user/identities/details/{id}', [IdentityController::class, 'verifyD
 Route::get('/user/business/check/{slug}', [BusinessController::class, 'Index'])->name('businessIndex');
 Route::post('/user/business/verify/{slug}', [BusinessController::class, 'BusinessStore'])->name('businessStore');
 Route::get('/user/address/verification/{slug}', [AddressController::class,'AddressIndex'])->name('addressIndex');
+Route::post('/user/address/verification/store/{slug}', [AddressController::class,'submitAddressVerify'])->name('AddressStore');
 Route::post('/user/candidate/create/{slug}', [AddressController::class,'createCandidate'])->name('createCandidate');
 Route::get('/user/candidate/index', [CandidateController::class, 'CandidateIndex'])->name('candidate.index');
 Route::get('/user/candidate/create', [CandidateController::class, 'CadidateCreate'])->name('candidate.create');

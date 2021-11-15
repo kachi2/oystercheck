@@ -56,7 +56,7 @@ class HomeController extends Controller
         $data['wallet']= Wallet::where('user_id', $user->id)->first();
         $data['logs'] = IdentityVerification::where(['user_id' => $user->id])->latest()->get();
         $data['recents'] = IdentityVerification::where(['user_id' => $user->id])->latest()->take(5)->get();
-        $data['transactions'] = Transaction::latest()->take(5)->get();
+        $data['transactions'] = Transaction::where('user_id', $user->id)->latest()->take(5)->get();
         $data['activity'] = ActivityLog::where('user_id', $user->id)->take(10)->get();
         
         return view('users.home', $data);

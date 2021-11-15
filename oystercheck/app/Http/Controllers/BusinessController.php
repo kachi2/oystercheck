@@ -136,7 +136,7 @@ class BusinessController extends Controller
             $datas = json_encode($data, true);
             //return $datas;
         curl_setopt_array($curl, [
-          CURLOPT_URL => "https://api.staging.youverify.co/v1/backgrounds/cac",
+          CURLOPT_URL => "https://api.youverify.co/v1/backgrounds/cac",
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => "",
           CURLOPT_MAXREDIRS => 10,

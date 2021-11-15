@@ -21,6 +21,7 @@
                             <tr><td height="5px" style="line-height: 5px;"></td></tr>
                             <tr><td style=" font-weight: 400; font-size: 15px;">Unique Email: <span>'{{$data["email"]}}.'</span></td></tr>
                             <tr><td style="font-weight: 400; font-size: 15px;">Password: <span>'{{$data["password"]}}'</span></td></tr>
+                            <tr><td style="font-weight: 400; font-size: 15px;">Login Here: <span>{{route('login')}}</span></td></tr>
                             <tr><td height="10px" style="line-height:10px;"></td></tr>
                             <tr><td style="font-weight:400; font-size: 15px;">Thank you for using our Services!</td></tr>
                             <tr><td style="font-weight:400; font-size: 15px;">If you have any queries, please contact our Customer Support Team on or email <a href="mailto:clientsupport@oysterchecks.com">clientsupport@oysterchecks.com</a> and quote your customer reference/account number +23417001770, +441977310180.</td></tr>

@@ -56,7 +56,7 @@ class AddressController extends Controller
                 $datas = json_encode($data, true);
                 //return $datas;
             curl_setopt_array($curl, [
-              CURLOPT_URL => "https://api.staging.youverify.co/v1/candidates",
+              CURLOPT_URL => "https://api.youverify.co/v1/candidates",
               CURLOPT_RETURNTRANSFER => true,
               CURLOPT_ENCODING => "",
               CURLOPT_MAXREDIRS => 10,
@@ -109,7 +109,7 @@ class AddressController extends Controller
        //$logo =  Client::first();
        $logo_image = base64_encode(asset('/images/logo.png'));
        if($request->slug == 'individual_address'){
-            $host = 'https://api.staging.youverify.co/v1/candidates/'.$service_ref.'/references';
+            $host = 'https://api.youverify.co/v1/candidates/'.$service_ref.'/references';
             $data = [
                 "description" => "Individual Adddress verification",
                 "address" => [
@@ -123,7 +123,7 @@ class AddressController extends Controller
                
             ];
        }elseif($request->slug == 'reference_address'){
-        $host = 'https://api.staging.youverify.co/v1/candidates/'.$service_ref.'/references';
+        $host = 'https://api.youverify.co/v1/candidates/'.$service_ref.'/references';
         $data = [
             "notes" => "Reference Adddress verification",
             "reference" => [
@@ -144,7 +144,7 @@ class AddressController extends Controller
             ], 
         ];
        }else{
-        $host = 'https://api.staging.youverify.co/v1/candidates/'.$service_ref.'/references';
+        $host = 'https://api.youverify.co/v1/candidates/'.$service_ref.'/references';
         $data = [
             "merchant" => [
               "name" => $request->name,

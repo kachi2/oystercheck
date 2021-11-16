@@ -7,7 +7,7 @@ use App\Models\FieldInput;
 use App\Models\BusinessVerificationDetail;
 use App\Models\Verification;
 use App\Models\IdentityVerificationDetail;
-use App\Models\wallet;
+use App\Models\Wallet;
 use App\Models\IdentityVerification;
 use App\Models\AddressVerification;
 use App\Models\AddressVerificationDetail;

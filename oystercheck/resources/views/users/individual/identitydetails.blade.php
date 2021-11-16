@@ -93,7 +93,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-6 align-self-center">
-                                            <img src="{{asset('/assets/profile/'.$verified->image_path)}}" alt="" class=" mx-auto  d-block" height="300px">                                           
+                                            <img src="{{asset('/assets/profile/'.$verified->image_path)}}" alt="" class=" mx-auto  d-block" height="200px">                                           
                                         </div><!--end col-->
                                         <div class="col-lg-6 align-self-center">
                                             <div class="single-pro-detail">

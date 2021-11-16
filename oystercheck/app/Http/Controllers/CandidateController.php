@@ -16,14 +16,16 @@ use Illuminate\Http\Request;
 class CandidateController extends Controller
 {
     //
-
+    public function RedirectUser(){
+        if(auth()->user()->user_type == 3)
+        return redirect()->route('admin.index');
+    }
     public function GeneratePassword($name){
         $pass = substr($name, 0, 5).rand(111,999);
         return $pass;
     }
     public function CandidateIndex(){
-        if(auth()->user()->user_type == 3)
-        return redirect()->route('admin.index');
+       $this->RedirectUser();
         
         $candidate['candidate'] = Candidate::where('client_id', auth()->user()->id)->get();
         $candidate['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'verified'])->get();
@@ -32,6 +34,7 @@ class CandidateController extends Controller
     }
 
     public function CadidateCreate(){
+        $this->RedirectUser();
         return view('users.candidates.create')
         ->with('verifications', CandidateService::get());
     }
@@ -93,7 +96,7 @@ class CandidateController extends Controller
     }
 
     public function CandidateDetails($id){
-        
+        $this->RedirectUser();
         $data['candidates'] = Candidate::where('client_id', auth()->user()->id)->get();
         $data['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'verified'])->get();
         $data['pending'] = Candidate::where(['client_id'=> auth()->user()->id, 'status'=>'pending'])->get();
@@ -106,6 +109,7 @@ class CandidateController extends Controller
 
 
     public function CandidateFileUpload(){
+        $this->RedirectUser();
         $user = User::where('id', auth()->user()->id)->first();
         $service = CandidateVerification::where('user_id', $user->id)->get();
         return view('users.onboarding.uploads', compact('service', $service));
@@ -132,6 +136,7 @@ class CandidateController extends Controller
     }
 
     public function candidateHomePage(){
+        $this->RedirectUser();
         $service = CandidateVerification::where('user_id', auth()->user()->id)->get();
         return view('users.onboarding.index', compact('service', $service));
         

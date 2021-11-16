@@ -68,6 +68,8 @@ Route::get('/user/profile', [HomeController::class, 'Profile'])->name('user.prof
 Route::post('user/updates/details', [HomeController::class, 'updateUserDetails'])->name('users.updateDetails');
 Route::post('/user/password/update', [HomeController::class, 'passwordUpdate'])->name('users.passwordUpdate');
 Route::post('/user/get/data', [HomeController::class, 'GetData'])->name('query.data');
+Route::post('/user/sort/business/data/{name}', [BusinessController::class, 'bizSort'])->name('bizSort');
+Route::post('/user/sort/identity/data/{slug}', [IdentityController::class, 'IdentitySort'])->name('IdentitySort');
 });
 
 #====================ADMIN ROUTES ============================

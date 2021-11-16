@@ -104,12 +104,13 @@ class IdentityController extends Controller
     {
         //
     }
-
-
-    public function StoreVerify(Request $request, $slug){
+    public function RedirectUser(){
         if(auth()->user()->user_type == 3)
         return redirect()->route('admin.index');
-        
+    }
+
+    public function StoreVerify(Request $request, $slug){
+       $this->RedirectUser();
         $validate = Validator::make($request->all(),[
             'reference' => 'required'
         ]);
@@ -139,19 +140,24 @@ class IdentityController extends Controller
         }
         if($userWallet->avail_balance < $amount){
             Session::flash('alert', 'error');
-            Session::flash('msg', 'Your walllet is too low for this transaction');
+            Session::flash('message', 'Your walllet is too low for this transaction');
             return back();
         }else{
            $this->chargeUser($amount, $ref, $slug->report_type);
         }
         }
+
             //check if the reference exist on the local data
-            $res = IdentityVerificationDetail::where(['reference'=>$request->reference, 'slug' => $slug->slug])->where('expires_at', '>=', now())->latest()->first();          
+            $res = IdentityVerificationDetail::where(['reference'=>$request->reference, 'slug' => $slug->slug])->where('expires_at', '<=', now())->latest()->first();          
+          //  dd($res);
+            sleep(5);
             if($res){
                 IdentityVerification::where(['user_id'=> auth()->user()->id])->latest()->first()
                 ->update(['status' => 'successful']);
                 $data = $this->generateIdentityReport($slug);
-                return view('users.individual.identityVerify', $data); 
+                Session::flash('alert', 'success');
+                Session::flash('message', $slug->slug.' Verification Completed Successfully');
+                return view('users.individual.identityVerify', $data)->with('verified', $res); 
             }else{
               $res =  $this->getIdentityVerify($request, $slug, $request->reference);
           //   return $res;
@@ -160,10 +166,13 @@ class IdentityController extends Controller
                         ->update(['status' => 'successful']);
                         $data = $this->generateIdentityReport($slug);
                       //  $data['res'] = $res;
+                      dd($data);
+                      Session::flash('alert', 'success');
+                      Session::flash('message', $slug->slug.' Verification Completed Successfully');
                 return view('users.individual.identityVerify', $data);
               }else{
                 $this->RefundUser($amount, $ref, $slug->report_type);
-                  Session::flash('alert', 'danger');
+                  Session::flash('alert', 'error');
                   Session::flash('message', 'Verification failed, please confirm input');
                 return redirect()->back();
               }
@@ -219,6 +228,7 @@ class IdentityController extends Controller
 }
 
     public function getIdentityVerify($request, $slug, $reference){
+        $this->RedirectUser();
         $identity = IdentityVerification::where('user_id', auth()->user()->id)->latest()->first();
         $curl = curl_init();
             $data = [
@@ -416,6 +426,7 @@ class IdentityController extends Controller
     }
 
     public function verifyDetails($id){
+        $this->RedirectUser();
         $slug = IdentityVerification::where('id', decrypt($id))->first();
         $user = User::where('id', auth()->user()->id)->first();
         $data['slug'] = IdentityVerification::where('id', decrypt($id))->first();
@@ -426,4 +437,40 @@ class IdentityController extends Controller
         $data['verified'] = IdentityVerificationDetail::where(['reference' => $slug->service_reference])->latest()->first();
        return view('users.individual.identitydetails', $data);
     }
+
+    public function IdentitySort(Request $request, $slug){
+        
+        $user = User::where('id', auth()->user()->id)->first();
+        $slug = Verification::where('slug', $slug)->first();
+         if($request->sort == 'success'){
+            $data['slug'] = Verification::where('slug', $slug->slug)->first();
+            $data['success'] = IdentityVerification::where(['status'=>'successful', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+            $data['failed'] = IdentityVerification::where(['status'=>'failed', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+            $data['pending'] = IdentityVerification::where(['status'=>'pending', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+            $data['fields'] = FieldInput::where(['slug'=>$slug->slug])->get();
+            $data['wallet']= Wallet::where('user_id', $user->id)->first();
+           $data['logs'] = IdentityVerification::where(['user_id'=>auth()->user()->id, 'status'=>'successful'])->get();
+            
+         }
+         if($request->sort == 'failed'){
+            $data['slug'] = Verification::where('slug', $slug->slug)->first();
+            $data['success'] = IdentityVerification::where(['status'=>'successful', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+            $data['failed'] = IdentityVerification::where(['status'=>'failed', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+            $data['pending'] = IdentityVerification::where(['status'=>'pending', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+            $data['fields'] = FieldInput::where(['slug'=>$slug->slug])->get();
+            $data['wallet']= Wallet::where('user_id', $user->id)->first();
+            $data['logs'] = IdentityVerification::where(['user_id'=>auth()->user()->id, 'status'=>'failed'])->get();
+              
+         }
+         if($request->sort == 'pending'){
+            $data['slug'] = Verification::where('slug', $slug->slug)->first();
+            $data['success'] = IdentityVerification::where(['status'=>'successful', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+            $data['failed'] = IdentityVerification::where(['status'=>'failed', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+            $data['pending'] = IdentityVerification::where(['status'=>'pending', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+            $data['fields'] = FieldInput::where(['slug'=>$slug->slug])->get();
+            $data['wallet']= Wallet::where('user_id', $user->id)->first();
+            $data['logs'] = IdentityVerification::where(['user_id'=>auth()->user()->id, 'status'=>'pending'])->get();
+           }
+           return view('users.individual.identityVerify', $data);
+     }
 }

@@ -93,7 +93,7 @@
                     <div class="card-header">
                         <h4 class="card-title">{{$slug->name}} ({{$slug->slug}})Verification</h4>
                     </div><!--end card-header-->
-                       <form method="post" action="{{route('StoreVerify',$slug->slug)}}">
+                       <form method="post" action="{{route('StoreVerify',$slug->slug)}}" id="form1">
             @csrf
                     <div class="card-body bootstrap-select-1">
                         <div class="row">
@@ -104,12 +104,7 @@
                             </div><!-- end col -->                                     
                              <!-- end col -->         
                              @endforeach 
-                             <div class="col-md-12">
-                              @if(Session::has('message'))
-                                <span class="btn btn-{{Session::get('alert')}}">
-                                    {{Session::get('message')}}
-                                </span>
-                             @endif 
+                             <div class="col-md-12"> 
                                <div class="col-md-6 p-3">
                              <span style="color:red; font-size:11px;"> Note: You will be charged  ₦{{number_format($slug->fee, 2)}} for each {{$slug->slug}} Verification</span> <br> 
                               <span style="color:darkblue; font-size:11px;">Your wallet Balance is  ₦{{number_format($wallet->avail_balance, 2)}}</span> <br> 
@@ -118,7 +113,7 @@
 
                              <span style="font-size:11px;" > By checking this box you acknowledge that you have gotten consent from that data subject to use their data for verification purposes on our platform in accourdance to our <a href="#"> Privacy Policy</a></span>
                              </div>
-                            <span class="float-center p-2"><button type="submit" class="btn btn-primary w-23"> Verify Candidate {{$slug->slug}}</button> </span> 
+                            <span class="float-center p-2"><button type="submit" id="btnsubmit" class="btn btn-primary w-23"> Verify Candidate {{$slug->slug}}</button> </span> 
                             </div>       
                                                                   
                         </div><!-- end row --> 
@@ -230,7 +225,26 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">{{$slug->slug}} Verification log</h4>
+                        <h4 class="card-title">{{$slug->slug}} Verification log
+                        
+                        
+                         <form method="post" action="{{route('IdentitySort',$slug->slug)}}">
+                        @csrf
+                        <span style="float:right; top:-10px">   <li class="nav-item dropdown " style="list-style:none">
+                                <a class="nav-link dropdown-toggle card-title" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Sort Data <i class="la la-angle-down"></i>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><button type="submit" name="sort" value="success" class="dropdown-item"> Sort By Successful</button></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><button type="submit"  name="sort"  value="failed" class="dropdown-item" >Sort By Failed</button></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><button type="submit"  name="sort"  value="pending" class="dropdown-item" href="#">Sort By Pending</button></li>
+                                </ul>
+                            </li></span>
+                        </form>
+                    </div><!--end card-header-->
+                        </h4>
                       
                     </div><!--end card-header-->
                     <div class="card-body">  
@@ -271,44 +285,4 @@
             </div> <!-- end col -->
         </div> 
                     
-@endsection
-
-@section('script')
-   <script>     
-  
-          $('#btnsubmit').on('click', function(){
-                  $('#btnsubmit').html('<span class="spinner-grow text-secondary spinner-grow-sm" role="status" aria-hidden="true"></span>Please Wait....');
-             let  reference = $('#reference').val();
-              let first_name = $('#first_name').val();
-              let last_name = $('#last_name').val();
-            $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-            });
-        $.ajax({
-         url: "{{route('StoreVerify',$slug->slug)}}",
-          type:'GET',
-          data:{
-            reference: reference,
-            first_name: reference,
-            last_name: last_name
-          },
-           cache:false,
-          dataType: "json",
-          success:function(response){
-           // console.log(response.status);
-           if(response.status == 'success'){
-               console.log(response);
-                     $('#btnsubmit').html('<span class="" role="status" aria-hidden="true">Verify Candidate</span>');
-                    $('#result').html('<span class="btn btn-success" role="status" aria-hidden="true">Verification Completed Successfull</span>');
-                    $('#details').attr('hidden', false);
-                    window.location.reload();
-           }
-         },
-   });
-    });
-
-   </script>
-
 @endsection

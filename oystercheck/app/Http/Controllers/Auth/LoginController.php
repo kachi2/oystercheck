@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Carbon;
+use App\Models\ActivityLog;
+use Symfony\Component\HttpFoundation\Request;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -36,5 +39,16 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+
+    function authenticated(Request $request, $user)
+    {
+        ActivityLog::create([
+            'user_id' => $user->id,
+            'activity' => 'New LogIn Request',
+            'ip_address' => $request->Ip(),
+            'user_agent' => $request->userAgent(),
+        ]);
     }
 }

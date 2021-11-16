@@ -194,11 +194,27 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">{{$slug->slug}} Verification log</h4>
+                        <h4 class="card-title" style="text-decoration:none">{{$slug->slug}} Verification log
+                        <form method="post" action="{{route('bizSort',$slug->slug)}}">
+                        @csrf
+                        <span style="float:right; top:-10px">   <li class="nav-item dropdown " style="list-style:none">
+                                <a class="nav-link dropdown-toggle card-title" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Sort Data <i class="la la-angle-down"></i>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><button type="submit" name="sort" value="success" class="dropdown-item"> Sort By Successful</button></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><button type="submit"  name="sort"  value="failed" class="dropdown-item" >Sort By Failed</button></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><button type="submit"  name="sort"  value="pending" class="dropdown-item" href="#">Sort By Pending</button></li>
+                                </ul>
+                            </li></span>
+                        </form>
                     </div><!--end card-header-->
+                    </h4>
                     <div class="card-body">  
-                        <table id="datatable-buttons" class=" orders table table-striped table-bordered dt-responsive nowrap " style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                            <thead>
+                       <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                              <thead>
                             <tr>
                                 <th>SN</th>
                                 <th>{{$slug->slug}} Verification</th>
@@ -233,39 +249,24 @@
 @endsection
 @section('script')
    <script>     
-          $('#btnsubmit').on('click', function(){
-                  $('#btnsubmit').html('<span class="spinner-grow text-secondary spinner-grow-sm" role="status" aria-hidden="true"></span>Please Wait....');
-             let  reference = $('#reference').val();
-              let first_name = $('#first_name').val();
-              let last_name = $('#last_name').val();
-            $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-            });
-        $.ajax({
-         url: "{{route('StoreVerify',$slug->slug)}}",
-          type:'GET',
-          data:{
-            reference: reference,
-            first_name: reference,
-            last_name: last_name
-          },
-           cache:false,
-          dataType: "json",
-          success:function(response){
-           // console.log(response.status);
-           if(response.status == 'success'){
-               console.log(response);
-                     $('#btnsubmit').html('<span class="" role="status" aria-hidden="true">Verify Candidate</span>');
-                    $('#result').html('<span class="btn btn-success" role="status" aria-hidden="true">Verification Completed Successfull</span>');
-                    $('#details').attr('hidden', false);
-                    window.location.reload();
-           }
-         },
-   });
-    });
+         
 
+let message = {!! json_encode(Session::get('message')) !!};
+let msg = {!! json_encode(Session::get('alert')) !!};
+//alert(msg);
+toastr.options = {
+        timeOut: 6000,
+        progressBar: true,
+        showMethod: "slideDown",
+        hideMethod: "slideUp",
+        showDuration: 500,
+        hideDuration: 500
+    };
+if(message != null && msg == 'success'){
+toastr.success(message);
+}else if(message != null && msg == 'error'){
+    toastr.error(message);
+}
    </script>
 
 @endsection

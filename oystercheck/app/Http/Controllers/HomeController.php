@@ -39,13 +39,15 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
+        public function RedirectUser(){
+            if(auth()->user()->user_type == 3)
+            return redirect()->route('admin.index');
+        }
     
     public function Home()
     {
+        $this->RedirectUser();
         $user = auth()->user();
-        if(auth()->user()->user_type == 3)
-        return redirect()->route('admin.index');
-
         if($user->user_type == 1){   
         $service = CandidateVerification::where('user_id', $user->id)->get();
         return view('users.onboarding.uploads', compact('service', $service));
@@ -69,6 +71,7 @@ class HomeController extends Controller
     }
 
     public function VerifyIndex($slug){
+        $this->RedirectUser();
         $user = auth()->user();
         $slug = strtoupper($slug);
         $slug = Verification::where('slug', $slug)->first();
@@ -86,6 +89,7 @@ class HomeController extends Controller
 
     public function VerifyIndexReturn($slug)
     {
+        $this->RedirectUser();
         $user = auth()->user();
         $slug = strtoupper($slug);
         $slug = Verification::where('slug', $slug)->first();
@@ -101,6 +105,7 @@ class HomeController extends Controller
     }
 
     public function UserTransactions(){
+        $this->RedirectUser();
         $user = User::where('id', auth()->user()->id)->first();
         $data['balances'] = Wallet::where('user_id', $user->id)->first();
         $data['transactions'] = Transaction::where('user_id', $user->id)->latest()->paginate();
@@ -128,7 +133,7 @@ class HomeController extends Controller
      }
     }
 
-    public function PaymentVerify($trxref){
+    public function PaymentVerify(Request $request, $trxref){
         $trnx_ref_exists = Transaction::where(['external_ref' => $trxref])->first();
         if ($trnx_ref_exists) {
       ;      return response()->json(['error'=>'Transaction not found, Please contact support']);
@@ -174,6 +179,14 @@ class HomeController extends Controller
                 'prev_balance' =>$wallet->avail_balance,
                 'avail_balance' => $ownerNewBalance 
             ]);
+
+            ActivityLog::create([
+                'user_id' => auth()->user()->id,
+                'activity' => 'Topup Wallet Balance',
+                'ip_address' => $request->Ip(),
+                'user_agent' => $request->UserAgent(),
+            ]);
+            
             return response()->json($se);
           
         } else {
@@ -182,11 +195,13 @@ class HomeController extends Controller
     }
 
     public function UserReports(){
+        $this->RedirectUser();
         return view('users.reports.reports')
         ->with('verifications', Verification::get());
     }
 
     public function getReports(Request $request){
+        $this->RedirectUser();
         $id = $request->verification_id;
         $user = User::where('id', auth()->user()->id)->first();
         $verify = Verification::where('id', decrypt($id))->first();
@@ -211,12 +226,13 @@ class HomeController extends Controller
     }
 
     public function Profile(){
+        $this->RedirectUser();
         return view('users.accounts.settings')
         ->with('user', User::where('id', auth()->user()->id)->first());
     }
 
     public function updateUserDetails(Request $request){
-
+        $this->RedirectUser();
         $user = User::where('id', auth()->user()->id)->first();
         if($request->name){
             User::where('id', $user->id)->update(['name' => $request->name]);
@@ -237,11 +253,18 @@ class HomeController extends Controller
          Client::where('user_id', $user->id)->update($data);
          Session::flash('alert', 'success');
          Session::flash('message', 'Details updated successfully');
+
+         ActivityLog::create([
+             'user_id' => auth()->user()->id,
+             'activity' => 'Updated Account Details',
+             'ip_address' => $request->Ip(),
+             'user_agent' => $request->UserAgent(),
+         ]);
         return redirect()->back();
     }
 
     public function passwordUpdate(Request $request){
-
+        $this->RedirectUser();
         $this->validate($request, [
             'oldPassword' => 'required',
             'password' => 'required|min:6|confirmed',
@@ -254,17 +277,23 @@ class HomeController extends Controller
                   $users =user::find(Auth()->user()->id);
                   $users->password = bcrypt($request->password);
                   user::where( 'id' , auth()->user()->id)->update( array( 'password' =>  $users->password));
-                  Session()->flash('message', 'Details/Pass Updated Successfully');
-                  Session()->flash('alert', 'success');
+                  Session::flash('message', 'Password Updated Successfully');
+                  Session::flash('alert', 'success');
+                  ActivityLog::create([
+                    'user_id' => auth()->user()->id,
+                    'activity' => 'Changed User Passsword',
+                    'ip_address' => $request->Ip(),
+                    'user_agent' => $request->UserAgent(),
+                ]);
                   return redirect()->back()->with('success', 'Details/Pass Updated Successfully');
                 }
                 else{
-                    Session()->flash('message', 'Old Password / New Password Cannot be the Same');
-                    Session()->flash('alert', 'danger');
+                    Session::flash('message', 'Old Password / New Password Cannot be the Same');
+                    Session::flash('alert', 'error');
                     return redirect()->back()->with('error', 'Old Password / New Password Cannot be the Same');}
             } else{
-                Session()->flash('message', 'Old Password is Incorrect');
-                Session()->flash('alert', 'danger');
+                Session::flash('message', 'Old Password is Incorrect');
+                Session::flash('alert', 'error');
                 return redirect()->back()->with('error', 'Old Password is Incorrect');
             }
     }

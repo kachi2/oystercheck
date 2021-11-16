@@ -39,7 +39,7 @@ public function generateHeaderReports($slug){
         $data['pending'] = IdentityVerification::where(['status'=>'pending', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
         $data['fields'] = FieldInput::where(['slug'=>$slug->slug])->get();
         $data['wallet']= Wallet::where('user_id', $user->id)->first();
-        //$data['verified'] = IdentityVerificationDetail::where(['user_id'=>auth()->user()->id, 'slug'=>$slug->slug])->latest()->first();           
+       // $data['verified'] = IdentityVerificationDetail::where(['user_id'=>auth()->user()->id, 'slug'=>$slug->slug])->latest()->first();           
         $data['logs'] = IdentityVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id])->latest()->get(); 
         return $data;
     }
@@ -53,8 +53,7 @@ public function generateHeaderReports($slug){
         $data['pending'] = AddressVerification::where(['status'=>'pending', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
         $data['fields'] = FieldInput::where(['slug'=>'candidate'])->get();
         $data['wallet']= Wallet::where('user_id', $user->id)->first();
-        //$data['verified'] = BusinessVerification::where(['user_id'=>auth()->user()->id, 'slug'=>$slug->slug])->latest()->first();           
-        $data['logs'] = AddressVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id])->latest()->get();
+       $data['logs'] = AddressVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id])->latest()->get();
     return $data;   
     }
 
@@ -67,7 +66,6 @@ public function generateHeaderReports($slug){
         $data['pending'] = AddressVerification::where(['status'=>'pending', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
         $data['fields'] = FieldInput::where(['slug'=>$slug->slug])->get();
         $data['wallet']= Wallet::where('user_id', $user->id)->first();
-        //$data['verified'] = BusinessVerification::where(['user_id'=>auth()->user()->id, 'slug'=>$slug->slug])->latest()->first();           
         $data['logs'] = AddressVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id])->latest()->get();
     return $data;   
     }

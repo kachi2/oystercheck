@@ -22,10 +22,12 @@ class BusinessController extends Controller
     use GenerateRef;
     use generateHeaderReports;
 
-    public function Index($name){
+    public function RedirectUser(){
         if(auth()->user()->user_type == 3)
         return redirect()->route('admin.index');
-        
+    }
+    public function Index($name){
+        $this->RedirectUser();
         $user = User::where('id', auth()->user()->id)->first();
        $slug = Verification::where(['slug' => $name])->first();
        $data['slug'] = Verification::where(['slug' => $name])->first();
@@ -34,7 +36,6 @@ class BusinessController extends Controller
        $data['pending'] = BusinessVerification::where(['status'=>'pending', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
        $data['fields'] = FieldInput::where(['slug'=>$slug->slug])->get();
        $data['wallet']= Wallet::where('user_id', $user->id)->first();
-       //$data['verified'] = BusinessVerification::where(['user_id'=>auth()->user()->id, 'slug'=>$slug->slug])->latest()->first();           
        $data['logs'] = BusinessVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id])->latest()->get();
         return view('users.business.index', $data);
     }
@@ -48,7 +49,7 @@ class BusinessController extends Controller
         $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
         if($validate->fails()){
             Session::flash('alert', 'error');
-            Session::flash('msg', 'Please provide the data to verify');
+            Session::flash('message', 'Please provide the data to verify');
             return redirect()->back();
         }
  $createVerify =  BusinessVerification::create([
@@ -68,39 +69,36 @@ class BusinessController extends Controller
             }
             if($userWallet->avail_balance < $amount){
                 Session::flash('alert', 'error');
-                Session::flash('msg', 'Your walllet is too low for this transaction');
+                Session::flash('message', 'Your walllet is too low for this transaction');
                 return back();
-            }else{
-                $charge = $this->chargeUser($amount, $ref, $slug->report_type);
-                if($charge){
+            }
+                $this->chargeUser($amount, $ref, $slug->report_type);
                     $res = BusinessVerificationDetail::where(['service_ref'=>$request->company_name, 'status'=>'VERIFIED'])->latest()->first();  
                     if($res){
                        // var_dump($res);
                         BusinessVerification::where(['user_id'=> auth()->user()->id])->latest()->first()
                         ->update(['status' => 'successful']);
+                        Session::flash('alert', 'success');
+                        Session::flash('message', $slug->slug.' Verification Completed Successfully');
                         $data = $this->generateHeaderReports($slug);
                   // return $data['slug'];
-                        return view('users.business.index', $data);
+                        return view('users.business.index', $data)->with('verified', $res);
                     }
                    $res = $this->BusinessVerify($request, $ref);
                    if($res['data']['details']['background_model']['status'] == 'VERIFIED'){
                     BusinessVerification::where(['user_id'=> auth()->user()->id])->latest()->first()
                     ->update(['status' => 'successful']);
                     $data = $this->generateHeaderReports($slug);
-                   return view('users.business.index', $data);
+                    Session::flash('alert', 'success');
+                    Session::flash('message', $slug->slug.' Verification Completed Successfully');
+                   return view('users.business.index', $data)->with('verified', $res);
                    }
-                   return $res;
                 }else{
+                    $this->RefundUser($slug->fee, $ref, $slug->report_type);
                     Session::flash('alert', 'error');
                     Session::flash('message', 'An error occured, please try again');
                     return redirect()->back();
                 }
-            }
-            }else{
-                Session::flash('alert', 'error');
-                Session::flash('message', 'Action failed, try again later');
-                return redirect()->back();
-            }
     }
 
     public function chargeUser($amount, $ext_ref, $type){
@@ -128,6 +126,7 @@ class BusinessController extends Controller
    }
 
    public function BusinessVerify($request, $reference){
+    $this->RedirectUser();
     $business = BusinessVerification::where('user_id', auth()->user()->id)->latest()->first();
     $curl = curl_init();
             $data = [
@@ -225,4 +224,71 @@ class BusinessController extends Controller
         return 'failed';
     }
    }
+
+   public function RefundUser($amount, $ext_ref, $type){
+    $user = User::where('id', auth()->user()->id)->first();
+    $wallet = Wallet::where('user_id', $user->id)->first();
+    $newWallet = $user->wallet->avail_balance + $amount;
+     Wallet::where('user_id', $user->id)
+    ->update([
+            'prev_balance' => $wallet->avail_balance,
+            'avail_balance' => $newWallet,
+    ]);
+    $refs = $this->GenerateRef();
+    Transaction::create([
+             'ref' => $refs,
+              'user_id' => $user->id,
+              'external_ref' => $ext_ref,
+              'purpose' => 'Payment for '.$type,
+               'service_type' => $type,
+              'type'  => 'CREDIT', 
+              'amount' => $amount, 
+             'prev_balance' => $wallet->avail_balance, 
+             'avail_balance' => $newWallet
+    ]);
+}
+
+    public function bizSort(Request $request, $name){
+
+       // dd($name);
+        if($request->sort == 'success'){
+            $user = User::where('id', auth()->user()->id)->first();
+            $slug = Verification::where(['slug' => $name])->first();
+            $data['slug'] = Verification::where(['slug' => $name])->first();
+            $data['success'] = BusinessVerification::where(['status'=>'successful', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+            $data['failed'] = BusinessVerification::where(['status'=>'failed', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+            $data['pending'] = BusinessVerification::where(['status'=>'pending', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+            $data['fields'] = FieldInput::where(['slug'=>$slug->slug])->get();
+            $data['wallet']= Wallet::where('user_id', $user->id)->first();
+            $data['logs'] = BusinessVerification::where(['user_id'=>auth()->user()->id, 'status'=>'successful'])->get();
+           
+        }
+        if($request->sort == 'failed'){
+            $user = User::where('id', auth()->user()->id)->first();
+            $slug = Verification::where(['slug' => $name])->first();
+            $data['slug'] = Verification::where(['slug' => $name])->first();
+            $data['success'] = BusinessVerification::where(['status'=>'successful', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+            $data['failed'] = BusinessVerification::where(['status'=>'failed', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+            $data['pending'] = BusinessVerification::where(['status'=>'pending', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+            $data['fields'] = FieldInput::where(['slug'=>$slug->slug])->get();
+            $data['wallet']= Wallet::where('user_id', $user->id)->first();
+            $data['logs'] = BusinessVerification::where(['user_id'=>auth()->user()->id, 'status'=>'failed'])->get();
+           
+        }
+        if($request->sort == 'pending'){
+            $user = User::where('id', auth()->user()->id)->first();
+            $slug = Verification::where(['slug' => $name])->first();
+            $data['slug'] = Verification::where(['slug' => $name])->first();
+            $data['success'] = BusinessVerification::where(['status'=>'successful', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+            $data['failed'] = BusinessVerification::where(['status'=>'failed', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+            $data['pending'] = BusinessVerification::where(['status'=>'pending', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
+            $data['fields'] = FieldInput::where(['slug'=>$slug->slug])->get();
+            $data['wallet']= Wallet::where('user_id', $user->id)->first();
+            $data['logs'] = BusinessVerification::where(['user_id'=>auth()->user()->id, 'status'=>'pending'])->get();
+           // dd($data);
+        }
+
+       
+        return view('users.business.index', $data);
+    }
 }

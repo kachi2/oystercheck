@@ -66,7 +66,7 @@ class AddressController extends Controller
               CURLOPT_POSTFIELDS => $datas,
               CURLOPT_HTTPHEADER => [
                 "Content-Type: application/json",
-                "Token: a00ab3e6537fdf1e4e4c39fa355de3ec"
+                "Token: 49c11a7ef799f5695c943ba4d3d1ddcc"
               ],
             ]);
             $response = curl_exec($curl);
@@ -176,7 +176,7 @@ class AddressController extends Controller
       CURLOPT_POSTFIELDS => $datas,
       CURLOPT_HTTPHEADER => [
         "Content-Type: application/json",
-        "Token: a00ab3e6537fdf1e4e4c39fa355de3ec"
+        "Token: 49c11a7ef799f5695c943ba4d3d1ddcc"
       ],
     ]);
     $response = curl_exec($curl);

@@ -148,7 +148,7 @@ class IdentityController extends Controller
         }
 
             //check if the reference exist on the local data
-            $res = IdentityVerificationDetail::where(['reference'=>$request->reference, 'slug' => $slug->slug])->where('expires_at', '<=', now())->latest()->first();          
+            $res = IdentityVerificationDetail::where(['reference'=>$request->reference, 'slug' => $slug->slug])->where('expires_at', '>=', now())->latest()->first();          
           //  dd($res);
             sleep(5);
             if($res){
@@ -166,7 +166,7 @@ class IdentityController extends Controller
                         ->update(['status' => 'successful']);
                         $data = $this->generateIdentityReport($slug);
                       //  $data['res'] = $res;
-                      dd($data);
+                    //  dd($data);
                       Session::flash('alert', 'success');
                       Session::flash('message', $slug->slug.' Verification Completed Successfully');
                 return view('users.individual.identityVerify', $data);
@@ -253,7 +253,7 @@ class IdentityController extends Controller
           CURLOPT_POSTFIELDS => $datas,
           CURLOPT_HTTPHEADER => [
             "Content-Type: application/json",
-            "Token: a00ab3e6537fdf1e4e4c39fa355de3ec"
+            "Token: 49c11a7ef799f5695c943ba4d3d1ddcc"
           ],
         ]);
         $response = curl_exec($curl);
@@ -372,7 +372,7 @@ class IdentityController extends Controller
              $image = $res['data']['response']['photo']; // image base64 encoded
              $file = base64_decode($image); 
              $safeName = time().'.'.'png'; 
-             file_put_contents('C:\xampp\htdocs\oystercheck\assets/profile/'.$safeName,$file);
+             file_put_contents('http://oystercheck.com/assets/profile/'.$safeName,$file);
             }else{
                 $safeName = 'image.png'; 
             }

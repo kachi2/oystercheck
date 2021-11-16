@@ -227,7 +227,7 @@
                     <div class="card-header">
                         <h4 class="card-title">{{$slug->slug}} Verification log
                         
-                        
+                         </h4>
                          <form method="post" action="{{route('IdentitySort',$slug->slug)}}">
                         @csrf
                         <span style="float:right; top:-10px">   <li class="nav-item dropdown " style="list-style:none">
@@ -241,10 +241,9 @@
                                     <li><hr class="dropdown-divider"></li>
                                     <li><button type="submit"  name="sort"  value="pending" class="dropdown-item" href="#">Sort By Pending</button></li>
                                 </ul>
-                            </li></span>
+                            </li>
+                            </span>
                         </form>
-                    </div><!--end card-header-->
-                        </h4>
                       
                     </div><!--end card-header-->
                     <div class="card-body">  

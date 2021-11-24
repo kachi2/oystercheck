@@ -2,13 +2,14 @@
 <html lang="zxx" class="js">
 
 <head>
-    <base href="../../../">
-    <meta charset="utf-8">
-    <meta name="author" content="Softnio">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
-    <!-- Fav Icon  -->
-    <link rel="shortcut icon" href="./images/favicon.png">
+    <meta charset="utf-8" />
+         <title>{{ config('app.name', 'Oysterchecks') }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="Oysterchecks Comprehensive and Exceptional background checks, KYC & AML compliance Solutions</" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{{asset('/assets/images/favicon.png')}}">
     <!-- Page Title  -->
     <title>Login | Oysterchecks</title>
     <!-- StyleSheets  -->
@@ -54,11 +55,11 @@
                                         <div class="form-label-group">
                                             <label class="form-label" for="default-01">Email or Username</label>
                                         </div>
-                                        <input type="text" name="email" class="form-control form-control-lg @error('email') is-invalid @enderror" id="default-01" placeholder="Enter your email address or username">
+                                        <input type="email" name="email" class="form-control form-control-lg @error('email') is-invalid @enderror" id="default-01" placeholder="Enter your email address or username">
 
                                          @error('email')
-                                    <span class="btn-danger" role="alert">
-                                        <strong class="">{{ $message }}</strong>
+                                    <span class="invalid-feedback" role="alert">
+                                        <small><strong>{{ $message }}</strong>  </small>
                                     </span>
                                          @enderror
 
@@ -75,7 +76,7 @@
                                             </a>
                                             <input   type="password"  name="password" class="form-control form-control-lg @error('password') is-invalid @enderror" id="password" placeholder="Enter your passcode">
                                              @error('password')
-                                    <span class="btn-danger" role="alert">
+                                    <span class="invalid-feedback" role="alert">
                                         <strong class="">{{ $message }}</strong>
                                     </span>
                                 @enderror

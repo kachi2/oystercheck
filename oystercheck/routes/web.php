@@ -24,6 +24,8 @@ use App\Http\Controllers\AdminController;
 
 require __DIR__.'/auth.php';
 
+Route::get('/logouts', [HomeController::class, 'Logouts'])->name('logouts');
+
 #=====================LANDING PAGES ===========================
 Route::get('/', [LandingPages::class, 'index'])->name('landing');
 Route::get('/who-we-are', [LandingPages::class, 'WhoWeAre'])->name('who-we-are');

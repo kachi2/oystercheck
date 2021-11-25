@@ -9,6 +9,7 @@ use App\Models\Verification;
 use App\Models\Wallet;
 use App\Models\User;
 use App\Models\Client;
+use Illuminate\Support\Facades\Auth;
 use App\Models\IdentityVerification;
 use Illuminate\Support\Facades\Hash;
 use App\Models\CandidateVerification;
@@ -296,5 +297,11 @@ class HomeController extends Controller
                 Session::flash('alert', 'error');
                 return redirect()->back()->with('error', 'Old Password is Incorrect');
             }
+    }
+
+    public function Logouts(){
+        Auth::logout();
+        //Auth::guard('web')->logout();
+        return redirect()->intended('login');
     }
 }

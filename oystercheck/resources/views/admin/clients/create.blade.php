@@ -39,7 +39,7 @@
                     <div class="card-header">
                         <h4 class="card-title">Create new Client</h4>
                     </div><!--end card-header-->
-                       <form method="post" action="{{route('admin.client.store')}}" class="add-candidate-form">
+                       <form method="post" action="{{route('admin.client.store')}}" class="add-candidate-form" enctype="multipart/form-data">
                       @csrf
                     <div class="card-body bootstrap-select-1">
                         <div class="row p-3">

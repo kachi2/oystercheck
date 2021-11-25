@@ -251,6 +251,14 @@ class HomeController extends Controller
         if($request->company_address){
             $data['company_address'] = $request->company_address;
         }
+        if($request->company_logo){
+                $image = $request->company_logo;
+                $ext =  $image->getClientOriginalExtension();
+                $dd = md5(time());
+                $fileName = $dd.'.'.$ext;
+                $image->move('assets/images',$fileName);
+              $data['image'] = $fileName;
+        }
          Client::where('user_id', $user->id)->update($data);
          Session::flash('alert', 'success');
          Session::flash('message', 'Details updated successfully');

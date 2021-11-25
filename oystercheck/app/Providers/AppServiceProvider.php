@@ -35,9 +35,9 @@ class AppServiceProvider extends ServiceProvider
             if (Auth::check()) {
                 $data['notify'] = Notification::where(['user_id' => auth()->user()->id])->latest()->take(4)->get();
                 $user = User::where('id', auth()->user()->id)->first();
-                if($user->id == 1){
+                if($user->user_type == 1){
                     $data['profile_image'] = 'default.png';
-                }elseif($user->id == 2){
+                }elseif($user->user_type == 2){
                     $img = Client::where('user_id', $user->id)->first();
                     $data['profile_image'] = $img->image;
                 }else{

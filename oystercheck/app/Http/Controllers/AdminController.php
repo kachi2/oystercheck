@@ -193,7 +193,7 @@ class AdminController extends Controller
             $time = time().$FileName;
             $dd = md5($time);
             $fileName = $dd.'.'.$ext;
-            $image->move('/images/profile', $fileName);
+            $image->move('assets/images', $fileName);
            $image = $fileName;
            }else{
             $image = 'default.png';

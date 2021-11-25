@@ -110,8 +110,8 @@ keepAliveUrl:"{{route('index')}}",
 logoutButton:"Logout Now",
 logoutUrl:"{{route('logouts')}}",
 redirUrl:"{{route('logouts')}}",
-warnAfter:400e3,
-redirAfter:400e4,
+warnAfter:4e3,
+redirAfter:4e4,
 countdownBar:!0
 });
    </script>

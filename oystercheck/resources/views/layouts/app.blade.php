@@ -105,13 +105,13 @@ toastr.success(message);
     toastr.error(message);
 }
 $.sessionTimeout({
-message: "Hi " + name + " Your session will be locked in 30 seconds.",
+message: "Hi " + name + " Your session will expire soon.",
 keepAliveUrl:"{{route('index')}}",
 logoutButton:"Logout Now",
 logoutUrl:"{{route('logouts')}}",
 redirUrl:"{{route('logouts')}}",
-warnAfter:4e3,
-redirAfter:4e4,
+warnAfter:80e3,
+redirAfter:60e4,
 countdownBar:!0
 });
    </script>

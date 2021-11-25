@@ -113,7 +113,7 @@
 
                              <span style="font-size:11px;" > By checking this box you acknowledge that you have gotten consent from that data subject to use their data for verification purposes on our platform in accourdance to our <a href="#"> Privacy Policy</a></span>
                              </div>
-                            <span class="float-center p-2"><button type="submit" id="btnsubmit" class="btn btn-primary w-23"> Verify Candidate {{$slug->slug}}</button> </span> 
+                            <span class="float-center p-2"><button type="submit" id="btnsubmit" class="btn btn-primary w-23"> <i class="fas fa-check-double"></i> Verify Candidate {{$slug->slug}}</button> </span> 
                             </div>       
                                                                   
                         </div><!-- end row --> 

@@ -84,47 +84,7 @@
                             </div><!--end row-->                
                         </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">{{$slug['name']}} Verification</h4>
-                    </div><!--end card-header-->
-                       <form method="post" action="{{route('businessStore',$slug['slug'])}}">
-                      @csrf
-                    <div class="card-body bootstrap-select-1">
-                        <div class="row">
-                        @foreach($fields as $input)
-                            <div class="col-md-6">
-                                <label class="mb-3" style="font-weight:bolder">{{$input->label}}</label> @if($input->is_required == 1) <span style="color:red; font-weight:bolder"> * </span> @endif
-                                <input type="{{$input->type}}" id="{{$input->inputid}}" name="{{$input->name}}" class="form-control mb-3 custom-select" placeholder="{{$input->placeholder}}" @if($input->is_required == 1) required @endif> 
-                            </div><!-- end col -->                                     
-                             <!-- end col -->         
-                             @endforeach 
-                             <div class="col-md-12">
-                              @if(Session::has('message'))
-                                <span class="btn btn-{{Session::get('alert')}}">
-                                    {{Session::get('message')}}
-                                </span>
-                             @endif 
-                               <div class="col-md-6 p-3">
-                             <span style="color:red; font-size:11px;"> Note: You will be charged  ₦{{number_format($slug->fee, 2)}} for each {{$slug->slug}} Verification</span> <br> 
-                              <span style="color:darkblue; font-size:11px;">Your wallet Balance is  ₦{{number_format($wallet->avail_balance, 2)}}</span> <br> 
-                     
-                             <input type="checkbox" required> 
-
-                             <span style="font-size:11px;" > By checking this box you acknowledge that you have gotten consent from that data subject to use their data for verification purposes on our platform in accourdance to our <a href="#"> Privacy Policy</a></span>
-                             </div>
-                            <span class="float-center p-2"><button type="submit" class="btn btn-primary w-23"> <i class="fas fa-check-double"></i> Verify Candidate {{$slug->slug}}</button> </span> 
-                            </div>       
-                                                                  
-                        </div><!-- end row --> 
-                    </div><!-- end card-body --> 
-                    </form>
-                </div> <!-- end card -->                               
-            </div> <!-- end col -->
-        </div>
-    
+ 
       @if(isset($verified))
                  <div class="row">
                   <p class="dastone-user-name">{{$verified->service_ref}}  <span class=" btn btn-success btn-sm "> <i class="fa fa-check"></i>Verified</span></p>                     
@@ -193,25 +153,7 @@
     @endif
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title" style="text-decoration:none">{{$slug->slug}} Verification log
-                        <form method="post" action="{{route('bizSort',$slug->slug)}}">
-                        @csrf
-                        <span style="float:right; top:-10px">   <li class="nav-item dropdown " style="list-style:none">
-                                <a class="nav-link dropdown-toggle card-title" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Sort Data <i class="la la-angle-down"></i>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><button type="submit" name="sort" value="success" class="dropdown-item"> Sort By Successful</button></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><button type="submit"  name="sort"  value="failed" class="dropdown-item" >Sort By Failed</button></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><button type="submit"  name="sort"  value="pending" class="dropdown-item" href="#">Sort By Pending</button></li>
-                                </ul>
-                            </li></span>
-                        </form>
-                    </div><!--end card-header-->
-                    </h4>
+                  
                     <div class="card-body">  
                        <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                               <thead>

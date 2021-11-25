@@ -298,7 +298,6 @@ class HomeController extends Controller
                 return redirect()->back()->with('error', 'Old Password is Incorrect');
             }
     }
-
     public function Logouts(){
         Auth::logout();
         //Auth::guard('web')->logout();

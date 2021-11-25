@@ -287,8 +287,18 @@ class BusinessController extends Controller
             $data['logs'] = BusinessVerification::where(['user_id'=>auth()->user()->id, 'status'=>'pending'])->get();
            // dd($data);
         }
-
-       
         return view('users.business.index', $data);
+    }
+
+    public function BusinessDetails($id){
+        $slug = BusinessVerification::where('id', decrypt($id))->first();
+        $user = User::where('id', auth()->user()->id)->first();
+        $data['slug'] = BusinessVerification::where('id', decrypt($id))->first();
+        $data['success'] = BusinessVerification::where(['status'=>'successful', 'verification_id'=>$slug->verification_id, 'user_id'=> $user->id])->get();
+        $data['failed'] = BusinessVerification::where(['status'=>'failed', 'verification_id'=>$slug->verification_id, 'user_id'=> $user->id])->get();
+        $data['pending'] = BusinessVerification::where(['status'=>'pending', 'verification_id'=>$slug->verification_id, 'user_id'=> $user->id])->get();
+        $data['logs'] = BusinessVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->verification_id])->latest()->get();
+        $data['verified'] = BusinessVerificationDetail::where(['service_ref' => $slug->service_ref])->latest()->first();
+          return view('users.business.details', $data);
     }
 }

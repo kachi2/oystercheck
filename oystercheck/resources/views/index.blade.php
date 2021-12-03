@@ -14,7 +14,7 @@
                         <h1 class="text-white">Background Checking Services</h1>
                         <p class="lead">Comprehensive and Exceptional background<br> checks, KYC & AML compliance Solutions </p>
                         <div class="action-btns mt-3">
-                            <a href="{{route('login')}}" class="btn secondary-solid-btn">Get Start Now</a>
+                            <a href="{{route('login')}}" class="btn secondary-solid-btn">Get Started Now</a>
                         </div>
                     </div>
                 </div>

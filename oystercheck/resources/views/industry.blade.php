@@ -40,7 +40,7 @@
           <div class="col-md-12 col-lg-12 pt-2">
                     <div class="video-promo-content mb-md-4 mb-lg-0">
                         <h2>Industries</h2>
-                        <p>Oysterchecks takes pride in providing background screening, KYC and AML checks services to a variety of clients on different industries. We have a great team of IT experts who ensures that our services meet the needs of our diverse clients. Our services are fully tested and automated for businesses found in the following sectors:</p>
+                        <p>Oysterchecks takes pride in providing background screening, KYC and AML checks services to a variety of clients in different industries. We have a great team of IT experts who ensure that our services meet the needs of our diverse clients. Our services are fully tested and automated for businesses in the following sectors:</p>
                          <ul class="list-unstyled tech-feature-list">
                          <li class="py-1"><span class="ti-check-box mr-2 color-secondary"> HR and Recruitment</span> </li>
                           <li class="py-1"><span class="ti-check-box mr-2 color-secondary"> Public sector</span> </li>
@@ -51,7 +51,7 @@
                          <li class="py-1"><span class="ti-check-box mr-2 color-secondary">  Retail</span> </li>
                          <li class="py-1"><span class="ti-check-box mr-2 color-secondary"> Fintech</span> </li>
                          <li class="py-1"><span class="ti-check-box mr-2 color-secondary">Asset and wealth management.</span> </li>
-                         <li class="py-1"><span class="ti-check-box mr-2 color-secondary">Automated AML transaction Monitoring service</span> </li>
+                         <li class="py-1"><span class="ti-check-box mr-2 color-secondary">Bank</span> </li>
                         
                          </ul>
             </div>

@@ -113,8 +113,8 @@ help our clients stay ahead of the rapidly evolving issues. </p>
                                         <li class="py-1"><span class="ti-control-forward mr-2 color-secondary"></span>Recruitment Agencies</li>
                                         <li class="py-1"><span class="ti-control-forward mr-2 color-secondary"></span>Professional Services</li>
                                         <li class="py-1"><span class="ti-control-forward mr-2 color-secondary"></span>Warehousing And Logistics</li>
-                                        <li class="py-1"><span class="ti-control-forward mr-2 color-secondary"></span>Banks Service</li>
-                                        <li class="py-1"><span class="ti-control-forward mr-2 color-secondary"></span>Insurances Firms</li>
+                                        <li class="py-1"><span class="ti-control-forward mr-2 color-secondary"></span>Bank Service</li>
+                                        <li class="py-1"><span class="ti-control-forward mr-2 color-secondary"></span>Insurance Firms</li>
                                     </ul>
                                 </div>
                             </div>
@@ -241,7 +241,7 @@ help our clients stay ahead of the rapidly evolving issues. </p>
                             <li class="py-1"><span class="ti-check-box mr-2 color-secondary"></span>Communication of adverse results/unforeseen delays</li>
                             <li class="py-1"><span class="ti-check-box mr-2 color-secondary"></span>High level of security around the information we process</li>
                             <li class="py-1"><span class="ti-check-box mr-2 color-secondary"></span>Staff that have respect for the information they handle</li>
-                            <li class="py-1"><span class="ti-check-box mr-2 color-secondary"></span>Prompt turnaround times from 1 hour</li>
+                            <li class="py-1"><span class="ti-check-box mr-2 color-secondary"></span>Prompt turnaround time from 1 hour</li>
                        
                         </ul>
                     </div>
@@ -263,7 +263,7 @@ help our clients stay ahead of the rapidly evolving issues. </p>
                 <div class="col-md-7">
                     <div class="subscribe-content">
                         <h3 class="mb-1">Don't have an account?</h3>
-                        <p>Our team are ready to setup an account for you, fast and easy.</p>
+                        <p>Our team is ready to setup an account for you. The process is fast and easy.</p>
                     </div>
                 </div>
                 <div class="col-md-4">

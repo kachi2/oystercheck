@@ -13,11 +13,11 @@
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-7">
                     <div class="page-header-content text-white text-center pt-sm-5 pt-md-5 pt-lg-0">
-                        <h1 class="text-white mb-0">KYC</h1>
+                        <h1 class="text-white mb-0">SERVICES</h1>
                         <div class="custom-breadcrumb">
                             <ol class="breadcrumb d-inline-block bg-transparent list-inline py-0">
                                 <li class="list-inline-item breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="list-inline-item breadcrumb-item"><a href="#">KYC</a></li>
+                                <li class="list-inline-item breadcrumb-item"><a href="#">SERVICES</a></li>
                             </ol>
                         </div>
                     </div>
@@ -42,7 +42,14 @@
                 <div class="col-md-12 col-lg-12 pt-3">
                     <div class="video-promo-content mb-md-4 mb-lg-0">
                         <h2>Why Use Our Services</h2>
-                        <p>Oysterchecks is focused on simplifying your pre-employment checks by performing extensive checks in a smooth and a quicker way and meet the essential regulatory and professional standards. If you are hiring employees from abroad, you can able to obtain global background check report by using of our services. We have access to global data which enables us to deliver such results easily and quickly. We are able to provide support and assistance when integrating our platform with your onboarding application. This will enable you to access screening solutions more easily and rapidly.</p>
+                        <p>Oysterchecks is focused on simplifying your pre-employment checks by 
+                        performing extensive checks in a smooth and a quicker way and at the same 
+                        time meeting the essential regulatory and professional standards. If you are
+                         hiring employees from outside the country, you will be able to obtain global
+                          background check report by using our services. We have access to global data 
+                          which enables us to deliver such results easily and quickly. We are able to
+                           provide support and assistance when integrating our platform with your onboarding application.
+                         This will enable you to access screening solutions more easily and rapidly..</p>
             </div>
         </div>
         </div>

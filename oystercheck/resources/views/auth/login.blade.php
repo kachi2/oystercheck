@@ -86,7 +86,7 @@
                                         <button class="btn btn-lg btn-primary btn-block">Sign in</button>
                                     </div>
                                 </form><!-- form -->
-                                <div class="form-note-s2 pt-4"> Need an Account? <a href="#">Contact Support</a>
+                                <div class="form-note-s2 pt-4"> Need an Account? <a href="{{route('contact-us')}}">Contact Support</a>
                                 </div>
                             </div><!-- .nk-block -->
                             <div class="nk-block nk-auth-footer">

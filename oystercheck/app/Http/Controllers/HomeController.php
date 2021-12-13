@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\ActivityLog;
@@ -61,7 +60,6 @@ class HomeController extends Controller
         $data['recents'] = IdentityVerification::where(['user_id' => $user->id])->latest()->take(5)->get();
         $data['transactions'] = Transaction::where('user_id', $user->id)->latest()->take(5)->get();
         $data['activity'] = ActivityLog::where('user_id', $user->id)->take(10)->get();
-        
         return view('users.home', $data);
     }
 

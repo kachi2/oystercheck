@@ -87,7 +87,8 @@
                 <div class="col-md-6">
                     <div class="contact-us-form gray-light-bg rounded p-5">
                         <h4>Ready to get started?</h4>
-                        <form action="#" method="get" id="contactForm1" class="contact-us-form" novalidate="novalidate">
+                        <form action="{{route('ContactForm')}}" method="POST" id="contactForm1" class="contact-us-form" novalidate="novalidate">
+                            @csrf
                             <div class="form-row">
                                 <div class="col-12">
                                     <div class="form-group">
@@ -107,6 +108,11 @@
                                  <div class="col-12">
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="company" placeholder="Enter company name" required="required">
+                                    </div>
+                                </div>
+                                 <div class="col-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="address" placeholder="Enter company Address" required="required">
                                     </div>
                                 </div>
                                 <div class="col-sm-12 mt-3">

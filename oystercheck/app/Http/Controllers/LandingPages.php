@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AgentRequest;
 
 class LandingPages extends Controller
 {
@@ -45,6 +47,21 @@ class LandingPages extends Controller
     }
     public function KYC(){
         return view('kyc');
+    }
+
+    public function ContactForm(Request $request){
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'company' => $request->company,
+            'address' =>$request->address,
+
+        ];
+
+        mail::to('support@oysterchecks.com')->send(new AgentRequest($data));
+        return redirect()->back()->with('success', 'Message send successfully');
+   
     }
     
 }

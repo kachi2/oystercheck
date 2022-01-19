@@ -123,6 +123,7 @@
                                                 <th>QA Status</th>
                                                 <th>QA Review</th>
                                                 <th>Payment Status</th>
+                                                
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -135,21 +136,44 @@
                                                  @elseif($ss->status == "failed")
                                                 <td><span class="badge badge-soft-danger">Rejected</span></td>
                                                 @else
-                                                 <td><span class="badge badge-soft-warning">Pending</span></td>
+                                                 <td>
+                                                    <select class="p-1" style="border:1px solid green; border-radius:5px" >
+                                                        <option class="badge badge-soft-warning ">Pending</option>
+                                                    <option class="badge badge-soft-info"> Approve </option>
+                                                        <option class="badge badge-soft-danger"> Reject </option>
+                                                    </select>
+                                                     </td>
+
                                                 @endif
-                                                <td>{{$ss->doc}}</td>
+                                                <td>{{$ss->doc}} <i class="fa fa-download"> </i></td>
                                                  @if($ss->QA_approved == "approved")
                                                 <td><span class="badge badge-soft-success">Approved</span></td>
                                                 @elseif($ss->QA_approved == "failed")
                                                 <td><span class="badge badge-soft-danger">Rejected</span></td>
                                                 @else
-                                                 <td><span class="badge badge-soft-warning">Pending</span></td>
+                                                 <td><select class="p-1" style="border:1px solid green; border-radius:5px" >
+                                                    <option class="badge badge-soft-warning ">Pending</option>
+                                                <option class="badge badge-soft-info"> Approve </option>
+                                                    <option class="badge badge-soft-danger"> Reject </option>
+                                                </select></td>
                                                 @endif
-                                                <td><p style="font-size:9px">{{$ss->QA_review}}</p></td>
+                                                <td> @if(!empty($ss->QA_review))
+                                                    <span class="badge badge-soft-success">{{$ss->QA_review}}</span>
+                                                    @else
+                                                    <span class="badge badge-soft-info">Click to type review</span>
+                                                    <span id="inputs" hidden> 
+                                                    <input type="text" style="border:1px solid darkblue" name="review"> <button type="submit" class="btn btn-xm btn-info"> Save</button> 
+                                                </span>
+                                                    @endif
+                                                </td>
                                                   @if($ss->is_paid == 1)
                                                 <td><span class="badge badge-soft-success">Approved</span></td>
                                                 @else
-                                                <td><span class="badge badge-soft-warning">Pending</span></td>
+                                                <td><select class="p-1" style="border:1px solid green; border-radius:5px" >
+                                                    <option class="badge badge-soft-warning ">Pending</option>
+                                                <option class="badge badge-soft-info"> Approve </option>
+                                                    <option class="badge badge-soft-danger"> Reject </option>
+                                                </select></td>
                                                 @endif
                                             </tr>
                                             @endforeach
@@ -167,3 +191,5 @@
             @endif
         </div>                  
 @endsection
+
+

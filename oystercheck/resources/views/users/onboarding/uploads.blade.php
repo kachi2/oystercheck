@@ -38,22 +38,23 @@
                     <div class="card-header">
                         <h4 class="card-title">Upload Documents</h4>
                     </div><!--end card-header-->
-                       <form method="post" action="{{route('candidate.FileStore')}}" class="add-candidate-form">
+                       <form method="post" action="{{route('candidate.FileStore')}}" class="add-candidate-form" enctype="multipart/form-data">
                       @csrf
                     <div class="card-body bootstrap-select-1">
                         <div class="row">
-                        @foreach ($service as  $ss)
+                       
+                        
                             <div class="col-xl-4">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" style="font-size:11px">Upload File for {{$ss->service->name}}</h4>
+                                    <h4 class="card-title" style="font-size:11px">Upload File for</h4>
                                 </div><!--end card-header-->
                                 <div class="card-body">
-                                    <input type="file" id="input-file-now" class="dropify" name="{{$ss->id}}" value="" />                                                   
+                                    <input type="file" id="input-file-now" class="dropify" name="images" value="" />                                                   
                                 </div><!--end card-body-->
                             </div><!--end card-->
                         </div> 
-                        @endforeach
+                        
                             </div>   
                            <center> <span class=""><button type="submit" class="btn btn-primary w-30 submitbtn p-2 ">Submit Documents</button> </span>                   
                             </center>                         

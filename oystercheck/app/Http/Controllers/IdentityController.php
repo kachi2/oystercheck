@@ -117,7 +117,6 @@ class IdentityController extends Controller
         $ref = $this->GenerateRef();
         $slug = Verification::where('slug', $slug)->first();
         $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
-
             if($validate->fails()){
                 Session::flash('alert', 'error');
                 Session::flash('msg', 'Please provide the data to verify');
@@ -473,4 +472,7 @@ class IdentityController extends Controller
            }
            return view('users.individual.identityVerify', $data);
      }
+
+     
+     
 }

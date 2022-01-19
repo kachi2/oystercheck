@@ -13,9 +13,7 @@ class BusinessVerification extends Model
 
         'verification_id', 'ref', 'service_ref', 'user_id', 'fee', 'discount', 'status'
     ];
-
     public function user(){
-    
         return $this->belongsTo(User::class);
     }
 

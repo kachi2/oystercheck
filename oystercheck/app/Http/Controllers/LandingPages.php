@@ -56,12 +56,9 @@ class LandingPages extends Controller
             'phone' => $request->phone,
             'company' => $request->company,
             'address' =>$request->address,
-
         ];
-
         mail::to('support@oysterchecks.com')->send(new AgentRequest($data));
         return redirect()->back()->with('success', 'Message send successfully');
-   
     }
     
 }

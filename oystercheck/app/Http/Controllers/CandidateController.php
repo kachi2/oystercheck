@@ -26,9 +26,8 @@ class CandidateController extends Controller
     }
     public function CandidateIndex(){
        $this->RedirectUser();
-        
         $candidate['candidate'] = Candidate::where('client_id', auth()->user()->id)->get();
-        $candidate['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'verified'])->get();
+        $candidate['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'approved'])->get();
         $candidate['pending'] = Candidate::where(['client_id'=> auth()->user()->id, 'status'=>'pending'])->get();
         return view('users.candidates.index', $candidate);
     }
@@ -40,7 +39,6 @@ class CandidateController extends Controller
     }
 
     public function CadidateStore(Request $request){
-
         //check if email exist 
         $check = User::where('email', $request->email)->first();
         if($check){
@@ -118,8 +116,6 @@ class CandidateController extends Controller
 
     public function CandidateFileStore(Request $request){
        
-        
-            
         foreach($request->images as $key => $image){
             $name =  $image->getClientOriginalName();
             $fileName = \pathinfo($name, PATHINFO_FILENAME);

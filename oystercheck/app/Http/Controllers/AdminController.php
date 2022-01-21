@@ -113,7 +113,7 @@ class AdminController extends Controller
 
     public function CandidateIndex(){
         $candidate['candidate'] = Candidate::get();
-        $candidate['verified'] = Candidate::where(['status'=>'verified'])->get();
+        $candidate['verified'] = Candidate::where(['status'=>'approved'])->get();
         $candidate['pending'] = Candidate::where(['status'=>'pending'])->get();
         return view('admin.candidates.index', $candidate);
     }
@@ -277,7 +277,7 @@ class AdminController extends Controller
         if($request->status == 1 ){
             CandidateVerification::where('id', $status->id)
                 ->update([
-                    'status' => 'approved'
+                'status' => 'approved'
                 ]);
             Session::flash('alert', 'success');
             Session::flash('message', 'Document Marked as Approved');
@@ -285,7 +285,7 @@ class AdminController extends Controller
         }else if($request->status == 2){
             CandidateVerification::where('id', $status->id)
             ->update([
-                'status' => 'failed'
+            'status' => 'failed'
             ]);
         Session::flash('alert', 'warning');
         Session::flash('message', 'Document Marked as Rejected');
@@ -364,4 +364,12 @@ class AdminController extends Controller
     Session::flash('message', 'Document Review Saved');
     return back();
 }
+
+        public function VerifyCandidate($id){
+            
+            $status = CandidateVerification::where('user_id', decrypt($id))->first();
+                    
+            $user = Candidate::where('id', decrypt($id))->first();
+
+        }
 }

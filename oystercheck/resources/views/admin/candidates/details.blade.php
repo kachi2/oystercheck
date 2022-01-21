@@ -137,22 +137,25 @@
                                                 <td><span class="badge badge-soft-danger">Rejected</span></td>
                                                 @else
                                                  <td>
-                                                    <select class="p-1" style="border:1px solid green; border-radius:5px" >
+                                                    <form action="{{route('payment.update', encrypt($ss->id))}}" method="post" id="form1">
+                                                    <select class="p-1" style="border:1px solid green; border-radius:5px" id="status" name="status" >
                                                         <option class="badge badge-soft-warning ">Pending</option>
                                                     <option class="badge badge-soft-info"> Approve </option>
                                                         <option class="badge badge-soft-danger"> Reject </option>
                                                     </select>
+                                                </form>
                                                      </td>
 
+
                                                 @endif
-                                                <td>@if(!empty($ss->doc)) <a href="{{asset('/file/download/'.$ss->id)}}"> {{$ss->doc}} <i class="fa fa-download"> </i></a> @else No Documents @endif</td>
+                                                <td>@if(!empty($ss->doc)) <a href="{{route('fileDownload',encrypt($ss->id))}}"> {{$ss->doc}} <i class="fa fa-download"> </i></a> @else No Documents @endif</td>
 
                                                  @if($ss->QA_approved == "approved")
                                                 <td><span class="badge badge-soft-success">Approved</span></td>
                                                 @elseif($ss->QA_approved == "failed")
                                                 <td><span class="badge badge-soft-danger">Rejected</span></td>
                                                 @else
-                                                 <td><select class="p-1" style="border:1px solid green; border-radius:5px" >
+                                                 <td><select class="p-1" style="border:1px solid green; border-radius:5px" id="qa" name="qa" >
                                                     <option class="badge badge-soft-warning ">Pending</option>
                                                 <option class="badge badge-soft-info"> Approve </option>
                                                     <option class="badge badge-soft-danger"> Reject </option>
@@ -169,8 +172,10 @@
                                                 </td>
                                                   @if($ss->is_paid == 1)
                                                 <td><span class="badge badge-soft-success">Approved</span></td>
+                                                @elseif($ss->is_paid == 2)
+                                                <td><span class="badge badge-soft-danger">Rejected</span></td>
                                                 @else
-                                                <td><select class="p-1" style="border:1px solid green; border-radius:5px" >
+                                                <td><select class="p-1" style="border:1px solid green; border-radius:5px" id="payment" name="payment">
                                                     <option class="badge badge-soft-warning ">Pending</option>
                                                 <option class="badge badge-soft-info"> Approve </option>
                                                     <option class="badge badge-soft-danger"> Reject </option>
@@ -180,8 +185,7 @@
                                             @endforeach
                                             </tbody>
                                         </table><!--end /table-->
-                                    </div><!--end /tableresponsive-->
-                                                                     
+                                    </div><!--end /tableresponsive-->                     
                                             </div>
                                         </div><!--end col-->                                            
                                     </div><!--end row-->
@@ -194,3 +198,15 @@
 @endsection
 
 
+
+@section('script')
+    
+<script>
+
+$('#status').on('change', function){
+    form1.submit();
+}
+
+    
+</script>
+@endsection

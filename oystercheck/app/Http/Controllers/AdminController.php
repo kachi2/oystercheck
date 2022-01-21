@@ -265,4 +265,11 @@ class AdminController extends Controller
         return back();
 
     }
+
+    public function FileDownload($id){
+
+        $file = CandidateVerification::where('id', decrypt($id))->first();
+        $location = public_path()."/assets/candidates/".$file->doc;
+        return response()->download($location);
+    }
 }

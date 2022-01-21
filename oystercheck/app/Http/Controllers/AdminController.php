@@ -365,11 +365,5 @@ class AdminController extends Controller
     return back();
 }
 
-        public function VerifyCandidate($id){
-            
-            $status = CandidateVerification::where('user_id', decrypt($id))->first();
-                    
-            $user = Candidate::where('id', decrypt($id))->first();
-
-        }
+       
 }

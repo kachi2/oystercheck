@@ -353,8 +353,15 @@ class AdminController extends Controller
 
 
     public function QAReview(Request $request, $id){
-        dd($id);
+        $status = CandidateVerification::where('id', decrypt($id))->first();
+        if(isset($request->reviews) ){
+            CandidateVerification::where('id', $status->id)
+                ->update([
+                    'QA_review' => $request->reviews
+                ]);
     }
-
-
+    Session::flash('alert', 'success');
+    Session::flash('message', 'Document Review Saved');
+    return back();
+}
 }

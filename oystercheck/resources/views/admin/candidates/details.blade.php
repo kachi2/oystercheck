@@ -166,14 +166,14 @@
                                                 </td>
                                                 @endif
                                                 <td> @if(!empty($ss->QA_review))
-                                                    <span class="badge badge-soft-success">{{$ss->QA_review}}</span>
+                                                    <span class="badge badge-soft-secondary" style="flex-wrap:wrap">{{substr($ss->QA_review, 0,30)}}</span>
                                                     @else
                                                     <span class="badge badge-soft-info review" type="button">Click to type review</span>
 
                                                     <span class="reviews" hidden> 
                                                         <form action="{{route('qaReviews',encrypt($ss->id))}}" method="post" id="form2">
                                                             @csrf
-                                                    <input type="text" style="border:1px solid darkblue" name="reviews" class="qaReviews" > 
+                                                    <input type="text" style="border:1px solid darkblue" name="reviews" class="qaReviews" >  <button type="submit" class="btn bnt-xm btn-primary"> Save</button>
                                                         </form>
                                                 </span>
                                                     @endif

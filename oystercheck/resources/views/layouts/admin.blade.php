@@ -77,7 +77,27 @@
        
         <!-- App js -->
         <script src="{{asset('/assets/js/app.js')}}"></script> 
+      
+      <script>     
+     let message = {!! json_encode(Session::get('message')) !!};
+     let msg = {!! json_encode(Session::get('alert')) !!};
+     //let logUlr = $('#frm-logout').submit();
+     //alert(msg);
+     toastr.options = {
+             timeOut: 6000,
+             progressBar: true,
+             showMethod: "slideDown",
+             hideMethod: "slideUp",
+             showDuration: 500,
+             hideDuration: 500
+         };
+     if(message != null && msg == 'success'){
+     toastr.success(message);
+     }else if(message != null && msg == 'error'){
+         toastr.error(message);
+     }
 
+     </script>
         @yield('script')
     </body>
 </html>

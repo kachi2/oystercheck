@@ -93,5 +93,6 @@ Route::post('/clients/store', [AdminController::class, 'ClientStore'])->name('ad
 Route::get('/administrators/index', [AdminController::class, 'AdministratorIndex'])->name('administratorIndex');
 Route::get('/administrators/create', [AdminController::class, 'AdministratorCreate'])->name('administratorCreate');
 Route::post('/administrators/store', [AdminController::class, 'AdministratorStore'])->name('administratorStore');
+Route::get('/file/download', [AdminController::class, 'FileDownload'])->name('fileDownload');
 
 });

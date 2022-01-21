@@ -83,6 +83,7 @@ class CandidateController extends Controller
                 'candidate_services_id' => $value,
                 'status' => 'pending',
                 'is_paid' => '0',
+                
               ]);
           }
         Session::flash('alert', 'success');
@@ -117,20 +118,17 @@ class CandidateController extends Controller
 
     public function CandidateFileStore(Request $request){
        
-        $image = $request->images;
-        dd($image);
-        foreach($request->all() as $key => $files){
-            $image = $request->images;
-            dd($image);
+        
+            
+        foreach($request->images as $key => $image){
             $name =  $image->getClientOriginalName();
             $fileName = \pathinfo($name, PATHINFO_FILENAME);
             $ext =  $image->getClientOriginalExtension();
             $fileName = $fileName.'.'.$ext;
             $image->move('assets/candidates', $fileName);
-            print_r($files);
-           $upload =  CandidateVerification::where('id', $key)
+            $upload =  CandidateVerification::where('id', $request->candidate[$key])
             ->update([
-                'doc' => $files
+                'doc' => $fileName
             ]);
         }
         if($upload){

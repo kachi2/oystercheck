@@ -145,7 +145,8 @@
                                                      </td>
 
                                                 @endif
-                                                <td>{{$ss->doc}} <i class="fa fa-download"> </i></td>
+                                                <td>@if(!empty($ss->doc)) <a href="{{asset('/file/download/'.$ss->id)}}"> {{$ss->doc}} <i class="fa fa-download"> </i></a> @else No Documents @endif</td>
+
                                                  @if($ss->QA_approved == "approved")
                                                 <td><span class="badge badge-soft-success">Approved</span></td>
                                                 @elseif($ss->QA_approved == "failed")

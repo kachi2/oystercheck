@@ -96,7 +96,8 @@ Route::get('/administrators/create', [AdminController::class, 'AdministratorCrea
 Route::post('/administrators/store', [AdminController::class, 'AdministratorStore'])->name('administratorStore');
 Route::get('/file/download/{id}', [AdminController::class, 'FileDownload'])->name('fileDownload');
 Route::post('/candidate/status/update/{id}', [AdminController::class, 'statusUpdate'])->name('statusUpdate');
-Route::post('/candidate/payment/update/{id}', [AdminController::class, 'statusUpdate'])->name('paymentUpdate');
-Route::post('/candidate/qa/update/{id}', [AdminController::class, 'statusUpdate'])->name('qaUpdate');
+Route::post('/candidate/payment/update/{id}', [AdminController::class, 'paymentUpdate'])->name('paymentUpdate');
+Route::post('/candidate/qa/update/{id}', [AdminController::class, 'QAUpdate'])->name('qaUpdate');
+Route::post('/candidate/qa/review/{id}', [AdminController::class, 'QAReview'])->name('qaReviews');
 
 });

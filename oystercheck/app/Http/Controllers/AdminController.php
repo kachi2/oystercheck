@@ -267,9 +267,94 @@ class AdminController extends Controller
     }
 
     public function FileDownload($id){
-
         $file = CandidateVerification::where('id', decrypt($id))->first();
         $location = public_path()."/assets/candidates/".$file->doc;
         return response()->download($location);
     }
+
+    public function statusUpdate(Request $request, $id){
+        $status = CandidateVerification::where('id', decrypt($id))->first();
+        if($request->status == 1 ){
+            CandidateVerification::where('id', $status->id)
+                ->update([
+                    'status' => 'approved'
+                ]);
+            Session::flash('alert', 'success');
+            Session::flash('message', 'Document Marked as Approved');
+            return back();
+        }else if($request->status == 2){
+            CandidateVerification::where('id', $status->id)
+            ->update([
+                'status' => 'failed'
+            ]);
+        Session::flash('alert', 'warning');
+        Session::flash('message', 'Document Marked as Rejected');
+            return back();
+        }else{
+            Session::flash('alert', 'info');
+            Session::flash('message', 'No changes made, check your request and try again');
+            return back();
+
+        }
+    }
+
+    public function QAUpdate(Request $request, $id){
+        $status = CandidateVerification::where('id', decrypt($id))->first();
+        if($request->qa == 1 ){
+            CandidateVerification::where('id', $status->id)
+                ->update([
+                    'QA_approved' => 'approved'
+                ]);
+            Session::flash('alert', 'success');
+            Session::flash('message', 'Document Marked as Approved');
+            return back();
+        }else if($request->qa == 2){
+            CandidateVerification::where('id', $status->id)
+            ->update([
+                'QA_approved' => 'failed'
+            ]);
+        Session::flash('alert', 'warning');
+        Session::flash('message', 'Document Marked as Rejected');
+            return back();
+        }else{
+            Session::flash('alert', 'info');
+            Session::flash('message', 'No changes made, check your request and try again');
+            return back();
+
+        }
+    }
+
+
+    public function paymentUpdate(Request $request, $id){
+        $status = CandidateVerification::where('id', decrypt($id))->first();
+        if($request->payment == 1 ){
+            CandidateVerification::where('id', $status->id)
+                ->update([
+                    'is_paid' => 1
+                ]);
+            Session::flash('alert', 'success');
+            Session::flash('message', 'Document Marked as Paid');
+            return back();
+        }else if($request->payment == 2){
+            CandidateVerification::where('id', $status->id)
+            ->update([
+                'is_paid' => 2
+            ]);
+        Session::flash('alert', 'warning');
+        Session::flash('message', 'Document Marked as Not Paid');
+            return back();
+        }else{
+            Session::flash('alert', 'info');
+            Session::flash('message', 'No changes made, check your request and try again');
+            return back();
+
+        }
+    }
+
+
+    public function QAReview(Request $request, $id){
+        dd($id);
+    }
+
+
 }

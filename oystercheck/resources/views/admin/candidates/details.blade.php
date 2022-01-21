@@ -137,16 +137,15 @@
                                                 <td><span class="badge badge-soft-danger">Rejected</span></td>
                                                 @else
                                                  <td>
-                                                    <form action="{{route('payment.update', encrypt($ss->id))}}" method="post" id="form1">
+                                                    <form action="{{route('statusUpdate',encrypt($ss->id))}}" method="post" id="form1">
+                                                        @csrf
                                                     <select class="p-1" style="border:1px solid green; border-radius:5px" id="status" name="status" >
-                                                        <option class="badge badge-soft-warning ">Pending</option>
-                                                    <option class="badge badge-soft-info"> Approve </option>
-                                                        <option class="badge badge-soft-danger"> Reject </option>
+                                                        <option  value="0" class="badge badge-soft-warning ">Pending</option>
+                                                    <option value="1" class="badge badge-soft-info"> Approve </option>
+                                                        <option  value="2" class="badge badge-soft-danger"> Reject </option>
                                                     </select>
                                                 </form>
                                                      </td>
-
-
                                                 @endif
                                                 <td>@if(!empty($ss->doc)) <a href="{{route('fileDownload',encrypt($ss->id))}}"> {{$ss->doc}} <i class="fa fa-download"> </i></a> @else No Documents @endif</td>
 
@@ -155,31 +154,45 @@
                                                 @elseif($ss->QA_approved == "failed")
                                                 <td><span class="badge badge-soft-danger">Rejected</span></td>
                                                 @else
-                                                 <td><select class="p-1" style="border:1px solid green; border-radius:5px" id="qa" name="qa" >
-                                                    <option class="badge badge-soft-warning ">Pending</option>
-                                                <option class="badge badge-soft-info"> Approve </option>
-                                                    <option class="badge badge-soft-danger"> Reject </option>
-                                                </select></td>
+                                                 <td>
+                                                    <form action="{{route('qaUpdate', encrypt($ss->id))}}" method="post" id="form2">
+                                                        @csrf
+                                                        <select class="p-1" style="border:1px solid green; border-radius:5px" id="qa" name="qa" >
+                                                    <option class="badge badge-soft-warning " value="0">Pending</option>
+                                                <option class="badge badge-soft-info" value="1"> Approve </option>
+                                                    <option class="badge badge-soft-danger" value="2"> Reject </option>
+                                                </select>
+                                                    </form>
+                                                </td>
                                                 @endif
                                                 <td> @if(!empty($ss->QA_review))
                                                     <span class="badge badge-soft-success">{{$ss->QA_review}}</span>
                                                     @else
-                                                    <span class="badge badge-soft-info">Click to type review</span>
-                                                    <span id="inputs" hidden> 
-                                                    <input type="text" style="border:1px solid darkblue" name="review"> <button type="submit" class="btn btn-xm btn-info"> Save</button> 
+                                                    <span class="badge badge-soft-info review" type="button">Click to type review</span>
+
+                                                    <span class="reviews" hidden> 
+                                                        <form action="{{route('qaReviews',encrypt($ss->id))}}" method="post" id="form2">
+                                                            @csrf
+                                                    <input type="text" style="border:1px solid darkblue" name="reviews" class="qaReviews" > 
+                                                        </form>
                                                 </span>
                                                     @endif
                                                 </td>
                                                   @if($ss->is_paid == 1)
                                                 <td><span class="badge badge-soft-success">Approved</span></td>
                                                 @elseif($ss->is_paid == 2)
-                                                <td><span class="badge badge-soft-danger">Rejected</span></td>
+                                                <td><span class="badge badge-soft-danger">Not Paid</span></td>
                                                 @else
-                                                <td><select class="p-1" style="border:1px solid green; border-radius:5px" id="payment" name="payment">
-                                                    <option class="badge badge-soft-warning ">Pending</option>
-                                                <option class="badge badge-soft-info"> Approve </option>
-                                                    <option class="badge badge-soft-danger"> Reject </option>
-                                                </select></td>
+                                                <td>
+                                                    <form action="{{route('paymentUpdate', encrypt($ss->id))}}" method="post" id="form3">
+                                                        @csrf
+                                                        <select class="p-1" style="border:1px solid green; border-radius:5px" id="payment" name="payment">
+                                                    <option class="badge badge-soft-warning " value="0">Pending</option>
+                                                <option class="badge badge-soft-info" value="1"> Approve </option>
+                                                    <option class="badge badge-soft-danger" value="2"> Reject </option>
+                                                </select>
+                                                    </form>
+                                                </td>
                                                 @endif
                                             </tr>
                                             @endforeach
@@ -203,9 +216,33 @@
     
 <script>
 
-$('#status').on('change', function){
-    form1.submit();
-}
+$('#status').on('change', function(){
+    $('#form1').submit();
+
+});
+
+$('#payment').on('change', function(){
+    $('#form3').submit();
+
+});
+$('#qa').on('change', function(){
+    $('#form2').submit();
+
+});
+
+
+
+
+$('.review').on('click', function(){
+        $('.reviews').attr('hidden', false);
+        $('.review').attr('hidden', true);
+$('.qaReviews').on('change', function(){
+    $('#form4').submit();
+});
+   
+ });
+
+
 
     
 </script>

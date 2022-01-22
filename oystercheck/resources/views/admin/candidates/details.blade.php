@@ -67,8 +67,8 @@
                                         <div class="card-body" style="background:rgb(36, 16, 82)">
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
-                                                    <p class="text-white mb-0 fw-semibold">Pending Candidates</p>
-                                                    <h3 class="m-0 text-white">{{count($pending)}}</h3>
+                                                    <p class="text-white mb-0 fw-semibold">Rejected Candidates</p>
+                                                    <h3 class="m-0 text-white">{{count($rejected)}}</h3>
                                                 </div>
                                                 <div class="col-auto align-self-center">
                                                     <div class="report-main-icon bg-light-alt">

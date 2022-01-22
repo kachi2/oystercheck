@@ -54,8 +54,8 @@
                                 <td>{{$cand->user->name}}</td>
                                 <td>{{$cand->user->email}}</td>
                                 <td>{{$cand->phone}}</td>
-                                <td>pending</td>
-                                <td>delivered</td>
+                                <td>{{$cand->status}}</td>
+                                <td>{{$cand->email_status}}</td>
                                 <td> {{$cand->created_at}}</td>
                                 <td><a href="{{route('admin.candidate.details', encrypt($cand->id))}}"> view Details</a></td>
                             </tr>

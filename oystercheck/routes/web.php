@@ -99,5 +99,6 @@ Route::post('/candidate/status/update/{id}', [AdminController::class, 'statusUpd
 Route::post('/candidate/payment/update/{id}', [AdminController::class, 'paymentUpdate'])->name('paymentUpdate');
 Route::post('/candidate/qa/update/{id}', [AdminController::class, 'QAUpdate'])->name('qaUpdate');
 Route::post('/candidate/qa/review/{id}', [AdminController::class, 'QAReview'])->name('qaReviews');
+Route::post('/candndate/document/verified/{id}', [AdminController::class, 'VerifyCandidate'])->name('VerifyCandidate');
 
 });

@@ -117,6 +117,7 @@ class CandidateController extends Controller
 
     public function CandidateFileStore(Request $request){
         //dd($request->all());
+        
         foreach($request->all() as $key => $files){
            $upload =  CandidateVerification::where('id', $key)
             ->update([

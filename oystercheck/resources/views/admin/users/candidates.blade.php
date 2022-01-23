@@ -54,8 +54,25 @@
                                 <td>{{$cand->user->name}}</td>
                                 <td>{{$cand->user->email}}</td>
                                 <td>{{$cand->phone}}</td>
-                                <td>pending</td>
-                                <td>delivered</td>
+                                 @if($cand->status == "verified")
+                                    <td><span class="badge badge-soft-success">Verified</span></td>
+                                    @elseif($cand->status == "rejected")
+                                    <td><span class="badge badge-soft-danger">Rejected</span></td>
+                                    @else
+                                     <td>
+                                        <form action="{{route('VerifyCandidate',encrypt($cand->user_id))}}" method="post" id="form1">
+                                            @csrf
+                                            <select class="p-1" style="border:1px solid green; border-radius:5px" id="verify" name="verify" >
+                                        <option class="badge badge-soft-warning " value="0">Pending</option>
+                                    <option class="badge badge-soft-info" value="1"> Verify </option>
+                                        <option class="badge badge-soft-danger" value="2"> Reject </option>
+                                    </select>
+                                        </form>
+                                    </td>
+                                        @endif
+                                   
+                                   
+                                <td>{{$cand->email_status}}</td>
                                 <td> {{$cand->created_at}}</td>
                                 <td><a href="{{route('admin.candidate.details', encrypt($cand->id))}}"> view Details</a></td>
                             </tr>
@@ -66,4 +83,16 @@
                 </div>
             </div> <!-- end col -->
         </div>                  
+@endsection
+
+@section('script')
+    
+<script>
+
+$('#verify').on('change', function(){
+    $('#form1').submit();
+
+});
+
+</script>
 @endsection

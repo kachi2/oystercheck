@@ -26,10 +26,9 @@ class CandidateController extends Controller
     }
     public function CandidateIndex(){
        $this->RedirectUser();
-        
         $candidate['candidate'] = Candidate::where('client_id', auth()->user()->id)->get();
-        $candidate['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'verified'])->get();
-        $candidate['pending'] = Candidate::where(['client_id'=> auth()->user()->id, 'status'=>'pending'])->get();
+        $candidate['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'approved'])->get();
+        $candidate['rejected'] = Candidate::where(['client_id'=> auth()->user()->id, 'status'=>'rejected'])->get();
         return view('users.candidates.index', $candidate);
     }
 
@@ -40,7 +39,6 @@ class CandidateController extends Controller
     }
 
     public function CadidateStore(Request $request){
-
         //check if email exist 
         $check = User::where('email', $request->email)->first();
         if($check){
@@ -75,6 +73,8 @@ class CandidateController extends Controller
             'address'=>$request->address,
             'country' => $request->country,
             'company' => $request->company,
+            'email_status' => 'Email Sent',
+            'status' => 'not verified'
           ]);
           foreach($request->verifyServices as $key => $value){
             CandidateVerification::create([
@@ -83,6 +83,7 @@ class CandidateController extends Controller
                 'candidate_services_id' => $value,
                 'status' => 'pending',
                 'is_paid' => '0',
+                
               ]);
           }
         Session::flash('alert', 'success');
@@ -99,7 +100,7 @@ class CandidateController extends Controller
         $this->RedirectUser();
         $data['candidates'] = Candidate::where('client_id', auth()->user()->id)->get();
         $data['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'verified'])->get();
-        $data['pending'] = Candidate::where(['client_id'=> auth()->user()->id, 'status'=>'pending'])->get();
+        $data['rejected'] = Candidate::where(['client_id'=> auth()->user()->id, 'status'=>'rejected'])->get();
         $candidate = Candidate::where('id', decrypt($id))->first();
         $data['candidate'] = Candidate::where('user_id', $candidate->user_id)->first();
         $data['services'] = CandidateVerification::where('user_id', $candidate->user_id)->get();
@@ -111,17 +112,29 @@ class CandidateController extends Controller
     public function CandidateFileUpload(){
         $this->RedirectUser();
         $user = User::where('id', auth()->user()->id)->first();
+                Candidate::where('user_id', $user->id)->update(['email_status' => 'Email Read']);
         $service = CandidateVerification::where('user_id', $user->id)->get();
         return view('users.onboarding.uploads', compact('service', $service));
     }
 
+<<<<<<< HEAD
     public function CandidateFileStore(Request $request){
         //dd($request->all());
         
         foreach($request->all() as $key => $files){
            $upload =  CandidateVerification::where('id', $key)
+=======
+    public function CandidateFileStore(Request $request){  
+        foreach($request->images as $key => $image){
+            $name =  $image->getClientOriginalName();
+            $fileName = \pathinfo($name, PATHINFO_FILENAME);
+            $ext =  $image->getClientOriginalExtension();
+            $fileName = $fileName.'.'.$ext;
+            $image->move('assets/candidates', $fileName);
+            $upload =  CandidateVerification::where('id', $request->candidate[$key])
+>>>>>>> 592438ebbf8a575226b6303941efb56d45b09d99
             ->update([
-                'doc' => $files
+                'doc' => $fileName
             ]);
         }
         if($upload){

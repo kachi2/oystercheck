@@ -82,7 +82,7 @@
                                             </div>
                                         </div><!--end col-->
                                         </div>
-                                        </div><                              
+                                        </div>                          
             </div> <!-- end col -->  
                 
 @endsection
@@ -105,31 +105,7 @@
          jQuery('input[name="totalprice"]').val(totalprice);
     });
 
-        jQuery(document).on('click', '.submitbtn', function(e){
-      e.preventDefault();
-      var valid = 'true';
-
-      if( jQuery('.service-checkbox:checked').length < 1 ){
-        jQuery('.msg-box').text('Please select atleast one Service!');
-        
-        valid = 'false';
-
-        setInterval(function(){ 
-          jQuery('.msg-box').text('');
-        }, 5000);
-      }
-
-     });
-
-      jQuery(document).on('click', '.submitbtn', function(e){
-    e.preventDefault();
-      jQuery('.add-candidate-form').submit();
-  });
-
-  jQuery(document).on('click', '.cancelbnt', function(e){
-    e.preventDefault();
-    jQuery('.add-candidate-form').trigger("reset");  
-  });
+       
 </script>
 
 @endsection

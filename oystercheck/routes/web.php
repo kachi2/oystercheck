@@ -8,6 +8,7 @@ use App\Http\Controllers\LandingPages;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\AdminController;
+use App\Models\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,5 +94,11 @@ Route::post('/clients/store', [AdminController::class, 'ClientStore'])->name('ad
 Route::get('/administrators/index', [AdminController::class, 'AdministratorIndex'])->name('administratorIndex');
 Route::get('/administrators/create', [AdminController::class, 'AdministratorCreate'])->name('administratorCreate');
 Route::post('/administrators/store', [AdminController::class, 'AdministratorStore'])->name('administratorStore');
+Route::get('/file/download/{id}', [AdminController::class, 'FileDownload'])->name('fileDownload');
+Route::post('/candidate/status/update/{id}', [AdminController::class, 'statusUpdate'])->name('statusUpdate');
+Route::post('/candidate/payment/update/{id}', [AdminController::class, 'paymentUpdate'])->name('paymentUpdate');
+Route::post('/candidate/qa/update/{id}', [AdminController::class, 'QAUpdate'])->name('qaUpdate');
+Route::post('/candidate/qa/review/{id}', [AdminController::class, 'QAReview'])->name('qaReviews');
+Route::post('/candndate/document/verified/{id}', [AdminController::class, 'VerifyCandidate'])->name('VerifyCandidate');
 
 });

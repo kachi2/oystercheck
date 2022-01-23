@@ -163,7 +163,7 @@
                                 <th>Verification</th>
                                 <th>Fee</th>
                                 <th>Action </th>
-                            </tr>
+                            </tr> 
                             </thead>
                             <tbody>
                               @foreach ($verifications as $verify)
@@ -210,32 +210,6 @@
          jQuery('.totalprice strong').text(totalprice);
          jQuery('input[name="totalprice"]').val(totalprice);
     });
-
-        jQuery(document).on('click', '.submitbtn', function(e){
-      e.preventDefault();
-      var valid = 'true';
-
-      if( jQuery('.service-checkbox:checked').length < 1 ){
-        jQuery('.msg-box').text('Please select atleast one Service!');
-        
-        valid = 'false';
-
-        setInterval(function(){ 
-          jQuery('.msg-box').text('');
-        }, 5000);
-      }
-
-     });
-
-      jQuery(document).on('click', '.submitbtn', function(e){
-    e.preventDefault();
-      jQuery('.add-candidate-form').submit();
-  });
-
-  jQuery(document).on('click', '.cancelbnt', function(e){
-    e.preventDefault();
-    jQuery('.add-candidate-form').trigger("reset");  
-  });
 </script>
 
 @endsection

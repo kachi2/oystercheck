@@ -371,7 +371,7 @@ class IdentityController extends Controller
              $image = $res['data']['response']['photo']; // image base64 encoded
              $file = base64_decode($image); 
              $safeName = time().'.'.'png'; 
-             file_put_contents(asset('assets/profile/').$safeName,$file);
+             file_put_contents('assets/profile/'.$safeName,$file);
             }else{
                 $safeName = 'image.png'; 
             }

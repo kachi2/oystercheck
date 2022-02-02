@@ -150,7 +150,7 @@ class IdentityController extends Controller
             $res = IdentityVerificationDetail::where(['reference'=>$request->reference, 'slug' => $slug->slug])->where('expires_at', '>=', now())->latest()->first();          
           //  dd($res);
             sleep(5);
-            if($res){
+            if(!$res){
                 IdentityVerification::where(['user_id'=> auth()->user()->id])->latest()->first()
                 ->update(['status' => 'successful']);
                 $data = $this->generateIdentityReport($slug);
@@ -306,8 +306,8 @@ class IdentityController extends Controller
             }else{
                 $document_number = null;
             }
-            if(isset($res['data']['response']['residence_adress_line1'])){
-                $address = $res['data']['response']['residence_adress_line1'];
+            if(isset($res['data']['response']['residence_address_line1'])){
+                $address = $res['data']['response']['residence_address_line1'];
             }else{
                 $address = null;
             }
@@ -371,7 +371,7 @@ class IdentityController extends Controller
              $image = $res['data']['response']['photo']; // image base64 encoded
              $file = base64_decode($image); 
              $safeName = time().'.'.'png'; 
-             file_put_contents('http://oystercheck.com/assets/profile/'.$safeName,$file);
+             file_put_contents(asset('assets/profile/').$safeName,$file);
             }else{
                 $safeName = 'image.png'; 
             }
@@ -385,7 +385,7 @@ class IdentityController extends Controller
                 'dob' => $dob, 
                 'phone' => $phone,
                 'reference'=>$reference,
-                'image_path'=> $safeName ,
+                'image_path'=> $image,
                 'slug' => $slug->slug,
                 'user_id' => auth()->user()->id,
                 'expires_at' => Carbon::now()->addDay(30),

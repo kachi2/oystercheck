@@ -70,7 +70,12 @@
                             <div class="nav-link">
                                 <a class=" btn btn-sm btn-soft-primary" href="#" role="button">Client Dashboard</a>
                             </div>                                
-                        </li>                           
+                        </li>  
+                        <li class="creat-btn">
+                            <div class="nav-link">
+                                <a class=" btn btn-sm btn-soft-primary" >Wallet Balance: ₦{{number_format($client_balance->avail_balance,2)}}</a>
+                            </div>                                
+                        </li>                          
                     </ul>
                 </nav>
                 <!-- end navbar-->

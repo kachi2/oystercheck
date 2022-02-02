@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Notification;
 use App\Models\Client;
+use App\Models\Wallet;
 use Illuminate\Support\Composer;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -40,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
                 }elseif($user->user_type == 2){
                     $img = Client::where('user_id', $user->id)->first();
                     $data['profile_image'] = $img->image;
+                    $data['client_balance'] = Wallet::where('user_id', $user->id)->first();
                 }else{
                     $data['profile_image'] ='default.png';
                 }

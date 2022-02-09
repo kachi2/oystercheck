@@ -38,12 +38,14 @@ class AppServiceProvider extends ServiceProvider
                 $user = User::where('id', auth()->user()->id)->first();
                 if($user->user_type == 1){
                     $data['profile_image'] = 'default.png';
+                    $data['client_balance'] = Wallet::where('user_id', $user->id)->first();
                 }elseif($user->user_type == 2){
                     $img = Client::where('user_id', $user->id)->first();
                     $data['profile_image'] = $img->image;
                     $data['client_balance'] = Wallet::where('user_id', $user->id)->first();
                 }else{
                     $data['profile_image'] ='default.png';
+                    $data['client_balance'] = Wallet::where('user_id', $user->id)->first();
                 }
                 $view->with($data);
                

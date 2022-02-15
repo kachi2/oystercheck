@@ -117,13 +117,6 @@ class CandidateController extends Controller
         return view('users.onboarding.uploads', compact('service', $service));
     }
 
-<<<<<<< HEAD
-    public function CandidateFileStore(Request $request){
-        //dd($request->all());
-        
-        foreach($request->all() as $key => $files){
-           $upload =  CandidateVerification::where('id', $key)
-=======
     public function CandidateFileStore(Request $request){  
         foreach($request->images as $key => $image){
             $name =  $image->getClientOriginalName();
@@ -132,7 +125,6 @@ class CandidateController extends Controller
             $fileName = $fileName.'.'.$ext;
             $image->move('assets/candidates', $fileName);
             $upload =  CandidateVerification::where('id', $request->candidate[$key])
->>>>>>> 592438ebbf8a575226b6303941efb56d45b09d99
             ->update([
                 'doc' => $fileName
             ]);

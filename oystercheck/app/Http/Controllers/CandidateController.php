@@ -16,10 +16,10 @@ use Illuminate\Http\Request;
 class CandidateController extends Controller
 {
     //
-    public function RedirectUser(){
-        if(auth()->user()->user_type == 3)
-        return redirect()->route('admin.index');
-    }
+    // public function RedirectUser(){
+    //     if(auth()->user()->user_type == 3)
+    //     return redirect()->route('admin.index');
+    // }
     public function GeneratePassword($name){
         $pass = substr($name, 0, 5).rand(111,999);
         return $pass;

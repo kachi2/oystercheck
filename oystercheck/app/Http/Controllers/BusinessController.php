@@ -22,10 +22,10 @@ class BusinessController extends Controller
     use GenerateRef;
     use generateHeaderReports;
 
-    public function RedirectUser(){
-        if(auth()->user()->user_type == 3)
-        return redirect()->route('admin.index');
-    }
+    // public function RedirectUser(){
+    //     if(auth()->user()->user_type == 3)
+    //     return redirect()->route('admin.index');
+    // }
     public function Index($name){
         $this->RedirectUser();
         $user = User::where('id', auth()->user()->id)->first();

@@ -105,7 +105,7 @@ class IdentityController extends Controller
         //
     }
     public function RedirectUser(){
-        if(auth()->user()->user_type == 3)
+        if(auth()->user()->user_type == 6)
         return redirect()->route('admin.index');
     }
 

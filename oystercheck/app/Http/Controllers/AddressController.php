@@ -22,7 +22,7 @@ class AddressController extends Controller
     //
 
     public function AddressIndex($slug){
-        if(auth()->user()->user_type == 3)
+        if(auth()->user()->user_type == 6)
         return redirect()->route('admin.index');
         
         $data = $this->generateAddressReport($slug);

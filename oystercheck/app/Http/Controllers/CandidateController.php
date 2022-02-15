@@ -35,7 +35,12 @@ class CandidateController extends Controller
 
     public function CadidateCreate(){
         $this->RedirectUser();
-        return view('users.candidates.create')
+        $candidate['candidate'] = Candidate::where('client_id', auth()->user()->id)->get();
+        $candidate['pending'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'pending'])->get();
+        $candidate['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'approved'])->get();
+        $candidate['rejected'] = Candidate::where(['client_id'=> auth()->user()->id, 'status'=>'rejected'])->get();
+       
+        return view('users.candidates.create', $candidate)
         ->with('verifications', CandidateService::get());
     }
 
@@ -44,7 +49,7 @@ class CandidateController extends Controller
         $check = User::where('email', $request->email)->first();
         if($check){
             Session::flash('alert', 'error');
-            Session::flash('message', 'The email is already registered');
+            Session::flash('message', 'A User with this email already exist, if you forgot the password, contact the Administratori.');
             return redirect()->back();
         }
         //create user account

@@ -99,6 +99,7 @@ class CandidateController extends Controller
 
     public function CandidateDetails($id){
         $this->RedirectUser();
+        $candidate['pending'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'pending'])->get();
         $data['candidates'] = Candidate::where('client_id', auth()->user()->id)->get();
         $data['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'verified'])->get();
         $data['rejected'] = Candidate::where(['client_id'=> auth()->user()->id, 'status'=>'rejected'])->get();

@@ -26,10 +26,6 @@
                             </div><!--end page-title-box-->
                         </div><!--end col-->
                     </div>
-
-                    @if(Session::has('alert'))
-                    <span class="btn btn-danger">{{Session::get('message')}}</span>
-                    @endif
                     <div class="row ">
                         <div class="col-lg-12">
                             <div class="row justify-content-center">

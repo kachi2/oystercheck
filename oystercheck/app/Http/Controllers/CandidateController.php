@@ -27,6 +27,7 @@ class CandidateController extends Controller
     public function CandidateIndex(){
        $this->RedirectUser();
         $candidate['candidate'] = Candidate::where('client_id', auth()->user()->id)->get();
+        $candidate['pending'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'pending'])->get();
         $candidate['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'approved'])->get();
         $candidate['rejected'] = Candidate::where(['client_id'=> auth()->user()->id, 'status'=>'rejected'])->get();
         return view('users.candidates.index', $candidate);

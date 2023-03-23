@@ -77,7 +77,7 @@
                         </li>  
                         <li class="creat-btn">
                             <div class="nav-link">
-                                <a class=" btn btn-sm btn-soft-primary" >Wallet Balance: ₦{{number_format($client_balance->avail_balance,2)}}</a>
+                                <a class=" badge bg-soft-primary" >Wallet Balance: ₦{{number_format($client_balance->avail_balance,2)}}</a>
                             </div>                                
                         </li>                          
                     </ul>

@@ -19,9 +19,6 @@
                                  <span class="" id="Select_date">Jan 11</span>
                                  <i data-feather="calendar" class="align-self-center icon-xs ms-1"></i>
                              </a>
-                             <a href="#" class="btn btn-sm btn-outline-primary">
-                                 <i data-feather="download" class="align-self-center icon-xs"></i>
-                             </a>
                          </div>
                          <!--end col-->
                      </div>
@@ -34,13 +31,13 @@
          <div class="row ">
              <div class="col-lg-12">
                  <div class="row justify-content-left">
-                     <div class="col-md-6 col-lg-3">
+                     <div class="col-md-6 col-lg-4">
                          <div class="card report-card ">
-                             <div class="card-body" style="background:rgb(36, 16, 82)">
+                             <div class="card-body" >
                                  <div class="row d-flex justify-content-center">
                                      <div class="col">
-                                         <p class="mb-0 fw-semibold text-white">Verified Requests</p>
-                                         <h3 class="m-0 text-white">{{$verified}}</h3>
+                                         <p class="mb-0 fw-semibold text-black">Verified Requests</p>
+                                         <h3 class="m-0 text-black">{{$verified}}</h3>
                                      </div>
                                      <div class="col-auto align-self-center">
                                          <div class="report-main-icon bg-light-alt">
@@ -53,13 +50,13 @@
                          </div>
                          <!--end card-->
                      </div>
-                     <div class="col-md-6 col-lg-3">
+                     <div class="col-md-6 col-lg-4">
                          <div class="card report-card">
-                             <div class="card-body" style="background:rgb(36, 16, 82)">
+                             <div class="card-body" >
                                  <div class="row d-flex justify-content-center">
                                      <div class="col">
-                                         <p class="text-white mb-0 fw-semibold">Unverified Requests</p>
-                                         <h3 class="m-0 text-white">{{$not_verified}}</h3>
+                                         <p class="text-black mb-0 fw-semibold">Unverified Requests</p>
+                                         <h3 class="m-0 text-black">{{$not_verified}}</h3>
                                      </div>
                                      <div class="col-auto align-self-center">
                                          <div class="report-main-icon bg-light-alt">
@@ -72,33 +69,13 @@
                          </div>
                          <!--end card-->
                      </div>
-                     <div class="col-md-6 col-lg-3">
+                     <div class="col-md-6 col-lg-4">
                          <div class="card report-card">
-                             <div class="card-body" style="background:rgb(36, 16, 82)">
+                             <div class="card-body" >
                                  <div class="row d-flex justify-content-center">
                                      <div class="col">
-                                         <p class="text-white mb-0 fw-semibold">Pending Requests</p>
-                                         <h3 class="m-0 text-white">{{$pending}}</h3>
-                                     </div>
-                                     <div class="col-auto align-self-center">
-                                         <div class="report-main-icon bg-light-alt">
-                                             <i data-feather="users" class="align-self-center text-muted icon-sm"></i>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
-                             <!--end card-body-->
-                         </div>
-                         <!--end card-->
-                     </div>
-                     <!--end col-->
-                     <div class="col-md-6 col-lg-3">
-                         <div class="card report-card">
-                             <div class="card-body" style="background:rgb(36, 16, 82)">
-                                 <div class="row d-flex justify-content-center">
-                                     <div class="col">
-                                         <p class="text-white mb-0 fw-semibold">Cancelled Requests</p>
-                                         <h3 class="m-0 text-white">{{$cancelled}}</h3>
+                                         <p class="text-black mb-0 fw-semibold">Pending Requests</p>
+                                         <h3 class="m-0 text-black">{{$pending}}</h3>
                                      </div>
                                      <div class="col-auto align-self-center">
                                          <div class="report-main-icon bg-light-alt">
@@ -112,13 +89,13 @@
                          <!--end card-->
                      </div>
                      <!--end col-->
-                     <div class="col-md-6 col-lg-3">
+                     <div class="col-md-6 col-lg-4">
                          <div class="card report-card">
-                             <div class="card-body" style="background:rgb(36, 16, 82)">
+                             <div class="card-body" >
                                  <div class="row d-flex justify-content-center">
                                      <div class="col">
-                                         <p class="text-white mb-0 fw-semibold">Requests Awaiting Reschedule</p>
-                                         <h3 class="m-0 text-white">{{$awaiting_reschedule}}</h3>
+                                         <p class="text-black mb-0 fw-semibold">Cancelled Requests</p>
+                                         <h3 class="m-0 text-black">{{$cancelled}}</h3>
                                      </div>
                                      <div class="col-auto align-self-center">
                                          <div class="report-main-icon bg-light-alt">
@@ -132,13 +109,33 @@
                          <!--end card-->
                      </div>
                      <!--end col-->
-                     <div class="col-md-6 col-lg-3">
+                     <div class="col-md-6 col-lg-4">
                          <div class="card report-card">
-                             <div class="card-body" style="background:rgb(36, 16, 82)">
+                             <div class="card-body" >
                                  <div class="row d-flex justify-content-center">
                                      <div class="col">
-                                         <p class="text-white mb-0 fw-semibold">Verification not Requested</p>
-                                         <h3 class="m-0 text-white">{{$not_requested}}</h3>
+                                         <p class="text-black mb-0 fw-semibold">Requests Awaiting Reschedule</p>
+                                         <h3 class="m-0 text-black">{{$awaiting_reschedule}}</h3>
+                                     </div>
+                                     <div class="col-auto align-self-center">
+                                         <div class="report-main-icon bg-light-alt">
+                                             <i data-feather="users" class="align-self-center text-muted icon-sm"></i>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <!--end card-body-->
+                         </div>
+                         <!--end card-->
+                     </div>
+                     <!--end col-->
+                     <div class="col-md-6 col-lg-4">
+                         <div class="card report-card">
+                             <div class="card-body" >
+                                 <div class="row d-flex justify-content-center">
+                                     <div class="col">
+                                         <p class="text-black mb-0 fw-semibold">Verification not Requested</p>
+                                         <h3 class="m-0 text-black">{{$not_requested}}</h3>
                                      </div>
                                      <div class="col-auto align-self-center">
                                          <div class="report-main-icon bg-light-alt">
@@ -170,7 +167,7 @@
                          </div>
                          <div class="col-md-6 align-self-center">
                              <div class="card-body d-flex justify-content-lg-end justify-content-center">
-                                 <a type="button" class="btn btn-primary btn-lg btn-square" href="{{route('showCreateCandidate', $slug->slug)}}">Create Candidate</a>
+                                 <a type="button" class="btn btn-primary " href="{{route('showCreateCandidate', $slug->slug)}}">Create Candidate</a>
 
                              </div>
                          </div>

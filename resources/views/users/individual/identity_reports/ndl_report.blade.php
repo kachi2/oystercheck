@@ -45,7 +45,7 @@
                     <div class="card-body" id="pdfContent">
                         <div class="row">
                             <div class="col-4 mb-4 ms-auto me-auto">
-                                <img src="{{asset('/assets/images/logo.png')}}" style="width:100%" alt="Oysterchecks Logo" class="logo-light">
+                                <img src="{{asset('/assets/images/logo.png')}}" style="width:40%" alt="Oysterchecks Logo" class="logo-light">
                             </div>
                         </div>
                         <div class="row mt-3">

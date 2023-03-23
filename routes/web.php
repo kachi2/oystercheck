@@ -8,6 +8,7 @@ use App\Http\Controllers\LandingPages;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\IdentityIndexController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TransactionController;
 
@@ -47,6 +48,8 @@ Route::get('/technology', [LandingPages::class, 'Technology'])->name('technology
 Route::get('/industry', [LandingPages::class, 'Industry'])->name('industry');
 Route::get('/resources', [LandingPages::class, 'Resources'])->name('resource');
 Route::post('/contact/form', [LandingPages::class, 'ContactForm'])->name('ContactForm');
+
+
 // Route::get('email', [LandingPages::class, 'email'])->name('email');
 #===================== USERS ROUTE ===============================
 Route::middleware('auth')->group(function() {
@@ -54,7 +57,7 @@ Route::get('/getting-started', [HomeController::class, 'gettingStarted'])->name(
 Route::get('/dashboard', [HomeController::class, 'Home'])->name('index');
 Route::get('/home', [HomeController::class, 'Home'])->name('home');
 Route::get('/identity/bank-account/banks', [IdentityController::class, 'getBanks']);
-Route::get('/user/identities/{slug}', [IdentityController::class, 'identityIndex'])->name('identityIndex');
+Route::get('/user/identities/{slug}', IdentityIndexController::class)->name('identityIndex');
 Route::get('/user/identities/check/{slug}',[IdentityController::class, 'showIdentityVerificationForm'])->name('showIdentityVerificationForm');
 Route::post('/user/identities/verify/{slug}', [IdentityController::class, 'StoreVerify'])->name('StoreVerify');
 Route::get('/test', [IdentityController::class, 'test']);

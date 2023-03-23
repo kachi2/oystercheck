@@ -18,9 +18,6 @@
                                             <span class="" id="Select_date">Jan 11</span>
                                             <i data-feather="calendar" class="align-self-center icon-xs ms-1"></i>
                                         </a>
-                                        <a href="#" class="btn btn-sm btn-outline-primary">
-                                            <i data-feather="download" class="align-self-center icon-xs"></i>
-                                        </a>
                                     </div><!--end col-->  
                                 </div><!--end row-->                                                              
                             </div><!--end page-title-box-->
@@ -31,11 +28,11 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card report-card ">
-                                        <div class="card-body" style="background:rgb(36, 16, 82)">
+                                        <div class="card-body" >
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
-                                                    <p class="mb-0 fw-semibold text-white">Successful {{$slug['slug']}} verifications</p>
-                                                    <h3 class="m-0 text-white">{{$success}}</h3>
+                                                    <p class="mb-0 fw-semibold text-black">Successful {{$slug['slug']}} verifications</p>
+                                                    <h3 class="m-0 text-black">{{$success}}</h3>
                                                 </div>
                                                 <div class="col-auto align-self-center">
                                                     <div class="report-main-icon bg-light-alt">
@@ -48,11 +45,11 @@
                                 </div>
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card report-card">
-                                        <div class="card-body" style="background:rgb(36, 16, 82)">
+                                        <div class="card-body" >
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
-                                                    <p class="text-white mb-0 fw-semibold">Failed {{$slug['slug']}}  verifications</p>
-                                                    <h3 class="m-0 text-white">{{$failed}}</h3>
+                                                    <p class="text-black mb-0 fw-semibold">Failed {{$slug['slug']}}  verifications</p>
+                                                    <h3 class="m-0 text-black">{{$failed}}</h3>
                                                 </div>
                                                 <div class="col-auto align-self-center">
                                                     <div class="report-main-icon bg-light-alt">
@@ -65,11 +62,11 @@
                                 </div>
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card report-card">
-                                        <div class="card-body" style="background:rgb(36, 16, 82)">
+                                        <div class="card-body" >
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
-                                                    <p class="text-white mb-0 fw-semibold">Pending Request</p>
-                                                    <h3 class="m-0 text-white">{{$pending}}</h3>
+                                                    <p class="text-black mb-0 fw-semibold">Pending Request</p>
+                                                    <h3 class="m-0 text-black">{{$pending}}</h3>
                                                 </div>
                                                 <div class="col-auto align-self-center">
                                                     <div class="report-main-icon bg-light-alt">
@@ -98,7 +95,7 @@
                          </div>
                          <div class="col-md-6 align-self-center">
                              <div class="card-body d-flex justify-content-lg-end justify-content-center">
-                                 <a type="button" class="btn btn-primary btn-square" href="{{route('showIdentityVerificationForm', $slug->slug)}}">Verify Candidate</a>
+                                 <a type="button" class="btn btn-primary" href="{{route('showIdentityVerificationForm', $slug->slug)}}">Verify Candidate NIN</a>
 
                              </div>
                          </div>
@@ -176,7 +173,7 @@
                                     <td class="px-0 py-0"><a class="table-link" href="{{route('showIdentityReport', ['slug'=>$slug->slug, 'verificationId'=>$trans->id])}}"><div class="px-2 py-3">{{auth()->user()->name}}</div></a></td>
                                     <td class="px-0 py-0"><a class="table-link" href="{{route('showIdentityReport', ['slug'=>$slug->slug, 'verificationId'=>$trans->id])}}"><div class="px-2 py-3">{{date('jS F Y, h:iA', strtotime($trans->requested_at))}}</div></a></td>
                                     <td class="px-0 py-0"><a class="table-link" href="{{route('showIdentityReport', ['slug'=>$slug->slug, 'verificationId'=>$trans->id])}}"><div class="px-2 py-3"> @if($trans->status == 'successful')
-                                    <a href="{{route('verify.details', encrypt($trans->id))}}">View Details</a>
+                                    <a href="{{route('showIdentityReport', ['slug'=>$slug->slug, 'verificationId'=>$trans->id])}}">View Details</a>
                                      @endif
                                     </div></a></td>
                                 </tr>

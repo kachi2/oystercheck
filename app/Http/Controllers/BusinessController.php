@@ -76,10 +76,12 @@ class BusinessController extends Controller
             return $this->processTin($request->only(['pin', 'subject_consent']), $slug);
         } else {
         }
+
+
         //         $ref = $this->GenerateRef();
         //         $slug = Verification::where('slug', $slug)->first();
         //         $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
-        //  $createVerify =  BusinessVerification::create([
+        //         $createVerify =  BusinessVerification::create([
         //                 'verification_id' => $slug->id,
         //                 'ref' => $ref,
         //                 'service_ref' => $request->company_name,
@@ -126,6 +128,8 @@ class BusinessController extends Controller
         //                     Session::flash('message', 'An error occured, please try again');
         //                     return redirect()->back();
         //                 }
+
+
     }
 
     protected function processCac(array $data, $slug)
@@ -135,24 +139,19 @@ class BusinessController extends Controller
             'search_value' => 'bail|required|alpha_dash',
             'subject_consent' => 'bail|required|accepted'
         ]);
-
         if ($validate->fails()) {
-            // dd($validate->errors());
             Session::flash('alert', 'error');
             Session::flash('message', 'Incorrect or no data provided!');
             return redirect()->back();
         }
-            // dd($data);
         $ref = $this->GenerateRef();
         $slug = Verification::where('slug', $slug)->first();
         $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
-    
             if (isset($slug->discount) && $slug->discount > 0) {
                 $amount = ($slug->discount * $slug->fee) / 100;
             } else {
                 $amount = $slug->fee;
             }
-
             if ($userWallet->avail_balance < $amount) {
                 Session::flash('alert', 'error');
                 Session::flash('message', 'Your walllet is too low for this transaction');
@@ -169,7 +168,6 @@ class BusinessController extends Controller
             }elseif($data['search_term'] == 'regPhone'){
                 $requestData['type'] = 'phone';
             }
-        // dd($requestData);
             DB::beginTransaction();
             try {
                 $curl = curl_init();
@@ -188,15 +186,12 @@ class BusinessController extends Controller
                         "Token: N0R9AJ4L.PWYaM5cXggThkdCtkVSCsWz4fMsfeMIp6CKL"
                     ],
                 ]);
-    
                 $response = curl_exec($curl);
                 if (curl_errno($curl)) {
                     dd('error:' . curl_errno($curl));
                 } else {
                     $decodedResponse = json_decode($response, true);
-                    // dd($decodedResponse);
                     if ($decodedResponse['success'] == true && $decodedResponse['statusCode'] == 200) {
-                       
                         CacVerification::create([
                             'verification_id' => $slug->id,
                             'user_id' => auth()->user()->id,
@@ -233,13 +228,14 @@ class BusinessController extends Controller
                             'requested_at' => $decodedResponse['data']['requestedAt'] != null ? $decodedResponse['data']['requestedAt'] : null,
                             'last_modified_at' => $decodedResponse['data']['lastModifiedAt'] != null ? $decodedResponse['data']['lastModifiedAt'] : null,
                         ]);
-    
                         DB::commit();
                         Session::flash('alert', 'success');
                         Session::flash('message', 'Verification Successful');
                         return redirect()->route('businessIndex', $slug->slug);
                     }else{
-    
+                        Session::flash('alert', 'error');
+                    Session::flash('message', $decodedResponse['message']);
+                    return back()->withInput($data);
                     }
                 }
             } catch (\Exception $e) {
@@ -250,7 +246,6 @@ class BusinessController extends Controller
 
     protected function processTin(array $data, $slug)
     {
-
         $validate = Validator::make($data, [
             'pin' => 'bail|required|alpha_dash|size:13|regex:/^[0-9a-zA-Z]{8}-[0-9a-zA-Z]{4}$/',
             'subject_consent' => 'bail|required|accepted'
@@ -258,9 +253,6 @@ class BusinessController extends Controller
 
         if ($validate->fails()) {
             dd($validate->errors());
-            // Session::flash('alert', 'error');
-            // Session::flash('message', 'Incorrect or no data provided!');
-            // return redirect()->back();
         }
         
         $ref = $this->GenerateRef();
@@ -339,7 +331,9 @@ class BusinessController extends Controller
                         Session::flash('message', 'Verification Successful');
                         return redirect()->route('businessIndex', $slug->slug);
                     }else{
-    
+                        Session::flash('alert', 'error');
+                        Session::flash('message', $decodedResponse['message']);
+                        return back()->withInput($data);
                     }
                 }
             } catch (\Exception $e) {

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use App\Models\BvnVerification;
+use App\Models\IdentityVerification;
 use App\Traits\GenerateRef;
 use Illuminate\Support\Facades\DB;
 use App\Models\Wallet;
@@ -126,6 +127,15 @@ class IdentityBvnController extends Controller
                         'all_validation_passed' => $decodedResponse['data']['allValidationPassed'],
                         'requested_at' => $decodedResponse['data']['requestedAt'] != null ? $decodedResponse['data']['requestedAt'] : null,
                         'last_modified_at' => $decodedResponse['data']['lastModifiedAt'] != null ? $decodedResponse['data']['lastModifiedAt'] : null,
+                    ]);
+                    IdentityVerification::create([
+                        'verification_id' => $slug->id,
+                        'user_id' => auth()->user()->id,
+                        'ref' => $ref,
+                        'status' => $decodedResponse['data']['status'],
+                        'first_name' => $decodedResponse['data']['firstName'],
+                        'last_name' => $decodedResponse['data']['lastName'],
+                        'pin' => $request->pin,
                     ]);
 
                     DB::commit();

@@ -20,9 +20,6 @@
                                             <span class="" id="Select_date">Jan 11</span>
                                             <i data-feather="calendar" class="align-self-center icon-xs ms-1"></i>
                                         </a>
-                                        <a href="#" class="btn btn-sm btn-outline-primary">
-                                            <i data-feather="download" class="align-self-center icon-xs"></i>
-                                        </a>
                                     </div><!--end col-->  
                                 </div><!--end row-->                                                              
                             </div><!--end page-title-box-->
@@ -34,11 +31,11 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card report-card">
-                                        <div class="card-body " style="background:#303e67">
+                                        <div class="card-body " >
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
-                                                    <p class="text-white mb-0 fw-semibold">Successful verifications</p>
-                                                    <h3 class="m-0 text-white">{{count($success)}}</h3>
+                                                    <p class="text-black mb-0 fw-semibold">Successful verifications</p>
+                                                    <h3 class="m-0 text-black">{{count($success)}}</h3>
                                                 </div>
                                                 <div class="col-auto align-self-center">
                                                     <div class="report-main-icon bg-light-alt">
@@ -51,11 +48,11 @@
                                 </div>
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card report-card">
-                                        <div class="card-body" style="background:#303e67">
+                                        <div class="card-body" >
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
-                                                    <p class="text-white mb-0 fw-semibold">Failed verifications</p>
-                                                    <h3 class="m-0 text-white">{{count($failed)}}</h3>
+                                                    <p class="text-black mb-0 fw-semibold">Failed verifications</p>
+                                                    <h3 class="m-0 text-black">{{count($failed)}}</h3>
                                                 </div>
                                                 <div class="col-auto align-self-center">
                                                     <div class="report-main-icon bg-light-alt">
@@ -68,11 +65,11 @@
                                 </div>
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card report-card">
-                                        <div class="card-body" style="background:#303e67">
+                                        <div class="card-body" >
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
-                                                    <p class="text-white mb-0 fw-semibold">Pending Request</p>
-                                                    <h3 class="m-0 text-white">{{count($pending)}}</h3>
+                                                    <p class="text-black mb-0 fw-semibold">Pending Request</p>
+                                                    <h3 class="m-0 text-black">{{count($pending)}}</h3>
                                                 </div>
                                                 <div class="col-auto align-self-center">
                                                     <div class="report-main-icon bg-light-alt">
@@ -87,25 +84,67 @@
                                 <!--end col-->                               
                             </div><!--end row-->
                             <div class="card">
-                                <div class="card-header">
-                                    <div class="row align-items-center">
-                                        <div class="col">                      
-                                            <h4 class="card-title">verification Overview</h4>                      
-                                        </div><!--end col-->
-                                        <div class="col-auto"> 
-                                            <div class="dropdown">
-                                                <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                   This Year<i class="las la-angle-down ms-1"></i>
-                                                </a>
-                                            </div>               
-                                        </div><!--end col-->
-                                    </div>  <!--end row-->                                  
-                                </div><!--end card-header-->
-                                   <div class="card-body">
-                                    <div class="chart-demo">
-                                        <div id="apex_column1" class="apex-charts"></div>
-                                    </div>                                        
-                                </div>
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="row align-items-center">
+                                                <div class="col">                      
+                                                    <h4 class="card-title">Recent Verification</h4>                      
+                                                </div><!--end col-->                                        
+                                            </div>  <!--end row-->                                  
+                                        </div><!--end card-header-->
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table id="datatable-buttons" class="table table-striped table-hover dt-responsive nowrap " style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="px-2 py-3">S/N</th>
+                                                        <th class="px-2 py-3">Reference</th>
+                                                        <th class="px-2 py-3">Verification ID</th>
+                                                        <th class="px-2 py-3">Name</th>
+                                                        <th class="px-2 py-3">Status</th>
+                                                        <th class="px-2 py-3">Verified by</th>
+                                                        <th class="px-2 py-3">Initiated At</th>
+                                                     
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                              
+                                                @foreach ($logs as $trans)
+                                                    <tr>
+                                                        <td class="px-0 py-0"><div class="px-2 py-3">{{$loop->iteration}}</div></td>
+                                                        <td class="px-0 py-0"><div class="px-2 py-3">{{$trans->ref}}</div></td>
+                                                        <td class="px-0 py-0"><div class="px-2 py-3">{{$trans->pin}}</div></td>
+                                                        <td class="px-0 py-0"><div class="px-2 py-3">{{$trans->status == 'found' ? $trans->first_name.' '.$trans->last_name : 'N/A'}}</div></td>
+                                                        <td class="px-0 py-0">
+                                                            <div class="px-2 py-3">
+                                                                @if($trans->status == $trans->status )
+                                                                @if($trans->validations != null && $trans->validations->validationMessages != "")
+                                                                <span class="badge badge-soft-warning">Found</span>
+                                                                @else
+                                                                <span class="badge badge-soft-success"> Found</span> 
+                                                                @endif
+                                                                @elseif($trans->status == 'not_found')
+                                                                <span class="badge badge-soft-danger">Not Found</span>
+                                                                @else
+                                                                <span class="badge badge-soft-purple"> {{$trans->status}}</span>
+                                                                @endif  
+                                                            </div></a>
+                                                        </td>
+                                                        <td class="px-0 py-0"><div class="px-2 py-3">{{auth()->user()->firstname . ' '.auth()->user()->lastname}}</div></td>
+                                                        <td class="px-0 py-0"><div class="px-2 py-3">{{date('d/M/Y h:iA', strtotime($trans->requested_at))}}</div></td>
+                                                        <td class="px-0 py-0"><div class="px-2 py-3"> @if($trans->status == 'found')
+                  
+                                                         @endif
+                                                        </div></td>
+                                                    </tr>
+                                                     @endforeach
+                                                    </tbody>
+                                                </table>        
+                                            </div>  
+                                        </div>
+                                    </div><!--end card--> 
+                                </div> <!--end col-->   
                         
                             </div><!--end card--> 
                         </div><!--end col-->
@@ -160,60 +199,12 @@
                         </div> <!--end col--> 
                     </div><!--end row-->
                     <div class="row">                        
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="row align-items-center">
                                         <div class="col">                      
-                                            <h4 class="card-title">Recent Verification</h4>                      
-                                        </div><!--end col-->                                        
-                                    </div>  <!--end row-->                                  
-                                </div><!--end card-header-->
-                                <div class="card-body">
-                                    <div class="table-responsive browser_users">
-                                        <table class="table mb-0">
-                                            <thead class="table-light">
-                                                <tr>
-                                                    <th class="border-top-0">Type</th>
-                                                    <th class="border-top-0">User</th>
-                                                    <th class="border-top-0">Payment Status</th>
-                                                    <th class="border-top-0">Status</th>
-                                                    <th class="border-top-0">Date</th>
-                                                </tr><!--end tr-->
-                                            </thead>
-                                            <tbody>
-                                            @foreach ($recents as $recent )
-                                                <tr>                                                        
-                                                    <td><a href="#" class="text-primary">{{$recent->verification->name}}</a></td>
-                                                    <td>{{$recent->user->name}}</td>
-                                                 @if($recent->status == 'successful')   <td class="text-success">Charged</td>
-                                                 @else
-                                                 <td class="text-warning">Pending</td> 
-                                                 @endif
-                                                 @if($recent->status == 'successful')   <td class="text-success">Successful</td>
-                                                 @elseif($recent->status == 'pending')
-                                                 <td class="text-warning">Pending</td> 
-                                                 @else
-                                                  <td class="text-danger">Failed</td> 
-                                                 @endif
-                                                    
-                                                    <td>{{$recent->created_at->DiffForHumans()}}</td>
-                                                </tr>
-                                                @endforeach
-                                                <!--end tr-->                            
-                                            </tbody>
-                                        </table> <!--end table-->                                               
-                                    </div><!--end /div-->
-                                </div><!--end card-body--> 
-                            </div><!--end card--> 
-                        </div> <!--end col-->   
-                        
-                        <div class="col-lg-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="row align-items-center">
-                                        <div class="col">                      
-                                            <h4 class="card-title">Other Logs</h4>                      
+                                            <h4 class="card-title">Payment Logs</h4>                      
                                         </div><!--end col-->                                        
                                     </div>  <!--end row-->                                  
                                 </div><!--end card-header-->

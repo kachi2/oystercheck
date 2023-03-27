@@ -7,6 +7,7 @@ use App\Traits\GenerateRef;
 use App\Models\NinVerification;
 use App\Models\Wallet;
 use App\Models\User;
+use App\Models\IdentityVerification;
 use Illuminate\Support\Facades\{Session, Validator, DB};
 
 class IdentityNinController extends Controller
@@ -128,6 +129,16 @@ class IdentityNinController extends Controller
                         'all_validation_passed' => $decodedResponse['data']['allValidationPassed'],
                         'requested_at' => $decodedResponse['data']['requestedAt'],
                         'last_modified_at' => $decodedResponse['data']['lastModifiedAt'],
+                    ]);
+
+                    IdentityVerification::create([
+                        'verification_id' => $slug->id,
+                        'user_id' => auth()->user()->id,
+                        'ref' => $ref,
+                        'status' => $decodedResponse['data']['status'],
+                        'first_name' => $decodedResponse['data']['firstName'],
+                        'last_name' => $decodedResponse['data']['lastName'],
+                        'pin' => $request->pin,
                     ]);
 
                     DB::commit();

@@ -54,9 +54,9 @@ class HomeController extends Controller
         $service = CandidateVerification::where('user_id', $user->id)->get();
         return view('users.onboarding.uploads', ['service'=> $service]);
         }
-        $data['success'] = IdentityVerification::where(['status'=>'successful',  'user_id'=> $user->id])->get();
-        $data['failed'] = IdentityVerification::where(['status'=>'failed', 'user_id'=> $user->id])->get();
-        $data['pending'] = IdentityVerification::where(['status'=>'pending', 'user_id'=> $user->id])->get();
+        $data['success'] = IdentityVerification::where(['status'=>'found',  'user_id'=> $user->id])->get();
+        $data['failed'] = IdentityVerification::where(['status'=>'not-found', 'user_id'=> $user->id])->get();
+        $data['pending'] = IdentityVerification::where(['status'=>'null', 'user_id'=> $user->id])->get();
         $data['wallet']= Wallet::where('user_id', $user->id)->first();
         $data['logs'] = IdentityVerification::where(['user_id' => $user->id])->latest()->get();
         $data['recents'] = IdentityVerification::where(['user_id' => $user->id])->latest()->take(5)->get();

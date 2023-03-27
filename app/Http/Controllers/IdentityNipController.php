@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\NipVerification;
 use Illuminate\Support\Facades\DB;
 use App\Models\Wallet;
+use App\Models\IdentityVerification;
 use App\Traits\GenerateRef;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
@@ -128,6 +129,15 @@ class IdentityNipController extends Controller
                         'all_validation_passed' => $decodedResponse['data']['allValidationPassed'],
                         'requested_at' => $decodedResponse['data']['requestedAt'],
                         'last_modified_at' => $decodedResponse['data']['lastModifiedAt'],
+                    ]);
+                    IdentityVerification::create([
+                        'verification_id' => $slug->id,
+                        'user_id' => auth()->user()->id,
+                        'ref' => $ref,
+                        'status' => $decodedResponse['data']['status'],
+                        'first_name' => $decodedResponse['data']['firstName'],
+                        'last_name' => $decodedResponse['data']['lastName'],
+                        'pin' => $request->pin,
                     ]);
                     DB::commit();
                     Session::flash('alert', 'success');

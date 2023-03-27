@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Session, Validator, DB};
 use App\Models\BankVerification;
+use App\Models\IdentityVerification;
 use App\Models\Wallet;
 
 class IdentityBankController extends Controller
@@ -79,6 +80,16 @@ class IdentityBankController extends Controller
                         'all_validation_passed' => $decodedResponse['data']['allValidationPassed'],
                         'requested_at' => $decodedResponse['data']['requestedAt'],
                         'last_modified_at' => $decodedResponse['data']['lastModifiedAt'],
+                    ]);
+
+                    IdentityVerification::create([
+                        'verification_id' => $slug->id,
+                        'user_id' => auth()->user()->id,
+                        'ref' => $ref,
+                        'status' => $decodedResponse['data']['status'],
+                        'first_name' => $decodedResponse['data']['dataValidation'],
+                        'last_name' => $request->bank_name,
+                        'pin' =>  $request->account_number,
                     ]);
 
                     DB::commit();

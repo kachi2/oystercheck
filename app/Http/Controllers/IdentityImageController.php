@@ -8,6 +8,7 @@ use App\Models\ImageVerification;
 use App\Traits\GenerateRef;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use App\Models\IdentityVerification;
 use App\Models\Wallet;
 use Illuminate\Support\Facades\Session;
 
@@ -94,7 +95,15 @@ class IdentityImageController extends Controller
                         'requested_at' => $decodedResponse['data']['requestedAt'],
                         'last_modified_at' => $decodedResponse['data']['lastModifiedAt'],
                     ]);
-
+                    IdentityVerification::create([
+                        'verification_id' => $slug->id,
+                        'user_id' => auth()->user()->id,
+                        'ref' => $ref,
+                        'status' => $decodedResponse['data']['status'],
+                        'first_name' => 'compare-images',
+                        'last_name' => $decodedResponse['data']['reason'],
+                        'pin' => $decodedResponse['data']['id'],
+                    ]);
                     DB::commit();
                     Session::flash('alert', 'success');
                     Session::flash('message', 'Verification Successful');

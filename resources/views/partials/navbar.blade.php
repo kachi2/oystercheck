@@ -72,7 +72,7 @@
                         </li> 
                         <li class="creat-btn">
                             <div class="nav-link">
-                                <a class=" btn btn-sm btn-soft-primary" href="#" role="button">Client Dashboard</a>
+                                <a class=" badge bg-soft-primary" href="#" role="">Client Dashboard</a>
                             </div>                                
                         </li>  
                         <li class="creat-btn">

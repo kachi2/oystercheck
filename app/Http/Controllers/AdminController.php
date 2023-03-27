@@ -58,7 +58,7 @@ class AdminController extends Controller
         $data['success'] = IdentityVerification::where(['status'=>'successful'])->get();
         $data['failed'] = IdentityVerification::where(['status'=>'failed'])->get();
         $data['pending'] = IdentityVerification::where(['status'=>'pending'])->get();
-        $data['logs'] = IdentityVerification::latest()->get();
+        $data['logs'] = IdentityVerification::latest()->take()->get();
         $data['recents'] = IdentityVerification::latest()->take(5)->get();
         $data['transactions'] = Transaction::latest()->take(5)->get();
         $data['activity'] = ActivityLog::take(10)->latest()->get();

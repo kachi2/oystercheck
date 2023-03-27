@@ -24,7 +24,6 @@
                                 <i data-feather="download" class="align-self-center icon-xs"></i>
                             </a>
                         </div>
-                        <!--end col-->
                     </div>
                     <!--end row-->
                 </div>

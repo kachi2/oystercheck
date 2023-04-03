@@ -107,9 +107,6 @@
                     <a class="nav-link active" id="profile_tab" data-bs-toggle="pill" href="#profile">Profile Information</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="business_tab" data-bs-toggle="pill" href="#business">Business Information</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" id="business_activation_tab" data-bs-toggle="pill" href="#business_activation">Business Activation</a>
                 </li>
                 <li class="nav-item">
@@ -129,7 +126,7 @@
                                         <h4 class="card-title">Personal Information</h4>
                                     </div>
                                     <div class="card-body ">
-                                        <form>
+                                        <form >
                                             <div class="row">
                                                 <div class="col-12 col-md-6 col-lg-4 mb-3">
                                                     <label class="form-label " for="firstName">First Name</label>
@@ -337,30 +334,7 @@
                         <!--end row-->
                     </div>
                     <!--end tab-pane-->
-                    <div class="tab-pane fade " id="business" role="tabpanel" aria-labelledby="business_tab">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Business Information</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-12 d-flex py-4 px-4 border-bottom">
-                                                <div class="m-0 font-14 me-3 text-muted col-2">Country:</div>
-                                                <div class="font-14 col-8">$bvn_verification->country</div>
-                                            </div>
-                                            <div class="col-12 d-flex py-4 px-4 border-bottom">
-                                                <div class="m-0 font-14 me-3 text-muted col-2">Country:</div>
-                                                <div class="font-14 col-8">$bvn_verification->country</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end row-->
-                        </div>
-                    </div>
+                 
                     <div class="tab-pane fade " id="business_activation" role="tabpanel" aria-labelledby="business_activation_tab">
                         <div class="row">
                             <div class="col-12">
@@ -599,7 +573,7 @@
                                                 <div class="col-12 col-md-4 d-flex py-4 px-4 border-bottom">
                                                     <div class="m-0 font-14 me-3 text-muted col-4">Verification ID:</div>
                                                     
-                                                    <div class="font-14 col-8 text-break">{{$cac_verification->ref}}</div>
+                                                    {{-- <div class="font-14 col-8 text-break">{{$cac_verification->ref}}</div> --}}
                                                 </div>
                                             </div>
                                         </div>

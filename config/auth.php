@@ -42,9 +42,13 @@ return [
         ],
         'admin' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'admins',
         ],
 
+        'candidates' => [
+            'driver' => 'session',
+            'provider' => 'candidates',
+        ],
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -74,9 +78,13 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'admin' => [
+        'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Admin::class,
+        ],
+        'candidates' => [
+            'driver' => 'eloquent',
+            'model' => App\Candidate::class,
         ],
 
         // 'users' => [

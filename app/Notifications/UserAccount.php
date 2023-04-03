@@ -47,7 +47,7 @@ class UserAccount extends Notification
     {
         return (new MailMessage)
                     ->subject('Candidate Onboarding.')
-                    ->from('support@oysterchecks.com', 'Oystechecks')
+                    ->from('support@mazeoptions.com', 'Oystechecks')
                     ->view('emails.accountCreation', ['data' => $this->data]);
     }
 

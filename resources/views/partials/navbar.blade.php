@@ -72,12 +72,12 @@
                         </li> 
                         <li class="creat-btn">
                             <div class="nav-link">
-                                <a class=" badge bg-soft-primary" href="#" role="">Client Dashboard</a>
+                                <a class=" badge bg-soft-primary" href="#" role="" @if(auth()->user()->type == 2)>Client Dashboard @endif</a>
                             </div>                                
                         </li>  
                         <li class="creat-btn">
                             <div class="nav-link">
-                                <a class=" badge bg-soft-primary" >Wallet Balance: ₦{{number_format($client_balance->avail_balance,2)}}</a>
+                                <a class=" badge bg-soft-primary" > @if(auth()->user()->type == 2)Wallet Balance: ₦{{number_format($client_balance->avail_balance,2)}} @endif</a>
                             </div>                                
                         </li>                          
                     </ul>

@@ -91,21 +91,7 @@
                                     <a href="{{route('user.transactions')}}" class="btn btn-sm btn-soft-primary">Let's Go<i class="las la-external-link-alt font-15"></i></a>
                                 </div>
                             </li>
-                            <li class="list-group-item align-items-center d-flex justify-content-between">
-                                <div class="media">
-                                    <div class="me-3 align-self-center rounded">
-                                        <i class="mdi mdi-numeric-3-circle-outline font35"></i>
-                                    </div>
-                                    <div class="media-body align-self-center">
-                                        <h5 class="m-0">Dashboard Tour</h5>
-                                        <p class="mb-0 text-muted">Need help navigating your Dashboard? Lets give you a tour of your entire dashboard.</p>
-                                    </div>
-                                    <!--end media body-->
-                                </div>
-                                <div class="align-self-center">
-                                    <a href="#" class="btn btn-sm btn-soft-primary" data-id="dashboardTour">Let's Go <i class="las la-external-link-alt font-15"></i></a>
-                                </div>
-                            </li>
+                          
                             <li class="list-group-item align-items-center d-flex justify-content-between">
                                 <div class="media">
                                     <div class="me-3 align-self-center rounded">

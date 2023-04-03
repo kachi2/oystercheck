@@ -14,7 +14,7 @@
                 <tr bgcolor="#ffffff">
                     <td style="padding:20px 30px 20px 30px;">
                         <table align="center" style="width: 100%; max-width: 800px;">
-                            <tr><td style="font-weight: 500; font-size: 20px; color: #383838;">Dear {{$data["name"]}} </td></tr>
+                            <tr><td style="font-weight: 500; font-size: 20px; color: #383838;">Dear {{$data["firstname"] .' '. $data['lastname']}} </td></tr>
                             <tr><td height="7px" style="line-height: 7px;"></td></tr>
                             <tr><td style=" font-weight: 400; font-size: 15px;">Congratulations and welcome.</td></tr>
                             <tr><td style=" font-weight: 400; font-size: 15px;">Thank you for registering for Oysterchecks Background Vetting service.</td>

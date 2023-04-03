@@ -30,6 +30,6 @@ class UserAccount extends Mailable
      */
     public function build()
     {
-        return $this->from('support@oysterchecks.com', 'Oysterchecks')->subject('Candidate Details')->view('emails.accountCreation')->with('data', $this->data);
+        return $this->from('support@mazeoptions.com', 'Oysterchecks')->subject('Candidate Details')->view('emails.accountCreation')->with('data', $this->data);
     }
 }

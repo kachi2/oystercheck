@@ -29,13 +29,13 @@
                     <div class="row ">
                         <div class="col-lg-12">
                             <div class="row justify-content-center">
-                                <div class="col-md-4 col-lg-4">
+                                <div class="col-md-3 col-lg-3">
                                     <div class="card report-card ">
-                                        <div class="card-body" style="background:rgb(36, 16, 82)">
+                                        <div class="card-body" >
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
-                                                    <p class="mb-0 fw-semibold text-white">Total Candidates</p>
-                                                    <h3 class="m-0 text-white">{{count($candidates)}}</h3>
+                                                    <p class="mb-0 fw-semibold text-black">Total Candidates</p>
+                                                    <h3 class="m-0 text-black">{{count($candidates)}}</h3>
                                                 </div>
                                                 <div class="col-auto align-self-center">
                                                     <div class="report-main-icon bg-light-alt">
@@ -46,13 +46,13 @@
                                         </div><!--end card-body--> 
                                     </div><!--end card--> 
                                 </div>
-                                <div class="col-md-4 col-lg-4">
+                                <div class="col-md-3 col-lg-3">
                                     <div class="card report-card">
-                                        <div class="card-body" style="background:rgb(36, 16, 82)">
+                                        <div class="card-body" >
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
-                                                    <p class="text-white mb-0 fw-semibold">Total Verified Candidates</p>
-                                                    <h3 class="m-0 text-white">{{count($verified)}}</h3>
+                                                    <p class="text-black mb-0 fw-semibold">Total Verified Candidates</p>
+                                                    <h3 class="m-0 text-black">{{count($verified)}}</h3>
                                                 </div>
                                                 <div class="col-auto align-self-center">
                                                     <div class="report-main-icon bg-light-alt">
@@ -63,13 +63,13 @@
                                         </div><!--end card-body--> 
                                     </div><!--end card--> 
                                 </div>
-                                <div class="col-md-4 col-lg-4">
+                                <div class="col-md-3 col-lg-3">
                                     <div class="card report-card ">
-                                        <div class="card-body" style="background:rgb(36, 16, 82)">
+                                        <div class="card-body" >
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
-                                                    <p class="mb-0 fw-semibold text-white">Total Rejected Candidates </p>
-                                                         <h3 class="m-0 text-white">{{count($rejected)}}</h3>
+                                                    <p class="mb-0 fw-semibold text-black">Total Rejected Candidates </p>
+                                                         <h3 class="m-0 text-black">{{count($rejected)}}</h3>
                                                 </div>
                                                 <div class="col-auto align-self-center">
                                                     <div class="report-main-icon bg-light-alt">
@@ -80,13 +80,13 @@
                                         </div><!--end card-body--> 
                                     </div><!--end card--> 
                                 </div>
-                                <div class="col-md-4 col-lg-4">
+                                <div class="col-md-3 col-lg-3">
                                     <div class="card report-card">
-                                        <div class="card-body" style="background:rgb(36, 16, 82)">
+                                        <div class="card-body">
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
-                                                    <p class="text-white mb-0 fw-semibold">Pending Candidates</p>
-                                                    <h3 class="m-0 text-white">{{count($pending)}}</h3>
+                                                    <p class="text-black mb-0 fw-semibold">Pending Candidates</p>
+                                                    <h3 class="m-0 text-black">{{count($pending)}}</h3>
                                                 </div>
                                                 <div class="col-auto align-self-center">
                                                     <div class="report-main-icon bg-light-alt">
@@ -115,44 +115,59 @@
                     <div class="card-body bootstrap-select-1">
                         <div class="row">
                             <div class="col-md-6">
-                                <label class="mb-3" style="font-weight:bolder">Full Name</label>
+                                <label class="mb-3" style="font-weight:bolder">First Name</label>
                                  <span style="color:red; font-weight:bolder"> * </span> 
-                                <input type="text"  name="name" class="form-control mb-3 custom-select" placeholder="Enter candidate Name"> 
+                                <input type="text"  name="first_name" value="{{old('first_name')}}" class="form-control mb-3 custom-select @error('first_name') is-invalid @enderror" placeholder="Enter candidate First Name"> 
+                                
+                          
+                            </div><!-- end col -->
+                            <div class="col-md-6">
+                                <label class="mb-3" style="font-weight:bolder">Last Name</label>
+                                 <span style="color:red; font-weight:bolder"> * </span> 
+                                <input type="text"  name="last_name" value="{{old('last_name')}}" class="form-control mb-3 custom-select @error('last_name') is-invalid @enderror" placeholder="Enter candidate Last Name"> 
+                                
                             </div><!-- end col -->
                                 <div class="col-md-6">
                                 <label class="mb-3" style="font-weight:bolder">Email</label>
                                  <span style="color:red; font-weight:bolder"> * </span> 
-                                <input type="email"  name="email" class="form-control mb-3 custom-select" placeholder="Enter candidate Email"> 
+                                <input type="email"  name="email"  value="{{old('email')}}" class="form-control mb-3 custom-select @error('email') is-invalid @enderror" placeholder="Enter candidate Email"> 
+                             
                             </div><!-- end col -->
                              <div class="col-md-6">
                                 <label class="mb-3" style="font-weight:bolder">Phone Number</label>
                                  <span style="color:red; font-weight:bolder"> * </span> 
-                                <input type="text"  name="phone" class="form-control mb-3 custom-select" placeholder="Enter candidate Phone"> 
+                                <input type="text"  name="phone" value="{{old('phone')}}" class="form-control mb-3 custom-select @error('phone') is-invalid @enderror" placeholder="Enter candidate Phone"> 
+                               
                             </div><!-- end col -->
                              <div class="col-md-6">
                                 <label class="mb-3" style="font-weight:bolder">Address </label>
                                  <span style="color:red; font-weight:bolder"> * </span> 
-                                <input type="text"  name="address" class="form-control mb-3 custom-select" placeholder="Enter candidate Address"> 
+                                <input type="text"  name="address" value="{{old('addreess')}}" class="form-control mb-3 custom-select @error('address') is-invalid @enderror" placeholder="Enter candidate Address"> 
+                               
                             </div><!-- end col -->
                              <div class="col-md-6">
                                 <label class="mb-3" style="font-weight:bolder">City</label>
                                  <span style="color:red; font-weight:bolder"> * </span> 
-                                <input type="text"  name="city" class="form-control mb-3 custom-select" placeholder="Enter candidate City"> 
+                                <input type="text"  name="city" value="{{old('city')}}" class="form-control mb-3 custom-select @error('city') is-invalid @enderror" placeholder="Enter candidate City"> 
+                               
                             </div><!-- end col -->
                             <div class="col-md-6">
                                 <label class="mb-3" style="font-weight:bolder">State</label>
                                  <span style="color:red; font-weight:bolder"> * </span> 
-                                <input type="text"  name="state" class="form-control mb-3 custom-select" placeholder="Enter candidate City"> 
+                                <input type="text"  name="state" value="{{old('state')}}" class="form-control mb-3 custom-select @error('state') is-invalid @enderror" placeholder="Enter candidate City"> 
+                                
                             </div>
                             <div class="col-md-6">
                                 <label class="mb-3" style="font-weight:bolder">country</label>
                                  <span style="color:red; font-weight:bolder"> * </span> 
-                                <input type="text"  name="country" class="form-control mb-3 custom-select" placeholder="Enter candidate City"> 
+                                <input type="text"  name="country" value="{{old('country')}}" class="form-control mb-3 custom-select @error('country') is-invalid @enderror" placeholder="Enter candidate City"> 
+                               
                             </div>
                              <div class="col-md-6">
                                 <label class="mb-3" style="font-weight:bolder">Company Name</label>
                                  <span style="color:red; font-weight:bolder"> * </span> 
-                                <input type="text"  name="company" class="form-control mb-3 custom-select" placeholder="Enter company name"> 
+                                <input type="text"  name="company" value="{{old('company_name')}}" class="form-control mb-3 custom-select @error('company_name') is-invalid @enderror" placeholder="Enter company name"> 
+                               
                             </div><!-- end col -->
                             </div>       
                                                                   
@@ -175,28 +190,28 @@
                             <thead>
                             <tr>
                                 <th>Verification</th>
-                                <th>Fee</th>
-                                <th>Action </th>
+                                {{-- <th>Fee</th> --}}
+                                <th>Select </th>
                             </tr> 
                             </thead>
                             <tbody>
                               @foreach ($verifications as $verify)
                             <tr>
                                 <td>{{$verify->name}}</td>
-                                <td>{{$verify->fee}}</td>
+                                {{-- <td>{{$verify->fee}}</td> --}}
 
-                                <td><input type="checkbox" class="service-checkbox" name="verifyServices[]" value="{{$verify->id}}" data-price="{{$verify->fee}}"> </td>
+                                <td><input type="checkbox" class="service-checkbox "  name="verifyServices[]" value="{{$verify->id}}" data-price="{{$verify->fee}}"> </td>
                             </tr>
                               
                                 @endforeach
                                 <tr>
                                 <td></td>
-                                <td>Total</td>
-                                <td class="totalprice">N<strong>0</strong></td>
+                                {{-- <td>Total</td> --}}
+                                {{-- <td class="totalprice">N<strong>0</strong></td> --}}
                             </tr>
                             </tbody>
                         </table> 
-                                <span class=""><button type="submit" class="btn btn-primary w-50 submitbtn">Create Candidate</button> </span> 
+                                <span class="pl-5"><button type="submit" class="btn btn-primary w-50 btn-lg submitbtn">Create Candidate</button> </span> 
                          
                       <span class="msg-box"></span>
                     </div>

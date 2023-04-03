@@ -14,7 +14,7 @@ body, td {font-family: "Open Sans", sans-serif!important;}
     <div style="padding:40px 10px 40px 10px; background-color: #3d66fe; font-weight: 600; font-size: 1.5em; color: #ffffff; text-align: center; text-transform: uppercase;">Welcome to Oysterchecks</div>
       <div style="width: 100%; max-width: 100%; margin: auto; padding: 0 25px 25px 25px; background-color: #ffffff; box-sizing: border-box;">
         <div style="padding: 40px 0 0 0; box-sizing: border-box;">
-          <p style="margin: 0; padding: 0 0 10px 0; font-size:1em; line-height: 20px; color: #555555; box-sizing: border-box;">Hi {{$data['name']}}</p>
+          <p style="margin: 0; padding: 0 0 10px 0; font-size:1em; line-height: 20px; color: #555555; box-sizing: border-box;">Hi {{$data['firstname'].' '.$data['lastname']}}</p>
 
             <p style="margin: 0;padding: 0 0 20px 0; font-size:1em; line-height: 20px; color: #555555;">Congratulations on your new role, and welcome to your Pre-Employment Screening (PES) process.</p>
 

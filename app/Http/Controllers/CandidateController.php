@@ -12,13 +12,13 @@ use Illuminate\Support\Facades\Session;
 use App\Models\CandidateVerification;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CandidateController extends Controller
 {
-    //
-    public function RedirectUser(){
-        if(auth()->user()->user_type == 3)
-        return redirect()->route('admin.index');
+    public function __construct()
+    {
+       // $this->middleware('auth:admin');
     }
 
     public function GeneratePassword($name){
@@ -27,7 +27,6 @@ class CandidateController extends Controller
     }
     
     public function CandidateIndex(){
-       $this->RedirectUser();
         $candidate['candidate'] = Candidate::where('client_id', auth()->user()->id)->get();
         $candidate['pending'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'pending'])->get();
         $candidate['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'approved'])->get();
@@ -36,7 +35,6 @@ class CandidateController extends Controller
     }
 
     public function CadidateCreate(){
-        $this->RedirectUser();
         $candidate['candidates'] = Candidate::where('client_id', auth()->user()->id)->get();
         $candidate['pending'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'pending'])->get();
         $candidate['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'approved'])->get();
@@ -48,15 +46,36 @@ class CandidateController extends Controller
 
     public function CadidateStore(Request $request){
         //check if email exist 
+
+        $valid = Validator::make($request->all(), [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'company_name' => 'required',
+            'phone' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'country' => 'required'
+        ]);
+
+        if($valid){
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Some fields are missing, please check');
+            return back()->withInput($request->all())->withErrors($valid);
+        }
         $check = User::where('email', $request->email)->first();
         if($check){
             Session::flash('alert', 'error');
             Session::flash('message', 'A User with this email already exist, if you forgot the password, contact the Administrator.');
-            return redirect()->back();
+            return back()->withInput($request->all());
         }
         //create user account
-        if(isset($request->name)){
-            $data['name'] = $request->name;
+        if(isset($request->first_name)){
+            $data['firstname'] = $request->first_name;
+           }
+           if(isset($request->last_name)){
+            $data['lastname'] = $request->last_name;
            }
            if(isset($request->email)){
             $data['email'] = $request->email;
@@ -65,13 +84,16 @@ class CandidateController extends Controller
            $data['password'] = Hash::make($password);
            $data['user_type'] = 1;
            $data['role_id'] = 1;
+           $data['status'] = 'pending';
+
+            //dd($data);
           $create = User::create($data);
           if($create){
           $data['password']  = $password;
           Mail::to($request->email)->send( new UserAccount($data));
           Mail::to($request->email)->send( new UserOnboard($data));
-          sleep(5);
-          $candidate= User::latest()->first();
+          sleep(2);
+          $candidate = User::latest()->first();
           Candidate::create([
             'user_id' => $candidate->id,
             'client_id' => auth()->user()->id,
@@ -100,12 +122,11 @@ class CandidateController extends Controller
           }else{
               Session::flash('alert', 'error');
               Session::flash('message', 'Unable to create candidate, please try again');
-              return redirect()->back();
+              return redirect()->back()->withInput($request->all());
           }
     }
 
     public function CandidateDetails($id){
-        $this->RedirectUser();
         $data['pending'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'pending'])->get();
         $data['candidates'] = Candidate::where('client_id', auth()->user()->id)->get();
         $data['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'verified'])->get();
@@ -118,7 +139,6 @@ class CandidateController extends Controller
 
 
     public function CandidateFileUpload(){
-        $this->RedirectUser();
         $user = User::where('id', auth()->user()->id)->first();
                 Candidate::where('user_id', $user->id)->update(['email_status' => 'Email Read']);
         $service = CandidateVerification::where('user_id', $user->id)->get();
@@ -150,7 +170,6 @@ class CandidateController extends Controller
     }
 
     public function candidateHomePage(){
-        $this->RedirectUser();
         $service = CandidateVerification::where('user_id', auth()->user()->id)->get();
         return view('users.onboarding.index', ['service'=> $service]);
         

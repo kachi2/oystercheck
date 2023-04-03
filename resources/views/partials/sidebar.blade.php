@@ -23,6 +23,26 @@
                         
                     </li>
                     <hr class="hr-dashed hr-menu">
+                    
+                    <li class="menu-label my-2">Candidate Onboarding</li>
+                <li>
+                        <a href="javascript: void(0);">
+                            <i data-feather="user-plus" class="align-self-center menu-icon"></i>
+                            <span>Candidate Onboarding</span>
+                            <span class="menu-arrow">
+                                <i class="mdi mdi-chevron-right"></i>
+                            </span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                             <li class="nav-item">
+                                <a class="nav-link" href="{{route('candidate.index')}}">
+                                    <i class="ti-control-record"></i> Onboard Candidate
+                                </a>
+                            </li>
+                        </ul>
+                </li>
+                    <hr class="hr-dashed hr-menu">
+                    <li class="menu-label my-2">Identity Verifications</li>
                     <li>
                         <a href="javascript: void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i>
@@ -42,6 +62,9 @@
                              @endforeach
                         </ul>
                     </li> 
+                    <hr class="hr-dashed hr-menu">
+                    <li class="menu-label my-2">Business Verifications</li>
+                      
                      
                      <li>
                         <a href="javascript: void(0);"><i data-feather="layers" class="align-self-center menu-icon"></i><span>Business Verifications</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
@@ -51,6 +74,9 @@
                            @endforeach
                         </ul>
                     </li> 
+                    <hr class="hr-dashed hr-menu">
+                    <li class="menu-label my-2">Address Verifications</li>
+                      
                   
                          <li>
                         <a href="javascript: void(0);"><i data-feather="map-pin" class="align-self-center menu-icon"></i><span>Address Verification</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
@@ -61,24 +87,7 @@
                         </ul>
                     </li> 
  
-                  <hr class="hr-dashed hr-menu">
-                    
-                    <li class="menu-label my-2">Candidate Onboarding</li>
-                <li>
-                        <a href="javascript: void(0);">
-                            <i data-feather="user-plus" class="align-self-center menu-icon"></i>
-                            <span>Candidate Onboarding</span>
-                            <span class="menu-arrow">
-                                <i class="mdi mdi-chevron-right"></i>
-                            </span>
-                        </a>
-                        <ul class="nav-second-level" aria-expanded="false">
-                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('candidate.index')}}">
-                                    <i class="ti-control-record"></i> Onboard Candidate
-                                </a>
-                            </li>
-                        </ul>
+                  
                  <hr class="hr-dashed hr-menu">
                     <li class="menu-label my-2">Administrative Task</li>
                       

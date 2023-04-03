@@ -31,10 +31,11 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card report-card ">
-                                        <div class="card-body" style="background:rgb(36, 16, 82)">
+                                        <div class="card-body" >
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
-                                                    <p class="mb-0 fw-semibold text-white">Total Candidates<h3 class="m-0 text-white">{{count($candidates)}}</h3>
+                                                    <p class="mb-0 fw-semibold text-black">Total Candidates </p>
+                                                    <h3 class="m-0 text-black">{{count($candidates)}}</h3>
                                                 </div>
                                                 <div class="col-auto align-self-center">
                                                     <div class="report-main-icon bg-light-alt">
@@ -47,11 +48,11 @@
                                 </div>
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card report-card">
-                                        <div class="card-body" style="background:rgb(36, 16, 82)">
+                                        <div class="card-body" >
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
-                                                    <p class="text-white mb-0 fw-semibold">Total Verified Candidates</p>
-                                                    <h3 class="m-0 text-white">{{count($verified)}}</h3>
+                                                    <p class="text-black mb-0 fw-semibold">Total Verified Candidates</p>
+                                                    <h3 class="m-0 text-black">{{count($verified)}}</h3>
                                                 </div>
                                                 <div class="col-auto align-self-center">
                                                     <div class="report-main-icon bg-light-alt">
@@ -64,11 +65,11 @@
                                 </div>
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card report-card">
-                                        <div class="card-body" style="background:rgb(36, 16, 82)">
+                                        <div class="card-body" >
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
-                                                    <p class="text-white mb-0 fw-semibold">Pending Candidates</p>
-                                                    <h3 class="m-0 text-white">{{count($pending)}}</h3>
+                                                    <p class="text-black mb-0 fw-semibold">Pending Candidates</p>
+                                                    <h3 class="m-0 text-black">{{count($pending)}}</h3>
                                                 </div>
                                                 <div class="col-auto align-self-center">
                                                     <div class="report-main-icon bg-light-alt">
@@ -183,22 +184,20 @@
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Status</th>
-                                <th>Email Status</th>
                                 <th>Created On</th>
-                                <th>Action</th>
+                            
                             </tr>
                             </thead>
                             <tbody>
                             @foreach ($candidates as $cand )
                                <tr>
                                 <td>#{{$cand->id}}</td>
-                                <td>{{$cand->user->name}}</td>
+                                <td>{{$cand->user->firstname.' '.$cand->user->lastname}}</td>
                                 <td>{{$cand->user->email}}</td>
                                 <td>{{$cand->phone}}</td>
-                                <td>pending</td>
-                                <td>delivered</td>
+                                <td>{{$cand->status}}</td>
                                 <td> {{$cand->created_at}}</td>
-                                <td>view Details</td>
+                               
                             </tr>
                                  @endforeach
                             </tbody>

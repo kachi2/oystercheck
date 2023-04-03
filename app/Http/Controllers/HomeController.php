@@ -32,7 +32,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-       $this->API_Token = 'FLWSECK_TEST-4b55ad219d2376bebfb6bc146b02a781-X';
+       return $this->middleware('auth');
     }
 
     /**
@@ -41,14 +41,9 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-        public function RedirectUser(){
-            if(auth()->user()->user_type == 3)
-            return redirect()->route('admin.index');
-        }
     
     public function Home()
     {
-        $this->RedirectUser();
         $user = auth()->user();
         if($user->user_type == 1){   
         $service = CandidateVerification::where('user_id', $user->id)->get();
@@ -75,26 +70,10 @@ class HomeController extends Controller
     {
         return view('users.instructions');
     }
-    // public function VerifyIndex($slug){
-    //     $this->RedirectUser();
-    //     $user = auth()->user();
-    //     $slug = strtoupper($slug);
-    //     $slug = Verification::where('slug', $slug)->first();
-    //     $data['slug'] = Verification::where('slug', $slug->slug)->first();
-    //     $data['success'] = IdentityVerification::where(['status'=>'successful', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
-    //     $data['failed'] = IdentityVerification::where(['status'=>'failed', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
-    //     $data['pending'] = IdentityVerification::where(['status'=>'pending', 'verification_id'=>$slug->id, 'user_id'=> $user->id])->get();
-    //     $data['fields'] = FieldInput::where(['slug'=>$slug->slug])->get();
-    //     $data['wallet']= Wallet::where('user_id', $user->id)->first();
-    //     $data['verified'] = IdentityVerificationDetail::where(['user_id'=>$user->id])->latest()->first();           
-    //     $data['logs'] = IdentityVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id])->latest()->get();
-    //     return view('users.individual.identityVerify', $data);
-    // }
-
 
     public function VerifyIndexReturn($slug)
     {
-        $this->RedirectUser();
+   
         $user = auth()->user();
         $slug = strtoupper($slug);
         $slug = Verification::where('slug', $slug)->first();
@@ -110,7 +89,6 @@ class HomeController extends Controller
     }
 
     public function UserTransactions(){
-        $this->RedirectUser();
         $user = User::where('id', auth()->user()->id)->first();
         $data['balances'] = Wallet::where('user_id', $user->id)->first();
         $data['transactions'] = Transaction::where('user_id', $user->id)->latest()->paginate();
@@ -126,12 +104,6 @@ class HomeController extends Controller
         if($validator->fails()){
             return response()->json(['errors' => $validator->errors()], 401);
         }
-
-        // if($request->paymentMethod == 'card'){
-        //     Session::flash('alert', 'success');
-        //     Session::flash('message', 'Wallet top-up completed successfully');
-        //     return redirect()->back();
-        // }
         if($required_data['paymentMethod'] == 'bank_transfer'){
             $user = auth()->user();
             $tax = (7.5*$required_data['customAmount'])/100;
@@ -153,75 +125,12 @@ class HomeController extends Controller
      }
     }
 
-    public function PaymentVerify(Request $request, $trxref){
-        $trnx_ref_exists = Transaction::where(['external_ref' => $trxref])->first();
-        if ($trnx_ref_exists) {
-      ;      return response()->json(['error'=>'Transaction not found, Please contact support']);
-            exit();
-        }
-
-        $cURLConnection = curl_init();
-        curl_setopt($cURLConnection, CURLOPT_URL, 'https://api.flutterwave.com/v3/transactions/'.$trxref.'/verify/');
-        curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array(
-            "Content-Type: application/json",
-            "Authorization: Bearer ".$this->API_Token
-        ));
-        curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true); 
-        $se = curl_exec($cURLConnection);
-        curl_close($cURLConnection);  
-        $resp = json_decode($se, true);
-
-      // dd($resp);
-        if ($resp['status'] == 'error') {
-            Session::flash('message', 'Transaction not found, Please contact support');
-            return response()->json(['error'=>'Transaction not found, Please contact support']);
-        }
-        $chargeResponsecode = $resp['status'];
-        $chargeAmount = $resp['data']['amount'];
-       // $chargeCurrency = $resp['data']['currency'];
-        $custemail = $resp['data']['customer']['email'];
-        $payment_id = $resp['data']['tx_ref'];
-        $external_ref = $resp['data']['flw_ref'];
-        if (($chargeResponsecode == "success")) {     
-            //Give Value and return to Success page
-            $transactionRef = $this->GenerateRef();
-            $getUser = User::where('email', $custemail)->first();
-            $wallet = Wallet::where('user_id', $getUser->id)->first();
-            $ownerNewBalance = $wallet->avail_balance + $chargeAmount;
-            Wallet::where(['user_id' => $getUser->id])->update(['avail_balance' => $ownerNewBalance, 'prev_balance' => $wallet->avail_balance]);
-           Transaction::create([
-                'user_id' => $getUser->id,
-                'ref'=>$transactionRef,
-                'type'=>'CREDIT',
-                'purpose' => 'WALLET TOP-UP',
-                'external_ref'=>$external_ref,
-                'amount'=>$chargeAmount,
-                'prev_balance' =>$wallet->avail_balance,
-                'avail_balance' => $ownerNewBalance 
-            ]);
-
-            ActivityLog::create([
-                'user_id' => auth()->user()->id,
-                'activity' => 'Topup Wallet Balance',
-                'ip_address' => $request->Ip(),
-                'user_agent' => $request->UserAgent(),
-            ]);
-            
-            return response()->json($se);
-          
-        } else {
-            return response()->json($se);
-        }
-    }
-
     public function UserReports(){
-        $this->RedirectUser();
         return view('users.reports.reports')
         ->with('verifications', Verification::get());
     }
 
     public function getReports(Request $request){
-        $this->RedirectUser();
         $id = $request->verification_id;
         $user = User::where('id', auth()->user()->id)->first();
         $verify = Verification::where('id', decrypt($id))->first();
@@ -246,13 +155,11 @@ class HomeController extends Controller
     }
 
     public function Profile(){
-        $this->RedirectUser();
         return view('users.accounts.profile_settings')
         ->with('user', User::where('id', auth()->user()->id)->first());
     }
 
     public function updateUserDetails(Request $request){
-        $this->RedirectUser();
         $user = User::where('id', auth()->user()->id)->first();
         if($request->name){
             User::where('id', $user->id)->update(['name' => $request->name]);
@@ -292,7 +199,6 @@ class HomeController extends Controller
     }
 
     public function passwordUpdate(Request $request){
-        $this->RedirectUser();
         $this->validate($request, [
             'oldPassword' => 'required',
             'password' => 'required|min:6|confirmed',

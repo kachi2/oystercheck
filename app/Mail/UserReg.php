@@ -28,6 +28,6 @@ class UserReg extends Mailable
      */
     public function build()
     {
-        return $this->from('support@oysterchecks.com', 'Oysterchecks')->subject('Verify Your Email')->view('emails.ClientRegistration')->with('data', $this->data);
+        return $this->from('support@mazeoptions.com', 'Oysterchecks')->subject('Verify Your Email')->view('emails.ClientRegistration')->with('data', $this->data);
     }
 }

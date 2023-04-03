@@ -11,8 +11,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\IdentityIndexController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\CandidatesDocsReviewController as Candidates;
 
 use App\Models\Admin;
+use App\Models\Candidate;
 
 // use App\Models\Transaction;
 
@@ -98,6 +100,11 @@ Route::post('/user/sort/business/data/{name}', [BusinessController::class, 'bizS
 Route::post('/user/sort/identity/data/{slug}', [IdentityController::class, 'IdentitySort'])->name('IdentitySort');
 Route::get('/frequently-asked-questions', [HomeController::class, 'faqs'])->name('faqs');
 Route::get('/knowledge-base', [HomeController::class, 'knowledgeBase'])->name('knowledgeBase');
+
+
+#=========== approve candidates documents by clients ========
+
+Route::get('/candidates/doc/approve/{id}', [Candidates::class, 'ApproveDoc'])->name('candidate.doc.approve');
 
 // Route::get('/addressReport', function(){
 //     return view('users.address.addressReport');

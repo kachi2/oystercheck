@@ -18,9 +18,6 @@
                                             <span class="" id="Select_date">Jan 11</span>
                                             <i data-feather="calendar" class="align-self-center icon-xs ms-1"></i>
                                         </a>
-                                        <a href="#" class="btn btn-sm btn-outline-primary">
-                                            <i data-feather="download" class="align-self-center icon-xs"></i>
-                                        </a>
                                     </div><!--end col-->  
                                 </div><!--end row-->                                                              
                             </div><!--end page-title-box-->
@@ -98,7 +95,7 @@
                                             
                                                 <ul class="list-unstyled personal-detail mb-0">
                                                     <li class=""><i class="ti ti-mobile me-2 text-secondary font-16 align-middle"></i> <b> Phone </b> : {{$candidate->phone}}</li>
-                                                    <li class="mt-2"><i class="ti ti-email text-secondary font-16 align-middle me-2"></i> <b> Email </b> : {{$candidate->user->email}}</li>
+                                                    <li class="mt-2"><i class="ti ti-email text-secondary font-16 align-middle me-2"></i> <b> Email </b> : {{$candidate->email}}</li>
                                                     <li class="mt-2"><i class="ti ti-briefcase text-secondary font-16 align-middle me-2"></i> <b> Company </b> : {{$candidate->company}}</li>
                                                     <li class="mt-2"><i class="ti ti-world text-secondary font-16 align-middle me-2"></i> <b> Address </b> :{{$candidate->address}} </li>  
                                                       <li class=""> <i class="ti ti-world text-secondary font-16 align-middle me-2"></i><b> City</b> : {{$candidate->city}}</li>
@@ -123,7 +120,6 @@
                                                 <th>Document</th>
                                                 <th>QA Status</th>
                                                 <th>QA Review</th>
-                                                <th>Payment Status</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -136,9 +132,10 @@
                                                  @elseif($ss->status == "failed")
                                                 <td><span class="badge badge-soft-danger">Rejected</span></td>
                                                 @else
-                                                 <td><span class="badge badge-soft-warning">Pending</span></td>
+                                                 <td><span class="badge badge-soft-warning">Pending</span> <br>  <a href="{{route('candidate.doc.approve', encrypt($ss->id))}}"> <i class="fa fa-check-circle badge badge-outline-info"> </i></a><i class="fa fa-times badge badge-outline-info"> </i></td>
                                                 @endif
-                                                <td>{{$ss->doc}}</td>
+                                                <td>@if(!empty($ss->doc)) <a target="_blank" href="{{asset('assets/candidates/'.$ss->doc)}}"> {{$ss->doc}} <i class="fa fa-download badge badge-outline-info"> </i></a> @else No Documents @endif</td>
+         
                                                  @if($ss->QA_approved == "approved")
                                                 <td><span class="badge badge-soft-success">Approved</span></td>
                                                 @elseif($ss->QA_approved == "failed")
@@ -147,11 +144,7 @@
                                                  <td><span class="badge badge-soft-warning">Pending</span></td>
                                                 @endif
                                                 <td><p style="font-size:9px">{{$ss->QA_review}}</p></td>
-                                                  @if($ss->is_paid == 1)
-                                                <td><span class="badge badge-soft-success">Approved</span></td>
-                                                @else
-                                                <td><span class="badge badge-soft-warning">Pending</span></td>
-                                                @endif
+                                                  
                                             </tr>
                                             @endforeach
                                             </tbody>

@@ -142,7 +142,7 @@
                              <div class="col-md-6">
                                 <label class="mb-3" style="font-weight:bolder">Address </label>
                                  <span style="color:red; font-weight:bolder"> * </span> 
-                                <input type="text"  name="address" value="{{old('addreess')}}" class="form-control mb-3 custom-select @error('address') is-invalid @enderror" placeholder="Enter candidate Address"> 
+                                <input type="text"  name="address" value="{{old('address')}}" class="form-control mb-3 custom-select @error('address') is-invalid @enderror" placeholder="Enter candidate Address"> 
                                
                             </div><!-- end col -->
                              <div class="col-md-6">
@@ -166,7 +166,7 @@
                              <div class="col-md-6">
                                 <label class="mb-3" style="font-weight:bolder">Company Name</label>
                                  <span style="color:red; font-weight:bolder"> * </span> 
-                                <input type="text"  name="company" value="{{old('company_name')}}" class="form-control mb-3 custom-select @error('company_name') is-invalid @enderror" placeholder="Enter company name"> 
+                                <input type="text"  name="company_name" value="{{old('company_name')}}" class="form-control mb-3 custom-select @error('company_name') is-invalid @enderror" placeholder="Enter company name"> 
                                
                             </div><!-- end col -->
                             </div>       

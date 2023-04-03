@@ -18,9 +18,6 @@
                                             <span class="" id="Select_date">Jan 11</span>
                                             <i data-feather="calendar" class="align-self-center icon-xs ms-1"></i>
                                         </a>
-                                        <a href="#" class="btn btn-sm btn-outline-primary">
-                                            <i data-feather="download" class="align-self-center icon-xs"></i>
-                                        </a>
                                     </div><!--end col-->  
                                 </div><!--end row-->                                                              
                             </div><!--end page-title-box-->

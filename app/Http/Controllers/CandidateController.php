@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Candidate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 use App\Models\CandidateVerification;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
@@ -27,6 +28,7 @@ class CandidateController extends Controller
     }
     
     public function CandidateIndex(){
+        
         $candidate['candidate'] = Candidate::where('client_id', auth()->user()->id)->get();
         $candidate['pending'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'pending'])->get();
         $candidate['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'approved'])->get();
@@ -56,10 +58,10 @@ class CandidateController extends Controller
             'phone' => 'required',
             'city' => 'required',
             'state' => 'required',
-            'country' => 'required'
+            'country' => 'required',
         ]);
 
-        if($valid){
+        if($valid->fails()){
             Session::flash('alert', 'error');
             Session::flash('message', 'Some fields are missing, please check');
             return back()->withInput($request->all())->withErrors($valid);
@@ -71,6 +73,10 @@ class CandidateController extends Controller
             return back()->withInput($request->all());
         }
         //create user account
+
+        DB::beginTransaction();
+
+        try{
         if(isset($request->first_name)){
             $data['firstname'] = $request->first_name;
            }
@@ -97,6 +103,7 @@ class CandidateController extends Controller
           Candidate::create([
             'user_id' => $candidate->id,
             'client_id' => auth()->user()->id,
+            'email' => $request->email,
             'phone' => $request->phone,
             'state'=>$request->state,
             'city' => $request->city,
@@ -113,17 +120,22 @@ class CandidateController extends Controller
                 'candidate_services_id' => $value,
                 'status' => 'pending',
                 'is_paid' => '0',
-                
               ]);
           }
+        }
+        DB::commit();
         Session::flash('alert', 'success');
         Session::flash('message', 'Candidate Created Successfully');
         return redirect()->back();
-          }else{
-              Session::flash('alert', 'error');
-              Session::flash('message', 'Unable to create candidate, please try again');
-              return redirect()->back()->withInput($request->all());
+          }catch(\Exception $e){
+            DB::rollBack();
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Unable to create candidate, please try again');
+            return redirect()->back()->withInput($request->all());
           }
+        
+              
+          
     }
 
     public function CandidateDetails($id){
@@ -139,6 +151,9 @@ class CandidateController extends Controller
 
 
     public function CandidateFileUpload(){
+        if(request()->user_type != 1 ){
+            return redirect('home');
+        }
         $user = User::where('id', auth()->user()->id)->first();
                 Candidate::where('user_id', $user->id)->update(['email_status' => 'Email Read']);
         $service = CandidateVerification::where('user_id', $user->id)->get();
@@ -170,6 +185,9 @@ class CandidateController extends Controller
     }
 
     public function candidateHomePage(){
+        if(request()->user_type != 1 ){
+            return redirect('home');
+        }
         $service = CandidateVerification::where('user_id', auth()->user()->id)->get();
         return view('users.onboarding.index', ['service'=> $service]);
         

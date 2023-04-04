@@ -104,7 +104,7 @@ Route::get('/knowledge-base', [HomeController::class, 'knowledgeBase'])->name('k
 
 #=========== approve candidates documents by clients ========
 
-Route::get('/candidates/doc/approve/{id}', [Candidates::class, 'ApproveDoc'])->name('candidate.doc.approve');
+Route::get('/candidates/user/approve/{service}', [Candidates::class, 'ApproveDoc'])->name('candidate.doc.approve');
 
 // Route::get('/addressReport', function(){
 //     return view('users.address.addressReport');

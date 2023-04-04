@@ -49,6 +49,10 @@ return [
             'driver' => 'session',
             'provider' => 'candidates',
         ],
+        'clients' => [
+            'driver' => 'session',
+            'provider' => 'clients',
+        ],
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -85,6 +89,11 @@ return [
         'candidates' => [
             'driver' => 'eloquent',
             'model' => App\Candidate::class,
+        ],
+
+        'clients' => [
+            'driver' => 'eloquent',
+            'model' => App\Client::class,
         ],
 
         // 'users' => [

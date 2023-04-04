@@ -48,8 +48,7 @@ class RegisterController extends Controller
     }
 
     public function register(Request $request)
-    {
-        
+    { 
         $this->validator($request->all())->validate();
 
         $plain_password = $this->GeneratePass($request->fname);
@@ -65,9 +64,7 @@ class RegisterController extends Controller
             return redirect()->route('register-success');
         }
 
-        return $request->wantsJson()
-                    ? new JsonResponse([], 201)
-                    : redirect($this->redirectPath());
+        return $request->wantsJson() ? new JsonResponse([], 201) : redirect($this->redirectPath());
     }
     /**
      * Get a validator for an incoming registration request.

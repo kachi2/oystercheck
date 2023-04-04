@@ -42,7 +42,7 @@
                         </ul>
                 </li>
                     <hr class="hr-dashed hr-menu">
-                    <li class="menu-label my-2">Identity Verifications</li>
+                    <li class="menu-label my-2">Verifications</li>
                     <li>
                         <a href="javascript: void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i>
@@ -62,8 +62,6 @@
                              @endforeach
                         </ul>
                     </li> 
-                    <hr class="hr-dashed hr-menu">
-                    <li class="menu-label my-2">Business Verifications</li>
                       
                      
                      <li>
@@ -74,8 +72,6 @@
                            @endforeach
                         </ul>
                     </li> 
-                    <hr class="hr-dashed hr-menu">
-                    <li class="menu-label my-2">Address Verifications</li>
                       
                   
                          <li>

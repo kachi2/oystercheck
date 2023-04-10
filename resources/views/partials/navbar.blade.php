@@ -3,7 +3,17 @@
                 <!-- Navbar -->
                 <nav class="navbar-custom">    
                     <ul class="list-unstyled topbar-nav float-end mb-0">  
-                                          
+                        
+                        <li class="dropdown notification-list">
+                            <span class="nav-link dropdown-toggle arrow-none waves-light " >
+                                @if($logon_user->client->is_activated != 1)
+                                 <span class="badge bg-danger rounded-pill "> Test Mode</span>
+                                 @else
+                                 <span class="badge bg-success rounded-pill "> Live Mode</span>
+                                 @endif
+                        </span>
+                            
+                        </li>
             
                         <li class="dropdown notification-list">
                             <a class="nav-link dropdown-toggle arrow-none waves-light waves-effect" data-bs-toggle="dropdown" href="#" role="button"
@@ -38,6 +48,7 @@
                                    <!--end-item-->
                                 </div>
                             </div>
+                            
                         </li>
 
                         <li class="dropdown">
@@ -62,6 +73,7 @@
                            </form>
                         </div>
                         </li>
+                       
                     </ul><!--end topbar-nav-->
         
                     <ul class="list-unstyled topbar-nav mb-0">                        
@@ -70,16 +82,25 @@
                                 <i data-feather="menu" class="align-self-center topbar-icon"></i>
                             </button>
                         </li> 
+                    @if($logon_user->client->is_activated == 1)
                         <li class="creat-btn">
                             <div class="nav-link">
-                                <a class=" badge bg-soft-primary" href="#" role="" @if(auth()->user()->type == 2)>Client Dashboard @endif</a>
+                                <span class=" badge bg-soft-primary"  role="" @if(auth()->user()->user_type == 2)>User Dashboard @endif</span>
                             </div>                                
                         </li>  
                         <li class="creat-btn">
                             <div class="nav-link">
-                                <a class=" badge bg-soft-primary" > @if(auth()->user()->type == 2)Wallet Balance: ₦{{number_format($client_balance->avail_balance,2)}} @endif</a>
+                                <span class=" badge bg-secondary" > @if(auth()->user()->user_type == 2)Wallet Balance: ₦{{number_format($client_balance->avail_balance,2)}} @endif</span>
                             </div>                                
-                        </li>                          
+                        </li>  
+                        @else
+                        <li class="creat-btn">
+                            <div class="nav-link">
+                        Welcome to Oysterchecks
+                    Kindly provide the requested information to fully verify your account. <a href="{{route('user.profile')}}" class=" badge bg-primary" >  Get Started </a>
+                            </div>
+                        </li>                
+                        @endif       
                     </ul>
                 </nav>
                 <!-- end navbar-->

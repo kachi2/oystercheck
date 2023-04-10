@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\Models\IdentityVerification;
 use App\Traits\GenerateRef;
+use App\Traits\sandbox;
 use App\Models\Wallet;
 
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ use Illuminate\Http\Request;
 class IdentityPvcController extends Controller
 {
     use GenerateRef;
+    use sandbox;
     public function processPvc(Request $request, $slug)
     {
         $validator = Validator::make($request->all(), [
@@ -31,6 +33,13 @@ class IdentityPvcController extends Controller
             return redirect()->back();
         }
 
+        if($this->sandbox() == 1 ){
+            if($request->pin != '11111111111'){
+                Session::flash('alert', 'error');
+                Session::flash('message', 'Use Test data only for test mode');
+                return redirect()->back();
+            }
+        }
         $ref = $this->GenerateRef();
         $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
         $requestData = [
@@ -51,7 +60,7 @@ class IdentityPvcController extends Controller
             $curl = curl_init();
             $encodedRequestData = json_encode($requestData, true);
             curl_setopt_array($curl, [
-                CURLOPT_URL => "https://api.sandbox.youverify.co/v2/api/identity/ng/pvc",
+                CURLOPT_URL => $this->ReqUrl()."identity/ng/pvc",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 1,
@@ -61,7 +70,7 @@ class IdentityPvcController extends Controller
                 CURLOPT_POSTFIELDS => $encodedRequestData,
                 CURLOPT_HTTPHEADER => [
                     "Content-Type: application/json",
-                    "Token: N0R9AJ4L.PWYaM5cXggThkdCtkVSCsWz4fMsfeMIp6CKL"
+                    "Token: ".$this->ReqToken()
                 ],
             ]);
 
@@ -93,6 +102,7 @@ class IdentityPvcController extends Controller
                         'all_validation_passed' => $decodedResponse['data']['allValidationPassed'],
                         'requested_at' => $decodedResponse['data']['requestedAt'],
                         'last_modified_at' => $decodedResponse['data']['lastModifiedAt'],
+                        'is_sandbox' => $this->sandbox()
                     ]);
                     IdentityVerification::create([
                         'verification_id' => $slug->id,
@@ -102,6 +112,7 @@ class IdentityPvcController extends Controller
                         'first_name' => $decodedResponse['data']['firstName'],
                         'last_name' => $decodedResponse['data']['lastName'],
                         'pin' => $request->pin,
+                        'is_sandbox' => $this->sandbox()
                     ]);
                     DB::commit();
                     Session::flash('alert', 'success');

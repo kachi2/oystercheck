@@ -27,7 +27,7 @@ class IdentityController extends Controller
 //Constructor
     public function __construct()
     {
-        //  return $this->user = auth()->user();
+         return $this->middleware('clients');
     }
 
     public function RedirectUser()
@@ -62,7 +62,6 @@ class IdentityController extends Controller
 
     public function StoreVerify(Request $request, $slug)
     {
-        $this->RedirectUser();
         $slug = Verification::where('slug', $slug)->first();
 
         if ($slug) {
@@ -174,7 +173,6 @@ class IdentityController extends Controller
 
     public function verificationReport($slug, $verificationId)
     {
-        $this->RedirectUser();
         $user = auth()->user();
         $slug = Verification::where('slug', $slug)->first();
         $data['slug'] = $slug;

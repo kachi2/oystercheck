@@ -49,6 +49,7 @@ class AppServiceProvider extends ServiceProvider
                     $img = Client::where('user_id', $user->id)->first();
                     $data['profile_image'] = 'default.png';
                     $data['client_balance'] = Wallet::where('user_id', $user->id)->first();
+                    $data['logon_user'] = $user;
                 }else{
                     $data['profile_image'] ='default.png';
                     $data['client_balance'] = Wallet::where('user_id', $user->id)->first();
@@ -61,6 +62,7 @@ class AppServiceProvider extends ServiceProvider
             $data['sidebars'] = Verification::get();
             $data['business'] = Verification::where('report_type', '=', 'business')->get();
             $data['address'] = Verification::where('report_type', '=', 'address')->get();
+            
             view::share($data);
 
 

@@ -62,8 +62,6 @@
                              @endforeach
                         </ul>
                     </li> 
-                      
-                     
                      <li>
                         <a href="javascript: void(0);"><i data-feather="layers" class="align-self-center menu-icon"></i><span>Business Verifications</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
@@ -72,8 +70,6 @@
                            @endforeach
                         </ul>
                     </li> 
-                      
-                  
                          <li>
                         <a href="javascript: void(0);"><i data-feather="map-pin" class="align-self-center menu-icon"></i><span>Address Verification</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
@@ -82,12 +78,8 @@
                          @endforeach
                         </ul>
                     </li> 
- 
-                  
-                 <hr class="hr-dashed hr-menu">
+                     <hr class="hr-dashed hr-menu">
                     <li class="menu-label my-2">Administrative Task</li>
-                      
-                   
                     <li>
                         <a href="{{route('users.report')}}">
                             <i data-feather="trending-up" class="align-self-center menu-icon"></i>

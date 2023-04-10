@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\ImageVerification;
 use App\Traits\GenerateRef;
+use App\Traits\sandbox;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Models\IdentityVerification;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Session;
 class IdentityImageController extends Controller
 {
     use GenerateRef;
+    use sandbox;
 
     public function processImage(Request $request, $slug)
     {
@@ -25,10 +27,18 @@ class IdentityImageController extends Controller
         ]);
 
         if ($validator->fails()) {
-            dd($validator->errors());
+         //   dd($validator->errors());
             Session::flash('alert', 'error');
             Session::flash('message', 'Failed! There was some errors in your input');
             return redirect()->back();
+        }
+
+        if($this->sandbox() == 1 ){
+            if($request->pin != '11111111111'){
+                Session::flash('alert', 'error');
+                Session::flash('message', 'Use Test data only for test mode');
+                return redirect()->back();
+            }
         }
 
         $ref = $this->GenerateRef();
@@ -57,7 +67,7 @@ class IdentityImageController extends Controller
             $curl = curl_init();
             $encodedRequestData = json_encode($requestData, true);
             curl_setopt_array($curl, [
-                CURLOPT_URL => "https://api.sandbox.youverify.co/v2/api/identity/compare-image",
+                CURLOPT_URL => $this->ReqUrl()."/identity/compare-image",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 1,
@@ -67,7 +77,7 @@ class IdentityImageController extends Controller
                 CURLOPT_POSTFIELDS => $encodedRequestData,
                 CURLOPT_HTTPHEADER => [
                     "Content-Type: application/json",
-                    "Token: N0R9AJ4L.PWYaM5cXggThkdCtkVSCsWz4fMsfeMIp6CKL"
+                    "Token: ".$this->ReqToken()
                 ],
             ]);
 
@@ -94,6 +104,7 @@ class IdentityImageController extends Controller
                         'all_validation_passed' => $decodedResponse['data']['allValidationPassed'],
                         'requested_at' => $decodedResponse['data']['requestedAt'],
                         'last_modified_at' => $decodedResponse['data']['lastModifiedAt'],
+                        'is_sandbox' => $this->sandbox()
                     ]);
                     IdentityVerification::create([
                         'verification_id' => $slug->id,
@@ -103,6 +114,7 @@ class IdentityImageController extends Controller
                         'first_name' => 'compare-images',
                         'last_name' => $decodedResponse['data']['reason'],
                         'pin' => $decodedResponse['data']['id'],
+                        'is_sandbox' => $this->sandbox()
                     ]);
                     DB::commit();
                     Session::flash('alert', 'success');

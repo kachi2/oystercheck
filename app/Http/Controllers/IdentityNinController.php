@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Traits\GenerateRef;
 use App\Models\NinVerification;
 use App\Models\Wallet;
+use App\Traits\sandbox;
 use App\Models\User;
 use App\Models\IdentityVerification;
 use Illuminate\Support\Facades\{Session, Validator, DB};
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\{Session, Validator, DB};
 class IdentityNinController extends Controller
 {
     use GenerateRef;
+    use sandbox;
 
     public function processNin(Request $request, $slug)
     {
@@ -33,7 +35,13 @@ class IdentityNinController extends Controller
             Session::flash('message', 'Failed! There was some errors in your input');
             return redirect()->back();
         }
-
+        if($this->sanbox() == 1 ){
+            if($request->pin != '12312121212'){
+                Session::flash('alert', 'error');
+                Session::flash('message', 'Use Test data only for test mode');
+                return redirect()->back();
+            }
+        }
         $ref = $this->GenerateRef();
         $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
         $requestData = [
@@ -66,7 +74,7 @@ class IdentityNinController extends Controller
             $curl = curl_init();
             $encodedRequestData = json_encode($requestData, true);
             curl_setopt_array($curl, [
-                CURLOPT_URL => "https://api.sandbox.youverify.co/v2/api/identity/ng/nin",
+                CURLOPT_URL => $this->ReqUrl()."identity/ng/nin",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 1,
@@ -76,7 +84,7 @@ class IdentityNinController extends Controller
                 CURLOPT_POSTFIELDS => $encodedRequestData,
                 CURLOPT_HTTPHEADER => [
                     "Content-Type: application/json",
-                    "Token: N0R9AJ4L.PWYaM5cXggThkdCtkVSCsWz4fMsfeMIp6CKL"
+                    "Token: ".$this->reqToken(),
                 ],
             ]);
 
@@ -129,6 +137,7 @@ class IdentityNinController extends Controller
                         'all_validation_passed' => $decodedResponse['data']['allValidationPassed'],
                         'requested_at' => $decodedResponse['data']['requestedAt'],
                         'last_modified_at' => $decodedResponse['data']['lastModifiedAt'],
+                        'is_sandox' => $this->sandbox(),
                     ]);
 
                     IdentityVerification::create([
@@ -139,6 +148,7 @@ class IdentityNinController extends Controller
                         'first_name' => $decodedResponse['data']['firstName'],
                         'last_name' => $decodedResponse['data']['lastName'],
                         'pin' => $request->pin,
+                        'is_sandox' => $this->sandbox(),
                     ]);
 
                     DB::commit();

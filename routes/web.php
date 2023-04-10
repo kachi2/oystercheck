@@ -12,7 +12,7 @@ use App\Http\Controllers\IdentityIndexController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CandidatesDocsReviewController as Candidates;
-
+use App\Http\Controllers\ClientProfileController;
 use App\Models\Admin;
 use App\Models\Candidate;
 
@@ -100,11 +100,16 @@ Route::post('/user/sort/business/data/{name}', [BusinessController::class, 'bizS
 Route::post('/user/sort/identity/data/{slug}', [IdentityController::class, 'IdentitySort'])->name('IdentitySort');
 Route::get('/frequently-asked-questions', [HomeController::class, 'faqs'])->name('faqs');
 Route::get('/knowledge-base', [HomeController::class, 'knowledgeBase'])->name('knowledgeBase');
-
+Route::post('/user/profile/update', [ClientProfileController::class, 'StorePersonalInfo'])->name('form_profileUpdate');
+Route::post('/user/password/update', [ClientProfileController::class, 'UpdatePassword'])->name('form_PasswordeUpdate');
+Route::post('/user/basic/information/update', [ClientProfileController::class, 'UpdateBusinessInfo'])->name('basic_information');
+Route::post('/user/contact/information/update', [ClientProfileController::class, 'UpdateContactInfo'])->name('contact_information');
+Route::post('/user/document/update', [ClientProfileController::class, 'UpdateDocumentInfo'])->name('document_information');
 
 #=========== approve candidates documents by clients ========
 
 Route::get('/candidates/user/approve/{service}', [Candidates::class, 'ApproveDoc'])->name('candidate.doc.approve');
+Route::get('/candidates/user/disapprove/{service}', [Candidates::class, 'DisapproveDoc'])->name('candidate.doc.disapprove');
 
 // Route::get('/addressReport', function(){
 //     return view('users.address.addressReport');

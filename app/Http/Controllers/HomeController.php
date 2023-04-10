@@ -8,6 +8,7 @@ use App\Models\Verification;
 use App\Models\Wallet;
 use App\Models\User;
 use App\Models\Client;
+use App\Models\UserActivity;
 use Illuminate\Support\Facades\Auth;
 use App\Models\IdentityVerification;
 use Illuminate\Support\Facades\Hash;
@@ -16,6 +17,7 @@ use App\Models\FieldInput;
 use App\Traits\GenerateRef;
 use App\Models\AddressVerification;
 use App\Models\IdentityVerificationDetail;
+use App\Traits\sandbox;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Session;
 use App\Models\FundRequest;
@@ -25,6 +27,7 @@ use Illuminate\Support\Facades\Validator;
 class HomeController extends Controller
 {
     use GenerateRef;
+    use sandbox;
     /**
      * Create a new controller instance.
      *
@@ -49,12 +52,12 @@ class HomeController extends Controller
         $service = CandidateVerification::where('user_id', $user->id)->get();
         return view('users.onboarding.uploads', ['service'=> $service]);
         }
-        $data['success'] = IdentityVerification::where(['status'=>'found',  'user_id'=> $user->id])->get();
-        $data['failed'] = IdentityVerification::where(['status'=>'not-found', 'user_id'=> $user->id])->get();
-        $data['pending'] = IdentityVerification::where(['status'=>'null', 'user_id'=> $user->id])->get();
+        $data['success'] = IdentityVerification::where(['status'=>'found',  'user_id'=> $user->id, 'is_sandbox' => $this->sandbox()])->get();
+        $data['failed'] = IdentityVerification::where(['status'=>'not-found', 'user_id'=> $user->id, 'is_sandbox' => $this->sandbox()])->get();
+        $data['pending'] = IdentityVerification::where(['status'=>'null', 'user_id'=> $user->id, 'is_sandbox' => $this->sandbox()])->get();
         $data['wallet']= Wallet::where('user_id', $user->id)->first();
-        $data['logs'] = IdentityVerification::where(['user_id' => $user->id])->latest()->get();
-        $data['recents'] = IdentityVerification::where(['user_id' => $user->id])->latest()->take(5)->get();
+        $data['logs'] = IdentityVerification::where(['user_id' => $user->id, 'is_sandbox' => $this->sandbox()])->latest()->get();
+        $data['recents'] = IdentityVerification::where(['user_id' => $user->id, 'is_sandbox' => $this->sandbox()])->latest()->take(5)->get();
         $data['transactions'] = Transaction::where('user_id', $user->id)->latest()->take(5)->get();
         $data['activity'] = ActivityLog::where('user_id', $user->id)->take(10)->get();
         return view('users.home', $data);
@@ -155,8 +158,15 @@ class HomeController extends Controller
     }
 
     public function Profile(){
-        return view('users.accounts.profile_settings')
-        ->with('user', User::where('id', auth()->user()->id)->first());
+        $user = User::where('id', auth()->user()->id)->first();
+        $client = Client::where('user_id', $user->id)->first();
+        $clients = $this->GetClientProfile($client);
+        return view('users.accounts.profile_settings', $clients, [
+            'user' =>  $user,
+            'activities' => ActivityLog::where('user_id',  $user->id)->latest()->get(),
+            'client' => $client,
+           
+        ]);
     }
 
     public function updateUserDetails(Request $request){
@@ -236,4 +246,31 @@ class HomeController extends Controller
         //Auth::guard('web')->logout();
         return redirect()->intended('login');
     }
+
+    public function GetClientProfile($client){
+        if($client->user->firstname != null && $client->user->email != null && $client->user->phone != null){
+            $clients['profileInfo'] = 1;
+        }else{
+            $clients['profileInfo'] = null;
+        }
+
+        if($client->email != null && $client->logo != null && $client->company_name != null  && $client->description != null  && $client->reg_number != null && $client->tax_number != null) {
+            $clients['basicInfo'] = 1;
+        }else{
+            $clients['basicInfo'] = null;
+        }
+        if( $client->company_address != null && $client->company_phone != null && $client->facebook != null && $client->linkedin != null && $client->instagram != null) {
+            $clients['busContact'] = 1;
+        }else{
+            $clients['busContact'] = null;
+        }
+
+        if( $client->cac != null && $client->others != null) {
+            $clients['Vdocs'] = 1;
+        }else{
+            $clients['Vdocs'] = null;
+        }
+        return $clients;
+    }
+  
 }

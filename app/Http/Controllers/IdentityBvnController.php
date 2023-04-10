@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use App\Models\BvnVerification;
 use App\Models\IdentityVerification;
+use App\Traits\sandbox;
 use App\Traits\GenerateRef;
 use Illuminate\Support\Facades\DB;
 use App\Models\Wallet;
@@ -14,6 +15,7 @@ use App\Models\Wallet;
 class IdentityBvnController extends Controller
 {
     use GenerateRef;
+    use sandbox;
     //
 
 
@@ -35,7 +37,14 @@ class IdentityBvnController extends Controller
             Session::flash('message', 'Failed! There was some errors in your input');
             return redirect()->back();
         }
-
+     
+        if($this->sandbox() == 1 ){
+            if($request->pin != '11111111111'){
+                Session::flash('alert', 'error');
+                Session::flash('message', 'Use Test data only for test mode');
+                return redirect()->back();
+            }
+        }
         
         $ref = $this->GenerateRef();
         Wallet::where('user_id', auth()->user()->id)->first();
@@ -74,7 +83,7 @@ class IdentityBvnController extends Controller
             $curl = curl_init();
             $encodedRequestData = json_encode($requestData, true);
             curl_setopt_array($curl, [
-                CURLOPT_URL => "https://api.sandbox.youverify.co/v2/api/identity/ng/bvn",
+                CURLOPT_URL => $this->ReqUrl()."identity/ng/bvn",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 1,
@@ -84,7 +93,7 @@ class IdentityBvnController extends Controller
                 CURLOPT_POSTFIELDS => $encodedRequestData,
                 CURLOPT_HTTPHEADER => [
                     "Content-Type: application/json",
-                    "Token: N0R9AJ4L.PWYaM5cXggThkdCtkVSCsWz4fMsfeMIp6CKL"
+                    "Token: ".$this->reqToken(),
                 ],
             ]);
 
@@ -127,6 +136,7 @@ class IdentityBvnController extends Controller
                         'all_validation_passed' => $decodedResponse['data']['allValidationPassed'],
                         'requested_at' => $decodedResponse['data']['requestedAt'] != null ? $decodedResponse['data']['requestedAt'] : null,
                         'last_modified_at' => $decodedResponse['data']['lastModifiedAt'] != null ? $decodedResponse['data']['lastModifiedAt'] : null,
+                        'is_sandbox' => $this->sandbox(),
                     ]);
                     IdentityVerification::create([
                         'verification_id' => $slug->id,
@@ -136,6 +146,7 @@ class IdentityBvnController extends Controller
                         'first_name' => $decodedResponse['data']['firstName'],
                         'last_name' => $decodedResponse['data']['lastName'],
                         'pin' => $request->pin,
+                        'is_sandbox' => $this->sandbox()
                     ]);
 
                     DB::commit();

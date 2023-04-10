@@ -132,7 +132,7 @@
                                                  @elseif($ss->status == "failed")
                                                 <td><span class="badge badge-soft-danger">Rejected</span></td>
                                                 @else
-                                                 <td><span class="badge badge-soft-warning">Pending</span> <br>  <a href="{{route('candidate.doc.approve', encrypt($ss->id))}}"> <i class="fa fa-check-circle badge badge-outline-info"> </i></a><i class="fa fa-times badge badge-outline-info"> </i></td>
+                                                 <td><span class="badge badge-soft-warning">Pending</span> <br>  <a href="{{route('candidate.doc.approve', encrypt($ss->id))}}"> <i class="fa fa-check-circle badge badge-outline-info"> </i></a> <a href="{{route('candidate.doc.disapprove', encrypt($ss->id))}}"><i class="fa fa-times badge badge-outline-info"> </i> </a> </td>
                                                 @endif
                                                 <td>@if(!empty($ss->doc)) <a target="_blank" href="{{asset('assets/candidates/'.$ss->doc)}}"> {{$ss->doc}} <i class="fa fa-download badge badge-outline-info"> </i></a> @else No Documents @endif</td>
          

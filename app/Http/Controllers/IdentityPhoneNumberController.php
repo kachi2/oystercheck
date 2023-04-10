@@ -8,6 +8,7 @@ use App\Models\PhoneVerification;
 use Illuminate\Support\Facades\DB;
 use App\Models\IdentityVerification;
 use App\Traits\GenerateRef;
+use App\Traits\sandbox;
 use App\Models\Wallet;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Session;
 class IdentityPhoneNumberController extends Controller
 {
     use GenerateRef;
+    use sandbox;
     public function processPhoneNumber(Request $request, $slug)
     {
         $validator = Validator::make($request->all(), [
@@ -28,6 +30,13 @@ class IdentityPhoneNumberController extends Controller
             Session::flash('alert', 'error');
             Session::flash('message', 'Failed! There was some errors in your input');
             return redirect()->back();
+        }
+        if($this->sandbox() == 1 ){
+            if($request->pin != '11111111111'){
+                Session::flash('alert', 'error');
+                Session::flash('message', 'Use Test data only for test mode');
+                return redirect()->back();
+            }
         }
 
         $ref = $this->GenerateRef();
@@ -47,7 +56,7 @@ class IdentityPhoneNumberController extends Controller
             $curl = curl_init();
             $encodedRequestData = json_encode($requestData, true);
             curl_setopt_array($curl, [
-                CURLOPT_URL => "https://api.sandbox.youverify.co/v2/api/identity/ng/phone",
+                CURLOPT_URL => $this->sandbox()."identity/ng/phone",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 1,
@@ -57,7 +66,7 @@ class IdentityPhoneNumberController extends Controller
                 CURLOPT_POSTFIELDS => $encodedRequestData,
                 CURLOPT_HTTPHEADER => [
                     "Content-Type: application/json",
-                    "Token: N0R9AJ4L.PWYaM5cXggThkdCtkVSCsWz4fMsfeMIp6CKL"
+                    "Token: ".$this->ReqToken()
                 ],
             ]);
 
@@ -105,6 +114,7 @@ class IdentityPhoneNumberController extends Controller
                         'advance_search' => $request->advance_search ? true : false,
                         'requested_at' => $decodedResponse['data']['requestedAt'],
                         'last_modified_at' => $decodedResponse['data']['lastModifiedAt'],
+                        'is_sandbox' => $this->sandbox()
                     ]);
 
                     IdentityVerification::create([
@@ -115,6 +125,7 @@ class IdentityPhoneNumberController extends Controller
                         'first_name' => $decodedResponse['data']['firstName'],
                         'last_name' => $decodedResponse['data']['lastName'],
                         'pin' => $request->phone_number,
+                        'is_sandbox' => $this->sandbox()
                     ]);
 
                     DB::commit();

@@ -7,11 +7,13 @@
                         
                         <li class="dropdown notification-list">
                             <span class="nav-link dropdown-toggle arrow-none waves-light " >
+                                @auth('clients')
                                 @if($logon_user->client->is_activated != 1)
                                  <span class="badge bg-danger rounded-pill "> Test Mode</span>
                                  @else
                                  <span class="badge bg-success rounded-pill "> Live Mode</span>
                                  @endif
+                                 @endauth
                         </span>
                             
                         </li>
@@ -56,6 +58,7 @@
                              <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-bs-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="false" aria-expanded="false">
                                 <span class="ms-1 nav-user-name hidden-sm ">{{ucwords(auth()->user()->firstname)}}</span>
+                              
                                 @if($logon_user->client->logo == null)
                                 <div style="display: inline-flex;width:32px;height:32px;background-color:rgba(59, 130, 246, 0.5);vertical-align:middle;align-items:center;justify-content:center;overflow:hidden" class="rounded-circle">
                                     <div class="fw-semibold text-white" style="color:#ffffff;">{{strtoupper(substr(auth()->user()->firstname,0,1))}}</div>

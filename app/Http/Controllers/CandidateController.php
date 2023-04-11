@@ -145,7 +145,7 @@ class CandidateController extends Controller
 
     public function CandidateDetails($id){
         $data['pending'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'pending', 'is_sandbox' => $this->sandbox()])->get();
-        $data['candidates'] = Candidate::where(['client_id', auth()->user()->id, 'is_sandbox' => $this->sandbox()])->get();
+        $data['candidates'] = Candidate::where(['client_id' => auth()->user()->id, 'is_sandbox' => $this->sandbox()])->get();
         $data['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'verified', 'is_sandbox' => $this->sandbox()])->get();
         $data['rejected'] = Candidate::where(['client_id'=> auth()->user()->id, 'status'=>'rejected', 'is_sandbox' => $this->sandbox()])->get();
         $candidate = Candidate::where('id', decrypt($id))->first();

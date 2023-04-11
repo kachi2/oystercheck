@@ -7,13 +7,14 @@
                         
                         <li class="dropdown notification-list">
                             <span class="nav-link dropdown-toggle arrow-none waves-light " >
-                                @auth('clients')
+                               @if($logon_user->user_type == 2)
                                 @if($logon_user->client->is_activated != 1)
                                  <span class="badge bg-danger rounded-pill "> Test Mode</span>
                                  @else
                                  <span class="badge bg-success rounded-pill "> Live Mode</span>
                                  @endif
                                  @endauth
+                                 @endif
                         </span>
                             
                         </li>
@@ -58,13 +59,16 @@
                              <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-bs-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="false" aria-expanded="false">
                                 <span class="ms-1 nav-user-name hidden-sm ">{{ucwords(auth()->user()->firstname)}}</span>
-                              
+                                @if($logon_user->user_type == 2)
                                 @if($logon_user->client->logo == null)
                                 <div style="display: inline-flex;width:32px;height:32px;background-color:rgba(59, 130, 246, 0.5);vertical-align:middle;align-items:center;justify-content:center;overflow:hidden" class="rounded-circle">
                                     <div class="fw-semibold text-white" style="color:#ffffff;">{{strtoupper(substr(auth()->user()->firstname,0,1))}}</div>
                                 </div>
                                 @else
                                 <img src="{{asset('assets/images/'.$logon_user->client->logo)}}" alt="logo-large" class="rounded-circle thumb-sm"> 
+                                @endif
+                                @else
+                                <img src="{{asset('assets/images/default.png')}}" alt="logo-large" class="rounded-circle thumb-sm"> 
                                 @endif
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
@@ -86,6 +90,7 @@
                                 <i data-feather="menu" class="align-self-center topbar-icon"></i>
                             </button>
                         </li> 
+                        @if($logon_user->user_type == 2)
                     @if($logon_user->client->is_activated == 1)
                         <li class="creat-btn">
                             <div class="nav-link">
@@ -104,7 +109,8 @@
                     Kindly provide the requested information to fully verify your account. <a href="{{route('user.profile')}}" class=" badge bg-primary" >  Get Started </a>
                             </div>
                         </li>                
-                        @endif       
+                        @endif  
+                    @endif     
                     </ul>
                 </nav>
                 <!-- end navbar-->

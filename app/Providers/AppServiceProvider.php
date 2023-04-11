@@ -49,7 +49,6 @@ class AppServiceProvider extends ServiceProvider
                 }elseif($user->user_type == 2){
                     $img = Client::where('user_id', $user->id)->first();
                     $data['profile_image'] = $img->logo;
-                    dd($img->logo);
                     $data['client_balance'] = Wallet::where('user_id', $user->id)->first();
                    
                 }else{

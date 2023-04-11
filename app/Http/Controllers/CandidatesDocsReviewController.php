@@ -17,13 +17,13 @@ class CandidatesDocsReviewController extends Controller
     public function __construct(Auth $user)
     {    
         
-       // return $this->middleware('clients');
+        return $this->middleware('clients');
     }
 
 
     public function ApproveDoc($service){
 
-        dd(decrypt($service));
+      //  dd(decrypt($service));
         if(isset($service)){
             $candidate = CandidateVerification::where('id', decrypt($service))->first();
           if($candidate->doc == null){

@@ -47,6 +47,7 @@ class HomeController extends Controller
     
     public function Home()
     {
+        
         $user = auth()->user();
         if($user->user_type == 1){   
         $service = CandidateVerification::where('user_id', $user->id)->get();

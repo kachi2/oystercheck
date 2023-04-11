@@ -71,6 +71,11 @@ class HomeController extends Controller
 
     public function gettingStarted()
     {
+        $user = auth()->user();
+        if($user->user_type == 1){   
+        $service = CandidateVerification::where('user_id', $user->id)->get();
+        return view('users.onboarding.uploads', ['service'=> $service]);
+        }
         return view('users.instructions');
     }
 

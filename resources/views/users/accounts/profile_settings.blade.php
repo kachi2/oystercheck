@@ -57,7 +57,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body p-0">
-                        <div id="user_map" class="pro-map" style="height: 220px"></div>
+                        <div id="user_map" class="pro-map leaflet-container leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag" style="height: 220px; position: relative; outline: none;" tabindex="0">
+                            <img src="{{asset('assets/images/'.$logon_user->client->logo)}}" repeat alt="logo-large" > 
+                    </div>
                     </div>
                     <!--end card-body-->
                     <div class="card-body">
@@ -66,12 +68,13 @@
                                 <div class="col-lg-4 align-self-center mb-3 mb-lg-0">
                                     <div class="dastone-profile-main">
                                         <div class="dastone-profile-pic">
-                                            @if(auth()->user()->image == null)
+                                            @if($logon_user->client->logo == null)
                                             <div style="display: flex;width:128px;height:128px;background-color:rgba(59, 130, 246, 0.5);vertical-align:middle;align-items:center;justify-content:center;overflow:hidden" class="rounded-circle">
                                                 <div class="fw-semibold text-white" style="font-size: 36px;font-weight:700">{{strtoupper(substr(auth()->user()->firstname,0,1))}}</div>
                                             </div>
                                             @else
-                                            <img src="{{asset('assets/images/placeholder.png')}}" alt="" height="110" class="rounded-circle">
+                                            {{-- <img src="{{asset('assets/images/placeholder.png')}}" alt="" height="110" class="rounded-circle"> --}}
+                                            <img src="{{asset('assets/images/'.$logon_user->client->logo)}}" height="50" width="60px" class="rounded-circle"> 
                                             <!-- <img src="{{auth()->user()->image}}" alt="logo-large" class="rounded-circle thumb-xs">  -->
                                             @endif
                                             <span class="dastone-profile_main-pic-change">
@@ -100,7 +103,7 @@
                                 <!--end col-->
                                 <div class="col-lg-4 align-self-center">
                                     <ul class="list-unstyled personal-detail mb-0">
-                                        <li class=""><i class="ti ti-medall me-2 text-secondary font-16 align-middle"></i> <b> Role </b> : {{$user->user_type == 2? 'Super Admin' : ''}}</li>
+                                        <li class=""><i class="ti ti-medall me-2 text-secondary font-16 align-middle"></i> <b> Role </b> : {{$user->user_type == 2? 'User Account' : ''}}</li>
                                         <li class="mt-2"><i class="ti ti-pencil-alt text-secondary font-16 align-middle me-2"></i> <b> Date Registered </b> : {{date('jS F Y, h:iA', strtotime($user->created_at))}}</li>
                                         <!-- <li class="mt-2"><i class="ti ti-briefcase text-secondary font-16 align-middle me-2"></i> <b>  </b> : {{ucwords($user->client->company_name)}}</li> -->
                                     </ul>

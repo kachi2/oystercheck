@@ -1,4 +1,5 @@
    <!-- Top Bar Start -->
+   
             <div class="topbar">            
                 <!-- Navbar -->
                 <nav class="navbar-custom">    
@@ -55,12 +56,12 @@
                              <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-bs-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="false" aria-expanded="false">
                                 <span class="ms-1 nav-user-name hidden-sm ">{{ucwords(auth()->user()->firstname)}}</span>
-                                @if(auth()->user()->image == null)
+                                @if($logon_user->client->logo == null)
                                 <div style="display: inline-flex;width:32px;height:32px;background-color:rgba(59, 130, 246, 0.5);vertical-align:middle;align-items:center;justify-content:center;overflow:hidden" class="rounded-circle">
                                     <div class="fw-semibold text-white" style="color:#ffffff;">{{strtoupper(substr(auth()->user()->firstname,0,1))}}</div>
                                 </div>
                                 @else
-                                <img src="{{auth()->user()->image}}" alt="logo-large" class="rounded-circle thumb-xs"> 
+                                <img src="{{asset('assets/images/'.$logon_user->client->logo)}}" alt="logo-large" class="rounded-circle thumb-sm"> 
                                 @endif
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">

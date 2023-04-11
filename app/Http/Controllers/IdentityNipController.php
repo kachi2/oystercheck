@@ -24,7 +24,7 @@ class IdentityNipController extends Controller
             'pin' => 'bail|required',
             'last_name' => 'bail|required|string|alpha',
             'first_name' => 'bail|nullable|string|alpha',
-            'validate_data' => 'bail|nullable|dob',
+            'validate_data' => 'bail|nullable',
             'compare_image' => 'bail|nullable',
             'dob' => 'bail|nullable|date',
             'image' => 'bail|nullable|image|mimes:jpg,jpeg,png',

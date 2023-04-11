@@ -57,9 +57,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body p-0">
-                        <div id="user_map" class="pro-map leaflet-container leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag" style="height: 220px; position: relative; outline: none;" tabindex="0">
-                            <img src="{{asset('assets/images/'.$logon_user->client->logo)}}" repeat alt="logo-large" > 
-                    </div>
+                        <div id="user_map" class="pro-map leaflet-container leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag" style="height: 100px; position: relative; outline: none;" tabindex="0">
+                           
+                       </div>
                     </div>
                     <!--end card-body-->
                     <div class="card-body">

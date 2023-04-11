@@ -23,7 +23,7 @@ class IdentityNinController extends Controller
             'first_name' => 'bail|nullable|string|alpha',
             'last_name' => 'bail|nullable|string|alpha',
             'validate_data' => 'bail|nullable',
-            'compare_image' => 'bail|nullable|required_with:image',
+            'compare_image' => 'bail|nullable|required_with:image,dob',
             'dob' => 'bail|nullable|date',
             'image' => 'bail|nullable|image|mimes:jpg,jpeg,png',
             'subject_consent' => 'bail|required|accepted'

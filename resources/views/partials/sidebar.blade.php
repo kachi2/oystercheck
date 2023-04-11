@@ -25,7 +25,7 @@
                     <hr class="hr-dashed hr-menu">
                     
                     <li class="menu-label my-2">Candidate Onboarding</li>
-                <li>
+                    <li>
                         <a href="javascript: void(0);">
                             <i data-feather="user-plus" class="align-self-center menu-icon"></i>
                             <span>Candidate Onboarding</span>
@@ -40,7 +40,7 @@
                                 </a>
                             </li>
                         </ul>
-                </li>
+                    </li>
                     <hr class="hr-dashed hr-menu">
                     <li class="menu-label my-2">Verifications</li>
                     <li>
@@ -114,9 +114,7 @@
                             </div>
                     
                         </form>
-                    </li>
-              
-                            
+                    </li>       
                 </ul>
             </div>
             @else

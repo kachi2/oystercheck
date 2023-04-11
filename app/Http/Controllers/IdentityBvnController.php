@@ -30,7 +30,7 @@ class IdentityBvnController extends Controller
             'dob' => 'bail|nullable|date',
             'image' => 'bail|nullable|image|mimes:jpg,jpeg,png',
             'advance_search' => 'bail|nullable',
-            'subject_consent' => 'bail|required|accepted'
+            'subject_consent' => 'bail|requiπred|accepted'
         ]);
         if ($validator->fails()) {
             Session::flash('alert', 'error');

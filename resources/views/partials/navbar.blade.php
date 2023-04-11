@@ -1,10 +1,6 @@
-   <!-- Top Bar Start -->
-   
-            <div class="topbar">            
-                <!-- Navbar -->
+            <div class="topbar">   
                 <nav class="navbar-custom">    
                     <ul class="list-unstyled topbar-nav float-end mb-0">  
-                        
                         <li class="dropdown notification-list">
                             <span class="nav-link dropdown-toggle arrow-none waves-light " >
                                @if($logon_user->user_type == 2)
@@ -14,8 +10,7 @@
                                  <span class="badge bg-success rounded-pill "> Live Mode</span>
                                  @endif
                                  @endif
-                        </span>
-                            
+                            </span>
                         </li>
             
                         <li class="dropdown notification-list">
@@ -25,13 +20,10 @@
                                 <span class="badge bg-danger rounded-pill noti-icon-badge">@if(isset($notify)){{count($notify)}} @else 0 @endif</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end dropdown-lg pt-0">
-                            
                                 <h6 class="dropdown-item-text font-15 m-0 py-3 border-bottom d-flex justify-content-between align-items-center">
                                     Notifications <span class="badge bg-primary rounded-pill">@if(isset($notify)){{count($notify)}} @else 0 @endif</span>
                                 </h6> 
                                 <div class="notification-menu" data-simplebar>
-                                <!--end-item-->
-                                    <!-- item-->
                                     @if(isset($notify) && count($notify) > 0)
                                     @foreach ($notify as $ss )
                                     <a href="#" class="dropdown-item py-3">
@@ -48,10 +40,8 @@
                                     </a><!--end-item-->
                                     @endforeach
                                     @endif
-                                   <!--end-item-->
                                 </div>
                             </div>
-                            
                         </li>
 
                         <li class="dropdown">
@@ -90,7 +80,7 @@
                             </button>
                         </li> 
                         @if($logon_user->user_type == 2)
-                    @if($logon_user->client->is_activated == 1)
+                        @if($logon_user->client->is_activated == 1)
                         <li class="creat-btn">
                             <div class="nav-link">
                                 <span class=" badge bg-soft-primary"  role="" @if(auth()->user()->user_type == 2)>User Dashboard @endif</span>
@@ -105,11 +95,11 @@
                         <li class="creat-btn">
                             <div class="nav-link">
                         Welcome to Oysterchecks
-                    Kindly provide the requested information to fully verify your account. <a href="{{route('user.profile')}}" class=" badge bg-primary" >  Get Started </a>
+                       Kindly provide the requested information to fully verify your account. <a href="{{route('user.profile')}}" class=" badge bg-primary" >  Get Started </a>
                             </div>
                         </li>                
                         @endif  
-                    @endif     
+                       @endif     
                     </ul>
                 </nav>
                 <!-- end navbar-->

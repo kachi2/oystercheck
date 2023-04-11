@@ -19,7 +19,7 @@ class IdentityPvcController extends Controller
     public function processPvc(Request $request, $slug)
     {
         $validator = Validator::make($request->all(), [
-            'pin' => 'bail|required|alpha_num|size:19',
+            'pin' => 'bail|required|alpha_num',
             'first_name' => 'bail|nullable|string|alpha',
             'last_name' => 'bail|nullable|string|alpha',
             'validate_data' => 'bail|nullable|required_with:first_name,dob',

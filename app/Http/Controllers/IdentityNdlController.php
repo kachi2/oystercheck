@@ -21,7 +21,7 @@ class IdentityNdlController extends Controller
             'pin' => 'bail|required|alpha_num|size:12',
             'first_name' => 'bail|nullable|string|alpha',
             'last_name' => 'bail|nullable|string|alpha',
-            'validate_data' => 'bail|nullable|required_with:first_name,dob',
+            'validate_data' => 'bail|nullable|required_with:first_name',
             'compare_image' => 'bail|nullable|required_with:image',
             'dob' => 'bail|nullable|date',
             'image' => 'bail|nullable|image|mimes:jpg,jpeg,png',

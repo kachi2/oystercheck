@@ -17,7 +17,7 @@ class CandidatesDocsReviewController extends Controller
     public function __construct(Auth $user)
     {    
         
-        return $this->middleware('clients');
+       // return $this->middleware('clients');
     }
 
 

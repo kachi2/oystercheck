@@ -42,15 +42,16 @@ class AppServiceProvider extends ServiceProvider
             if (Auth::check()) {
                 $data['notify'] = Notification::where(['user_id' => auth()->user()->id])->latest()->take(4)->get();
                 $user = User::where('id', auth()->user()->id)->first();
+                $data['logon_user'] = $user;
                 if($user->user_type == 1){
                     $data['profile_image'] = 'default.png';
                     $data['client_balance'] = Wallet::where('user_id', $user->id)->first();
                 }elseif($user->user_type == 2){
                     $img = Client::where('user_id', $user->id)->first();
                     $data['profile_image'] = $img->logo;
-                    //dd($img->logo);
+                    dd($img->logo);
                     $data['client_balance'] = Wallet::where('user_id', $user->id)->first();
-                    $data['logon_user'] = $user;
+                   
                 }else{
                     $data['profile_image'] ='default.png';
                     $data['client_balance'] = Wallet::where('user_id', $user->id)->first();

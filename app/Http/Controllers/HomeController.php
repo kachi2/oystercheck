@@ -140,6 +140,7 @@ class HomeController extends Controller
        
         if($verify->report_type == 'business'){
             $reports = BusinessVerification::where(['slug' => $verify->slug, 'user_id'=>$user->id])->latest()->get();
+          
             return redirect()->back()
                 ->with('reports', $reports);
         }else if($verify->report_type == 'address'){
@@ -149,7 +150,6 @@ class HomeController extends Controller
         }else{
            
             $reports = IdentityVerification::where(['verification_id' => $verify->id, 'user_id'=>$user->id])->latest()->get();
-          
             return view('users.reports.reports')
                     ->with('verifications', Verification::get())
                 ->with('reports', $reports);

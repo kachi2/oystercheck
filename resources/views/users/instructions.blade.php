@@ -20,9 +20,6 @@
                                 <span class="" id="Select_date">Jan 11</span>
                                 <i data-feather="calendar" class="align-self-center icon-xs ms-1"></i>
                             </a>
-                            <a href="#" class="btn btn-sm btn-outline-primary">
-                                <i data-feather="download" class="align-self-center icon-xs"></i>
-                            </a>
                         </div>
                     </div>
                     <!--end row-->
@@ -127,7 +124,7 @@
                     <!--end card-body-->
                 </div>
                 <!--end card-->
-                <div class="card">
+                {{-- <div class="card">
                     <div class="card-body">
                         <div class="d-block align-self-center justify text-center">
                             <h5 class="mt-1 mb-2">Verifications are very easy! takes less than 3 minutes.</h5>
@@ -143,7 +140,7 @@
                         </div>
                     </div>
                     <!--end card-body-->
-                </div>
+                </div> --}}
                 <!--end card-->
             </div>
         </div>

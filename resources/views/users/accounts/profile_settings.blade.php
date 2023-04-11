@@ -8,7 +8,7 @@
   position: relative;
   left: 5px;
   content: "✔";
-
+    }
     .errors{
         color:red;
     }

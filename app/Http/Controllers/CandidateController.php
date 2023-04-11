@@ -90,7 +90,7 @@ class CandidateController extends Controller
            if(isset($request->email)){
             $data['email'] = $request->email;
            }
-           $password =$this->GeneratePassword($request->name);
+           $password =$this->GeneratePassword($request->firstname);
            $data['password'] = Hash::make($password);
            $data['user_type'] = 1;
            $data['role_id'] = 1;

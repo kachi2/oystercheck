@@ -13,7 +13,6 @@
                                  @else
                                  <span class="badge bg-success rounded-pill "> Live Mode</span>
                                  @endif
-                                 @endauth
                                  @endif
                         </span>
                             

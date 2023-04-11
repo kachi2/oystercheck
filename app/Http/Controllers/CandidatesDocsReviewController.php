@@ -23,7 +23,7 @@ class CandidatesDocsReviewController extends Controller
 
     public function ApproveDoc($service){
 
-       // dd(decrypt($service));
+        dd(decrypt($service));
         if(isset($service)){
             $candidate = CandidateVerification::where('id', decrypt($service))->first();
           if($candidate->doc == null){

@@ -105,6 +105,8 @@ Route::post('/user/password/update', [ClientProfileController::class, 'UpdatePas
 Route::post('/user/basic/information/update', [ClientProfileController::class, 'UpdateBusinessInfo'])->name('basic_information');
 Route::post('/user/contact/information/update', [ClientProfileController::class, 'UpdateContactInfo'])->name('contact_information');
 Route::post('/user/document/update', [ClientProfileController::class, 'UpdateDocumentInfo'])->name('document_information');
+Route::get('/user/activated/account', [HomeController::class, 'AccountActivate'])->name('client.AccountActivate');
+Route::get('/user/account/activities', [HomeController::class, 'ActivityLog'])->name('client.ActivityLog');
 
 #=========== approve candidates documents by clients ========
 

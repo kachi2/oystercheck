@@ -93,7 +93,7 @@
                         </a>
                     </li> 
                     <li>
-                        <a href="javascript: void(0);">
+                        <a href="{{route('client.ActivityLog')}}">
                             <i data-feather="activity" class="align-self-center menu-icon"></i>
                             <span>Activity Log</span>
                         </a>
@@ -104,14 +104,18 @@
                             <span>Wallets Transactions</span>
                         </a>
                     </li>
-                    @if(auth()->user()->user_type == 3)
+                
                     <li>
-                        <a href="{{route('admin.index')}}">
-                            <i data-feather="credit-card" class="align-self-center menu-icon"></i>
-                            <span>Switch to Admin</span>
-                        </a>
+                        <form  action="{{route('client.AccountActivate')}}" method="get" id="form2">
+                     
+                            <div class="form-check form-switch form-switch-info">
+                                <input class="form-check-input" type="checkbox" id="customSwitchSecondary" onclick="form2.submit()" @if($logon_user->client->is_activated == 1) checked @endif>
+                                <label class="form-check-label" for="customSwitchinfo" style="color:#fff"> @if($logon_user->client->is_activated == 1)  Live Mode @else Test Mode @endif</label>
+                            </div>
+                    
+                        </form>
                     </li>
-                    @endif
+              
                             
                 </ul>
             </div>

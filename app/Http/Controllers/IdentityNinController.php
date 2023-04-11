@@ -35,7 +35,7 @@ class IdentityNinController extends Controller
             Session::flash('message', 'Failed! There was some errors in your input');
             return redirect()->back();
         }
-        if($this->sanbox() == 1 ){
+        if($this->sanbox() == 0 ){
             if($request->pin != '12312121212'){
                 Session::flash('alert', 'error');
                 Session::flash('message', 'Use Test data only for test mode');

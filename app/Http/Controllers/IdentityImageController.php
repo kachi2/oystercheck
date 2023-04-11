@@ -33,7 +33,7 @@ class IdentityImageController extends Controller
             return redirect()->back();
         }
 
-        if($this->sandbox() == 1 ){
+        if($this->sandbox() == 0 ){
             if($request->pin != '11111111111'){
                 Session::flash('alert', 'error');
                 Session::flash('message', 'Use Test data only for test mode');

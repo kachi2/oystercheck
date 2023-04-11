@@ -13,10 +13,12 @@ use Illuminate\Support\Facades\DB;
 use App\Models\CandidateVerification;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use App\Traits\sandbox;
 use Illuminate\Support\Facades\Validator;
 
 class CandidateController extends Controller
 {
+    use sandbox;
     public function __construct()
     {
        // $this->middleware('auth:admin');
@@ -29,18 +31,18 @@ class CandidateController extends Controller
     
     public function CandidateIndex(){
         
-        $candidate['candidate'] = Candidate::where('client_id', auth()->user()->id)->get();
-        $candidate['pending'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'pending'])->get();
-        $candidate['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'approved'])->get();
-        $candidate['rejected'] = Candidate::where(['client_id'=> auth()->user()->id, 'status'=>'rejected'])->get();
+        $candidate['candidate'] = Candidate::where(['client_id' => auth()->user()->id, 'is_sandbox' => $this->sandbox()])->get();
+        $candidate['pending'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'pending', 'is_sandbox' => $this->sandbox()])->get();
+        $candidate['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'approved', 'is_sandbox' => $this->sandbox()])->get();
+        $candidate['rejected'] = Candidate::where(['client_id'=> auth()->user()->id, 'status'=>'rejected', 'is_sandbox' => $this->sandbox()])->get();
         return view('users.candidates.index', $candidate);
     }
 
     public function CadidateCreate(){
-        $candidate['candidates'] = Candidate::where('client_id', auth()->user()->id)->get();
-        $candidate['pending'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'pending'])->get();
-        $candidate['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'approved'])->get();
-        $candidate['rejected'] = Candidate::where(['client_id'=> auth()->user()->id, 'status'=>'rejected'])->get();
+        $candidate['candidates'] = Candidate::where(['client_id', auth()->user()->id, 'is_sandbox' => $this->sandbox()])->get();
+        $candidate['pending'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'pending', 'is_sandbox' => $this->sandbox()])->get();
+        $candidate['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'approved', 'is_sandbox' => $this->sandbox()])->get();
+        $candidate['rejected'] = Candidate::where(['client_id'=> auth()->user()->id, 'status'=>'rejected', 'is_sandbox' => $this->sandbox()])->get();
        
         return view('users.candidates.create', $candidate)
         ->with('verifications', CandidateService::get());
@@ -111,7 +113,8 @@ class CandidateController extends Controller
             'country' => $request->country,
             'company' => $request->company,
             'email_status' => 'Email Sent',
-            'status' => 'not verified'
+            'status' => 'not verified',
+            'is_sanbox' => $this->sandbox()
           ]);
           foreach($request->verifyServices as $key => $value){
             CandidateVerification::create([
@@ -139,12 +142,12 @@ class CandidateController extends Controller
     }
 
     public function CandidateDetails($id){
-        $data['pending'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'pending'])->get();
-        $data['candidates'] = Candidate::where('client_id', auth()->user()->id)->get();
-        $data['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'verified'])->get();
-        $data['rejected'] = Candidate::where(['client_id'=> auth()->user()->id, 'status'=>'rejected'])->get();
+        $data['pending'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'pending', 'is_sandbox' => $this->sandbox()])->get();
+        $data['candidates'] = Candidate::where(['client_id', auth()->user()->id, 'is_sandbox' => $this->sandbox()])->get();
+        $data['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'verified', 'is_sandbox' => $this->sandbox()])->get();
+        $data['rejected'] = Candidate::where(['client_id'=> auth()->user()->id, 'status'=>'rejected', 'is_sandbox' => $this->sandbox()])->get();
         $candidate = Candidate::where('id', decrypt($id))->first();
-        $data['candidate'] = Candidate::where('user_id', $candidate->user_id)->first();
+        $data['candidate'] = Candidate::where(['user_id', $candidate->user_id, 'is_sandbox' => $this->sandbox()])->first();
         $data['services'] = CandidateVerification::where('user_id', $candidate->user_id)->get();
         return view('users.candidates.details', $data);
     }

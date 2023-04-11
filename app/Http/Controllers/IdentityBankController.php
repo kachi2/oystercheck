@@ -26,6 +26,13 @@ class IdentityBankController extends Controller
             Session::flash('message', 'Failed! There was some errors in your input');
             return redirect()->back();
         }
+        if($this->sandbox() == 0 ){
+            if($request->pin != '11111111111'){
+                Session::flash('alert', 'error');
+                Session::flash('message', 'Use Test data only for test mode');
+                return redirect()->back();
+            }
+        }
 
         $ref = $this->GenerateRef();
         $userWallet = Wallet::where('user_id', auth()->user()->id)->first();

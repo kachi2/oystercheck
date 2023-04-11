@@ -10,6 +10,7 @@ use App\Traits\GenerateRef;
 use Illuminate\Http\Request;
 use App\Traits\generateHeaderReports;
 use App\Models\User;
+use App\Traits\sandbox;
 use App\Models\FieldInput;
 use App\Models\Wallet;
 // use App\Models\BusinessVerificationDetail;
@@ -19,6 +20,7 @@ class BusinessController extends Controller
 {
     //
     use GenerateRef;
+    use sandbox;
     use generateHeaderReports;
 
     public function RedirectUser()
@@ -34,21 +36,21 @@ class BusinessController extends Controller
         if ($slug) {
             if ($slug->slug == 'cac') {
                 $data['slug'] = $slug;
-                $data['success'] = CacVerification::where(['status' => 'found', 'verification_id' => $slug->id, 'user_id' => $user->id])->count();
-                $data['failed'] = CacVerification::where(['status' => 'not_found', 'verification_id' => $slug->id, 'user_id' => $user->id])->count();
-                $data['pending'] = CacVerification::where(['status' => 'pending', 'verification_id' => $slug->id, 'user_id' => $user->id])->count();
+                $data['success'] = CacVerification::where(['status' => 'found', 'verification_id' => $slug->id, 'user_id' => $user->id,'is_sandbox' => $this->sandbox()])->count();
+                $data['failed'] = CacVerification::where(['status' => 'not_found', 'verification_id' => $slug->id, 'user_id' => $user->id, 'is_sandbox' => $this->sandbox()])->count();
+                $data['pending'] = CacVerification::where(['status' => 'pending', 'verification_id' => $slug->id, 'user_id' => $user->id, 'is_sandbox' => $this->sandbox()])->count();
                 $data['fields'] = FieldInput::where(['slug' => $slug->slug])->get();
                 $data['wallet'] = Wallet::where('user_id', $user->id)->first();
-                $data['logs'] = CacVerification::where(['user_id' => $user->id, 'verification_id' => $slug->id])->latest()->get();
+                $data['logs'] = CacVerification::where(['user_id' => $user->id, 'verification_id' => $slug->id, 'is_sandbox' => $this->sandbox()])->latest()->get();
                 return view('users.business.index', $data);
             } elseif ($slug->slug == 'tin') {
                 $data['slug'] = $slug;
-                $data['success'] = TinVerification::where(['status' => 'found', 'verification_id' => $slug->id, 'user_id' => $user->id])->count();
-                $data['failed'] = TinVerification::where(['status' => 'not_found', 'verification_id' => $slug->id, 'user_id' => $user->id])->count();
-                $data['pending'] = TinVerification::where(['status' => 'pending', 'verification_id' => $slug->id, 'user_id' => $user->id])->count();
+                $data['success'] = TinVerification::where(['status' => 'found', 'verification_id' => $slug->id, 'user_id' => $user->id, 'is_sandbox' => $this->sandbox()])->count();
+                $data['failed'] = TinVerification::where(['status' => 'not_found', 'verification_id' => $slug->id, 'user_id' => $user->id, 'is_sandbox' => $this->sandbox()])->count();
+                $data['pending'] = TinVerification::where(['status' => 'pending', 'verification_id' => $slug->id, 'user_id' => $user->id, 'is_sandbox' => $this->sandbox()])->count();
                 $data['fields'] = FieldInput::where(['slug' => $slug->slug])->get();
                 $data['wallet'] = Wallet::where('user_id', $user->id)->first();
-                $data['logs'] = TinVerification::where(['user_id' => $user->id, 'verification_id' => $slug->id])->latest()->get();
+                $data['logs'] = TinVerification::where(['user_id' => $user->id, 'verification_id' => $slug->id, 'is_sandbox' => $this->sandbox()])->latest()->get();
                 return view('users.business.index', $data);
             } else {
             }
@@ -144,6 +146,7 @@ class BusinessController extends Controller
             Session::flash('message', 'Incorrect or no data provided!');
             return redirect()->back();
         }
+        
         $ref = $this->GenerateRef();
         $slug = Verification::where('slug', $slug)->first();
         $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
@@ -173,7 +176,7 @@ class BusinessController extends Controller
                 $curl = curl_init();
                 $encodedRequestData = json_encode($requestData, true);
                 curl_setopt_array($curl, [
-                    CURLOPT_URL => "https://api.sandbox.youverify.co/v2/api/verifications/ng/company",
+                    CURLOPT_URL => $this->reqUrl()."verifications/ng/company",
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_ENCODING => "",
                     CURLOPT_MAXREDIRS => 1,
@@ -183,7 +186,7 @@ class BusinessController extends Controller
                     CURLOPT_POSTFIELDS => $encodedRequestData,
                     CURLOPT_HTTPHEADER => [
                         "Content-Type: application/json",
-                        "Token: N0R9AJ4L.PWYaM5cXggThkdCtkVSCsWz4fMsfeMIp6CKL"
+                        "Token: ".$this->reqToken()
                     ],
                 ]);
                 $response = curl_exec($curl);
@@ -227,6 +230,7 @@ class BusinessController extends Controller
                             'country' => 'Nigeria',
                             'requested_at' => $decodedResponse['data']['requestedAt'] != null ? $decodedResponse['data']['requestedAt'] : null,
                             'last_modified_at' => $decodedResponse['data']['lastModifiedAt'] != null ? $decodedResponse['data']['lastModifiedAt'] : null,
+                            'is_sandbox' => $this->sandbox()
                         ]);
                         DB::commit();
                         Session::flash('alert', 'success');
@@ -280,7 +284,7 @@ class BusinessController extends Controller
                 $curl = curl_init();
                 $encodedRequestData = json_encode($requestData, true);
                 curl_setopt_array($curl, [
-                    CURLOPT_URL => "https://api.sandbox.youverify.co/v2/api/verifications/ng/tin",
+                    CURLOPT_URL => $this->reqUrl()."verifications/ng/tin",
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_ENCODING => "",
                     CURLOPT_MAXREDIRS => 1,
@@ -290,7 +294,7 @@ class BusinessController extends Controller
                     CURLOPT_POSTFIELDS => $encodedRequestData,
                     CURLOPT_HTTPHEADER => [
                         "Content-Type: application/json",
-                        "Token: N0R9AJ4L.PWYaM5cXggThkdCtkVSCsWz4fMsfeMIp6CKL"
+                        "Token: ".$this->ReqToken()
                     ],
                 ]);
     
@@ -324,6 +328,7 @@ class BusinessController extends Controller
                             'country' => 'Nigeria',
                             'requested_at' => $decodedResponse['data']['requestedAt'] != null ? $decodedResponse['data']['requestedAt'] : null,
                             'last_modified_at' => $decodedResponse['data']['lastModifiedAt'] != null ? $decodedResponse['data']['lastModifiedAt'] : null,
+                            'is_sandbox' => $this->sandbox()
                         ]);
     
                         DB::commit();
@@ -391,58 +396,58 @@ class BusinessController extends Controller
         ]);
     }
 
-    public function bizSort(Request $request, $name)
-    {
+    // public function bizSort(Request $request, $name)
+    // {
 
-        // dd($name);
-        if ($request->sort == 'success') {
-            $user = User::where('id', auth()->user()->id)->first();
-            $slug = Verification::where(['slug' => $name])->first();
-            $data['slug'] = Verification::where(['slug' => $name])->first();
-            $data['success'] = BusinessVerification::where(['status' => 'successful', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
-            $data['failed'] = BusinessVerification::where(['status' => 'failed', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
-            $data['pending'] = BusinessVerification::where(['status' => 'pending', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
-            $data['fields'] = FieldInput::where(['slug' => $slug->slug])->get();
-            $data['wallet'] = Wallet::where('user_id', $user->id)->first();
-            $data['logs'] = BusinessVerification::where(['user_id' => auth()->user()->id, 'status' => 'successful'])->get();
-        }
-        if ($request->sort == 'failed') {
-            $user = User::where('id', auth()->user()->id)->first();
-            $slug = Verification::where(['slug' => $name])->first();
-            $data['slug'] = Verification::where(['slug' => $name])->first();
-            $data['success'] = BusinessVerification::where(['status' => 'successful', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
-            $data['failed'] = BusinessVerification::where(['status' => 'failed', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
-            $data['pending'] = BusinessVerification::where(['status' => 'pending', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
-            $data['fields'] = FieldInput::where(['slug' => $slug->slug])->get();
-            $data['wallet'] = Wallet::where('user_id', $user->id)->first();
-            $data['logs'] = BusinessVerification::where(['user_id' => auth()->user()->id, 'status' => 'failed'])->get();
-        }
-        if ($request->sort == 'pending') {
-            $user = User::where('id', auth()->user()->id)->first();
-            $slug = Verification::where(['slug' => $name])->first();
-            $data['slug'] = Verification::where(['slug' => $name])->first();
-            $data['success'] = BusinessVerification::where(['status' => 'successful', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
-            $data['failed'] = BusinessVerification::where(['status' => 'failed', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
-            $data['pending'] = BusinessVerification::where(['status' => 'pending', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
-            $data['fields'] = FieldInput::where(['slug' => $slug->slug])->get();
-            $data['wallet'] = Wallet::where('user_id', $user->id)->first();
-            $data['logs'] = BusinessVerification::where(['user_id' => auth()->user()->id, 'status' => 'pending'])->get();
-            // dd($data);
-        }
-        return view('users.business.index', $data);
-    }
+    //     // dd($name);
+    //     if ($request->sort == 'success') {
+    //         $user = User::where('id', auth()->user()->id)->first();
+    //         $slug = Verification::where(['slug' => $name])->first();
+    //         $data['slug'] = Verification::where(['slug' => $name])->first();
+    //         $data['success'] = BusinessVerification::where(['status' => 'successful', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
+    //         $data['failed'] = BusinessVerification::where(['status' => 'failed', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
+    //         $data['pending'] = BusinessVerification::where(['status' => 'pending', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
+    //         $data['fields'] = FieldInput::where(['slug' => $slug->slug])->get();
+    //         $data['wallet'] = Wallet::where('user_id', $user->id)->first();
+    //         $data['logs'] = BusinessVerification::where(['user_id' => auth()->user()->id, 'status' => 'successful'])->get();
+    //     }
+    //     if ($request->sort == 'failed') {
+    //         $user = User::where('id', auth()->user()->id)->first();
+    //         $slug = Verification::where(['slug' => $name])->first();
+    //         $data['slug'] = Verification::where(['slug' => $name])->first();
+    //         $data['success'] = BusinessVerification::where(['status' => 'successful', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
+    //         $data['failed'] = BusinessVerification::where(['status' => 'failed', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
+    //         $data['pending'] = BusinessVerification::where(['status' => 'pending', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
+    //         $data['fields'] = FieldInput::where(['slug' => $slug->slug])->get();
+    //         $data['wallet'] = Wallet::where('user_id', $user->id)->first();
+    //         $data['logs'] = BusinessVerification::where(['user_id' => auth()->user()->id, 'status' => 'failed'])->get();
+    //     }
+    //     if ($request->sort == 'pending') {
+    //         $user = User::where('id', auth()->user()->id)->first();
+    //         $slug = Verification::where(['slug' => $name])->first();
+    //         $data['slug'] = Verification::where(['slug' => $name])->first();
+    //         $data['success'] = BusinessVerification::where(['status' => 'successful', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
+    //         $data['failed'] = BusinessVerification::where(['status' => 'failed', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
+    //         $data['pending'] = BusinessVerification::where(['status' => 'pending', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
+    //         $data['fields'] = FieldInput::where(['slug' => $slug->slug])->get();
+    //         $data['wallet'] = Wallet::where('user_id', $user->id)->first();
+    //         $data['logs'] = BusinessVerification::where(['user_id' => auth()->user()->id, 'status' => 'pending'])->get();
+    //         // dd($data);
+    //     }
+    //     return view('users.business.index', $data);
+    // }
 
     public function BusinessReport($slug, $verification_id)
     {
         $this->RedirectUser();
         $user = auth()->user();
         if($slug == 'cac'){
-            $cac_verification = CacVerification::where(['id'=>$verification_id, 'user_id'=>$user->id])->first();
+            $cac_verification = CacVerification::where(['id'=>$verification_id, 'user_id'=>$user->id, 'is_sandbox' => $this->sandbox() ])->first();
             if($cac_verification){
                 return view('users.business.reports.cac_report', ['cac_verification'=>$cac_verification]);
             }
         }elseif($slug == 'tin'){
-            $tin_verification = TinVerification::where(['id'=>$verification_id, 'user_id'=>$user->id])->first();
+            $tin_verification = TinVerification::where(['id'=>$verification_id, 'user_id'=>$user->id, 'is_sandbox' => $this->sandbox()])->first();
             if($tin_verification){
                 return view('users.business.reports.tin_report', ['tin_verification'=>$tin_verification]);
             }

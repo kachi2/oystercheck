@@ -35,8 +35,8 @@ class IdentityNdlController extends Controller
             return redirect()->back();
         }
 
-        if($this->sandbox() == 1 ){
-            if($request->pin != '11111111111'){
+        if($this->sandbox() == 0){
+            if($request->pin != 'AAA00000AA00'){
                 Session::flash('alert', 'error');
                 Session::flash('message', 'Use Test data only for test mode');
                 return redirect()->back();

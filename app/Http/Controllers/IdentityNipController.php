@@ -36,8 +36,8 @@ class IdentityNipController extends Controller
             Session::flash('message', $validator->errors()->first());
             return redirect()->back()->withInput($request->all());
         }
-        if($this->sandbox() == 1 ){
-            if($request->pin != '11111111111'){
+        if($this->sandbox() == 0){
+            if($request->pin != 'A11111111'){
                 Session::flash('alert', 'error');
                 Session::flash('message', 'Use Test data only for test mode');
                 return redirect()->back();

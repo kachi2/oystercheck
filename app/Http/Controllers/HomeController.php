@@ -273,4 +273,33 @@ class HomeController extends Controller
         return $clients;
     }
   
+    public function AccountActivate(){
+        $user = User::whereId(auth()->user()->id)->first();
+        $client = Client::where('user_id', $user->id)->first();
+        if($client->is_admin_verified != 1){
+            Session::flash('message', 'Request failed, Kindly provide the requested information to fully verify your account');
+            Session::flash('alert', 'error');
+            return redirect()->back();
+        }
+
+        if($client->is_activated != 1){
+        $client->update(['is_activated' => 1]);
+        Session::flash('message', 'Request completed Successfully, Account fully activated');
+            Session::flash('alert', 'success');
+            return redirect()->back();
+    }else{
+        $client->update(['is_activated' => 0]);
+        Session::flash('message', 'Account Successfully switched to test mode');
+            Session::flash('alert', 'error');
+            return redirect()->back();
+    }
+    }
+
+    public function ActivityLog(){
+        $user = User::whereId(auth()->user()->id)->first();
+    return view('users.accounts.activities', [
+        'activities' => ActivityLog::where('user_id',  $user->id)->latest()->get(),
+    ]);
+    
+    }
 }

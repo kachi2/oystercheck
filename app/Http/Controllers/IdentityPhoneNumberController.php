@@ -31,8 +31,8 @@ class IdentityPhoneNumberController extends Controller
             Session::flash('message', 'Failed! There was some errors in your input');
             return redirect()->back();
         }
-        if($this->sandbox() == 1 ){
-            if($request->pin != '11111111111'){
+        if($this->sandbox() == 0){
+            if($request->pin != '08000000000'){
                 Session::flash('alert', 'error');
                 Session::flash('message', 'Use Test data only for test mode');
                 return redirect()->back();

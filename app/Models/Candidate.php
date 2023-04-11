@@ -10,7 +10,7 @@ class Candidate extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'client_id', 'phone', 'role', 'company', 'city', 'address', 'state', 'country', 'email'
+        'user_id', 'client_id', 'phone', 'role', 'company', 'city', 'address', 'state', 'country', 'email', 'is_sandbox'
     ];
     public function client(){
         return $this->belongsTo(Client::class, 'client_id', 'id');

@@ -48,17 +48,12 @@ class AdminController extends Controller
         Mail::to($data['email'])->send(new UserReg($data));
     }
 
-    public function RedirectUser(){
-        if(auth()->user()->user_type !== 3)
-        return redirect()->route('home');
-    }
-
     public function Index(){
-        $this->RedirectUser();
+        
         $data['success'] = IdentityVerification::where(['status'=>'successful'])->get();
         $data['failed'] = IdentityVerification::where(['status'=>'failed'])->get();
         $data['pending'] = IdentityVerification::where(['status'=>'pending'])->get();
-        $data['logs'] = IdentityVerification::latest()->take()->get();
+        $data['logs'] = IdentityVerification::latest()->take(5)->get();
         $data['recents'] = IdentityVerification::latest()->take(5)->get();
         $data['transactions'] = Transaction::latest()->take(5)->get();
         $data['activity'] = ActivityLog::take(10)->latest()->get();
@@ -66,7 +61,6 @@ class AdminController extends Controller
     }
 
     public function getVerify($slug){
-        $this->RedirectUser();
         $slug = strtoupper($slug);
         $slug = Verification::where('slug', $slug)->first();
         $data['slug'] = Verification::where('slug', $slug->slug)->first();
@@ -78,7 +72,6 @@ class AdminController extends Controller
     }  
     
     public function businessIndex($slug){
-        $this->RedirectUser();
         $slug = Verification::where(['slug' => $slug])->first();
         $data['slug'] = Verification::where(['slug' => $slug->slug])->first();
         $data['success'] = BusinessVerification::where(['status'=>'successful', 'verification_id'=>$slug->id])->get();
@@ -89,7 +82,6 @@ class AdminController extends Controller
     }
 
     public function businessDetails($id){
-        $this->RedirectUser();
         $slug = BusinessVerification::where('id', decrypt($id))->first();
         $data['slug'] = BusinessVerification::where('id', decrypt($id))->first();
         $data['success'] = BusinessVerification::where(['status'=>'successful', 'verification_id'=>$slug->verification_id])->get();
@@ -101,7 +93,6 @@ class AdminController extends Controller
     }
 
     public function AddressIndex($slug){
-        $this->RedirectUser();
         $slug = Verification::where(['slug' => $slug])->first();
         $data['slug'] = Verification::where(['slug' => $slug->slug])->first();
         $data['success'] = AddressVerification::where(['status'=>'successful', 'verification_id'=>$slug->id])->get();
@@ -119,7 +110,6 @@ class AdminController extends Controller
     }
 
     public function candidateDetails($id){
-        $this->RedirectUser();
         $data['verified'] = Candidate::where([ 'status'=>'verified'])->get();
         $data['rejected'] = Candidate::where([ 'status'=>'rejected'])->get();  
         $candidate = Candidate::where('id', decrypt($id))->first();

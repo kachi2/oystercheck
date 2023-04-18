@@ -32,6 +32,7 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+
     /**
      * Create a new controller instance.
      *
@@ -51,6 +52,8 @@ class LoginController extends Controller
             'ip_address' => $request->Ip(),
             'user_agent' => $request->userAgent(),
         ]);
+        if($user->user_type ==3) return redirect()->route('admin.index');
+        if($user->user_type ==1)return redirect()->route('candidate.homepage');
 
         $get_user_db = User::find($user->id);
         if($get_user_db->email_verified == null || $get_user_db->email_verified == false){

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-
+use Illuminate\Support\Facades\Auth;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -16,11 +16,15 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->type == 3){
+        if(auth::check()){
+        if(auth()->user()->user_type == 3){
             return $next($request);
         }
+    }else{
+        return redirect()->route('login');
+    }
           
-        return response()->json(['You do not have permission to access for this page.']);
+        return back()->route('home');
         /* return response()->view('errors.check-permission'); */
     }
 }

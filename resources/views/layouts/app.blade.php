@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
         <meta charset="utf-8" />
-         <title>{{ config('app.name', 'Oysterchecks') }}</title>
+         <title>{{ config('app.name', 'Oysterchecks Comprehensive and Exceptional background checks') }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta content="Oysterchecks Comprehensive and Exceptional background checks, KYC & AML compliance Solutions</" name="description" />
         <meta content="" name="author" />

@@ -21,12 +21,15 @@ class AddressController extends Controller
 {
   use GenerateRef;
   use generateHeaderReports;
+
+    public function __construct()
+    {
+      return $this->middleware('clients');
+    }
   //
 
   public function AddressIndex($slug)
   {
-    if (auth()->user()->user_type == 3)
-      return redirect()->route('admin.index');
 
     $data = $this->generateAddressReport($slug);
     return view('users.address.index', $data);
@@ -34,8 +37,6 @@ class AddressController extends Controller
 
   public function showCreateCandidate($slug)
   {
-    if (auth()->user()->user_type == 3)
-      return redirect()->route('admin.index');
 
     $data = $this->generateCreateCandidateData($slug);
     return view('users.address.createAddressCandidate', $data);

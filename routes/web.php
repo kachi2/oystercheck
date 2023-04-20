@@ -13,6 +13,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CandidatesDocsReviewController as Candidates;
 use App\Http\Controllers\ClientProfileController;
+use App\Http\Controllers\Admin\{AdminBusinessController, AdminAddressController, AdminClientController, AdminCandidateController, AdminIdentityController, AdminPaymentController, UserController};
 use App\Models\Admin;
 use App\Models\Candidate;
 
@@ -107,9 +108,7 @@ Route::post('/user/contact/information/update', [ClientProfileController::class,
 Route::post('/user/document/update', [ClientProfileController::class, 'UpdateDocumentInfo'])->name('document_information');
 Route::get('/user/activated/account', [HomeController::class, 'AccountActivate'])->name('client.AccountActivate');
 Route::get('/user/account/activities', [HomeController::class, 'ActivityLog'])->name('client.ActivityLog');
-
 #=========== approve candidates documents by clients ========
-
 Route::get('/candidates/user/approve/{service}', [Candidates::class, 'ApproveDoc'])->name('candidate.doc.approve');
 Route::get('/candidates/user/disapprove/{service}', [Candidates::class, 'DisapproveDoc'])->name('candidate.doc.disapprove');
 
@@ -119,29 +118,41 @@ Route::get('/candidates/user/disapprove/{service}', [Candidates::class, 'Disappr
 });
 
 #====================ADMIN ROUTES ============================
-Route::middleware('admin')->prefix('admin')->group( function() { 
-Route::get('/', [AdminController::class, 'Index'])->name('admin.index');
-Route::get('/index', [AdminController::class, 'Index'])->name('admin.index');
-Route::get('/identity/{slug}', [AdminController::class, 'getVerify'])->name('admin.verify');
-Route::get('/business/{slug}', [AdminController::class, 'businessIndex'])->name('admin.businessIndex');
-Route::get('/business/details/{id}', [AdminController::class, 'businessDetails'])->name('admin.business.details');
-Route::get('/address/{slug}', [AdminController::class, 'AddressIndex'])->name('admin.addressIndex');
-Route::get('/candidate', [AdminController::class, 'getVerify'])->name('admin.candidate.index');
-Route::get('/candidate/index', [AdminController::class, 'CandidateIndex'])->name('admin.candidate.index');
-Route::get('/candidate/details/{id}', [AdminController::class, 'CandidateDetails'])->name('admin.candidate.details');
-Route::get('/users/candidate/', [AdminController::class, 'UserCandidates'])->name('admin.user.candidates');
-Route::get('/users/clients/candidate/{id}', [AdminController::class, 'ClientCandidates'])->name('admin.client.candidates');
-Route::get('/user/clients/', [AdminController::class, 'UserClients'])->name('admin.user.clients');
-Route::get('/clients/create', [AdminController::class, 'createClient'])->name('admin.client.create');
-Route::post('/clients/store', [AdminController::class, 'ClientStore'])->name('admin.client.store');
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() { 
+Route::middleware('admin')->group(function (){
+Route::get('/', [AdminController::class, 'Index'])->name('index');
+Route::get('/index', [AdminController::class, 'Index'])->name('index');
+Route::get('/identity/{slug}', [AdminIdentityController::class, 'getVerify'])->name('verify');
+Route::get('/business/{slug}', [AdminBusinessController::class, 'businessIndex'])->name('businessIndex');
+Route::get('/business/details/{id}', [AdminBusinessController::class, 'businessDetails'])->name('business.details');
+Route::get('/address/{slug}', [AdminAddressController::class, 'AddressIndex'])->name('addressIndex');
+Route::get('/candidate', [AdminCandidateController::class, 'getVerify'])->name('candidate.index');
+Route::get('/candidate/index', [AdminCandidateController::class, 'CandidateIndex'])->name('candidate.index');
+Route::get('/candidate/details/{id}', [AdminCandidateController::class, 'CandidateDetails'])->name('candidate.details');
+
+Route::get('candidate/', [AdminCandidateController::class, 'UserCandidates'])->name('user.candidates');
+Route::get('/clients/candidate/{id}', [AdminCandidateController::class, 'ClientCandidates'])->name('client.candidates');
+Route::get('/user/clients/', [AdminClientController::class, 'UserClients'])->name('user.clients');
+Route::get('/clients/create', [AdminClientController::class, 'createClient'])->name('client.create');
+Route::post('/clients/store', [AdminClientController::class, 'ClientStore'])->name('client.store');
 Route::get('/administrators/index', [AdminController::class, 'AdministratorIndex'])->name('administratorIndex');
 Route::get('/administrators/create', [AdminController::class, 'AdministratorCreate'])->name('administratorCreate');
 Route::post('/administrators/store', [AdminController::class, 'AdministratorStore'])->name('administratorStore');
-Route::get('/file/download/{id}', [AdminController::class, 'FileDownload'])->name('fileDownload');
-Route::post('/candidate/status/update/{id}', [AdminController::class, 'statusUpdate'])->name('statusUpdate');
-Route::post('/candidate/payment/update/{id}', [AdminController::class, 'paymentUpdate'])->name('paymentUpdate');
-Route::post('/candidate/qa/update/{id}', [AdminController::class, 'QAUpdate'])->name('qaUpdate');
-Route::post('/candidate/qa/review/{id}', [AdminController::class, 'QAReview'])->name('qaReviews');
-Route::post('/candndate/document/verified/{id}', [AdminController::class, 'VerifyCandidate'])->name('VerifyCandidate');
+Route::get('/file/download/{id}', [AdminCandidateController::class, 'FileDownload'])->name('fileDownload');
+Route::post('/candidate/status/update/{id}', [AdminCandidateController::class, 'statusUpdate'])->name('statusUpdate');
+Route::post('/candidate/payment/update/{id}', [AdminPaymentController::class, 'paymentUpdate'])->name('paymentUpdate');
+Route::post('/candidate/qa/update/{id}', [AdminCandidateController::class, 'QAUpdate'])->name('qaUpdate');
+Route::post('/candidate/qa/review/{id}', [AdminCandidateController::class, 'QAReview'])->name('qaReviews');
+Route::post('/candidate/document/verified/{id}', [AdminCandidateController::class, 'VerifyCandidate'])->name('VerifyCandidate');
+Route::get('/client/company/details/{id}', [AdminCandidateController::class, 'VerifyCandidate'])->name('VerifyCandidate');
 
+Route::get('/reports', [AdminController::class, 'UserReports'])->name('users.report');
+Route::get('/reports/get/', [AdminController::class, 'getReports'])->name('users.getReports');
+Route::get('/profile', [AdminController::class, 'Profile'])->name('user.profile');
+Route::get('/transactions', [AdminController::class, 'getTransaction'])->name('user.transactions');
+Route::post('/profile/update', [AdminController::class, 'StorePersonalInfo'])->name('form_profileUpdate');
+Route::post('/password/update', [AdminController::class, 'UpdatePassword'])->name('form_PasswordeUpdate');
+Route::post('/basic/information/update', [AdminController::class, 'UpdateBusinessInfo'])->name('basic_information');
+Route::post('/contact/information/update', [AdminController::class, 'UpdateContactInfo'])->name('contact_information');
+});
 });

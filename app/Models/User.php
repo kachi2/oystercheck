@@ -9,6 +9,11 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+
+const ADMIN_VERIFIED = 1;
+const ADMIN_SUSPENDED = -1;
+const ADMIN_PENDING = 0;
+
     use HasFactory, Notifiable;
 
     /**
@@ -61,4 +66,8 @@ class User extends Authenticatable
     //         $type = 'CLIENT';
     //     }
     // }
+
+    public function activities(){
+        return $this->hasOne(ActivityLog::class)->latest();
+    }
 }

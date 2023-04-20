@@ -30,6 +30,7 @@ use App\Models\Client;
 use App\Models\Profile;
 use App\Models\Service;
 use App\Models\UserActivity;
+use App\Traits\VerifyIndex;
 use App\Mail\UserReg;
 use Illuminate\Support\Facades\Session;
 
@@ -37,6 +38,7 @@ class AdminController extends Controller
 {
     //
     use GenerateRef;
+    use VerifyIndex;
 
     public function __construct()
     {
@@ -44,95 +46,17 @@ class AdminController extends Controller
  
     }
 
+
+    public function Index(){
+        $data = $this->IdentityIndex();
+        return view('admin.verifications.index', $data);
+    }
+
+
     public function sendMail($data){
         Mail::to($data['email'])->send(new UserReg($data));
     }
 
-    public function Index(){
-        
-        $data['success'] = IdentityVerification::where(['status'=>'successful'])->get();
-        $data['failed'] = IdentityVerification::where(['status'=>'failed'])->get();
-        $data['pending'] = IdentityVerification::where(['status'=>'pending'])->get();
-        $data['logs'] = IdentityVerification::latest()->take(5)->get();
-        $data['recents'] = IdentityVerification::latest()->take(5)->get();
-        $data['transactions'] = Transaction::latest()->take(5)->get();
-        $data['activity'] = ActivityLog::take(10)->latest()->get();
-        return view('admin.verifications.index', $data);
-    }
-
-    public function getVerify($slug){
-        $slug = strtoupper($slug);
-        $slug = Verification::where('slug', $slug)->first();
-        $data['slug'] = Verification::where('slug', $slug->slug)->first();
-        $data['success'] = IdentityVerification::where(['status'=>'successful', 'verification_id'=>$slug->id])->get();
-        $data['failed'] = IdentityVerification::where(['status'=>'failed', 'verification_id'=>$slug->id])->get();
-        $data['pending'] = IdentityVerification::where(['status'=>'pending', 'verification_id'=>$slug->id])->get();           
-        $data['logs'] = IdentityVerification::where(['verification_id'=>$slug->id])->latest()->get();
-        return view('admin.verifications.verify', $data);
-    }  
-    
-    public function businessIndex($slug){
-        $slug = Verification::where(['slug' => $slug])->first();
-        $data['slug'] = Verification::where(['slug' => $slug->slug])->first();
-        $data['success'] = BusinessVerification::where(['status'=>'successful', 'verification_id'=>$slug->id])->get();
-        $data['failed'] = BusinessVerification::where(['status'=>'failed', 'verification_id'=>$slug->id])->get();
-        $data['pending'] = BusinessVerification::where(['status'=>'pending', 'verification_id'=>$slug->id])->get();          
-        $data['logs'] = BusinessVerification::where(['verification_id'=>$slug->id])->latest()->get();
-        return view('admin.business.index', $data);
-    }
-
-    public function businessDetails($id){
-        $slug = BusinessVerification::where('id', decrypt($id))->first();
-        $data['slug'] = BusinessVerification::where('id', decrypt($id))->first();
-        $data['success'] = BusinessVerification::where(['status'=>'successful', 'verification_id'=>$slug->verification_id])->get();
-        $data['failed'] = BusinessVerification::where(['status'=>'failed', 'verification_id'=>$slug->verification_id])->get();
-        $data['pending'] = BusinessVerification::where(['status'=>'pending', 'verification_id'=>$slug->verification_id])->get();
-        $data['logs'] = BusinessVerification::where([ 'verification_id'=>$slug->verification_id])->latest()->get();
-        $data['verified'] = BusinessVerificationDetail::where(['service_ref' => $slug->service_ref])->latest()->first();
-      return view('admin.business.details', $data);
-    }
-
-    public function AddressIndex($slug){
-        $slug = Verification::where(['slug' => $slug])->first();
-        $data['slug'] = Verification::where(['slug' => $slug->slug])->first();
-        $data['success'] = AddressVerification::where(['status'=>'successful', 'verification_id'=>$slug->id])->get();
-        $data['failed'] = AddressVerification::where(['status'=>'failed', 'verification_id'=>$slug->id])->get();
-        $data['pending'] = AddressVerification::where(['status'=>'pending', 'verification_id'=>$slug->id])->get();          
-        $data['logs'] = AddressVerification::where(['verification_id'=>$slug->id])->latest()->get();
-        return view('admin.address.index', $data);
-    }
-
-    public function CandidateIndex(){
-        $candidate['candidate'] = Candidate::get();
-        $candidate['verified'] = Candidate::where(['status'=>'approved'])->get();
-        $candidate['rejected'] = Candidate::where(['status'=>'rejected'])->get();
-        return view('admin.candidates.index', $candidate);
-    }
-
-    public function candidateDetails($id){
-        $data['verified'] = Candidate::where([ 'status'=>'verified'])->get();
-        $data['rejected'] = Candidate::where([ 'status'=>'rejected'])->get();  
-        $candidate = Candidate::where('id', decrypt($id))->first();
-        $data['candidates'] = Candidate::all();
-        $data['candidate'] = Candidate::where('user_id', $candidate->user_id)->first();
-        $data['services'] = CandidateVerification::where('user_id', $candidate->user_id)->get();
-        return view('admin.candidates.details', $data);
-    }
-
-    public function UserCandidates(){
-        $candidate = Candidate::get();
-        return view('admin.users.candidates', ['candidate'=> $candidate]);
-    }
-
-    public function UserClients(){
-        $clients = Client::get();
-        return view('admin.clients.index', ['clients'=> $clients]);
-    }
-
-    public function clientCandidates($id){
-        $candidate = Candidate::where('client_id', decrypt($id))->get();
-        return view('admin.clients.candidate', ['candidate'=> $candidate]);
-    }
 
     public function createClient(){
       return view('admin.clients.create');
@@ -382,5 +306,11 @@ class AdminController extends Controller
                 Session::flash('message', 'No changes made, check input and try again');
                 return back();
             }
+        }
+
+        public function UserTransactions(){
+            $data['balances'] = Wallet::first();
+            $data['transactions'] = Transaction::latest()->paginate(20);
+            return view('users.accounts.transactions', $data);
         }
 }

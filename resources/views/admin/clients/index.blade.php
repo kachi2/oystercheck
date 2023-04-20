@@ -1,3 +1,7 @@
+ <?php  
+use App\Models\User as User;
+?>
+ 
  @extends('layouts.admin')
  @section('content')
  <div class="page-content">
@@ -41,8 +45,9 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Address</th>
                                 <th>Status</th>
+                                <th>Last Login</th>
+                                <th>Login Ip</th>
                                 <th>Created On</th>
                                 <th>Action</th>
                             </tr>
@@ -50,13 +55,29 @@
                             <tbody>
                             @foreach ($clients as $client )
                                <tr>
-                                <td>{{$client->user->name}}</td>
+                                <td>{{$client->user->firstname .''.$client->user->lastname}}</td>
                                 <td>{{$client->user->email}}</td>
-                                <td>{{$client->company_name}}</td>
-                                <td>{{$client->company_email}}</td>
-                                <td>{{$client->company_address}}</td>
-                                <td> {{$client->created_at}}</td>
-                                <td><a href="{{route('admin.client.candidates', encrypt($client->id))}}}"> view Candidates</a></td>
+                                <td>{{$client->user->phone}}</td>
+                                <td>@if($client->is_admin_verified == User::ADMIN_VERIFIED) <span class="badge bg-success"> Verified</span> 
+                                @elseif($client->is_admin_verified == User::ADMIN_SUSPENDED) <span class="badge bg-danger">Suspended </span> 
+                                @else <span class="badge bg-warnig"> Pending</span></td>
+                                @endif
+                                <td> {{$client->user->activities->created_at->format('d/m/y H:I')}}</td>
+                                <td> {{$client->user->activities->ip_address}}</td>
+                                <td> {{$client->user->created_at}}</td>
+                                <td>
+                                    <div class="dropdown kanban-main-dropdown">
+                                        <a class="dropdown-toggle arrow-none" id="drop1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                            <i class="las la-ellipsis-v font-24 text-muted"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="drop1" style="">
+                                            <a class="dropdown-item " href="#" > Suspend User <span class="badge bg-danger"> X </span> </a>
+                                            {{-- <a class="dropdown-item" href="{{route('client.company.details')}}">View Company</a> --}}
+                                            <a class="dropdown-item" href="{{route('admin.client.candidates', encrypt($client->id))}}}"> view Candidates</a>
+                                            <a class="dropdown-item" href="#">View Payment History</a>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                                  @endforeach
                             </tbody>
@@ -64,5 +85,6 @@
                     </div>
                 </div>
             </div> <!-- end col -->
-        </div>                  
+        </div>                 
 @endsection
+

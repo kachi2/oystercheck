@@ -22,7 +22,7 @@
                         <a href="javascript: void(0);"><i data-feather="user" class="align-self-center menu-icon"></i><span>Identity Verification</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
                             @foreach($sidebar as $menu)
-                             <li class="nav-item"><a class="nav-link" href="{{route('admin.verify',$menu->slug)}}"><i class="ti-control-record"></i>{{$menu->slug}} Verification</a></li>
+                             <li class="nav-item"><a class="nav-link" href="{{route('admin.verify',$menu->slug)}}"><i class="ti-control-record"></i>{{strtoupper($menu->slug)}} Verification</a></li>
                              @endforeach
                         </ul>
                     </li> 
@@ -51,23 +51,23 @@
                    <li class="menu-label my-2">Administrative Task</li>
                        
                     <li>
-                        <a href="{{route('users.report')}}"><i data-feather="trending-up" class="align-self-center menu-icon"></i><span>Audit Reports</span></a>
+                        <a href="{{route('admin.users.report')}}"><i data-feather="trending-up" class="align-self-center menu-icon"></i><span>Audit Reports</span></a>
                     </li> 
                     <li>
-                        <a href="{{route('user.profile')}}"><i data-feather="settings" class="align-self-center menu-icon"></i><span>Settings</span></a>
+                        <a href="{{route('admin.user.profile')}}"><i data-feather="settings" class="align-self-center menu-icon"></i><span>Settings</span></a>
                     </li> 
                     <li>
                         <a href="javascript: void(0);"><i data-feather="activity" class="align-self-center menu-icon"></i><span>Activity Log</span></a>
                     </li>  
                      <li>
-                        <a href="{{route('user.transactions')}}"><i data-feather="credit-card" class="align-self-center menu-icon"></i><span>Wallets Transactions</span></a>
+                        <a href="{{route('admin.user.transactions')}}"><i data-feather="credit-card" class="align-self-center menu-icon"></i><span>Wallets Transactions</span></a>
                     </li>
                      
                    <li class="menu-label my-2">Manage Users</li>
                     
                            <li><a class="nav-link" href="{{route('admin.user.candidates')}}"> <i data-feather="users" class="align-self-center menu-icon"></i>Candidates</a></li>
                             <li><a class="nav-link" href="{{route('admin.user.clients')}}"> <i data-feather="user" class="align-self-center menu-icon"></i>Clients</a></li>
-                                     <li><a class="nav-link" href="{{route('administratorIndex')}}"> <i data-feather="user" class="align-self-center menu-icon"></i>Administrators</a></li>
+                                     {{-- <li><a class="nav-link" href="{{route('administratorIndex')}}"> <i data-feather="user" class="align-self-center menu-icon"></i>Administrators</a></li> --}}
                         
                         
                  </ul>

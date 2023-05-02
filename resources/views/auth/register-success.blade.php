@@ -99,7 +99,7 @@
                                     <div class="slider-item">
                                         <div class="nk-feature nk-feature-center">
                                             <div class="nk-feature-img">
-                                                <img class="round" src="{{asset('/landing_assets/img/landing1.png')}}" srcset="{{asset('/landing_assets/img/landing1.png')}} 2x" alt="">
+                                                <img class="round" src="{{asset('/landing_assets/fontpage.png')}}" srcset="{{asset('/landing_assets/img/landing1.png')}} 2x" alt="">
                                             </div>
                                             <div class="nk-feature-content py-5 p-sm-5">
                                                 <h4>Comprehensive Background Checks</h4>
@@ -113,7 +113,7 @@
                                     <div class="slider-item">
                                         <div class="nk-feature nk-feature-center">
                                             <div class="nk-feature-img">
-                                                <img class="round" src="{{asset('/landing_assets/img/landing2.png')}}" srcset="{{asset('/landing_assets/img/landing2.png')}} 2x" alt="">
+                                                <img class="round" src="{{asset('/landing_assets/fontpage2.png')}}" srcset="{{asset('/landing_assets/img/landing2.png')}} 2x" alt="">
                                             </div>
                                             <div class="nk-feature-content py-5 p-sm-5">
                                                 <h4>Had Enough Of Inconsistent KYC Check Results?</h4>

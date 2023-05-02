@@ -8,6 +8,7 @@ use App\Models\CandidateVerification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
+use App\Models\Verification;
 use Illuminate\Support\Facades\Auth;
 
 class CandidatesDocsReviewController extends Controller
@@ -57,6 +58,15 @@ class CandidatesDocsReviewController extends Controller
         return back();
         }
         return back();
+    }
+
+    public function RequestVerification($id){
+      $candidate = CandidateVerification::whereId(decrypt($id))->first();
+      return view('users.candidates.checks', [
+       'candidate' => $candidate,
+        'slug' => CandidateVerification::where('id', $candidate->candidate_services_id)->first()
+
+      ]);
     }
 
 }

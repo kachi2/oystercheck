@@ -87,17 +87,17 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-lg-4 ">
+                                        <div class="col-lg-3 ">
 
                                             
                                                 <div class="custom-border mb-3"></div>
-                                                <h3 class="pro-title">{{strtoupper($candidate->user->name)}}</h3>
+                                                <h3 class="pro-title">{{strtoupper($candidate->user->firstname .' '. $candidate->user->lastname)}}</h3>
                                             
                                                 <ul class="list-unstyled personal-detail mb-0">
                                                     <li class=""><i class="ti ti-mobile me-2 text-secondary font-16 align-middle"></i> <b> Phone </b> : {{$candidate->phone}}</li>
                                                     <li class="mt-2"><i class="ti ti-email text-secondary font-16 align-middle me-2"></i> <b> Email </b> : {{$candidate->email}}</li>
-                                                    <li class="mt-2"><i class="ti ti-briefcase text-secondary font-16 align-middle me-2"></i> <b> Company </b> : {{$candidate->company}}</li>
-                                                    <li class="mt-2"><i class="ti ti-world text-secondary font-16 align-middle me-2"></i> <b> Address </b> :{{$candidate->address}} </li>  
+                                                    <li class="mt-2"><i class="ti ti-briefcase text-secondary font-16 align-middle me-2"></i> <b> Company </b> : {{$candidate->client->company_name}}</li>
+                                                    <li class="mt-2"><i class="ti ti-map text-secondary font-16 align-middle me-2"></i> <b> Address </b> :{{$candidate->address}} </li>  
                                                       <li class=""> <i class="ti ti-world text-secondary font-16 align-middle me-2"></i><b> City</b> : {{$candidate->city}}</li>
                                                 <li class=""> <i class="ti ti-world text-secondary font-16 align-middle me-2"></i> <b> State</b> : {{$candidate->state}}</li>
                                                 <li class=""> <i class="ti ti-world text-secondary font-16 align-middle me-2"></i><b> Country</b> : {{$candidate->country}}</li>                                                 
@@ -106,7 +106,7 @@
                                              
 
                                         </div><!--end col-->
-                                        <div class="col-lg-8 align-self-center">
+                                        <div class="col-lg-9 align-self-center">
                                             <div class="single-pro-detail">
                                                 <div class="custom-border mb-3"></div>
                                                 <h3 class="pro-title">Verification Services</h3>
@@ -118,8 +118,9 @@
                                                 <th>Service Name</th>
                                                 <th>Status</th>
                                                 <th>Document</th>
-                                                <th>QA Status</th>
+                                                <th>QA Verified</th>
                                                 <th>QA Review</th>
+                                                <th>Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -144,6 +145,13 @@
                                                  <td><span class="badge badge-soft-warning">Pending</span></td>
                                                 @endif
                                                 <td><p style="font-size:9px">{{$ss->QA_review}}</p></td>
+
+                                                <td>
+                                                    @if($ss->status == "pending")
+                                                     <small class="badge bg-soft-primary">  <a href="{{route('candidate.request-verification', encrypt($ss->id))}}"> Request Verification</a> </small>
+                                                     @endif
+                                                    
+                                                    </td>
                                                   
                                             </tr>
                                             @endforeach

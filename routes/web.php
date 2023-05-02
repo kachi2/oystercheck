@@ -16,6 +16,7 @@ use App\Http\Controllers\ClientProfileController;
 use App\Http\Controllers\Admin\{AdminBusinessController, AdminAddressController, AdminClientController, AdminCandidateController, AdminIdentityController, AdminPaymentController, UserController};
 use App\Models\Admin;
 use App\Models\Candidate;
+use App\Models\CandidateVerification;
 
 // use App\Models\Transaction;
 
@@ -111,6 +112,7 @@ Route::get('/user/account/activities', [HomeController::class, 'ActivityLog'])->
 #=========== approve candidates documents by clients ========
 Route::get('/candidates/user/approve/{service}', [Candidates::class, 'ApproveDoc'])->name('candidate.doc.approve');
 Route::get('/candidates/user/disapprove/{service}', [Candidates::class, 'DisapproveDoc'])->name('candidate.doc.disapprove');
+Route::get('/requedst/candiate/custom/verification/{id}', [Candidates::class, 'RequestVerification'])->name('candidate.request-verification');
 
 // Route::get('/addressReport', function(){
 //     return view('users.address.addressReport');

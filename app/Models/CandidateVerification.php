@@ -19,4 +19,6 @@ class CandidateVerification extends Model
     }
 
     
+
+    
 }

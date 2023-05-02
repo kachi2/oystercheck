@@ -162,7 +162,7 @@
                                 </div>
                             </div><!-- .nk-block -->
                             <div class="nk-block nk-auth-footer">
-                                <div class="nk-block-between">
+                                {{-- <div class="nk-block-between">
                                     <ul class="nav nav-sm">
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">Terms & Condition</a>
@@ -188,7 +188,7 @@
                                             </div>
                                         </li>
                                     </ul><!-- .nav -->
-                                </div>
+                                </div> --}}
                                 <div class="mt-3">
                                     <p>&copy; Oysterchecks {{Date('Y')}}. All Rights Reserved.</p>
                                 </div>

@@ -30,7 +30,7 @@ public function ReqToken(){
     if($user->client->is_activated == 0){
         $reqToken= 'N0R9AJ4L.PWYaM5cXggThkdCtkVSCsWz4fMsfeMIp6CKL';
     }else{
-        $reqToken = 'N0R9AJ4L.PWYaM5cXggThkdCtkVSCsWz4fMsfeMIp6CKL';
+        $reqToken = 'bEhEkBLt.wFmQBZLRLe4jCvLki16ic9oTB27lwMnq8q7s';
     }
     return $reqToken;
 }

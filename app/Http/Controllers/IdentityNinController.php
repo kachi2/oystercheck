@@ -19,7 +19,6 @@ class IdentityNinController extends Controller
     public function processNin(Request $request, $slug)
     {
         $validator = Validator::make($request->all(), [
-            'pin' => 'bail|required|numeric|digits:11',
             'first_name' => 'bail|nullable|string|alpha',
             'last_name' => 'bail|nullable|string|alpha',
             'validate_data' => 'bail|nullable',
@@ -30,12 +29,12 @@ class IdentityNinController extends Controller
         ]);
 
         if ($validator->fails()) {
-            // dd($validator->errors());
+            
             Session::flash('alert', 'error');
             Session::flash('message', 'Failed! There was some errors in your input');
             return redirect()->back();
         }
-        if($this->sanbox() == 0 ){
+        if($this->sandbox() == 0 ){
             if($request->pin != '12312121212'){
                 Session::flash('alert', 'error');
                 Session::flash('message', 'Use Test data only for test mode');

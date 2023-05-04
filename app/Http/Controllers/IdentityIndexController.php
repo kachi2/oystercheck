@@ -28,6 +28,7 @@ class IdentityIndexController extends Controller
                 $data['logs'] = BvnVerification::where(['user_id' => $user->id, 'verification_id' => $slug->id, 'is_sandbox' => $this->sandbox()])->latest()->get();
                 return view('users.individual.identity_indexes.bvn_index', $data);
             } elseif ($slug->slug == 'nip') {
+
                 $data['success'] = NipVerification::where(['status' => 'found', 'verification_id' => $slug->id, 'user_id' => $user->id, 'is_sandbox' => $this->sandbox()])->count();
                 $data['failed'] =  NipVerification::where(['status' => 'not_found', 'verification_id' => $slug->id, 'user_id' => $user->id, 'is_sandbox' => $this->sandbox()])->count();
                 $data['pending'] = NipVerification::where(['status' => 'pending', 'verification_id' => $slug->id, 'user_id' => $user->id, 'is_sandbox' => $this->sandbox()])->count();
@@ -35,6 +36,8 @@ class IdentityIndexController extends Controller
                 $data['logs'] = NipVerification::where(['user_id' => $user->id, 'verification_id' => $slug->id, 'is_sandbox' => $this->sandbox()])->latest()->get();
                 return view('users.individual.identity_indexes.nip_index', $data);
             } elseif ($slug->slug == 'nin') {
+
+              
                 $data['success'] = NinVerification::where(['status' => 'found', 'verification_id' => $slug->id, 'user_id' => $user->id, 'is_sandbox' => $this->sandbox()])->count();
                 $data['failed'] =  NinVerification::where(['status' => 'not_found', 'verification_id' => $slug->id, 'user_id' => $user->id, 'is_sandbox' => $this->sandbox()])->count();
                 $data['pending'] = NinVerification::where(['status' => 'pending', 'verification_id' => $slug->id, 'user_id' => $user->id, 'is_sandbox' => $this->sandbox()])->count();

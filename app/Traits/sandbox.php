@@ -1,6 +1,6 @@
 <?php 
 namespace App\Traits;
-use App\Models\{User, Client};
+use App\Models\{User};
 
 trait sandbox{
 

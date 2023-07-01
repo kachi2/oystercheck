@@ -48,7 +48,7 @@
                                     
                                     <div class="col-md-6 mb-3">
                                         <label class="badge bg-soft-pink p-2"> Uploaded File for {{$candidate->service->name}}</label> 
-                                        <div> <a target="_blank" href="{{asset('assets/candidates/'.$candidate->doc)}}"><img src="{{asset('assets/candidates/'.$candidate->doc)}}" height="300px" width="200px"> </a>  </div>
+                                        <div> <a target="_blank" href="{{asset('assets/candidates/'.$candidate->doc)}}"><p {{asset('assets/candidates/'.$candidate->doc)}} height="300px" width="200px"> </p> </a>  </div>
                                     </div>
                                   
                                 </div>
@@ -57,9 +57,9 @@
                                     <div class="col-md-7 mb-3">
                                         <div class="media align-items-center p-2 border-start bg-light border-2">
                                           
-                                            <div class="media-body" style="font-size:12px;"> You are requesting for </div>
+                                            <div class="media-body" style="font-size:12px;"> You are requesting for  custom verification for {{$candidate->service->name}} </div>
                                         </div>
-                                        <div class="media align-items-center p-2">
+                                        <div class="media align-items-center p-2"> 
                                             <div class="me-3 align-items-center">
                                                 <i class="la la-info-circle"></i>
                                             </div>

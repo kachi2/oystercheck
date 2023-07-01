@@ -17,7 +17,7 @@
                             <tr><td height="7px" style="line-height: 7px;"></td></tr>
                             <tr><td style=" font-weight: 400; font-size: 15px;">Congratulations and welcome.</td></tr>
                             <tr><td style=" font-weight: 400; font-size: 15px;">Thank you for registering for Oysterchecks Background Vetting service.</td>
-                            <tr><td style=" font-weight: 400; font-size: 15px;">We have created your customer account with details you will require to access our portal for managing your account with us.</td></tr>
+                            <tr><td style=" font-weight: 400; font-size: 15px;">We have created your account with details below.</td></tr>
                             <tr><td height="5px" style="line-height: 5px;"></td></tr>
                             <tr><td style=" font-weight: 400; font-size: 15px;">Unique username: <span>{{$data["email"]}}</span></td></tr>
                             <tr><td style="font-weight: 400; font-size: 15px;">Password: <span>{{$data["password"]}}</span></td></tr>

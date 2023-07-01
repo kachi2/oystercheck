@@ -32,7 +32,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Upload Documents</h4>
+                        <h4 class="card-title">Upload Documents - <span style="color:rgb(17, 128, 175); font-size:14px"> NOTE: FILES MUST BE AN IMAGE OR PDF FILE </span></h4>
                     </div><!--end card-header-->
                        <form method="post" action="{{route('candidate.FileStore')}}" class="add-candidate-form" enctype="multipart/form-data">
                       @csrf
@@ -43,19 +43,25 @@
                             <div class="col-xl-4">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" style="font-size:11px">Upload File for {{$ss->service->name}}</h4>
+                                    <h4 class="card-title" style="font-size:11px; color:rgb(5, 5, 114)">Upload File for <span style="color:red"> {{$ss->service->name}} </span></h4>
                                 </div><!--end card-header-->
                                 <div class="card-body">
                                     <input type="file" id="input-file-now" class="dropify" name="images[]" va/>   
                                     <input type="hidden" name="candidate[]" value="{{$ss->id}}">                                            
                                 </div><!--end card-body-->
+                            
                             </div><!--end card-->
+                            <p>     <a href="" class="btn-info p-2"> Download Sample Form</a></p>
+                          
                         </div> 
                         @endforeach
                             </div>   
-                           <center> <span class=""><button type="submit" class="btn btn-primary w-30 submitbtn p-2 ">Submit Documents</button> </span>                   
-                            </center>                         
+                                                 
                         </div><!-- end row --> 
+                        <div class="p-4">
+                            <button type="submit" class="btn btn-primary w-30 submitbtn p-2 ">Submit Documents</button> 
+                        </span>                   
+                    </div> 
                         </form>  
                     </div><!-- end card-body --> 
                    

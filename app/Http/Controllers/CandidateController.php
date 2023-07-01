@@ -90,7 +90,7 @@ class CandidateController extends Controller
            if(isset($request->email)){
             $data['email'] = $request->email;
            }
-           $password =$this->GeneratePassword($request->firstname);
+           $password =$this->GeneratePassword($request->first_name);
            $data['password'] = Hash::make($password);
            $data['user_type'] = 1;
            $data['role_id'] = 1;
@@ -100,7 +100,7 @@ class CandidateController extends Controller
           $create = User::create($data);
           if($create){
           $data['password']  = $password;
-          Mail::to($request->email)->send( new UserAccount($data));
+        //   Mail::to($request->email)->send( new UserAccount($data));
           Mail::to($request->email)->send( new UserOnboard($data));
           sleep(2);
           $candidate = User::latest()->first();
@@ -135,7 +135,7 @@ class CandidateController extends Controller
           }catch(\Exception $e){
             DB::rollBack();
             Session::flash('alert', 'error');
-            Session::flash('message', 'Unable to create candidate, please try again'.' '.$e);
+            Session::flash('message', 'Unable to create candidate, please try again');
             return redirect()->back()->withInput($request->all());
           }
         
@@ -166,20 +166,42 @@ class CandidateController extends Controller
     }
 
     public function CandidateFileStore(Request $request){  
+        $valid = Validator::make($request->all(), [
+            'images' => ['required', 'mimes:jpeg, png, jpg, pdf']
+        ]);
+
+
+        if($valid->fails()){
+            Session::flash('alert', 'success');
+            Session::flash('message', 'Image Files Request'); 
+        }
+        Session::flash('alert', 'success');
+        Session::flash('message', 'Files uploaded successfully');
+
+
         foreach($request->images as $key => $image){
             $name =  $image->getClientOriginalName();
             $fileName = \pathinfo($name, PATHINFO_FILENAME);
             $ext =  $image->getClientOriginalExtension();
             $fileName = $fileName.'.'.$ext;
+            $upload =  CandidateVerification::where(['id' => $request->candidate[$key], 'user_id' => auth()->user()->id ])->first();
+            if($upload->doc != null){
             $image->move('assets/candidates', $fileName);
-            $upload =  CandidateVerification::where('id', $request->candidate[$key])
-            ->update([
+            $upload->update([
                 'doc' => $fileName
             ]);
+            $alert = 'success';
+            $message = 'Files uploaded Successfully';
+           
+        }else{
+            $alert = 'error';
+            $message = 'you cannot replace  '.$upload->doc. ', file already exist';
+           
+        }
         }
         if($upload){
-            Session::flash('alert', 'success');
-            Session::flash('message', 'Files uploaded successfully');
+            Session::flash('alert', $alert);
+            Session::flash('message', $message);
             return redirect()->back();
         }else{
         Session::flash('alert', 'error');
@@ -197,5 +219,9 @@ class CandidateController extends Controller
         return view('users.onboarding.index', ['service'=> $service]);
         
     }
-   
+
+    public function viewCandidateDocuments(){
+        $documents = CandidateVerification::where('user_id', auth()->user()->id)->get();
+        return view('users.onboarding.index', ['service'=> $documents]);
+    }
 }

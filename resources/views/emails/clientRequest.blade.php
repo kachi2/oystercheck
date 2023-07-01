@@ -16,11 +16,11 @@
                             <tr><td style="font-weight: 500; font-size: 20px; color: #383838;">Dear Admin, you have new contact form</td></tr>
                             <tr><td height="7px" style="line-height: 7px;"></td></tr>
                             
-                            <tr><td style=" font-weight: 400; font-size: 15px;">Name <span>'{{$data["name"]}}.'</span></td></tr>
-                            <tr><td style="font-weight: 400; font-size: 15px;">Email: <span>'{{$data["email"]}}'</span></td></tr>
+                            <tr><td style=" font-weight: 400; font-size: 15px;">Name <span>{{$data["name"]}}</span></td></tr>
+                            <tr><td style="font-weight: 400; font-size: 15px;">Email: <span>{{$data["email"]}}</span></td></tr>
                             <tr><td style="font-weight: 400; font-size: 15px;">Phone: <span>{{$data['phone']}}</span></td></tr>
-                            <tr><td style=" font-weight: 400; font-size: 15px;">Company: <span>'{{$data['company']}}.'</span></td></tr>
-                            <tr><td style=" font-weight: 400; font-size: 15px;">Company Address: <span>'{{$data['address']}}.'</span></td></tr>
+                            <tr><td style=" font-weight: 400; font-size: 15px;">Company: <span>{{$data['company']}}</span></td></tr>
+                            <tr><td style=" font-weight: 400; font-size: 15px;">Company Address: <span>{{$data['address']}}</span></td></tr>
                             <tr><td height="20px" style="line-height:20px;"></td></tr>
                         </table>
                     </td>

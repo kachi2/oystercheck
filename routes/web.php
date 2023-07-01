@@ -81,13 +81,9 @@ Route::get('/user/candidate/index', [CandidateController::class, 'CandidateIndex
 Route::get('/user/candidate/create', [CandidateController::class, 'CadidateCreate'])->name('candidate.create');
 Route::post('/user/candidate/store', [CandidateController::class, 'CadidateStore'])->name('candidate.store');
 Route::get('/user/candidate/details/{id}', [CandidateController::class, 'CandidateDetails'])->name('candidate.details');
-Route::get('/user/candidate/upload/', [CandidateController::class, 'CandidateFileUpload'])->name('candidate.FileUpload');
-Route::post('/user/candidate/upload/store', [CandidateController::class, 'CandidateFileStore'])->name('candidate.FileStore');
-Route::get('/user/candidate/upload/index', [CandidateController::class, 'candidateHomePage'])->name('candidate.homepage');
-Route::get('/user/transactions', [HomeController::class, 'UserTransactions'])->name('user.transactions');
 Route::get('/user/transactions/{transaction}', [TransactionController::class, 'getTransaction'])->name('user.transaction');
 Route::get('/user/transactions/{transaction}/download', [TransactionController::class, 'downloadTransaction'])->name('user.transaction.download');
-
+Route::get('/user/transactions', [HomeController::class, 'UserTransactions'])->name('user.transactions');
 Route::post('/user/fund/wallet', [PaymentController::class, 'pay'])->name('fundWallet');
 Route::post('/user/fund/request', [HomeController::class, 'fundRequest'])->name('fundRequest');
 Route::get('/payment-success', [PaymentController::class, 'handleCallback']);
@@ -113,6 +109,15 @@ Route::get('/user/account/activities', [HomeController::class, 'ActivityLog'])->
 Route::get('/candidates/user/approve/{service}', [Candidates::class, 'ApproveDoc'])->name('candidate.doc.approve');
 Route::get('/candidates/user/disapprove/{service}', [Candidates::class, 'DisapproveDoc'])->name('candidate.doc.disapprove');
 Route::get('/requedst/candiate/custom/verification/{id}', [Candidates::class, 'RequestVerification'])->name('candidate.request-verification');
+Route::get('/requedst/candiate/custom/verification/send/{id}', [Candidates::class, 'RequestVerification'])->name('candidate.request-verification.store');
+
+###### candidates routes  
+
+Route::get('/user/candidate/upload/', [CandidateController::class, 'CandidateFileUpload'])->name('candidate.FileUpload');
+Route::post('/user/candidate/upload/store', [CandidateController::class, 'CandidateFileStore'])->name('candidate.FileStore');
+Route::get('/user/candidate/upload/index', [CandidateController::class, 'candidateHomePage'])->name('candidate.homepage');
+Route::get('/user/candidate/documents/', [CandidateController::class, 'viewCandidateDocuments'])->name('candidate.documents');
+
 
 // Route::get('/addressReport', function(){
 //     return view('users.address.addressReport');

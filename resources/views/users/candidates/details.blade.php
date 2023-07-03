@@ -116,11 +116,14 @@
                                             <thead>
                                             <tr>
                                                 <th>Service Name</th>
+                                                <th>Review</th>
                                                 <th>Status</th>
-                                                <th>Document</th>
-                                                <th>QA Verified</th>
-                                                <th>QA Review</th>
+                                                <th>Uploaded Document</th>
+                                                <th>Approved Document</th>
+                                                <th>Qualitfy Assurance Verified</th>
+                                                <th>Qualitfy Assurance  Review</th>
                                                 <th>Action</th>
+
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -128,14 +131,21 @@
                                             @foreach ($services as $ss )
                                             <tr>
                                                 <td>{{$ss->service->name}}</td>
+                                                <td>{{$ss->review}}</td>
                                                 @if($ss->status == "approved")
                                                 <td><span class="badge badge-soft-success">Approved</span></td>
                                                  @elseif($ss->status == "failed")
                                                 <td><span class="badge badge-soft-danger">Rejected</span></td>
                                                 @else
-                                                 <td><span class="badge badge-soft-warning">Pending</span> <br>  <a href="{{route('candidate.doc.approve', encrypt($ss->id))}}"> <i class="fa fa-check-circle badge badge-outline-info"> </i></a> <a href="{{route('candidate.doc.disapprove', encrypt($ss->id))}}"><i class="fa fa-times badge badge-outline-info"> </i> </a> </td>
+                                                 <td><span class="badge badge-soft-warning">Pending</span> <br>  
+                                                    <span style="float:right"> 
+                                                        <a href="javascript();"  data-bs-toggle="modal" data-bs-target="#approveDoc{{$ss->id}}">
+                                                    <i class="fa fa-check-circle badge badge-outline-success"> </i></a> 
+                                                    <a href="javascript();"  data-bs-toggle="modal" data-bs-target="#disapproveDoc{{$ss->id}}">
+                                                        <i class="fa fa-times badge badge-outline-danger"> </i> </a> </td>
                                                 @endif
                                                 <td>@if(!empty($ss->doc)) <a target="_blank" href="{{asset('assets/candidates/'.$ss->doc)}}"> {{$ss->doc}} <i class="fa fa-download badge badge-outline-info"> </i></a> @else No Documents @endif</td>
+                                                <td>@if(!empty($ss->final_doc)) <a target="_blank" href="{{asset('assets/candidates/'.$ss->final_doc)}}"> {{$ss->doc}} <i class="fa fa-download badge badge-outline-info"> </i></a> @else No Documents @endif</td>
          
                                                  @if($ss->QA_approved == "approved")
                                                 <td><span class="badge badge-soft-success">Approved</span></td>
@@ -147,13 +157,14 @@
                                                 <td><p style="font-size:9px">{{$ss->QA_review}}</p></td>
 
                                                 <td>
-                                                    @if($ss->status == "pending")
-                                                     <small class="badge bg-soft-primary">  <a href="{{route('candidate.request-verification', encrypt($ss->id))}}"> Request Verification</a> </small>
+                                                 
+                                                    @if($ss->status == "pending"  || $ss->status  == null )
+                                                     <small>  <a  style="color:#fff"  class="btn btn-sm btn-info" href="{{route('candidate.request-verification', encrypt($ss->id))}}"> Request  for Verification</a>  </small>
                                                      @endif
-                                                    
                                                     </td>
                                                   
                                             </tr>
+                                            @include('users.candidates.modals')
                                             @endforeach
                                             </tbody>
                                         </table><!--end /table-->
@@ -186,6 +197,7 @@
                                 <th>Phone</th>
                                 <th>Status</th>
                                 <th>Created On</th>
+                                <th>Action</th>
                             
                             </tr>
                             </thead>
@@ -198,6 +210,7 @@
                                 <td>{{$cand->phone}}</td>
                                 <td>{{$cand->status}}</td>
                                 <td> {{$cand->created_at}}</td>
+                                <td><a href="{{route('candidate.details', encrypt($cand->id))}}"> view Details</a></td>
                                
                             </tr>
                                  @endforeach

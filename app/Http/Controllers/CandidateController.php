@@ -155,14 +155,20 @@ class CandidateController extends Controller
     }
 
 
-    public function CandidateFileUpload(){
-        if(request()->user_type != 1 ){
+    // public function CandidateFileUpload(){
+     
+    // }
+
+    public function candidateHomePage(){
+        $user = User::where('id', auth()->user()->id)->first();
+        if($user->user_type == 1){
+            Candidate::where('user_id', $user->id)->update(['email_status' => 'Email Read']);
+            $service = CandidateVerification::where(['user_id' => $user->id])->where('final_doc', '=', null)->get();
+            // dd($service);
+            return view('users.onboarding.uploads', ['service'=> $service]);
+        }else{
             return redirect('home');
         }
-        $user = User::where('id', auth()->user()->id)->first();
-                Candidate::where('user_id', $user->id)->update(['email_status' => 'Email Read']);
-        $service = CandidateVerification::where('user_id', $user->id)->get();
-        return view('users.onboarding.uploads', ['service'=> $service]);
     }
 
     public function CandidateFileStore(Request $request){  
@@ -185,7 +191,7 @@ class CandidateController extends Controller
             $ext =  $image->getClientOriginalExtension();
             $fileName = $fileName.'.'.$ext;
             $upload =  CandidateVerification::where(['id' => $request->candidate[$key], 'user_id' => auth()->user()->id ])->first();
-            if($upload->doc != null){
+            if($upload->doc == null){
             $image->move('assets/candidates', $fileName);
             $upload->update([
                 'doc' => $fileName
@@ -209,15 +215,6 @@ class CandidateController extends Controller
         return redirect()->back();
         }
 
-    }
-
-    public function candidateHomePage(){
-        if(request()->user_type != 1 ){
-            return redirect('home');
-        }
-        $service = CandidateVerification::where('user_id', auth()->user()->id)->get();
-        return view('users.onboarding.index', ['service'=> $service]);
-        
     }
 
     public function viewCandidateDocuments(){

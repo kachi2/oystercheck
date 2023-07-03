@@ -8,6 +8,7 @@ use App\Models\Verification;
 use App\Models\Wallet;
 use App\Models\User;
 use App\Models\Client;
+use App\Models\Candidate;
 use App\Models\UserActivity;
 use Illuminate\Support\Facades\Auth;
 use App\Models\IdentityVerification;
@@ -44,14 +45,15 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    
+     
     public function Home()
     {
         
         $user = auth()->user();
         if($user->user_type == 1){   
-        $service = CandidateVerification::where('user_id', $user->id)->get();
-        return view('users.onboarding.uploads', ['service'=> $service]);
+                Candidate::where('user_id', $user->id)->update(['email_status' => 'Email Read']);
+                $service = CandidateVerification::where(['user_id' => $user->id])->where('final_doc', '=', null)->get();
+                return view('users.onboarding.uploads', ['service'=> $service]);
         }
         $data['success'] = IdentityVerification::where(['status'=>'found',  'user_id'=> $user->id, 'is_sandbox' => $this->sandbox()])->get();
         $data['failed'] = IdentityVerification::where(['status'=>'not-found', 'user_id'=> $user->id, 'is_sandbox' => $this->sandbox()])->get();

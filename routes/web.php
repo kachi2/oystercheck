@@ -105,9 +105,10 @@ Route::post('/user/contact/information/update', [ClientProfileController::class,
 Route::post('/user/document/update', [ClientProfileController::class, 'UpdateDocumentInfo'])->name('document_information');
 Route::get('/user/activated/account', [HomeController::class, 'AccountActivate'])->name('client.AccountActivate');
 Route::get('/user/account/activities', [HomeController::class, 'ActivityLog'])->name('client.ActivityLog');
+
 #=========== approve candidates documents by clients ========
-Route::get('/candidates/user/approve/{service}', [Candidates::class, 'ApproveDoc'])->name('candidate.doc.approve');
-Route::get('/candidates/user/disapprove/{service}', [Candidates::class, 'DisapproveDoc'])->name('candidate.doc.disapprove');
+Route::post('/candidates/user/approve/{service}', [Candidates::class, 'ApproveDoc'])->name('candidate.doc.approve');
+Route::post('/candidates/user/disapprove/{service}', [Candidates::class, 'DisapproveDoc'])->name('candidate.doc.disapprove');
 Route::get('/requedst/candiate/custom/verification/{id}', [Candidates::class, 'RequestVerification'])->name('candidate.request-verification');
 Route::get('/requedst/candiate/custom/verification/send/{id}', [Candidates::class, 'RequestVerification'])->name('candidate.request-verification.store');
 

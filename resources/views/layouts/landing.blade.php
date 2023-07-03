@@ -16,7 +16,7 @@
     <meta property="og:type" content="article"/>
 
     <!--title-->
-    <title>Oysterchecks</title>
+    <title>Oysterchecks </title>
 
     <!--favicon icon-->
     <link rel="shortcut icon" href="{{asset('/assets/images/favicon.png')}}">

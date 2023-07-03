@@ -129,13 +129,13 @@
                     </li>
                     <li>
                         <a href="{{route('candidate.homepage')}}"> 
-                            <i data-feather="home" class="align-self-center menu-icon"></i>
+                            <i data-feather="upload" class="align-self-center menu-icon"></i>
                             <span>File Upload</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{route('candidate.documents')}}"> 
-                            <i data-feather="home" class="align-self-center menu-icon"></i>
+                            <i data-feather="file" class="align-self-center menu-icon"></i>
                             <span>My Documents</span>
                         </a>
                     </li>

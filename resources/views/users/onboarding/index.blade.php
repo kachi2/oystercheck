@@ -45,10 +45,10 @@
                                             <thead>
                                             <tr>
                                                 <th>Service Name</th>
+                                                <th>Uploaded File</th>
+                                                <th>Approved File</th>
+                                                <th>Document Review</th>
                                                 <th>Status</th>
-                                                <th>Documents</th>
-                                                <th>QA Status</th>
-                                                <th>QA Review</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -56,6 +56,53 @@
                                             @foreach ($service as $ss )
                                             <tr>
                                                 <td >{{$ss->service->name}}</td>
+                                                <td> <a target="_blank" href="{{asset('/assets/candidates/'.$ss->doc)}}"> 
+                                                    @php 
+                                                    $files = '';
+                                                      if($ss->doc != null){
+                                                    $file = explode('.',$ss->doc);
+                                                    if(count($file) >= 1){
+                                                        $files = $file[1];
+                                                    }else {
+                                                        $files = 'null';
+                                                    }
+                                                  } 
+                                                    @endphp 
+                                                    @if($files != null && $files == 'pdf') 
+                                                    <iframe  src="{{asset('/assets/candidates/'.$ss->doc)}}" width="200px" height="auto"> 
+                                                    </iframe>
+                                                   <span class="btn-info p-1">view</span> 
+                                                        @elseif($files != null && $files != 'pdf') 
+                                                    <img width="200px" height="auto" src="{{asset('/assets/candidates/'.$ss->doc)}}"> 
+                                                        @endif  
+                                                    </a>
+                                                </td>
+
+                                                <td> <a target="_blank" href="{{asset('/assets/candidates/'.$ss->final_doc)}}"> 
+                                                    @php 
+                                                    $final_doc = '';
+                                                    if($ss->final_doc != null){
+                                                    $final_docs = explode('.',$ss->final_doc);
+                                                    if(count($final_docs) >= 1){
+                                                        $final_doc = $final_docs[1];
+                                                    }else {
+                                                        $final_doc = 'null';
+                                                    }
+                                                  } 
+                                
+                                                    @endphp 
+                                                     @if($final_doc  != null && $final_doc  == 'pdf') 
+                                                     <iframe  src="{{asset('/assets/candidates/'.$ss->final_doc)}}" width="200px" height="auto"> 
+                                                     </iframe>
+                                                    <span class="btn-info p-1">view</span> 
+                                                         @elseif($final_doc  != null && $final_doc  != 'pdf') 
+                                                     <img width="200px" height="auto" src="{{asset('/assets/candidates/'.$ss->final_doc)}}"> 
+                                                     @else 
+                                                         @endif  
+                                                     </a>
+                                                </td>
+
+                                                <td><p style="font-size:9px">{{$ss->review}}</p></td> 
                                                 @if($ss->status == "approved")
                                                 <td><span class="badge badge-soft-success">Approved</span></td>
                                                  @elseif($ss->status == "failed")
@@ -63,29 +110,6 @@
                                                 @else
                                                  <td><span class="badge badge-soft-warning">Pending</span></td>
                                                 @endif
-                                                <td> <a target="_blank" href="{{asset('/assets/candidates/'.$ss->doc)}}"> 
-                                                    @php 
-                                                    $file = explode('.',$ss->doc);
-                                                    $files = $file[1];
-                                                    @endphp 
-                                                    @if($files == 'pdf') 
-                                                    <iframe  src="{{asset('/assets/candidates/'.$ss->doc)}}" width="200px" height="auto"> 
-                                                    </iframe>
-                                                   <span class="btn-info p-1">view</span> 
-                                                        @else 
-                                                    <img width="200px" height="auto" src="{{asset('/assets/candidates/'.$ss->doc)}}"> 
-                                                        @endif  
-                                                    </a>
-                                                </td>
-                                                 @if($ss->QA_approved == "approved")
-                                                <td><span class="badge badge-soft-success">Approved</span></td>
-                                                @elseif($ss->QA_approved == "failed")
-                                                <td><span class="badge badge-soft-danger">Rejected</span></td>
-                                                @else
-                                                 <td><span class="badge badge-soft-warning">Pending</span></td>
-                                                @endif
-                                                <td><p style="font-size:9px">{{$ss->QA_review}}</p></td>
-                                                 
                                             </tr>
                                             @endforeach
                                             </tbody>

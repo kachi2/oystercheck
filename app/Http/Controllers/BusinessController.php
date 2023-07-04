@@ -235,6 +235,11 @@ class BusinessController extends Controller
                         DB::commit();
                         Session::flash('alert', 'success');
                         Session::flash('message', 'Verification Successful');
+                        if($this->sandbox() == 1){
+                            $reference = $decodedResponse['data']['id'];
+                            $reasons = $decodedResponse['data']['reason'];
+                            $this->chargeUser($amount, $reference , $reasons );
+                        }
                         return redirect()->route('businessIndex', $slug->slug);
                     }else{
                         Session::flash('alert', 'error');
@@ -256,7 +261,10 @@ class BusinessController extends Controller
         ]);
 
         if ($validate->fails()) {
-            dd($validate->errors());
+           // dd($validate->errors());
+           Session::flash('alert', 'error');
+           Session::flash('message', $validate->errors()->first() );
+           return back();
         }
         
         $ref = $this->GenerateRef();
@@ -300,20 +308,23 @@ class BusinessController extends Controller
     
                 $response = curl_exec($curl);
                 if (curl_errno($curl)) {
-                    dd('error:' . curl_errno($curl));
+                    Session::flash('alert', 'error');
+                    Session::flash('message', 'Something went wrong, try again');
+                    return back();
                 } else {
                     $decodedResponse = json_decode($response, true);
                     // dd($decodedResponse);
                     if ($decodedResponse['success'] == true && $decodedResponse['statusCode'] == 200) {
-                       
+                       $reasons = isset($decodedResponse['data']['reason']) ? $decodedResponse['data']['reason'] : null;
+                       $reference = $decodedResponse['data']['id'] != null ? $decodedResponse['data']['id'] : null;
                         TinVerification::create([
                             'verification_id' => $slug->id,
                             'user_id' => auth()->user()->id,
                             'ref' => $ref,
-                            'service_reference' => $decodedResponse['data']['id'] != null ? $decodedResponse['data']['id'] : null,
+                            'service_reference' => $reference,
                             'subject_consent' => true,
                             'status' => $decodedResponse['data']['status'],
-                            'reason' => isset($decodedResponse['data']['reason']) ? $decodedResponse['data']['reason'] : null,
+                            'reason' => $reasons,
                             'type' => 'tin',
                             'fee' => $amount,
                             'search_term' => 'Tax Identification Number',
@@ -334,6 +345,11 @@ class BusinessController extends Controller
                         DB::commit();
                         Session::flash('alert', 'success');
                         Session::flash('message', 'Verification Successful');
+                        if($this->sandbox() == 1)
+                        {
+                        $this->chargeUser($amount, $reference , $reasons );
+                        }
+                       
                         return redirect()->route('businessIndex', $slug->slug);
                     }else{
                         Session::flash('alert', 'error');
@@ -354,7 +370,7 @@ class BusinessController extends Controller
         $newWallet = $user->wallet->avail_balance - $amount;
         $update = Wallet::where('user_id', $user->id)
             ->update([
-                'prev_balance' => $wallet->avail_balance,
+                'book_balance' => $wallet->avail_balance,
                 'avail_balance' => $newWallet,
             ]);
         $refs = $this->GenerateRef();
@@ -362,9 +378,11 @@ class BusinessController extends Controller
             'ref' => $refs,
             'user_id' => $user->id,
             'external_ref' => $ext_ref,
-            'purpose' => 'Payment for ' . $type,
+            'purpose' => $type,
             'service_type' => $type,
             'type'  => 'DEBIT',
+            'total_amount_payable' => $amount,
+            'payment_method' => 'Wallet Payment',
             'amount' => $amount,
             'prev_balance' => $wallet->avail_balance,
             'avail_balance' => $newWallet

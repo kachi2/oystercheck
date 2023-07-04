@@ -39,16 +39,64 @@
                         <h4 class="card-title"> <span style="color:rgb(13, 100, 132); font-style:italics">VERIFY  {{$candidate->service->name}} </span></h4>
                     </div>
                     <!--end card-header-->
-                    <form method="post" action="" id="form1" enctype="multipart/form-data">
+                    <form method="post" action="{{route('candidate.request-verification.store', encrypt($candidate->id))}}"  enctype="multipart/form-data">
                         @csrf
-
                         <div class="card-body bootstrap-select-1">
                             <div class="row">
                                 <div class="row" id="Wrapper" >
                                     
                                     <div class="col-md-6 mb-3">
                                         <label class="badge bg-soft-pink p-2"> Uploaded File for {{$candidate->service->name}}</label> 
-                                        <div> <a target="_blank" href="{{asset('assets/candidates/'.$candidate->doc)}}"><p {{asset('assets/candidates/'.$candidate->doc)}} height="300px" width="200px"> </p> </a>  </div>
+
+                                        <div>  <a target="_blank" href="{{asset('/assets/candidates/'.$candidate->doc)}}"> 
+                                            @php 
+                                            $files = '';
+                                              if($candidate->doc != null){
+                                            $file = explode('.',$candidate->doc);
+                                            if(count($file) >= 1){
+                                                $files = $file[1];
+                                            }else {
+                                                $files = 'null';
+                                            }
+                                          } 
+                                            @endphp 
+                                            @if($files != null && $files == 'pdf') 
+                                            <iframe  src="{{asset('/assets/candidates/'.$candidate->doc)}}" width="200px" height="auto"> 
+                                            </iframe>
+                                           <span class="btn-info p-1">view</span> 
+                                                @elseif($files != null && $files != 'pdf') 
+                                            <img width="300px" height="auto" src="{{asset('/assets/candidates/'.$candidate->doc)}}"> 
+                                                @endif  
+                                            </a>
+                                        </td>
+                                         </div>
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+
+                                        <div class="card mb-3">
+                                            <div class="row no-gutters">
+                                               
+                                                <div class="col-md-12">
+                                                    <div class="card-header">
+                                                        <div class="row align-items-center">
+                                                            <div class="col">                      
+                                                                <h4 class="card-title">Instructions</h4>               
+                                                            </div><!--end col-->  
+                                                            <div class="col-auto">    
+                                                                             
+                                                                <span class="badge badge-outline-light">{{$candidate->service->name}}</span>              
+                                                            </div><!--end col-->                                                                            
+                                                        </div>  <!--end row-->                                  
+                                                    </div><!--end card-header-->
+                                                    <div class="card-body">
+                                                        <p class="card-text">{{$candidate->service->instructions}}</p>
+                                                        {{-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> --}}
+                                                    </div><!--end card-body-->
+                                                </div><!--end col-->
+                                            </div><!--end row-->
+                                        </div>
+
                                     </div>
                                   
                                 </div>

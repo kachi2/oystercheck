@@ -9,6 +9,8 @@ use App\Models\BvnVerification;
 use App\Models\IdentityVerification;
 use App\Traits\sandbox;
 use App\Traits\GenerateRef;
+use App\Models\User;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
 use App\Models\Wallet;
 
@@ -30,7 +32,7 @@ class IdentityBvnController extends Controller
             'dob' => 'bail|nullable|date',
             'image' => 'bail|nullable|image|mimes:jpg,jpeg,png',
             'advance_search' => 'bail|nullable',
-            'subject_consent' => 'bail|requiπred|accepted'
+            'subject_consent' => 'bail|required|accepted'
         ]);
         if ($validator->fails()) {
             Session::flash('alert', 'error');
@@ -47,7 +49,17 @@ class IdentityBvnController extends Controller
         }
         
         $ref = $this->GenerateRef();
-        Wallet::where('user_id', auth()->user()->id)->first();
+        $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
+        if (isset($slug->discount) && $slug->discount > 0) {
+            $amount = ($slug->discount * $slug->fee) / 100;
+        } else {
+            $amount = $slug->fee;
+        }
+        if ($userWallet->avail_balance < $amount) {
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Your walllet is too low for this transaction');
+            return back();
+        }
         $requestData = [
             'id' => $request->pin,
             'isSubjectConsent' => $request->subject_consent ? true : false,
@@ -131,7 +143,7 @@ class IdentityBvnController extends Controller
                         'pin' => $request->pin,
                         'should_retrieve_nin' => $decodedResponse['data']['shouldRetrivedNin'],
                         'type' => 'bvn',
-                        'gender' => $decodedResponse['data']['gender'] != null ? $decodedResponse['data']['gender'] : null,
+                        //'gender' => $decodedResponse['data']['gender'] != null ? $decodedResponse['data']['gender'] : null,
                         'country' => 'Nigeria',
                         'all_validation_passed' => $decodedResponse['data']['allValidationPassed'],
                         'requested_at' => $decodedResponse['data']['requestedAt'] != null ? $decodedResponse['data']['requestedAt'] : null,
@@ -152,6 +164,11 @@ class IdentityBvnController extends Controller
                     DB::commit();
                     Session::flash('alert', 'success');
                     Session::flash('message', 'Verification Successful');
+                    if($this->sandbox() == 1){
+                        $reference = $decodedResponse['data']['id'];
+                        $reasons = $decodedResponse['data']['reason'];
+                        $this->chargeUser($amount, $reference , $reasons );
+                    }
                     return redirect()->route('identityIndex', $slug->slug);
                 }else{
                     Session::flash('alert', 'error');
@@ -165,4 +182,33 @@ class IdentityBvnController extends Controller
             throw $e;
         }
     }
+
+    public function chargeUser($amount, $ext_ref, $type)
+    {
+        $user = User::where('id', auth()->user()->id)->first();
+        $wallet = Wallet::where('user_id', $user->id)->first();
+        $newWallet = $user->wallet->avail_balance - $amount;
+        $update = Wallet::where('user_id', $user->id)
+            ->update([
+                'book_balance' => $wallet->avail_balance,
+                'avail_balance' => $newWallet,
+            ]);
+        $refs = $this->GenerateRef();
+        Transaction::create([
+            'ref' => $refs,
+            'user_id' => $user->id,
+            'external_ref' => $ext_ref,
+            'purpose' => $type,
+            'service_type' => $type,
+            'total_amount_payable' => $amount,
+            'payment_method' => 'Wallet Payment',
+            'type'  => 'DEBIT',
+            'amount' => $amount,
+            'prev_balance' => $wallet->avail_balance,
+            'avail_balance' => $newWallet
+        ]);
+        return $update;
+    }
 }
+
+

@@ -8,6 +8,7 @@ use App\Models\PhoneVerification;
 use Illuminate\Support\Facades\DB;
 use App\Models\IdentityVerification;
 use App\Traits\GenerateRef;
+use App\Models\Transaction;
 use App\Traits\sandbox;
 use App\Models\Wallet;
 use App\Models\User;
@@ -20,7 +21,7 @@ class IdentityPhoneNumberController extends Controller
     public function processPhoneNumber(Request $request, $slug)
     {
         $validator = Validator::make($request->all(), [
-            'phone_number' => 'bail|required|numeric|digits:11',
+            'phone_number' => 'bail|required',
             'advance_search' => 'bail|nullable',
             'subject_consent' => 'bail|required|accepted'
         ]);
@@ -32,13 +33,25 @@ class IdentityPhoneNumberController extends Controller
             return redirect()->back();
         }
         if($this->sandbox() == 0){
-            if($request->pin != '08000000000'){
+            if($request->phone_number != '08000000000'){
                 Session::flash('alert', 'error');
                 Session::flash('message', 'Use Test data only for test mode');
                 return redirect()->back();
             }
         }
-
+        if($this->sandbox() == 1){
+        $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
+        if (isset($slug->discount) && $slug->discount > 0) {
+            $amount = ($slug->discount * $slug->fee) / 100;
+        } else {
+            $amount = $slug->fee;
+        }
+        if ($userWallet->avail_balance < $amount) {
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Your walllet is too low for this transaction');
+            return back();
+        }
+    }
         $ref = $this->GenerateRef();
         $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
         $requestData = [
@@ -72,7 +85,9 @@ class IdentityPhoneNumberController extends Controller
 
             $response = curl_exec($curl);
             if (curl_errno($curl)) {
-                dd('error:' . curl_errno($curl));
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Something went wrong');
+            return back();
             } else {
                 $decodedResponse = json_decode($response, true);
                 // dd($decodedResponse);
@@ -131,6 +146,11 @@ class IdentityPhoneNumberController extends Controller
                     DB::commit();
                     Session::flash('alert', 'success');
                     Session::flash('message', 'Verification Successful');
+                    if($this->sandbox() == 0){
+                        $reference = $decodedResponse['data']['id'];
+                        $reasons = $decodedResponse['data']['reason'];
+                        $this->chargeUser($amount, $reference , $reasons );
+                    }
                     return redirect()->route('identityIndex', $slug->slug);
                 }else{
                     Session::flash('alert', 'error');
@@ -142,5 +162,31 @@ class IdentityPhoneNumberController extends Controller
             DB::rollBack();
             throw $e;
         }
+    }
+    public function chargeUser($amount, $ext_ref, $type)
+    {
+        $user = User::where('id', auth()->user()->id)->first();
+        $wallet = Wallet::where('user_id', $user->id)->first();
+        $newWallet = $user->wallet->avail_balance - $amount;
+        $update = Wallet::where('user_id', $user->id)
+            ->update([
+                'book_balance' => $wallet->avail_balance,
+                'avail_balance' => $newWallet,
+            ]);
+        $refs = $this->GenerateRef();
+        Transaction::create([
+            'ref' => $refs,
+            'user_id' => $user->id,
+            'external_ref' => $ext_ref,
+            'purpose' => $type,
+            'service_type' => $type,
+            'total_amount_payable' => $amount,
+            'payment_method' => 'Wallet Payment',
+            'type'  => 'DEBIT',
+            'amount' => $amount,
+            'prev_balance' => $wallet->avail_balance,
+            'avail_balance' => $newWallet
+        ]);
+        return $update;
     }
 }

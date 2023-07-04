@@ -26,7 +26,7 @@
                     <div class="row ">
                         <div class="col-lg-12">
                             <div class="row justify-content-center">
-                                <div class="col-md-6 col-lg-4">
+                                <div class="col-md-6 col-lg-3">
                                     <div class="card report-card ">
                                         <div class="card-body" >
                                             <div class="row d-flex justify-content-center">
@@ -43,7 +43,7 @@
                                         </div><!--end card-body--> 
                                     </div><!--end card--> 
                                 </div>
-                                <div class="col-md-6 col-lg-4">
+                                <div class="col-md-6 col-lg-3">
                                     <div class="card report-card">
                                         <div class="card-body" >
                                             <div class="row d-flex justify-content-center">
@@ -60,7 +60,7 @@
                                         </div><!--end card-body--> 
                                     </div><!--end card--> 
                                 </div>
-                                <div class="col-md-6 col-lg-4">
+                                <div class="col-md-6 col-lg-3">
                                     <div class="card report-card">
                                         <div class="card-body" >
                                             <div class="row d-flex justify-content-center">
@@ -76,7 +76,24 @@
                                             </div>
                                         </div><!--end card-body--> 
                                     </div><!--end card--> 
-                              </div> <!--end col-->          
+                              </div> <!--end col-->  
+                              <div class="col-md-6 col-lg-3">
+                                <div class="card report-card">
+                                    <div class="card-body" >
+                                        <div class="row d-flex justify-content-center">
+                                            <div class="col">
+                                                <p class="text-black mb-0 fw-semibold">Rejected Candidates</p>
+                                                <h3 class="m-0 text-black">{{count($rejected)}}</h3>
+                                            </div>
+                                            <div class="col-auto align-self-center">
+                                                <div class="report-main-icon bg-light-alt">
+                                                    <i data-feather="users" class="align-self-center text-muted icon-sm"></i>  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!--end card-body--> 
+                                </div><!--end card--> 
+                          </div> <!--end col-->         
                               <!--end col-->                               
                             </div><!--end row-->                
                         </div>
@@ -91,7 +108,8 @@
 
                                             
                                                 <div class="custom-border mb-3"></div>
-                                                <h3 class="pro-title">{{strtoupper($candidate->user->firstname .' '. $candidate->user->lastname)}}</h3>
+                                                <h3 class="pro-title">{{strtoupper($candidate->user->firstname .' '. $candidate->user->lastname)}} </h3>
+                                              
                                             
                                                 <ul class="list-unstyled personal-detail mb-0">
                                                     <li class=""><i class="ti ti-mobile me-2 text-secondary font-16 align-middle"></i> <b> Phone </b> : {{$candidate->phone}}</li>
@@ -102,9 +120,23 @@
                                                 <li class=""> <i class="ti ti-world text-secondary font-16 align-middle me-2"></i> <b> State</b> : {{$candidate->state}}</li>
                                                 <li class=""> <i class="ti ti-world text-secondary font-16 align-middle me-2"></i><b> Country</b> : {{$candidate->country}}</li>                                                 
                                                 </ul>
-                                          
-                                             
+                                                <br>
 
+                                                @if(count($services)> 0)
+                                                    @if($candidate->user->candidate->status == 'verified')
+                                                   
+                                                      @include('users.candidates.approved')
+                                                      @elseif($candidate->user->candidate->status == 'rejected')
+                                                      @include('users.candidates.decline')
+                                                    @else 
+                                                    @include('users.candidates.statusModal')
+                                                   
+                                                    <a href="javascript();"  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#approveCandidate{{$candidate->user_id}}">
+                                                        <i class="fa fa-check-circle badge badge-success"> </i> Approve </a> 
+                                                        <a href="javascript();" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#disapproveCandidate{{$candidate->user_id}}">
+                                                            <i class="fa fa-times badge badge-danger"> </i> Reject</a>
+                                                    @endif
+                                                    @endif
                                         </div><!--end col-->
                                         <div class="col-lg-9 align-self-center">
                                             <div class="single-pro-detail">
@@ -144,7 +176,7 @@
                                                     <a href="javascript();"  data-bs-toggle="modal" data-bs-target="#disapproveDoc{{$ss->id}}">
                                                         <i class="fa fa-times badge badge-outline-danger"> </i> </a> </td>
                                                 @endif
-                                                <td>@if(!empty($ss->doc)) <a target="_blank" href="{{asset('assets/candidates/'.$ss->doc)}}"> {{$ss->doc}} <i class="fa fa-download badge badge-outline-info"> </i></a> @else No Documents @endif</td>
+                                                <td>@if(!empty($ss->doc)) <a target="_blank" href="{{asset('assets/candidates/'.$ss->doc)}}"> {{$ss->doc}} <i class="fa fa-download badge badge-outline-info"> </i></a> @else No Documents @endif </td>
                                                 <td>@if(!empty($ss->final_doc)) <a target="_blank" href="{{asset('assets/candidates/'.$ss->final_doc)}}"> {{$ss->doc}} <i class="fa fa-download badge badge-outline-info"> </i></a> @else No Documents @endif</td>
          
                                                  @if($ss->QA_approved == "approved")
@@ -159,7 +191,7 @@
                                                 <td>
                                                  
                                                     @if($ss->status == "pending"  || $ss->status  == null )
-                                                     <small>  <a  style="color:#fff"  class="btn btn-sm btn-info" href="{{route('candidate.request-verification', encrypt($ss->id))}}"> Request  for Verification</a>  </small>
+                                                     <small>  <a  style="color:#fff"  class="btn btn-sm btn-info" href="{{route('candidate.request-verification', encrypt($ss->id))}}"> Request Verification</a>  </small>
                                                      @endif
                                                     </td>
                                                   
@@ -210,7 +242,9 @@
                                 <td>{{$cand->phone}}</td>
                                 <td>{{$cand->status}}</td>
                                 <td> {{$cand->created_at}}</td>
-                                <td><a href="{{route('candidate.details', encrypt($cand->id))}}"> view Details</a></td>
+                                <td> @if($cand->status == 'verified') <span class="badge bg-success"> Verified</span> @elseif($cand->status == 'rejected') <span class="badge bg-danger"> Rejected </span> @else <span class="badge bg-secondary"> Pending  </span > @endif </td>
+                                    <td> {{$cand->created_at}}</td>
+                                    <td><a class="badge bg-soft-primary" href="{{route('candidate.details', encrypt($cand->id))}}"> view Details</a></td>
                                
                             </tr>
                                  @endforeach

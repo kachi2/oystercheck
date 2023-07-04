@@ -68,6 +68,8 @@ class IdentityBankController extends Controller
                 $decodedResponse = json_decode($response, true);
                 // dd($decodedResponse);
                 if ($decodedResponse['success'] == true && $decodedResponse['statusCode'] == 200) {
+                    $reasons = $decodedResponse['data']['reason'];
+                    $reference = $decodedResponse['data']['id'];
                     BankVerification::create([
                         'verification_id' => $slug->id,
                         'user_id' => auth()->user()->id,
@@ -102,6 +104,9 @@ class IdentityBankController extends Controller
                     DB::commit();
                     Session::flash('alert', 'success');
                     Session::flash('message', 'Verification Successful');
+                    if($this->sandbox() == 1){
+                        $this->chargeUser($amount, $reference , $reasons );
+                        }
                     return redirect()->route('identityIndex', $slug->slug);
                 }else{
                     Session::flash('alert', 'error');

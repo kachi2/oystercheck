@@ -115,8 +115,8 @@
       logoutButton:"Logout Now",
       logoutUrl:"{{route('logouts')}}",
       redirUrl:"{{route('logouts')}}",
-      warnAfter:30e4,
-      redirAfter:60e4,
+      warnAfter:70e4,
+      redirAfter:90e4,
       countdownBar:!0
     });
     </script>

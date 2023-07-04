@@ -14,9 +14,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CandidatesDocsReviewController as Candidates;
 use App\Http\Controllers\ClientProfileController;
 use App\Http\Controllers\Admin\{AdminBusinessController, AdminAddressController, AdminClientController, AdminCandidateController, AdminIdentityController, AdminPaymentController, UserController};
-use App\Models\Admin;
-use App\Models\Candidate;
-use App\Models\CandidateVerification;
+use App\Http\Controllers\CustomVerification;
 
 // use App\Models\Transaction;
 
@@ -107,10 +105,14 @@ Route::get('/user/activated/account', [HomeController::class, 'AccountActivate']
 Route::get('/user/account/activities', [HomeController::class, 'ActivityLog'])->name('client.ActivityLog');
 
 #=========== approve candidates documents by clients ========
-Route::post('/candidates/user/approve/{service}', [Candidates::class, 'ApproveDoc'])->name('candidate.doc.approve');
-Route::post('/candidates/user/disapprove/{service}', [Candidates::class, 'DisapproveDoc'])->name('candidate.doc.disapprove');
-Route::get('/requedst/candiate/custom/verification/{id}', [Candidates::class, 'RequestVerification'])->name('candidate.request-verification');
-Route::get('/requedst/candiate/custom/verification/send/{id}', [Candidates::class, 'RequestVerification'])->name('candidate.request-verification.store');
+Route::post('/candidates/doc/approve/{service}', [Candidates::class, 'ApproveDoc'])->name('candidate.doc.approve');
+Route::post('/candidates/doc/disapprove/{service}', [Candidates::class, 'DisapproveDoc'])->name('candidate.doc.disapprove');
+Route::post('/candidates/markapprove/{user_id}', [Candidates::class, 'ApproveCandidate'])->name('candidateApprove');
+Route::post('/candidates/markdisapprove/{user_id}', [Candidates::class, 'DisApproveCandidate'])->name('candidateDisApprove');
+
+#send custom verification
+Route::get('/request/candiate/custom/verification/{id}', [CustomVerification::class, 'RequestVerification'])->name('candidate.request-verification');
+Route::post('/request/candiate/custom/verification/store/{id}', [CustomVerification::class, 'RequestVerificationStore'])->name('candidate.request-verification.store');
 
 ###### candidates routes  
 

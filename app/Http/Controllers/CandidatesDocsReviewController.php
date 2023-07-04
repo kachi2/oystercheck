@@ -85,13 +85,55 @@ class CandidatesDocsReviewController extends Controller
     return back();
   }
 
-  public function RequestVerification($id)
-  {
-    $candidate = CandidateVerification::whereId(decrypt($id))->first();
-    return view('users.candidates.checks', [
-      'candidate' => $candidate,
-      'slug' => CandidateVerification::where('id', $candidate->candidate_services_id)->first()
-
-    ]);
+  public function ApproveCandidate($user_id){
+    $candidate = Candidate::whereUserId(decrypt($user_id))->first();
+    if($candidate){
+      $status = [];
+      $check = CandidateVerification::where(['user_id' => $candidate->user_id, 'status' => null, 'status' => 'pending', 'status' => 'failed'])->get();
+      if(count($check) > 0){
+        Session::flash('alert', 'error');
+        Session::flash('message', 'Please approve all documents before proceeding with this step, some documents are either pending or cancelled');
+        return back();
+      }
+        $candidate->update([
+          'status' => 'verified'
+        ]);
+        Session::flash('alert', 'success');
+        Session::flash('message', 'Weldone!!!, Candidate Approved successfully');
+        return back();
+    }
   }
+
+
+  public function DisApproveCandidate($user_id){
+    $candidate = Candidate::whereUserId(decrypt($user_id))->first();
+    if($candidate){
+      $status = [];
+      $check = CandidateVerification::where(['user_id' => $candidate->user_id, 'status' => null, 'status' => 'pending', 'status' => 'approved'])->get();
+      if(count($check) > 0){
+        Session::flash('alert', 'error');
+        Session::flash('message', 'Please reject all documents before proceeding with this step, some documents are either pending or approved');
+        return back();
+      }
+      // $services = CandidateVerification::whereUserId($candidate->user_id)->get();
+      // foreach($services as $service){
+      //   array_push($status, $service['status']);
+      // }
+
+      // if(count(array_unique($status)) > 1){
+      //   Session::flash('alert', 'error');
+      //   Session::flash('message', 'Please reject all documents before proceeding with this step, some documents are either pending or approved');
+      //   return back();
+      // }else{
+
+        $candidate->update([
+          'status' => 'rejected'
+        ]);
+        Session::flash('alert', 'warning');
+        Session::flash('message', 'Weldone!!!, Candidate Rejected successfully');
+        return back();
+      } 
+    // }
+  }
+
 }

@@ -8,6 +8,7 @@ use App\Models\NinVerification;
 use App\Models\Wallet;
 use App\Traits\sandbox;
 use App\Models\User;
+use App\Models\Transaction;
 use App\Models\IdentityVerification;
 use Illuminate\Support\Facades\{Session, Validator, DB};
 
@@ -37,12 +38,22 @@ class IdentityNinController extends Controller
         if($this->sandbox() == 0 ){
             if($request->pin != '12312121212'){
                 Session::flash('alert', 'error');
-                Session::flash('message', 'Use Test data only for test mode');
+                Session::flash('message', 'Forbidden: Only Test IDs are allowed');
                 return redirect()->back();
             }
         }
         $ref = $this->GenerateRef();
         $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
+        if (isset($slug->discount) && $slug->discount > 0) {
+            $amount = ($slug->discount * $slug->fee) / 100;
+        } else {
+            $amount = $slug->fee;
+        }
+        if ($userWallet->avail_balance < $amount) {
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Your walllet is too low for this transaction');
+            return back();
+        }
         $requestData = [
             'id' => $request->pin,
             'isSubjectConsent' => $request->subject_consent ? true : false,
@@ -153,6 +164,11 @@ class IdentityNinController extends Controller
                     DB::commit();
                     Session::flash('alert', 'success');
                     Session::flash('message', 'Verification Successful');
+                    if($this->sandbox() == 1){
+                        $reference = $decodedResponse['data']['id'];
+                        $reasons = $decodedResponse['data']['reason'];
+                        $this->chargeUser($amount, $reference , $reasons );
+                    }
                     return redirect()->route('identityIndex', $slug->slug);
                 }else{
                     Session::flash('alert', 'error');
@@ -164,5 +180,32 @@ class IdentityNinController extends Controller
             DB::rollBack();
             throw $e;
         }
+    }
+
+    public function chargeUser($amount, $ext_ref, $type)
+    {
+        $user = User::where('id', auth()->user()->id)->first();
+        $wallet = Wallet::where('user_id', $user->id)->first();
+        $newWallet = $user->wallet->avail_balance - $amount;
+        $update = Wallet::where('user_id', $user->id)
+            ->update([
+                'book_balance' => $wallet->avail_balance,
+                'avail_balance' => $newWallet,
+            ]);
+        $refs = $this->GenerateRef();
+        Transaction::create([
+            'ref' => $refs,
+            'user_id' => $user->id,
+            'external_ref' => $ext_ref,
+            'purpose' => $type,
+            'service_type' => $type,
+            'total_amount_payable' => $amount,
+            'payment_method' => 'Wallet Payment',
+            'type'  => 'DEBIT',
+            'amount' => $amount,
+            'prev_balance' => $wallet->avail_balance,
+            'avail_balance' => $newWallet
+        ]);
+        return $update;
     }
 }

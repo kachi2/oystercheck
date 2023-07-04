@@ -70,4 +70,8 @@ const ADMIN_PENDING = 0;
     public function activities(){
         return $this->hasOne(ActivityLog::class)->latest();
     }
+
+    public function candidate(){
+        return $this->hasOne(Candidate::class, 'user_id', 'id');
+    }
 }

@@ -104,7 +104,9 @@ class IdentityNipController extends Controller
 
             $response = curl_exec($curl);
             if (curl_errno($curl)) {
-                dd('error:' . curl_errno($curl));
+                Session::flash('alert', 'error');
+                Session::flash('message', 'Something went wrong, try again');
+                return back();
             } else {
                 $decodedResponse = json_decode($response, true);
                // dd($decodedResponse);
@@ -180,6 +182,9 @@ class IdentityNipController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Something went wrong, try again');
+            return back();
         }
     }
 

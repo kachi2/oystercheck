@@ -44,6 +44,7 @@ class IdentityNdlController extends Controller
             }
         }
         $ref = $this->GenerateRef();
+        if($this->sandbox() == 1){
         $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
         if (isset($slug->discount) && $slug->discount > 0) {
             $amount = ($slug->discount * $slug->fee) / 100;
@@ -55,6 +56,7 @@ class IdentityNdlController extends Controller
             Session::flash('message', 'Your walllet is too low for this transaction');
             return back();
         }
+    }
         $requestData = [
             'id' => $request->pin,
             'isSubjectConsent' => $request->subject_consent ? true : false,
@@ -101,7 +103,9 @@ class IdentityNdlController extends Controller
 
             $response = curl_exec($curl);
             if (curl_errno($curl)) {
-                dd('error:' . curl_errno($curl));
+                Session::flash('alert', 'error');
+                Session::flash('message', 'Something went wrong, try again');
+                return back();
             } else {
                 $decodedResponse = json_decode($response, true);
                 // dd($decodedResponse);
@@ -172,6 +176,9 @@ class IdentityNdlController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Something went wrong, try again');
+            return back();
         }
     }
 

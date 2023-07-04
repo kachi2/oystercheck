@@ -161,6 +161,9 @@ class IdentityPhoneNumberController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Something went wrong, try again');
+            return back();
         }
     }
     public function chargeUser($amount, $ext_ref, $type)

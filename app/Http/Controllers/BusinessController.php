@@ -71,7 +71,6 @@ class BusinessController extends Controller
     public function businessStore(Request $request, $slug)
     {
 
-        
         if ($slug == 'cac') {
             return $this->processCac($request->only(['search_term', 'search_value', 'subject_consent']), $slug);
         } elseif ($slug == 'tin') {
@@ -146,9 +145,16 @@ class BusinessController extends Controller
             Session::flash('message', 'Incorrect or no data provided!');
             return redirect()->back();
         }
-        
+        if($this->sandbox() == 0){
+            if($data['search_value'] != 'RC00000000'){
+                Session::flash('alert', 'error');
+                Session::flash('message', 'Use Test data only for test mode');
+                return redirect()->back();
+            }
+        }
         $ref = $this->GenerateRef();
         $slug = Verification::where('slug', $slug)->first();
+        if($this->sandbox() == 0 ){
         $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
             if (isset($slug->discount) && $slug->discount > 0) {
                 $amount = ($slug->discount * $slug->fee) / 100;
@@ -160,6 +166,7 @@ class BusinessController extends Controller
                 Session::flash('message', 'Your walllet is too low for this transaction');
                 return back();
             }
+        }
             $requestData = [
                 'isConsent' => $data['subject_consent'] ? true : false,
                 'value' => $data['search_value'],
@@ -235,14 +242,14 @@ class BusinessController extends Controller
                         DB::commit();
                         Session::flash('alert', 'success');
                         Session::flash('message', 'Verification Successful');
-                        if($this->sandbox() == 1){
+                        if($this->sandbox() == 0){
                             $reference = $decodedResponse['data']['id'];
                             $reasons = $decodedResponse['data']['reason'];
                             $this->chargeUser($amount, $reference , $reasons );
                         }
                         return redirect()->route('businessIndex', $slug->slug);
                     }else{
-                        Session::flash('alert', 'error');
+                    Session::flash('alert', 'error');
                     Session::flash('message', $decodedResponse['message']);
                     return back()->withInput($data);
                     }
@@ -250,6 +257,9 @@ class BusinessController extends Controller
             } catch (\Exception $e) {
                 DB::rollBack();
                 throw $e;
+                Session::flash('alert', 'error');
+                Session::flash('message', 'Something went wrong, try again');
+                return back();
             }
     }
 
@@ -360,6 +370,9 @@ class BusinessController extends Controller
             } catch (\Exception $e) {
                 DB::rollBack();
                 throw $e;
+                Session::flash('alert', 'error');
+                Session::flash('message', 'Something went wrong, try again');
+                return back();
             }
 
     }

@@ -5,10 +5,12 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\PvcVerification;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use App\Models\Transaction;
 use App\Models\IdentityVerification;
 use App\Traits\GenerateRef;
 use App\Traits\sandbox;
 use App\Models\Wallet;
+use App\Models\User;
 
 use Illuminate\Http\Request;
 
@@ -41,7 +43,19 @@ class IdentityPvcController extends Controller
             }
         }
         $ref = $this->GenerateRef();
-        $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
+        if($this->sandbox() == 1 ){
+            $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
+            if (isset($slug->discount) && $slug->discount > 0) {
+                $amount = ($slug->discount * $slug->fee) / 100;
+            } else {
+                $amount = $slug->fee;
+            }
+            if ($userWallet->avail_balance < $amount) {
+                Session::flash('alert', 'error');
+                Session::flash('message', 'Your walllet is too low for this transaction');
+                return back();
+            }
+        }
         $requestData = [
             'id' => $request->pin,
             'isSubjectConsent' => $request->subject_consent ? true : false,
@@ -76,7 +90,9 @@ class IdentityPvcController extends Controller
 
             $response = curl_exec($curl);
             if (curl_errno($curl)) {
-                dd('error:' . curl_errno($curl));
+                Session::flash('alert', 'error');
+                Session::flash('message', 'Something went wrong, try again');
+                return back();
             } else {
                 $decodedResponse = json_decode($response, true);
                 // dd($decodedResponse);
@@ -117,6 +133,11 @@ class IdentityPvcController extends Controller
                     DB::commit();
                     Session::flash('alert', 'success');
                     Session::flash('message', 'Verification Successful');
+                    if($this->sandbox() == 1){
+                        $reference = $decodedResponse['data']['id'];
+                        $reasons = $decodedResponse['data']['reason'];
+                        $this->chargeUser($amount, $reference , $reasons );
+                    }
                     return redirect()->route('identityIndex', $slug->slug);
                 }else{
                     Session::flash('alert', 'error');
@@ -127,7 +148,37 @@ class IdentityPvcController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Something went wrong, try again');
+            return back();
         }
+    }
+
+    public function chargeUser($amount, $ext_ref, $type)
+    {
+        $user = User::where('id', auth()->user()->id)->first();
+        $wallet = Wallet::where('user_id', $user->id)->first();
+        $newWallet = $user->wallet->avail_balance - $amount;
+        $update = Wallet::where('user_id', $user->id)
+            ->update([
+                'book_balance' => $wallet->avail_balance,
+                'avail_balance' => $newWallet,
+            ]);
+        $refs = $this->GenerateRef();
+        Transaction::create([
+            'ref' => $refs,
+            'user_id' => $user->id,
+            'external_ref' => $ext_ref,
+            'purpose' => $type,
+            'service_type' => $type,
+            'total_amount_payable' => $amount,
+            'payment_method' => 'Wallet Payment',
+            'type'  => 'DEBIT',
+            'amount' => $amount,
+            'prev_balance' => $wallet->avail_balance,
+            'avail_balance' => $newWallet
+        ]);
+        return $update;
     }
 
 }

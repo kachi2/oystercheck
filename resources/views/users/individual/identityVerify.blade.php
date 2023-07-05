@@ -117,10 +117,32 @@
                                  <div class="col-md-12 mt-3">
                                      <div class="col-md-7 mb-3">
                                          <div class="media align-items-center p-2">
+                                            @if(!UserEnvironment())
+                                            <div class="col-md-12 ">
+                                               <div class="card" >
+                                                   <div class="card-header" style="background: rgb(13, 115, 115); color:#fff">
+                                                       <h4 class="card-title" style=" color:#fff">Test Data</h4>
+                                                       <p class="mb-0" style="color:#fff">Copy the Test data below and paste on the input field</p>
+                                                   </div><!--end card-header-->
+                                                   <div class="card-body">
+                                                       <p id="clipboardParagraph" class="border p-3">
+                                                          {{$slug->test_data}}
+                                                       </p>
+                                                       <div class="mt-3">
+                                                               <button type="button" class="btn btn-outline-info btn-clipboard" 
+                                                               data-clipboard-action="copy"
+                                                                data-clipboard-target="#clipboardParagraph">
+                                                                <i class="far fa-copy me-2"></i>Copy</button>
+                                                       </div>
+                                                   </div><!--end card-body-->
+                                               </div>
+                                            </div>
+                                             @else 
                                              <div class="me-3 align-items-center">
-                                                 <i class="la la-info-circle"></i>
-                                             </div>
+                                               <i class="la la-info-circle"></i>
+                                           </div>
                                              <div class="media-body" style="font-size:12px;"> <strong>Note:</strong> You will be charged <strong>₦{{number_format($slug->fee, 2)}}</strong> for each {{$slug->slug}} verification</div>
+                                             @endif
                                          </div>
                                          <!-- <div class="bg-soft-primary mb-2 p-1" style="font-size:12px;"> <strong>Note:</strong> You will be charged <strong>₦{{number_format($slug->fee, 2)}}</strong> for each {{$slug->slug}} verification</div> -->
                                          <div class="media align-items-center p-2 border-start bg-light border-2">

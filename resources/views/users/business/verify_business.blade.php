@@ -62,12 +62,40 @@
                                  @endforeach
                                  <div class="col-md-12 mt-3">
                                      <div class="col-md-7 mb-3">
+                                       
                                          <div class="media align-items-center p-2">
-                                             <div class="me-3 align-items-center">
-                                                 <i class="la la-info-circle"></i>
+                                           
+                                             @if(!UserEnvironment())
+                                             <div class="col-md-12 ">
+                                                <div class="card" >
+                                                    <div class="card-header" style="background: rgb(13, 115, 115); color:#fff">
+                                                        <h4 class="card-title" style=" color:#fff">Test Data</h4>
+                                                        <p class="mb-0" style="color:#fff">Copy the Test data below and paste on the input field</p>
+                                                    </div><!--end card-header-->
+                                                    <div class="card-body">
+                                                        <p id="clipboardParagraph" class="border p-3">
+                                                           {{$slug->test_data}}
+                                                        </p>
+                                                        <div class="mt-3">
+                                                                <button type="button" class="btn btn-outline-info btn-clipboard" 
+                                                                data-clipboard-action="copy"
+                                                                 data-clipboard-target="#clipboardParagraph">
+                                                                 <i class="far fa-copy me-2"></i>Copy</button>
+                                                        </div>
+                                                    </div><!--end card-body-->
+                                                </div>
                                              </div>
-                                             <div class="media-body" style="font-size:12px;"> <strong>Note:</strong> You will be charged <strong>₦{{number_format($slug->fee, 2)}}</strong> for each {{$slug->slug}} verification</div>
+                                              @else 
+                                              <div class="me-3 align-items-center">
+                                                <i class="la la-info-circle"></i>
+                                            </div>
+                                              <div class="media-body" style="font-size:12px;"> <strong>Note:</strong> You will be charged <strong>₦{{number_format($slug->fee, 2)}}</strong> for each {{$slug->slug}} verification</div>
+                                              @endif
+
                                          </div>
+                                        
+                          
+
                                          <!-- <div class="bg-soft-primary mb-2 p-1" style="font-size:12px;"> <strong>Note:</strong> You will be charged <strong>₦{{number_format($slug->fee, 2)}}</strong> for each {{$slug->slug}} verification</div> -->
                                          <div class="media align-items-center p-2 border-start bg-light border-2">
                                              <div class="me-3 align-items-center">
@@ -76,11 +104,14 @@
                                              <div class="media-body" style="font-size:12px;"> By checking this box you acknowledge that you have gotten consent from that data subject to use their data for verification purposes on our platform in accordance to our <a href="#"> Privacy Policy</a></div>
                                          </div>
                                      </div>
+                                   
                                      <div class="float-center p-2">
                                          <button type="submit" id="btnsubmit" class="btn btn-primary w-23">
                                              <i class="fas fa-check-double"></i> Verify Candidate {{$slug->slug}}</button>
                                      </div>
+                                     
                                  </div>
+                               
                              </div><!-- end row -->
                          </div><!-- end card-body -->
                      </form>

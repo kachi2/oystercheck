@@ -1,6 +1,5 @@
 <?php
-
-// use App\Models\User;
+use App\Models\User;
 
 function moneyFormat($data, $currency){
     $data = number_format($data);
@@ -82,6 +81,17 @@ function crypto_rand_secure($min, $max)
         }
 
         return $token;
+    }
+
+    if(!function_exists('testEnviroment')){
+        
+        function UserEnvironment(){
+            $user = User::where('id', auth()->user()->id)->first();
+            if($user->client->is_activated == 1){
+            return true;
+            }
+            return false;
+        }
     }
 
 

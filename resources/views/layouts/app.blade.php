@@ -69,6 +69,7 @@
     <script src="{{asset('/plugins/datatables/buttons.html5.min.js')}}"></script>
     <script src="{{asset('/plugins/datatables/buttons.print.min.js')}}"></script>
     <script src="{{asset('/plugins/datatables/buttons.colVis.min.js')}}"></script>
+    <script src="{{asset('/plugins/clipboard/clipboard.min.js')}}"></script>
       <!-- Responsive examples -->
     <script src="{{asset('/plugins/datatables/dataTables.responsive.min.js')}}"></script>
     <script src="{{asset('/plugins/datatables/responsive.bootstrap4.min.js')}}"></script>
@@ -81,6 +82,7 @@
     <script src="{{asset('/plugins/apex-charts/ohlc.js')}}"></script>
     <script src="{{asset('/assets/pages/jquery.forms-advanced.js')}}"></script>
     <script src="{{asset('/assets/pages/jquery.apexcharts.init.js')}}"></script>
+    <script src="{{asset('/assets/pages/jquery.clipboard.init.js')}}"></script>
         <!-- Session timeout js -->
     <script src="{{asset('/plugins/bootstrap-session-timeout/bootstrap-session-timeout.min.js')}}"></script>
         

@@ -167,7 +167,7 @@ class IdentityNipController extends Controller
                     DB::commit();
                     Session::flash('alert', 'success');
                     Session::flash('message', 'Verification Successful');
-                    if($this->sandbox() == 0){
+                    if($this->sandbox() == 1){
                         $reference = $decodedResponse['data']['id'];
                         $reasons = $decodedResponse['data']['reason'];
                         $this->chargeUser($amount, $reference , $reasons );

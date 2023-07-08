@@ -240,8 +240,7 @@
                                 <td>{{$cand->user->firstname.' '.$cand->user->lastname}}</td>
                                 <td>{{$cand->user->email}}</td>
                                 <td>{{$cand->phone}}</td>
-                                <td>{{$cand->status}}</td>
-                                <td> {{$cand->created_at}}</td>
+                                
                                 <td> @if($cand->status == 'verified') <span class="badge bg-success"> Verified</span> @elseif($cand->status == 'rejected') <span class="badge bg-danger"> Rejected </span> @else <span class="badge bg-secondary"> Pending  </span > @endif </td>
                                     <td> {{$cand->created_at}}</td>
                                     <td><a class="badge bg-soft-primary" href="{{route('candidate.details', encrypt($cand->id))}}"> view Details</a></td>

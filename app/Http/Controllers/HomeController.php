@@ -59,7 +59,7 @@ class HomeController extends Controller
         $data['failed'] = IdentityVerification::where(['status'=>'not-found', 'user_id'=> $user->id, 'is_sandbox' => $this->sandbox()])->get();
         $data['pending'] = IdentityVerification::where(['status'=>'null', 'user_id'=> $user->id, 'is_sandbox' => $this->sandbox()])->get();
         $data['wallet']= Wallet::where('user_id', $user->id)->first();
-        $data['logs'] = IdentityVerification::where(['user_id' => $user->id, 'is_sandbox' => $this->sandbox()])->latest()->get();
+        $data['logs'] = IdentityVerification::where(['user_id' => $user->id, 'is_sandbox' => $this->sandbox()])->latest()->take(5)->get();;
         $data['recents'] = IdentityVerification::where(['user_id' => $user->id, 'is_sandbox' => $this->sandbox()])->latest()->take(5)->get();
         $data['transactions'] = Transaction::where('user_id', $user->id)->latest()->take(5)->get();
         $data['activity'] = ActivityLog::where('user_id', $user->id)->take(10)->get();

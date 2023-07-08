@@ -177,7 +177,7 @@
                                                         <i class="fa fa-times badge badge-outline-danger"> </i> </a> </td>
                                                 @endif
                                                 <td>@if(!empty($ss->doc)) <a target="_blank" href="{{asset('assets/candidates/'.$ss->doc)}}"> {{$ss->doc}} <i class="fa fa-download badge badge-outline-info"> </i></a> @else No Documents @endif </td>
-                                                <td>@if(!empty($ss->final_doc)) <a target="_blank" href="{{asset('assets/candidates/'.$ss->final_doc)}}"> {{$ss->doc}} <i class="fa fa-download badge badge-outline-info"> </i></a> @else No Documents @endif</td>
+                                                <td>@if(!empty($ss->final_doc)) <a target="_blank" href="{{asset('assets/candidates/'.$ss->final_doc)}}"> {{$ss->final_doc}} <i class="fa fa-download badge badge-outline-info"> </i></a> @else No Documents @endif</td>
          
                                                  @if($ss->QA_approved == "approved")
                                                 <td><span class="badge badge-soft-success">Approved</span></td>

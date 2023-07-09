@@ -135,8 +135,9 @@ class IdentityPvcController extends Controller
                     Session::flash('message', 'Verification Successful');
                     if($this->sandbox() == 1){
                         $reference = $decodedResponse['data']['id'];
-                        $reasons = $decodedResponse['data']['reason'];
-                        $this->chargeUser($amount, $reference , $reasons );
+                        $reasons = 'Payment for '.$slug->name;
+                        $account = $request->pin ;
+                        $this->chargeUser($amount, $reference , $reasons, $account);
                     }
                     return redirect()->route('identityIndex', $slug->slug);
                 }else{
@@ -154,7 +155,7 @@ class IdentityPvcController extends Controller
         }
     }
 
-    public function chargeUser($amount, $ext_ref, $type)
+    public function chargeUser($amount, $ext_ref, $type, $account)
     {
         $user = User::where('id', auth()->user()->id)->first();
         $wallet = Wallet::where('user_id', $user->id)->first();
@@ -170,7 +171,7 @@ class IdentityPvcController extends Controller
             'user_id' => $user->id,
             'external_ref' => $ext_ref,
             'purpose' => $type,
-            'service_type' => $type,
+            'service_type' => $account,
             'total_amount_payable' => $amount,
             'payment_method' => 'Wallet Payment',
             'type'  => 'DEBIT',

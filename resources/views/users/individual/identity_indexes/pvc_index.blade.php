@@ -96,7 +96,7 @@
                          </div>
                          <div class="col-md-6 align-self-center">
                              <div class="card-body d-flex justify-content-lg-end justify-content-center">
-                                 <a type="button" class="btn btn-primary " href="{{route('showIdentityVerificationForm', $slug->slug)}}">Verify Candidate PVC</a>
+                                 <a type="button" class="btn btn-primary " href="{{route('showIdentityVerificationForm', $slug->slug)}}">Verify Candidate {{strtoupper($slug->slug)}}</a>
 
                              </div>
                          </div>

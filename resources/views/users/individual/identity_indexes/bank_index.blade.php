@@ -96,7 +96,7 @@
                          </div>
                          <div class="col-md-6 align-self-center">
                              <div class="card-body d-flex justify-content-lg-end justify-content-center">
-                                 <a type="button" class="btn btn-primary btn-square" href="{{route('showIdentityVerificationForm', $slug->slug)}}">Verify Candidate</a>
+                                 <a type="button" class="btn btn-primary btn-square" href="{{route('showIdentityVerificationForm', $slug->slug)}}">Verify Candidate Bank Account</a>
 
                              </div>
                          </div>

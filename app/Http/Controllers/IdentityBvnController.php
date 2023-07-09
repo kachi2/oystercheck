@@ -170,8 +170,9 @@ class IdentityBvnController extends Controller
                     Session::flash('message', 'Verification Successful');
                     if($this->sandbox() == 1){
                         $reference = $decodedResponse['data']['id'];
-                        $reasons = $decodedResponse['data']['reason'];
-                        $this->chargeUser($amount, $reference , $reasons );
+                        $reasons = 'Payment for '.$slug->name;
+                        $account = $request->pin ;
+                        $this->chargeUser($amount, $reference , $reasons, $account);
                     }
                     return redirect()->route('identityIndex', $slug->slug);
                 }else{
@@ -190,7 +191,7 @@ class IdentityBvnController extends Controller
         }
     }
 
-    public function chargeUser($amount, $ext_ref, $type)
+    public function chargeUser($amount, $ext_ref, $type, $acount)
     {
         $user = User::where('id', auth()->user()->id)->first();
         $wallet = Wallet::where('user_id', $user->id)->first();

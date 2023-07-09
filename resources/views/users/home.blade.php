@@ -213,8 +213,9 @@
                                         <table class="table mb-0">
                                             <thead class="table-light">
                                                 <tr>
-                                                    <th class="border-top-0">Type</th>
+                                                    <th class="border-top-0">#Ref</th>
                                                     <th class="border-top-0">User</th>
+                                                    <th class="border-top-0">Service</th>
                                                     <th class="border-top-0">Purpose</th>
                                                     <th class="border-top-0">Type</th>
                                                     <th class="border-top-0">Amount</th>
@@ -224,8 +225,9 @@
                                             <tbody>
                                             @foreach ($transactions as $trans )
                                                   <tr>                                                        
-                                                    <td><a href="#" class="text-primary">{{substr($trans->ref,0,10)}} </a></td>
-                                                    <td>{{$trans->user->name}}</td>
+                                                    <td><a href="#" class="text-primary">{{substr($trans->ref,0,100)}} </a></td>
+                                                    <td>{{$trans->user->firstname}}</td>
+                                                    <td>{{$trans->service_type}}</td>
                                                     <td>{{$trans->purpose}}</td>
                                                     <td>{{$trans->type}}</td>
                                                     <td>{{$trans->amount}}</td>

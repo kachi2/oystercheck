@@ -44,7 +44,7 @@ class IdentityNdlController extends Controller
             }
         }
         $ref = $this->GenerateRef();
-        if($this->sandbox() == 1){
+        if($this->sandbox() == 0){
         $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
         if (isset($slug->discount) && $slug->discount > 0) {
             $amount = ($slug->discount * $slug->fee) / 100;
@@ -160,10 +160,11 @@ class IdentityNdlController extends Controller
                     DB::commit();
                     Session::flash('alert', 'success');
                     Session::flash('message', 'Verification Successful');
-                    if($this->sandbox() == 1){
+                    if($this->sandbox() == 0){
                         $reference = $decodedResponse['data']['id'];
-                        $reasons = $decodedResponse['data']['reason'];
-                        $this->chargeUser($amount, $reference , $reasons );
+                        $reasons = 'Payment for '.$slug->name;
+                        $account = $request->pin ;
+                        $this->chargeUser($amount, $reference , $reasons, $account);
                     }
                     return redirect()->route('identityIndex', $slug->slug);
                 }else{
@@ -182,7 +183,7 @@ class IdentityNdlController extends Controller
         }
     }
 
-    public function chargeUser($amount, $ext_ref, $type)
+    public function chargeUser($amount, $ext_ref, $reason, $account)
     {
         $user = User::where('id', auth()->user()->id)->first();
         $wallet = Wallet::where('user_id', $user->id)->first();
@@ -197,8 +198,8 @@ class IdentityNdlController extends Controller
             'ref' => $refs,
             'user_id' => $user->id,
             'external_ref' => $ext_ref,
-            'purpose' => $type,
-            'service_type' => $type,
+            'purpose' => $reason,
+            'service_type' => $account,
             'total_amount_payable' => $amount,
             'payment_method' => 'Wallet Payment',
             'type'  => 'DEBIT',

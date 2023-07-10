@@ -15,6 +15,7 @@ use App\Http\Controllers\CandidatesDocsReviewController as Candidates;
 use App\Http\Controllers\ClientProfileController;
 use App\Http\Controllers\Admin\{AdminBusinessController, AdminAddressController, AdminClientController, AdminCandidateController, AdminIdentityController, AdminPaymentController, UserController};
 use App\Http\Controllers\CustomVerification;
+use App\Http\Middleware\ClientMiddleware;
 
 // use App\Models\Transaction;
 
@@ -54,7 +55,7 @@ Route::post('/contact/form', [LandingPages::class, 'ContactForm'])->name('Contac
 
 // Route::get('email', [LandingPages::class, 'email'])->name('email');
 #===================== USERS ROUTE ===============================
-Route::middleware('auth')->group(function() {
+Route::group(['middleware' => ['clients', 'auth']], function() { 
 Route::get('/getting-started', [HomeController::class, 'gettingStarted'])->name('instructions');
 Route::get('/dashboard', [HomeController::class, 'Home'])->name('index');
 Route::get('/home', [HomeController::class, 'Home'])->name('home');
@@ -128,8 +129,7 @@ Route::get('/user/candidate/documents/', [CandidateController::class, 'viewCandi
 });
 
 #====================ADMIN ROUTES ============================
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() { 
-Route::middleware('admin')->group(function (){
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', 'auth']], function() { 
 Route::get('/', [AdminController::class, 'Index'])->name('index');
 Route::get('/index', [AdminController::class, 'Index'])->name('index');
 Route::get('/identity/{slug}', [AdminIdentityController::class, 'getVerify'])->name('verify');
@@ -164,5 +164,4 @@ Route::post('/profile/update', [AdminController::class, 'StorePersonalInfo'])->n
 Route::post('/password/update', [AdminController::class, 'UpdatePassword'])->name('form_PasswordeUpdate');
 Route::post('/basic/information/update', [AdminController::class, 'UpdateBusinessInfo'])->name('basic_information');
 Route::post('/contact/information/update', [AdminController::class, 'UpdateContactInfo'])->name('contact_information');
-});
 });

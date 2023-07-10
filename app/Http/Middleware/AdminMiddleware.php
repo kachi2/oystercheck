@@ -22,9 +22,8 @@ class AdminMiddleware
         }
     }else{
         return redirect()->route('login');
-    }
-          
-        return back()->route('home');
+    }    
+        return redirect()->route('index');
         /* return response()->view('errors.check-permission'); */
     }
 }

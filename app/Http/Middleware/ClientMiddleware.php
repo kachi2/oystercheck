@@ -16,10 +16,9 @@ class ClientMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->user_type == 2){
+        if(auth()->user()->user_type != 3){
             return $next($request);
-
-        }
-        return redirect()->route('login');
+        }   
+        return redirect()->route('admin.index');
     }
 }

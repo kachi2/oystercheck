@@ -16,7 +16,6 @@ class AdminClientController extends Controller
     //
     public function UserClients(){
         $clients = Client::get();
-        dd($clients);
         return view('admin.clients.index', ['clients'=> $clients]);
     }
     

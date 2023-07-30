@@ -175,7 +175,8 @@
                                     <td class="px-0 py-0"><a class="table-link" href="{{route('showIdentityReport', ['slug'=>$slug->slug, 'verificationId'=>$trans->id])}}"><div class="px-2 py-3">{{$trans->fee}}</div></a></td>
                                     <td class="px-0 py-0"><a class="table-link" href="{{route('showIdentityReport', ['slug'=>$slug->slug, 'verificationId'=>$trans->id])}}"><div class="px-2 py-3">{{auth()->user()->name}}</div></a></td>
                                     <td class="px-0 py-0"><a class="table-link" href="{{route('showIdentityReport', ['slug'=>$slug->slug, 'verificationId'=>$trans->id])}}"><div class="px-2 py-3">{{date('jS F Y, h:iA', strtotime($trans->requested_at))}}</div></a></td>
-                                    <td class="px-0 py-0"><a class="table-link" href="{{route('showIdentityReport', ['slug'=>$slug->slug, 'verificationId'=>$trans->id])}}"><div class="px-2 py-3"> @if($trans->status == 'found')
+                                    <td class="px-0 py-0"><a class="table-link" href="{{route('showIdentityReport', ['slug'=>$slug->slug, 'verificationId'=>$trans->id])}}"><div class="px-2 py-3"> 
+                                    @if($trans->status == 'found')
                                     <a href="{{route('showIdentityReport', ['slug'=>$slug->slug, 'verificationId'=>$trans->id])}}">View Details</a>
                                      @endif
                                     </div></a></td>

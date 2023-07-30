@@ -133,8 +133,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', '
 Route::get('/', [AdminController::class, 'Index'])->name('index');
 Route::get('/index', [AdminController::class, 'Index'])->name('index');
 Route::get('/identity/{slug}', [AdminIdentityController::class, 'getVerify'])->name('verify');
+Route::get('/identities/{slug}/{verificationId}', [AdminIdentityController::class, 'verificationReport'])->name('showIdentityReport');
 Route::get('/business/{slug}', [AdminBusinessController::class, 'businessIndex'])->name('businessIndex');
-Route::get('/business/details/{id}', [AdminBusinessController::class, 'businessDetails'])->name('business.details');
+Route::get('/business/{slug}/{verificationId}', [AdminBusinessController::class, 'businessDetails'])->name('showBusinessReport');
 Route::get('/address/{slug}', [AdminAddressController::class, 'AddressIndex'])->name('addressIndex');
 Route::get('/candidate', [AdminCandidateController::class, 'getVerify'])->name('candidate.index');
 Route::get('/candidate/index', [AdminCandidateController::class, 'CandidateIndex'])->name('candidate.index');

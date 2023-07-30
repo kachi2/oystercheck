@@ -94,7 +94,7 @@
                  <!--end row-->
              </div>
          </div>
-         <div class="row">
+         {{-- <div class="row">
              <div class="col-lg-12">
                  <div class="card mb-3" style="background:#f1f5fa">
                      <div class="row">
@@ -118,7 +118,7 @@
                  </div>
                  <!--end card-->
              </div>
-         </div>
+         </div> --}}
          <div class="row">
              <div class="col-12">
                  <div class="card">
@@ -168,22 +168,22 @@
                                      @foreach ($logs as $trans)
                                      <tr>
                                          <td class="px-0 py-0">
-                                             <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>$trans->id])}}">
+                                             <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>encrypt($trans->id)])}}">
                                                  <div class="px-2 py-3">{{$loop->iteration}}</div>
                                              </a>
                                          </td>
                                          <td class="px-0 py-0">
-                                             <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>$trans->id])}}">
+                                             <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=> encrypt($trans->id)])}}">
                                                  <div class="px-2 py-3">{{$trans->ref}}</div>
                                              </a>
                                          </td>
                                          <td class="px-0 py-0">
-                                             <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>$trans->id])}}">
+                                             <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>encrypt($trans->id)])}}">
                                                  <div class="px-2 py-3">{{$trans->status == 'found' ? $trans->name : 'N/A'}}</div>
                                              </a>
                                          </td>
                                          <td class="px-0 py-0">
-                                             <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>$trans->id])}}">
+                                             <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>encrypt($trans->id)])}}">
                                                  <div class="px-2 py-3">
                                                      @if($trans->status == 'found')
                                                      @if($trans->validations != null && $trans->validations->validationMessages != "")
@@ -200,25 +200,25 @@
                                              </a>
                                          </td>
                                          <td class="px-0 py-0">
-                                             <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>$trans->id])}}">
+                                             <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>encrypt($trans->id)])}}">
                                                  <div class="px-2 py-3">{{$trans->fee}}</div>
                                              </a>
                                          </td>
                                          <td class="px-0 py-0">
-                                             <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>$trans->id])}}">
+                                             <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>encrypt($trans->id)])}}">
                                                  <div class="px-2 py-3">{{auth()->user()->name}}</div>
                                              </a>
                                          </td>
                                          <td class="px-0 py-0">
-                                             <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>$trans->id])}}">
+                                             <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>encrypt($trans->id)])}}">
                                                  <div class="px-2 py-3">{{date('jS F Y, h:iA', strtotime($trans->requested_at))}}</div>
                                              </a>
                                          </td>
                                          <td class="px-0 py-0">
-                                             <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>$trans->id])}}">
+                                             <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>encrypt($trans->id)])}}">
                                                  <div class="px-2 py-3">
-                                                     @if($trans->status == 'successful')
-                                                     <a href="{{route('verify.details', encrypt($trans->id))}}">View Details</a>
+                                                     @if($trans->status == 'found')
+                                                     <a href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>encrypt($trans->id)])}}">View Details</a>
                                                      @endif
                                                  </div>
                                              </a>

@@ -30,12 +30,6 @@ class IdentityController extends Controller
          return $this->middleware('clients');
     }
 
-    public function RedirectUser()
-    {
-        if (auth()->user()->user_type == 3)
-            return redirect()->route('admin.index');
-    }
-
     public function identityIndex($slug)
     {
         $this->RedirectUser();
@@ -53,8 +47,6 @@ class IdentityController extends Controller
         // $data['failed'] = IdentityVerification::where(['status' => 'failed', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
         // $data['pending'] = IdentityVerification::where(['status' => 'pending', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
         $data['fields'] = FieldInput::where(['slug' => $slug->slug])->get();
-       
-       
         // $data['wallet'] = Wallet::where('user_id', $user->id)->first();
 
         return view('users.individual.identityVerify', $data);
@@ -257,4 +249,11 @@ class IdentityController extends Controller
             throw $e;
         }
     }
+
+    public function RedirectUser()
+    {
+        if (auth()->user()->user_type == 3)
+            return redirect()->route('admin.index');
+    }
+  
 }

@@ -70,7 +70,9 @@ use App\Models\User as User;
                                         <a class="dropdown-toggle arrow-none" id="drop1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                                             <i class="las la-ellipsis-v font-24 text-muted"></i>
                                         </a>
+                                        
                                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="drop1" style="">
+                                            <a class="dropdown-item " href="{{route('admin.client.details', encrypt($client->id))}}" > View User  </a>
                                             <a class="dropdown-item " href="#" > Suspend User <span class="badge bg-danger"> X </span> </a>
                                             {{-- <a class="dropdown-item" href="{{route('client.company.details')}}">View Company</a> --}}
                                             <a class="dropdown-item" href="{{route('admin.client.candidates', encrypt($client->id))}}}"> view Candidates</a>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Client;
+use App\Models\ActivityLog;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -88,5 +89,59 @@ class AdminClientController extends Controller
 
 
     }
+
+    public function ClientProfile($client_id){
+        $client = Client::where('id', decrypt($client_id))->first();
+        $user = User::where('id',  $client->user_id)->first();
+        $clients = $this->GetClientProfile($client);
+        return view('admin.clients.accounts.profile_settings', $clients, [
+            'user' =>  $user,
+            'activities' => ActivityLog::where('user_id',  $user->id)->latest()->get(),
+            'client' => $client,
+           
+        ]);
+    }
+
+    public function GetClientProfile($client){
+        if($client->user->firstname != null && $client->user->email != null && $client->user->phone != null){
+            $clients['profileInfo'] = 1;
+        }else{
+            $clients['profileInfo'] = null;
+        }
+
+        if($client->email != null && $client->logo != null && $client->company_name != null  && $client->description != null  && $client->reg_number != null && $client->tax_number != null) {
+            $clients['basicInfo'] = 1;
+        }else{
+            $clients['basicInfo'] = null;
+        }
+        if( $client->company_address != null && $client->company_phone != null && $client->facebook != null && $client->linkedin != null && $client->instagram != null) {
+            $clients['busContact'] = 1;
+        }else{
+            $clients['busContact'] = null;
+        }
+
+        if( $client->cac != null && $client->others != null) {
+            $clients['Vdocs'] = 1;
+        }else{
+            $clients['Vdocs'] = null;
+        }
+        return $clients;
+    }
+
+    public function ActivateClientAccount($client_id){
+        client::where('id', decrypt($client_id))->update(['is_admin_verified' => 1]);
+        Session::flash('alert', 'info');
+        Session::flash('message', 'Account Activated Successfully');
+        return back();
+    }
+
+    public function SuspendClientAccount($client_id){
+        client::where('id', decrypt($client_id))->update(['is_admin_verified' => -1]);
+        Session::flash('alert', 'danger');
+        Session::flash('message', 'Account Suspend Successfully');
+        return back();
+    }
+
+
   
 }

@@ -140,10 +140,12 @@ Route::get('/address/{slug}', [AdminAddressController::class, 'AddressIndex'])->
 Route::get('/candidate', [AdminCandidateController::class, 'getVerify'])->name('candidate.index');
 Route::get('/candidate/index', [AdminCandidateController::class, 'CandidateIndex'])->name('candidate.index');
 Route::get('/candidate/details/{id}', [AdminCandidateController::class, 'CandidateDetails'])->name('candidate.details');
-
 Route::get('candidate/', [AdminCandidateController::class, 'UserCandidates'])->name('user.candidates');
 Route::get('/clients/candidate/{id}', [AdminCandidateController::class, 'ClientCandidates'])->name('client.candidates');
 Route::get('/user/clients/', [AdminClientController::class, 'UserClients'])->name('user.clients');
+Route::get('/clients/details/{client_id}', [AdminClientController::class, 'ClientProfile'])->name('client.details');
+Route::get('/client/activate/{client_id}', [AdminClientController::class, 'ActivateClientAccount'])->name('client.activateAccount');
+Route::get('/client/suspend/{client_id}', [AdminClientController::class, 'SuspendClientAccount'])->name('client.suspendAccount');
 Route::get('/clients/create', [AdminClientController::class, 'createClient'])->name('client.create');
 Route::post('/clients/store', [AdminClientController::class, 'ClientStore'])->name('client.store');
 Route::get('/administrators/index', [AdminController::class, 'AdministratorIndex'])->name('administratorIndex');

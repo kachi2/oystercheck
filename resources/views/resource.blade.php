@@ -34,7 +34,7 @@
     <section class="about-us-section ptb-100">
         <div class="container">
             <div class="row justify-content-between align-items-center">
-                <div class="col-md-12 col-lg-6">
+                <div class="col-md-6 col-lg-6">
                     <div class="video-promo-content mb-md-4 mb-lg-0">
                         <img src="{{asset('/landing_assets/img/screening.jpg')}}" width="100px">
                         <h4>Screening Regulations</h4>
@@ -47,7 +47,7 @@
             </div>
         </div>
 
-          <div class="col-md-12 col-lg-12 pt-2">
+          <div class="col-md-6 col-lg-6 pt-2">
                     <div class="video-promo-content mb-md-4 mb-lg-0">
                         <img src="{{asset('/landing_assets/img/com.jpg')}}" width="100px">
                         <h4>Data Protection Compliance</h4>
@@ -63,14 +63,14 @@
             </div>
         </div>
 
-         <div class="col-md-12 col-lg-6 pt-2">
+         <div class="col-md-6 col-lg-6 pt-2">
                     <div class="video-promo-content mb-md-4 mb-lg-0">
                         <img src="{{asset('/landing_assets/img/criminal.jpg')}}" width="100px">
                         <h4> Criminal Checks Records Compliance</h4>
                         <p>Oysterchecks ensures that any data collected about an individual or company is treated with at most confidentiality as required in Police Act 1997 and Data Act 1998. We have access to global databases and we will help you in conducting global employment screening with a lot of ease.</p></div>
                 </div>
 
-             <div class="col-md-12 col-lg-6 pt-2">
+             <div class="col-md-6 col-lg-6 pt-2">
                     <div class="video-promo-content mb-md-4 mb-lg-0">
                         <img src="{{asset('/landing_assets/img/com.jpg')}}" width="100px">
                         <h2>Compliance Standards</h2>

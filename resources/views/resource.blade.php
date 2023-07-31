@@ -70,7 +70,7 @@
                         <h4> Criminal Checks Records Compliance</h4>
                         <p>Oysterchecks ensures that any data collected about an individual or company is treated with at most confidentiality as required in Police Act 1997 and Data Act 1998. We have access to global databases and we will help you in conducting global employment screening with a lot of ease.</p></div>
                 </div>
-
+            </div>
              <div class="col-md-6 col-lg-6 pt-2">
                     <div class="video-promo-content mb-md-4 mb-lg-0">
                         <img src="{{asset('/landing_assets/img/com.jpg')}}" width="100px">

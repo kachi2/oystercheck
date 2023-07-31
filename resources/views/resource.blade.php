@@ -40,9 +40,10 @@
                         <h4>Screening Regulations</h4>
                         <p>Compliance knowledge and expertise is very important for organizations which provide employee screening services. At Oysterchecks we are always at the fore front ensuring that our screening services are in compliance with the dynamic regulatory requirements. We are committed and dedicated to ensure that we are in compliance with the latest regulatory programs in the industry.</p></div>
                 </div>
-                <div class="col-md-12 col-lg-6">
+                <div class="col-md-6 col-lg-6">
                     <div class="video-promo-content mb-md-4 mb-lg-0">
-                        <h4><img src="{{asset('/landing_assets/img/data.jpg')}}" width="100px"> Data Protection Compliance</h4>
+                        <img src="{{asset('/landing_assets/img/data.jpg')}}" width="100px"> 
+                        <h4>Data Protection Compliance</h4>
                         <p>Oysterchecks is registered with the Information Commissioner’s Office and strictly operates in compliance with rules stipulated under the Data Act 1998. This act regulates how a company gathers, handles, stores, retains and disposes personal information.</p>
             </div>
         </div>

@@ -65,7 +65,7 @@
                                        
                                          <div class="media align-items-center p-2">
                                            
-                                             @if(!UserEnvironment())
+                                             @if(UserEnvironment() == 0)
                                              <div class="col-md-12 ">
                                                 <div class="card" >
                                                     <div class="card-header" style="background: rgb(13, 115, 115); color:#fff">

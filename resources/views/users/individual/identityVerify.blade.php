@@ -117,7 +117,7 @@
                                  <div class="col-md-12 mt-3">
                                      <div class="col-md-7 mb-3">
                                          <div class="media align-items-center p-2">
-                                            @if(!UserEnvironment() && $slug->test_data != '' && $slug->test_data != null  )
+                                            @if(UserEnvironment() == 0 && $slug->test_data != '' && $slug->test_data != null  )
                                             <div class="col-md-12 ">
                                                <div class="card" >
                                                    <div class="card-header" style="background: rgb(13, 115, 115); color:#fff">

@@ -42,12 +42,10 @@ function executeCurl($data, $host, $method)
    ]);
    
    $response = curl_exec($curl);
-
    if(curl_errno($curl)){
      dd('error:'. curl_errno($curl));
    }else{
    $res = json_decode($response, true);
-   
    curl_close($curl);
    return $res;
    }
@@ -75,16 +73,14 @@ function crypto_rand_secure($min, $max)
         $codeAlphabet = "0123456789";
         $codeAlphabet .= "abcdefghkmnpqrstuvwxyz";
         $max = strlen($codeAlphabet); // edited
-
         for ($i = 0; $i < $length; $i++) {
             $token .= $codeAlphabet[crypto_rand_secure(0, $max - 1)];
         }
-
         return $token;
     }
 
+
     if(!function_exists('testEnviroment')){
-        
         function UserEnvironment(){
             $user = User::where('id', auth()->user()->id)->first();
             if($user->client->is_activated == 1){

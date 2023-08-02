@@ -78,6 +78,20 @@
                          @endforeach
                         </ul>
                     </li> 
+                    <hr class="hr-dashed hr-menu">
+                    <li class="menu-label my-2">AML Verification</li>
+                    <li>
+                        <a href="{{route('users.report')}}">
+                            <i data-feather="file" class="align-self-center menu-icon"></i>
+                            <span>Sanction & PEP Screening</span>
+                        </a>
+                    </li> 
+                    <li>
+                        <a href="{{route('users.report')}}">
+                            <i data-feather="check-square" class="align-self-center menu-icon"></i>
+                            <span>Adverse Media</span>
+                        </a>
+                    </li> 
                      <hr class="hr-dashed hr-menu">
                     <li class="menu-label my-2">Administrative Task</li>
                     <li>

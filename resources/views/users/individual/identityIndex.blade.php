@@ -87,11 +87,11 @@
                     </div>
                     <div class="row">
              <div class="col-lg-12">
-                 <div class="card mb-3" style="background:#f1f5fa">
+                 <div class="card mb-3" style="background: #1b4c89;">
                      <div class="row">
                          <div class="col-md-6">
                              <div class="card-body">
-                                 <h5 class="card-title">Verify an Identity ({{$slug->name}}) </h5>
+                                 <h5 class="card-title ">Verify an Identity ({{$slug->name}}) </h5>
                                  <p class="card-text mb-0">Seamless KYC and identity verification and get key insights and analysis for every verification.</p>
                                  <p class="card-text mb-0"><small class="text-muted">Use the "Verify Candidate" button to initiate the verification process.</small></p>
                              </div>

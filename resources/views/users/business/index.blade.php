@@ -96,24 +96,24 @@
          </div>
          <div class="row">
              <div class="col-lg-12">
-                 <div class="card mb-3" style="background:#f1f5fa">
-                     <div class="row">
-                         <div class="col-md-6">
-                             <div class="card-body">
-                                 <h5 class="card-title">Verify a Business ({{$slug->name}}) </h5>
-                                 <p class="card-text mb-0">Seamless KYC and business verification and get key insights and analysis for every verification.</p>
-                                 <p class="card-text mb-0"><small class="text-muted">Use the "Verify Candidate" button to initiate the verification process.</small></p>
-                             </div>
-                         </div>
-                         <div class="col-md-6 align-self-center">
-                             <div class="card-body d-flex justify-content-lg-end justify-content-center">
-                                 <a type="button" class="btn btn-primary " href="{{route('businessCheck', $slug->slug)}}">Verify Business</a>
+                <div class="card mb-3" style="background: #1b4c89;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <h4 class="text-white">  <strong> Verify an Identity </strong> ({{$slug->name}}) </h4>
+                                <p class="card-text text-white mb-0">Seamless KYC and identity verification and get key insights and analysis for every verification.</p>
+                                <p class="card-text text-white mb-0"><small class="">Use the "Verify {{strtoupper($slug->slug)}}" button to initiate the verification process.</small></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 align-self-center">
+                            <div class="card-body d-flex justify-content-lg-end justify-content-center">
+                                <a type="button" class="btn btn-primary btn-lg" href="{{route('showIdentityVerificationForm', $slug->slug)}}">      <img src="{{asset('assets/images/favicon.png')}}" width="30px" > Verify {{strtoupper($slug->slug)}}</a>
 
-                             </div>
-                         </div>
-                         <!--end col-->
-                         <!--end col-->
-                     </div>
+                            </div>
+                        </div>
+                        <!--end col-->
+                        <!--end col-->
+                    </div>
                      <!--end row-->
                  </div>
                  <!--end card-->

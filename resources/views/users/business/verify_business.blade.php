@@ -36,7 +36,7 @@
 
                  <div class="card">
                      <div class="card-header">
-                         <h4 class="card-title">{{$slug->name}} ({{$slug->slug}})Verification</h4>
+                         <h4 class="card-title">{{strtoupper($slug->name)}} Verification</h4>
                      </div>
                      <!--end card-header-->
                      <form method="post" action="{{route('businessStore',$slug->slug)}}" id="form1">

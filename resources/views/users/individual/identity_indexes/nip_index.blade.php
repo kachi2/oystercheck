@@ -95,7 +95,7 @@
                         </div>
                         <div class="col-md-6 align-self-center">
                             <div class="card-body d-flex justify-content-lg-end justify-content-center">
-                                <a type="button" class="btn btn-primary btn-lg" href="{{route('showIdentityVerificationForm', $slug->slug)}}">Verify  {{strtoupper($slug->slug)}}</a>
+                                <a type="button" class="btn btn-primary btn-lg" href="{{route('showIdentityVerificationForm', $slug->slug)}}">      <img src="{{asset('assets/images/favicon.png')}}" width="30px" > Verify {{strtoupper($slug->slug)}}</a>
 
                             </div>
                         </div>

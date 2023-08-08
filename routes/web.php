@@ -123,6 +123,8 @@ Route::get('/user/candidate/upload/index', [CandidateController::class, 'candida
 Route::get('/user/candidate/documents/', [CandidateController::class, 'viewCandidateDocuments'])->name('candidate.documents');
 
 
+//Pep-sanction screen and Adverse media
+
 // Route::get('/addressReport', function(){
 //     return view('users.address.addressReport');
 // });

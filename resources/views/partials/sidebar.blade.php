@@ -83,7 +83,7 @@
                     <li>
                         <a href="{{route('users.report')}}">
                             <i data-feather="file" class="align-self-center menu-icon"></i>
-                            <span>Sanction & PEP Screening <small style="font-size:8px; color:#fff; background:red; padding:2px">Coming Soon</small></span>
+                            <span>Sanction & PEP Screening   </span>
                         </a>
                     </li> 
                     <li>

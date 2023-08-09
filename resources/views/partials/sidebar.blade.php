@@ -80,18 +80,14 @@
                     </li> 
                     <hr class="hr-dashed hr-menu">
                     <li class="menu-label my-2">AML Verification</li>
+                    @foreach ($aml as $amls)
                     <li>
-                        <a href="{{route('users.report')}}">
-                            <i data-feather="file" class="align-self-center menu-icon"></i>
-                            <span>Sanction & PEP Screening   </span>
+                        <a href="{{route('user.aml_pep_sanction',$amls->slug)}}">
+                            <i data-feather="search" class="align-self-center menu-icon"></i>
+                            <span>{{$amls->name}}   </span>
                         </a>
-                    </li> 
-                    <li>
-                        <a href="{{route('users.report')}}">
-                            <i data-feather="check-square" class="align-self-center menu-icon"></i>
-                            <span>Adverse Media <small style="font-size:8px; color:#fff; background:red; padding:2px">Coming Soon</small></span>
-                        </a>
-                    </li> 
+                    </li>   
+                    @endforeach 
                      <hr class="hr-dashed hr-menu">
                     <li class="menu-label my-2">Administrative Task</li>
                     <li>

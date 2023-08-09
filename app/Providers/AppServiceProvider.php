@@ -59,10 +59,11 @@ class AppServiceProvider extends ServiceProvider
             }
 
             });
-            $data['sidebar'] = Verification::where('report_type', '!=', 'business')->where('report_type', '!=', 'address')->get();
+            $data['sidebar'] = Verification::where([['report_type', '!=', 'business'], ['report_type', '!=', 'address'], ['report_type', '!=', 'aml']])->get();
             $data['sidebars'] = Verification::get();
             $data['business'] = Verification::where('report_type', '=', 'business')->get();
             $data['address'] = Verification::where('report_type', '=', 'address')->get();
+            $data['aml'] = Verification::where('report_type', '=', 'aml')->get();
             
             view::share($data);
 

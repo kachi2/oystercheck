@@ -18,13 +18,18 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         $this->call([
-            RoleSeeder::class,
-            UserSeeder::class,
-            InputFieldSeeder::class,
-            AdminSeeder::class,
-            WalletSeeder::class,
-            VerificationSeeder::class,
-            CandidateServiceSeeder::class,
+            // RoleSeeder::class,
+            // UserSeeder::class,
+            // InputFieldSeeder::class,
+            // AdminSeeder::class,
+            // WalletSeeder::class,
+            // VerificationSeeder::class,
+            // CandidateServiceSeeder::class,
+
+            // AdverseMediaInputSeeder::class,
+            // AmlVerificationSeeder::class,
+            PepSanctionInputSeeder::class,
+            // AdverseMediaCategorySeeder::class,
                         
         ]);
     }

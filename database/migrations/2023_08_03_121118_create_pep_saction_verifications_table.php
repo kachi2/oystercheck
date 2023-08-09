@@ -18,6 +18,7 @@ class CreatePepSactionVerificationsTable extends Migration
             $table->foreignId('verification_id')->constrained('verifications');
             $table->foreignId('user_id')->constrained('users');
             $table->string('ref');
+            $table->string('status');
             $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
             $table->string('last_name')->nullable();

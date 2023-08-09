@@ -15,6 +15,7 @@ use App\Http\Controllers\CandidatesDocsReviewController as Candidates;
 use App\Http\Controllers\ClientProfileController;
 use App\Http\Controllers\Admin\{AdminBusinessController, AdminAddressController, AdminClientController, AdminCandidateController, AdminIdentityController, AdminPaymentController, UserController};
 use App\Http\Controllers\CustomVerification;
+use App\Http\Controllers\SanctionPepController;
 use App\Http\Middleware\ClientMiddleware;
 
 // use App\Models\Transaction;
@@ -63,7 +64,7 @@ Route::get('/identity/bank-account/banks', [IdentityController::class, 'getBanks
 Route::get('/user/identities/{slug}', IdentityIndexController::class)->name('identityIndex');
 Route::get('/user/identities/check/{slug}',[IdentityController::class, 'showIdentityVerificationForm'])->name('showIdentityVerificationForm');
 Route::post('/user/identities/verify/{slug}', [IdentityController::class, 'StoreVerify'])->name('StoreVerify');
-Route::get('/test', [IdentityController::class, 'test']);
+// Route::get('/test', [IdentityController::class, 'test']);
 Route::get('/user/identities/{slug}/{verificationId}', [IdentityController::class, 'verificationReport'])->name('showIdentityReport');
 // Route::get('/user/identities/details/{id}', [IdentityController::class, 'verifyDetails'])->name('verify.details');
 Route::get('/user/business/{slug}', [BusinessController::class, 'index'])->name('businessIndex');
@@ -73,7 +74,7 @@ Route::get('/user/business/{slug}/{verificationId}', [BusinessController::class,
 Route::get('/user/address/verification/{slug}', [AddressController::class,'AddressIndex'])->name('addressIndex');
 Route::get('/user/address/verification/{slug}/{addressId}', [AddressController::class, 'verificationReport'])->name('showAddressReport');
 Route::post('/user/address/verification/store/{slug}', [AddressController::class,'submitAddressVerify'])->name('AddressStore');
-Route::get('/user/address/verification/{slug}/candidate/{service_ref}/verification-details', [AddressController::class, 'showVerificationDetailsForm'])->name('showVerificationDetailsForm');
+Route::get('/user/address/verification/{slug}/candidate/{service_ref}', [AddressController::class, 'showVerificationDetailsForm'])->name('showVerificationDetailsForm');
 Route::get('/user/address/verification/{slug}/candidate/create', [AddressController::class,'showCreateCandidate'])->name('showCreateCandidate');
 Route::post('/user/address/verification/candidate/create/{slug}', [AddressController::class,'createCandidate'])->name('createCandidate');
 Route::get('/user/candidate/index', [CandidateController::class, 'CandidateIndex'])->name('candidate.index');
@@ -124,7 +125,8 @@ Route::get('/user/candidate/documents/', [CandidateController::class, 'viewCandi
 
 
 //Pep-sanction screen and Adverse media
-
+Route::get('user/aml/sanction-pep-screening/{slug}',[SanctionPepController::class, 'SanctionPepIndex'])->name('user.aml_pep_sanction');
+Route::get('user/aml/sanction-pep-screening/{slug}/check',[SanctionPepController::class, 'SanctionPepCheck'])->name('user.aml_pep_sanction_check');
 // Route::get('/addressReport', function(){
 //     return view('users.address.addressReport');
 // });

@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class PepSactionList extends Model
 {
     use HasFactory;
+
 }

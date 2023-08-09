@@ -127,6 +127,8 @@ Route::get('/user/candidate/documents/', [CandidateController::class, 'viewCandi
 //Pep-sanction screen and Adverse media
 Route::get('user/aml/sanction-pep-screening/{slug}',[SanctionPepController::class, 'SanctionPepIndex'])->name('user.aml_pep_sanction');
 Route::get('user/aml/sanction-pep-screening/{slug}/check',[SanctionPepController::class, 'SanctionPepCheck'])->name('user.aml_pep_sanction_check');
+Route::post('user/aml/sanction-pep-screening/{slug}/verify',[SanctionPepController::class, 'SanctionPepVerify'])->name('user.aml_pep_sanction_verify');
+Route::get('user/aml/sanction-pep-screening/report/{ref}',[SanctionPepController::class, 'SanctionPepGetReport'])->name('user.aml_pep_sanction_get_report');
 // Route::get('/addressReport', function(){
 //     return view('users.address.addressReport');
 // });

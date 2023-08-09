@@ -38,7 +38,7 @@
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
                                         <p class="text-black mb-0 fw-semibold"> <span class="badge bg-success"> Cleared Query </span></p>
-                                        <h3 class="m-0 text-black">{{count($failed)}}</h3>
+                                        <h3 class="m-0 text-black">{{count($success)}}</h3>
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
@@ -57,7 +57,7 @@
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
                                         <p class="mb-0 fw-semibold text-black"> <span class="badge bg-warning"> Review Required </span> </p>
-                                        <h3 class="m-0 text-black">{{count($failed)}}</h3>
+                                        <h3 class="m-0 text-black">{{count($pending)}}</h3>
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
@@ -160,7 +160,7 @@
                                         <th class="px-2 py-3">Verification ID</th>
                                         <th class="px-2 py-3">Name</th>
                                         <th class="px-2 py-3">Status</th>
-                                        <th class="px-2 py-3">Fee</th>
+                                        {{-- <th class="px-2 py-3">Fee</th> --}}
                                         <th class="px-2 py-3">Verified by</th>
                                         <th class="px-2 py-3">Initiated At</th>
                                         <th class="px-2 py-3">Action</th>
@@ -171,58 +171,54 @@
                                     @foreach ($logs as $trans)
                                     <tr>
                                         <td class="px-0 py-0">
-                                            <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>encrypt($trans->id)])}}">
+                                            <a class="table-link" href="{{route('user.aml_pep_sanction_get_report', ['ref'=>encrypt($trans->id)])}}">
                                                 <div class="px-2 py-3">{{$loop->iteration}}</div>
                                             </a>
                                         </td>
                                         <td class="px-0 py-0">
-                                            <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=> encrypt($trans->id)])}}">
+                                            <a class="table-link" href="{{route('user.aml_pep_sanction_get_report', ['ref'=>encrypt($trans->id)])}}">
                                                 <div class="px-2 py-3">{{$trans->ref}}</div>
                                             </a>
                                         </td>
                                         <td class="px-0 py-0">
-                                            <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>encrypt($trans->id)])}}">
-                                                <div class="px-2 py-3">{{$trans->status == 'found' ? $trans->name : 'N/A'}}</div>
+                                            <a class="table-link" href="{{route('user.aml_pep_sanction_get_report', ['ref'=>encrypt($trans->id)])}}">
+                                                <div class="px-2 py-3">{{$trans->first_name.' '.$trans->last_name}}</div>
                                             </a>
                                         </td>
                                         <td class="px-0 py-0">
-                                            <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>encrypt($trans->id)])}}">
+                                            <a class="table-link" href="{{route('user.aml_pep_sanction_get_report', ['ref'=>encrypt($trans->id)])}}">
                                                 <div class="px-2 py-3">
-                                                    @if($trans->status == 'found')
-                                                    @if($trans->validations != null && $trans->validations->validationMessages != "")
-                                                    <span class="badge badge-soft-warning">Found</span>
+                                                    @if($trans->status == 'cleared')
+                                                    <span class="badge badge-soft-success">Cleared</span>
+                                                    @elseif($trans->status == 'not_cleared')
+                                                    <span class="badge badge-soft-danger">Not Cleared</span>
                                                     @else
-                                                    <span class="badge badge-soft-success"> Found</span>
-                                                    @endif
-                                                    @elseif($trans->status == 'not_found')
-                                                    <span class="badge badge-soft-danger">Not Found</span>
-                                                    @else
-                                                    <span class="badge badge-soft-purple"> {{$trans->status}}</span>
+                                                    <span class="badge badge-soft-purple"> Review Required</span>
                                                     @endif
                                                 </div>
                                             </a>
                                         </td>
-                                        <td class="px-0 py-0">
+                                        {{-- <td class="px-0 py-0">
                                             <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>encrypt($trans->id)])}}">
                                                 <div class="px-2 py-3">{{$trans->fee}}</div>
                                             </a>
-                                        </td>
+                                        </td> --}}
                                         <td class="px-0 py-0">
-                                            <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>encrypt($trans->id)])}}">
+                                            <a class="table-link" href="{{route('user.aml_pep_sanction_get_report', ['ref'=>encrypt($trans->id)])}}">
                                                 <div class="px-2 py-3">{{auth()->user()->name}}</div>
                                             </a>
                                         </td>
                                         <td class="px-0 py-0">
-                                            <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>encrypt($trans->id)])}}">
-                                                <div class="px-2 py-3">{{date('jS F Y, h:iA', strtotime($trans->requested_at))}}</div>
+                                            <a class="table-link" href="{{route('user.aml_pep_sanction_get_report', ['ref'=>encrypt($trans->id)])}}">
+                                                <div class="px-2 py-3">{{date('jS F Y, h:iA', strtotime($trans->created_at))}}</div>
                                             </a>
                                         </td>
                                         <td class="px-0 py-0">
-                                            <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>encrypt($trans->id)])}}">
+                                            <a class="table-link" href="{{route('user.aml_pep_sanction_get_report', ['ref'=>encrypt($trans->id)])}}">
                                                 <div class="px-2 py-3">
-                                                    @if($trans->status == 'found')
-                                                    <a href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>encrypt($trans->id)])}}">View Details</a>
-                                                    @endif
+                                               
+                                                    <a href="{{route('user.aml_pep_sanction_get_report', ['ref'=>encrypt($trans->id)])}}">View Details</a>
+                                                 
                                                 </div>
                                             </a>
                                         </td>

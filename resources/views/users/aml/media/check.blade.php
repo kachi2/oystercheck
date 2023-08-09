@@ -39,7 +39,7 @@
                         <h4 class="card-title"> <span style="color:rgb(13, 100, 132); font-style:italics">Check  {{$slug->name}} </span></h4>
                     </div>
                     <!--end card-header-->
-                    <form method="post" action="{{route('StoreVerify',$slug->slug)}}" id="form1" enctype="multipart/form-data">
+                    <form method="post" action="{{route('user.aml_pep_sanction_verify',$slug->slug)}}" id="form1" enctype="multipart/form-data">
                         @csrf
 
                         <div class="card-body bootstrap-select-1">
@@ -55,6 +55,8 @@
 
                                     @php $test = json_decode($slug->test_data, true)@endphp 
                                     value="{{$test[$input->name]}}"
+                                    @else
+                                    value="{{old($input->name)}}"
                                     @endif
                                      id="{{$input->inputid}}" name="{{$input->name}}" class="form-control mb-3 custom-select" placeholder="{{$input->placeholder}}" @if($input->is_required == true) required @endif />
                                 </div><!-- end col -->
@@ -66,9 +68,12 @@
                                            @if(UserEnvironment() == 0 && $slug->test_data != '' && $slug->test_data != null  )
                                            <div class="col-md-12 ">
                                               <div class="card" >
-                                                  <div class="card-header" style="background: rgb(13, 115, 115); color:#fff">
-                                                      <h4 class="card-title" style=" color:#fff">Test Data</h4>
-                                                      <p class="mb-0" style="color:#fff">We’ve provided some details you can use to test this service in test mode.</p>
+                                                  <div class="card-header" style="background: rgb(140, 206, 206); color:#fff">
+                                                      <h4 class="card-title" style=" color:#110e0e">Test Data</h4>
+                                                      <p class="mb-0" style="color:#100f0f">
+                                                    
+
+                                                        We’ve provided some details you can use to test this service in test mode.</p>
                                                   </div><!--end card-header-->
                                                   {{-- <div class="card-body">
                                                       <p id="clipboardParagraph" class="border p-3">
@@ -87,7 +92,7 @@
                                             <div class="me-3 align-items-center">
                                               <i class="la la-info-circle"></i>
                                           </div>
-                                            <div class="media-body" style="font-size:12px;"> <strong>Note:</strong> You will be charged <strong>₦{{number_format($slug->fee, 2)}}</strong> for each {{$slug->slug}} verification</div>
+                                            <div class="media-body" style="font-size:12px;"> <strong>Note:</strong> You will be charged <strong>₦{{number_format($slug->fee, 2)}}</strong> for each {{$slug->name}} verification</div>
                                             @endif
                                         </div>
                                         <!-- <div class="bg-soft-primary mb-2 p-1" style="font-size:12px;"> <strong>Note:</strong> You will be charged <strong>₦{{number_format($slug->fee, 2)}}</strong> for each {{$slug->slug}} verification</div> -->
@@ -99,8 +104,8 @@
                                         </div>
                                     </div>
                                     <div class="float-center p-2">
-                                        <button type="submit" id="btnsubmit" class="btn btn-primary w-23">
-                                            <i class="fas fa-check-double"></i> Search</button>
+                                        <button type="submit" id="btnsubmit" class="btn btn-primary w-25">
+                                            <i class="fas fa-check-double"></i> Search List</button>
                                     </div>
                                 </div>
                             </div><!-- end row -->

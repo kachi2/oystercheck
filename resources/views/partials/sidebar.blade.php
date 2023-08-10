@@ -82,7 +82,7 @@
                     <li class="menu-label my-2">AML Verification</li>
                     @foreach ($aml as $amls)
                     <li>
-                        <a href="{{route('user.aml_pep_sanction',$amls->slug)}}">
+                        <a href="{{route('user.aml_'.$amls->slug,$amls->slug)}}">
                             <i data-feather="search" class="align-self-center menu-icon"></i>
                             <span>{{$amls->name}}   </span>
                         </a>

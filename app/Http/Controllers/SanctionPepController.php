@@ -107,7 +107,7 @@ class SanctionPepController extends Controller
                    PepSactionVerification::create([
                         'verification_id' => $slug->id,
                         'user_id' => auth()->user()->id,
-                        'ref' => $ref,
+                        'ref' => $decodedResponse['data']['id'],
                         'status' => $decodedResponse['data']['status'],
                         'first_name' => $decodedResponse['data']['firstName'],
                         'last_name' => $decodedResponse['data']['lastName'],

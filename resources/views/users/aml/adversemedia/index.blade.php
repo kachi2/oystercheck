@@ -38,7 +38,9 @@
                                     <div class="col">
                                         <p class="mb-0 fw-semibold text-black"> <span class="badge bg-danger">
                                             <i  class="mdi mdi-alpha-x-circle-outline"></i> Potential High Risk </span> </p>
-                                        <h3 class="m-0 text-black">{{count($failed)}} <small class="text-danger" style="font-size:14px; font-weight:100; ">0 this week</small></h3>
+                                        <h3 class="m-0 text-black">{{count($potential_high_risk)}} 
+                                            <small class="text-danger" style="font-size:14px; font-weight:100; ">request found</small>
+                                        </h3>
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
@@ -58,7 +60,9 @@
                                     <div class="col">
                                         <p class="mb-0 fw-semibold text-black"> <span class="badge bg-warning">
                                             <i  class="mdi mdi-alpha-x-circle-outline"></i> Potential Medium Risk </span> </p>
-                                        <h3 class="m-0 text-black">{{count($failed)}} <small class="text-warning" style="font-size:14px; font-weight:100; ">0 this week</small></h3>
+                                        <h3 class="m-0 text-black">{{count($potential_medium_risk)}}
+                                             <small class="text-warning" style="font-size:14px; font-weight:100; ">request found</small>
+                                            </h3>
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
@@ -78,7 +82,9 @@
                                     <div class="col">
                                         <p class="mb-0 fw-semibold text-black"> <span class="badge bg-info">
                                             <i  class="mdi mdi-shield-check-outline"></i> No Match Found </span> </p>
-                                        <h3 class="m-0 text-black">{{count($failed)}} <small class="text-info" style="font-size:14px; font-weight:100; ">0 this week</small></h3>
+                                        <h3 class="m-0 text-black">{{count($no_match_found)}}
+                                             <small class="text-info" style="font-size:14px; font-weight:100; ">request found</small> 
+                                        </h3>
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
@@ -99,7 +105,9 @@
                                     <div class="col">
                                         <p class="mb-0 fw-semibold text-black"> <span class="badge bg-primary">
                                             <i  class="mdi mdi-progress-alert"></i> Total Request </span> </p>
-                                        <h3 class="m-0 text-black">{{count($failed)}} <small class="text-primary" style="font-size:14px; font-weight:100; ">0 this week</small></h3>
+                                        <h3 class="m-0 text-black">{{count($total_request)}} 
+                                            <small class="text-primary" style="font-size:14px; font-weight:100; ">request sent</small>
+                                        </h3>
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
@@ -202,7 +210,7 @@
                                         </td>
                                         <td class="px-0 py-0">
                                             <a class="table-link" href="{{route('user.aml_pep_sanction_get_report', ['ref'=>encrypt($trans->id)])}}">
-                                                <div class="px-2 py-3">{{$trans->first_name.' '.$trans->last_name}}</div>
+                                                <div class="px-2 py-3">{{$trans->query}}</div>
                                             </a>
                                         </td>
                                         <td class="px-0 py-0">
@@ -225,7 +233,7 @@
                                         </td> --}}
                                         <td class="px-0 py-0">
                                             <a class="table-link" href="{{route('user.aml_pep_sanction_get_report', ['ref'=>encrypt($trans->id)])}}">
-                                                <div class="px-2 py-3">{{auth()->user()->name}}</div>
+                                                <div class="px-2 py-3">{{auth()->user()->client->company_name}}</div>
                                             </a>
                                         </td>
                                         <td class="px-0 py-0">

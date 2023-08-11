@@ -27,11 +27,13 @@ class AdverseMediaController extends Controller
         $slug = Verification::where('slug', $slug)->first();
         $user = User::where('id', auth()->user()->id)->first();
         $data['slug'] = Verification::where('slug', $slug->slug)->first();
-        $data['success'] = AdverseMedia::where(['status' => 'cleared', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
-        $data['failed'] = AdverseMedia::where(['status' => 'not_cleared', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
-        $data['pending'] = AdverseMedia::where(['status' => 'review_required', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
+        $data['no_match_found'] = AdverseMedia::where(['status' => 'no-match-found', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
+        $data['potential_high_risk'] = AdverseMedia::where(['status' => 'potential-high-risk', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
+        $data['potential_medium_risk'] = AdverseMedia::where(['status' => 'potential-medium-risk', 'verification_id' => $slug->id, 'user_id' => $user->id])->get();
+        $data['total_request'] = AdverseMedia::where(['verification_id' => $slug->id, 'user_id' => $user->id])->get();
         $data['wallet'] = Wallet::where('user_id', $user->id)->first();
         $data['logs'] = AdverseMedia::where(['user_id' => auth()->user()->id])->latest()->get();
+
         return view('users.aml.adversemedia.index', $data);
     }
 

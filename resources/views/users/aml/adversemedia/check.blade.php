@@ -182,7 +182,7 @@
 
  $(function() {
     $('#reportrange').daterangepicker({
-        minDate: new Date('2018/11/2'),
+        // minDate: new Date('2018/11/2'),
         locale: {
             format: 'YYYY/MM/DD',
         }

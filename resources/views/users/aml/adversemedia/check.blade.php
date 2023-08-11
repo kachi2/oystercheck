@@ -69,7 +69,7 @@
                                         <select class="select2 mb-3 select2-multiple select2-hidden-accessible" 
                                               style="width: 100%" multiple="" name="queryCountry[]" data-placeholder="Select Countries" tabindex="-1" aria-hidden="true">
                                             <optgroup label="countries">
-                                                <option value="ag">Argentina</option>
+                                                <option value="ag" selected>Argentina</option>
                                                 <option value="aus">Australia</option>
                                                 <option value="by">Belarus</option>
                                                 <option value="be">Belgium</option>
@@ -78,10 +78,10 @@
                                                 <option value="ca">Canada</option>
                                                 <option value="eg">Egypt</option>
                                                 <option value="gh">Ghana</option>
-                                                <option value="ng">Nigeria</option>
+                                                <option value="ng" selected>Nigeria</option>
                                                 <option value="za">South Africa</option>
-                                                <option value="us">United States</option>
-                                                <option value="uk">United Kingdom</option>
+                                                <option value="us" selected>United States</option>
+                                                <option value="uk" selected>United Kingdom</option>
                                                
                                             </optgroup>
                                         </select>

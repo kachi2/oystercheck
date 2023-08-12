@@ -72,7 +72,6 @@
     <script src="{{asset('/assets/pages/jquery.clipboard.init.js')}}"></script>
         <!-- Session timeout js -->
 
-      {{-- Charts --}}
       
       <script src="{{asset('plugins/apex-charts/apexcharts.min.js')}}"></script>
       <script src="{{asset('/plugins/apex-charts/irregular-data-series.js')}}"></script>

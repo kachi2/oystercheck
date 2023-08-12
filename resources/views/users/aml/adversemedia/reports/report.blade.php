@@ -32,7 +32,6 @@
             <!--end col-->
         </div>
         <div class="row">
-
             <div class="col-12">
                 <div class="card">
                     <div class="card-header" id="hasChar">
@@ -50,31 +49,31 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-12">
-                                @if($transactions->status == 'not_cleared')
+                                @if($transactions->status == 'no-match-found')
                                 
-                                <div class="alert custom-alert alert-purple icon-custom-alert shadow-sm fade show d-flex justify-content-between" role="alert">
+                                <div class="alert custom-alert alert-success icon-custom-alert shadow-sm fade show d-flex justify-content-between" role="alert">
                                     <div class="media">
-                                        <i class="mdi mdi mdi-close-box-multiple alert-icon text-danger align-self-center font-30 me-3"></i>
+                                        <i class="mdi mdi-shield-check-outline  alert-icon text-success align-self-center font-30 me-3"></i>
                                         <div class="media-body align-self-center">
-                                            <h5 class="mb-1 fw-bold mt-0 text-danger">Not Cleared</h5>
-                                            <span>Sanction & PEP Screening Check</span>
+                                            <h5 class="mb-1 fw-bold mt-0 text-success">No Match Found</h5>
+                                            <span>Sentiment Score: {{number_format($transactions->weightedScore,2)}}%</span>
                                         </div>
                                     </div>
                                 </div>
-                                @elseif($transactions->status == 'review_required')
-                                <div class="alert custom-alert alert-warning icon-custom-alert shadow-sm fade show d-flex justify-content-between" role="alert">
+                                @elseif($transactions->status == 'potential-high-risk')
+                                <div class="alert custom-alert alert-danger icon-custom-alert shadow-sm fade show d-flex justify-content-between" role="alert">
                                     <div class="media">
-                                        <i class="mdi  fa-times-circle alert-icon text-warning align-self-center font-30 me-3"></i>
+                                        <i class="mdi mdi-alpha-x-circle-outline text-danger align-self-center font-30 me-3"></i>
                                         <div class="media-body align-self-center">
-                                            <h5 class="mb-1 fw-bold mt-0 text-warning">Review Required</h5>
-                                            <span>Sanction & PEP Screening Check</span>
+                                            <h5 class="mb-1 fw-bold mt-0 text-danger">Potential High Risk</h5>
+                                            <span>Sentiment Score: {{number_format($transactions->weightedScore,2)}}%</span>
                                         </div>
                                     </div>
                                 </div>
                                 @else
                                 <div class="alert custom-alert alert-success icon-custom-alert shadow-sm fade show d-flex justify-content-between" role="alert">
                                     <div class="media">
-                                        <i class="far mdi mdi mdi-shield-check-outline alert-icon text-success align-self-center font-30 me-3"></i>
+                                        <i class=" mdi mmdi-shield-check-outline alert-icon text-success align-self-center font-30 me-3"></i>
                                         <div class="media-body align-self-center">
                                             <h5 class="mb-1 fw-bold mt-0 text-success">Cleared</h5>
                                             <span>Sanction & PEP Screening Check</span>
@@ -87,7 +86,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="my-4 d-flex justify-content-between align-items-center">
-                                    <h4 class="fw-semibold text-dark font-16">Sanction & PEP Screening Check - {{$transactions->ref}}</h4>
+                                    <h4 class="fw-semibold text-dark font-16">Adverse media report for  - {{$transactions->query}}</h4>
                                     <div>
                                         <a id="printBtn" class="btn btn-primary btn-square">Print</a>
                                         <a id="downloadBtn" class="btn btn-primary btn-square">Download Report</a>
@@ -120,166 +119,107 @@
                                 </div>
 
                                 <div class="m-0 font-14 me-3 mt-3 col-4">Search Term</div>
-                                <span class="m-0 font-14 me-3 mt-3 text-muted col-4">First Name:</span>  <span class="text-black"> {{$transactions->first_name}} </span> <br>  
-                                <span class="m-0 font-14 me-3 mt-3 text-muted col-4">Last Name: </span>  <span class="text-black"> {{$transactions->last_name}} </span>
+                                <span class="m-0 font-14 me-3 mt-3 text-muted col-4">Search Query:</span>  <span class="text-black"> {{$transactions->query}} </span> <br>  
+                                <span class="m-0 font-14 me-3 mt-3 text-muted col-4">Search Type: </span>  <span class="text-black"> {{$transactions->type}} </span>
                             </div>
                         </div>
+                    
                         @php 
-                        $peplist =  json_decode($transactions->pepList, true);
+                        $media =  json_decode($transactions->media, true);
+                      
                          @endphp
                         <div class="col-12">
-                            <div class="py-4 pt-2  mt-3 px-4 bg-light">
-                                <span class="font-16 p-2 m-0 lh-base" style="color:blue">PEP ( Politically exposed person)</span> <span class="p-2" style="float:right; color:red"> {{count( $peplist )}} Results found</span>
+                            <div class="py-4 pt-2  mt-3 px-1 bg-light">
+                                <span class="font-16  m-0 lh-base" style="color:rgb(26, 24, 24)"> <strong>Results</strong>
+                                    </span> <span class="p-2" style="float:right; color:red"> {{count( $media )}} Results found</span>
+                                    <br>
+                            Report Summary {{$transactions->reason}}
                             </div>
                         </div>
-                       
-                        @forelse( $peplist as $list)
-                        <div class="row mt-3">
-                            <div class="col-12">
-                                <div class="row" style="border:2px solid #77757527">
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-4">First Name:</div>
-                                        <div class="font-14 col-8">
-                                            {{$list['firstName']?$list['firstName']:'N/A'}}
-                                           
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-4">Last Name:</div>
-                                        <div class="font-14 col-8">
-                                            {{$list['lastName']?$list['lastName']:'N/A'}}
-                                           
-                                        </div>
-                                    </div>
-                                   
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-4">Middle Name:</div>
-                                        <div class="font-14 col-8"> {{$transactions->middle_name ? $transactions->middle_name : "N/A" }}</div>
-                                    </div>
-                                 
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-4">Gender:</div>
-                                        <div class="font-14 col-8"> {{$list['gender']?$list['gender']:'N/A'}}</div>
-                                    </div>
-                                  
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-4">Aliases:</div>
-                                        <div class="font-14 col-8">{{$list['aliases']?$list['aliases']:'N/A'}}</div>
-                                    </div>
-                                   
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-4">Function:</div>
-                                        <div class="font-14 col-8">
-                                            {{$list['function']?$list['function']:'N/A'}}
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-4">Specific:</div>
-                                        <div class="font-14 col-8">{{$list['specific']?$list['specific']:'N/A'}}</div>
-                                    </div>
-                                   
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-4">Country:</div>
-                                        <div class="font-14 col-8">{{$list['country']?$list['country']:'N/A'}}</div>
-                                    </div>
-
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-4">Active:</div>
-                                        <div class="font-14 col-8">{{$list['active']? 'Active' : 'Not Active'}}</div>
-                                    </div>
-                                    
-                                
-                                </div>
-                            </div>
-                        </div>
-                        @empty 
-                        <div class="col-12 col-md-12 d-flex py-4 px-4 border-bottom">
-                         
-                            <div class="font-14 ">This individual is not a politically exposed person</div>
-                        </div>
-                        
-                        @endforelse
-
-
-                        @php 
-                        $sanctionList =  json_decode($transactions->sanctionList, true);
-                         @endphp
-                        <div class="col-12">
-                            <div class="py-4 pt-2  mt-3 px-4 bg-light">
-                                <span class="font-16 p-2 m-0 lh-base" style="color:red"> <strong>SANCTION LIST </strong>
-                                    :</span> <span class="p-2" style="float:right; color:red"> {{count( $sanctionList )}} Results found</span>
-                            </div>
-                        </div>
-                       
-                        @forelse ( $sanctionList as $sanction)
-                        <div class="row mt-3">
-                            <div class="col-12">
-                                <div class="row" style="border:2px solid #908989">
-                                    <div class="col-12 col-md-12 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 " style="color:red">Sanction Type:</div>
-                                        <div class="font-14 col-8" style="color:red">
-                                            {{$sanction['sanctionType']?$sanction['sanctionType']:'N/A'}}
-                                           
-                                        </div>
-                                    </div>
-                                    
-                                   
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-2">First Name:</div>
-                                        <div class="font-14 col-8">  {{$sanction['firstName']?$sanction['firstName']:'N/A'}}</div>
-                                    </div>
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-2">Last Name:</div>
-                                        <div class="font-14 col-8">  {{$sanction['lastName']?$sanction['lastName']:'N/A'}}</div>
-                                    </div>
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-2">Full Name:</div>
-                                        <div class="font-14 col-8">  {{$sanction['fullName']?$sanction['lastName']:'N/A'}}</div>
-                                    </div>
-                                 
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-2">Gender:</div>
-                                        <div class="font-14 col-8"> {{$sanction['gender']?$sanction['gender']:'N/A'}}</div>
-                                    </div>
-                                   
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-2 ">Function:</div>
-                                        <div class="font-14">
-                                            {{$sanction['function']?$sanction['function']:'N/A'}}
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-2 ">Possible Age:</div>
-                                        <div class="font-14">
-
+                       @if(count($media) > 0)
+                        <div class="table-responsive">
+                            <table class="table mb-0">
+                                <thead class="">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Source</th>
+                                    <th>Score</th>
+                                    <th>Affiliated Entities</th>
+                                    <th> Tags</th>
+                                    <th>Headline</th>
+                                  <th>Excerpt</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ( $media as $adverse)
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>{{$adverse['source']}}</td>
+                                    <td><span class="badge badge-boxed  badge-outline-danger">{{$adverse['score']}}</span></td>
+                                    <td>
+                                        @if($adverse['persons'])
+                                        @php
+                                        $person = [];
                                        
-                                            @if($sanction['possibleBirthYears'])
-                                            
-                                            @php
-                                            $years = $sanction['possibleBirthYears'];
-                                            $age = json_encode($years, true);
-                                            echo $age
-                                             @endphp
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 col-md-12 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted ">Comment:</div>
-                                        <div class="font-14 ">{{$sanction['comment']?$sanction['comment']:'N/A'}}</div>
-                                    </div>
-                                    
-                                
-                                </div>
-                            </div>
+                                       foreach ($adverse['persons'] as  $persons) {
+                                        array_push($person,trim($persons));
+                                       }
+                                       echo implode(', ',$person);
+                                       
+                                         @endphp
+                                        @endif
+                                    </td>
+                                    <td> 
+                                        @if($adverse['tags'])
+                                        @php
+                                        $tagz = [];
+                                       
+                                       foreach ($adverse['tags'] as  $tags) {
+                                        if($tags[1] >= 0 && $tags[1] <= 50 ){
+                                            echo '<span class="badge bg-info m-1">'. $tags[0] .'</span>  &nbsp';
+                                        }elseif($tags[1] > 50 && $tags[1] <= 70){
+                                            echo '<span class="badge bg-warning m-1">'. $tags[0] .'</span>';
+                                        }else{
+                                            echo '<span class="badge bg-danger m-1">'. $tags[0] .'</span>';   
+                                        }
+                                       }
+                                      // echo implode(', ',$tagz);
+                                      
+                                       
+                                         @endphp
+                                        @endif
+                                    </td>
+                                    <td> {{$adverse['headline']}}</td>
+                                    <td> {{$adverse['excerpt']}}</td>
+                                </tr>
+                                @endforeach 
+                                </tbody>
+                            </table><!--end /table-->
                         </div>
-                        @empty 
+                        <div class="col-12">
+                            <div class="py-4 pt-2  mt-3 px-1 bg-light">
+                                <span class="font-16  m-0 lh-base" style="color:rgb(26, 24, 24)"> <strong>Result Dashboard</strong>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Simple Pie Chart</h4>
+                                </div><!--end card-header-->
+                                <div class="card-body">
+                                    <div class="">
+                                        <div id="apex_pie1" class="apex-charts"></div>
+                                    </div>                                        
+                                </div><!--end card-body-->
+                            </div><!--end card-->
+                        </div><!--end col-->
+                        @else
                         <div class="col-12 col-md-12 d-flex py-4 px-4 border-bottom">
                          
-                            <div class="font-14 ">This individual is not on any sanction list</div>
+                            <div class="font-14 ">No Adverse media result items to see here  <br>
+                                Looks like you have no Adverse media result items here</div>
                         </div>
+                        @endif
                         
-                        @endforelse
+                    
                     </div>
                 </div>
             </div> <!-- end col -->

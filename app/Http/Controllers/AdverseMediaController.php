@@ -187,9 +187,9 @@ class AdverseMediaController extends Controller
       return $update;
   } 
 
-  public function SanctionPepGetReport($ref){
-      return view('users.aml.media.reports.report', [
-          'transactions' => PepSactionVerification::where('id', decrypt($ref))->first()
+  public function AdverseMediaGetReport($ref){
+      return view('users.aml.adversemedia.reports.report', [
+          'transactions' => AdverseMedia::where('id', decrypt($ref))->first()
       ]);
   }
      

@@ -44,11 +44,9 @@
     </div>
     <script src="{{asset('/assets/js/jquery.min.js')}}"></script>
     <script src="{{asset('/assets/js/effects.min.js')}}"></script>
-
     <script src="{{asset('/assets/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('/assets/js/metismenu.min.js')}}"></script>
     <script src="{{asset('/assets/js/waves.js')}}"></script>
-    <script src="{{asset('/assets/pages/jquery.datatable.init.js')}}"></script>
     <script src="{{asset('/assets/pages/jquery.form-upload.init.js')}}"></script>
     <script src="{{asset('/plugins/dropify/js/dropify.min.js')}}"></script>
     <script src="{{asset('/assets/js/feather.min.js')}}"></script>
@@ -58,32 +56,29 @@
     <script src="{{asset('/plugins/dropify/js/dropify.min.js')}}"></script>
     <script src="{{asset('/plugins/select2/select2.min.js')}}"></script>
         <!-- Required datatable js -->
+    <script src="{{asset('/assets/pages/jquery.datatable.init.js')}}"></script>
     <script src="{{asset('/plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('/plugins/datatables/dataTables.bootstrap5.min.js')}}"></script>
+    
        <!-- Buttons examples -->
-    <script src="{{asset('/plugins/datatables/dataTables.buttons.min.js')}}"></script>
     <script src="{{asset('/plugins/datatables/buttons.bootstrap5.min.js')}}"></script>
-    <script src="{{asset('/plugins/datatables/jszip.min.js')}}"></script>
-    <script src="{{asset('/plugins/datatables/pdfmake.min.js')}}"></script>
-    <script src="{{asset('/plugins/datatables/vfs_fonts.js')}}"></script>
     <script src="{{asset('/plugins/datatables/buttons.html5.min.js')}}"></script>
-    <script src="{{asset('/plugins/datatables/buttons.print.min.js')}}"></script>
-    <script src="{{asset('/plugins/datatables/buttons.colVis.min.js')}}"></script>
-    <script src="{{asset('/plugins/clipboard/clipboard.min.js')}}"></script>
       <!-- Responsive examples -->
     <script src="{{asset('/plugins/datatables/dataTables.responsive.min.js')}}"></script>
     <script src="{{asset('/plugins/datatables/responsive.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('/plugins/sweet-alert2/sweetalert2.min.js')}}"></script>
-    <script src="{{asset('/assets/pages/jquery.sweet-alert.init.js')}}"></script>
     <script src="{{asset('/plugins/chartjs/chart.min.js')}}"></script>
     <script src="{{asset('/assets/pages/jquery.chartjs.init.js')}}"></script>
-    <script src="{{asset('plugins/apex-charts/apexcharts.min.js')}}"></script>
-    <script src="{{asset('/plugins/apex-charts/irregular-data-series.js')}}"></script>
-    <script src="{{asset('/plugins/apex-charts/ohlc.js')}}"></script>
     <script src="{{asset('/assets/pages/jquery.forms-advanced.js')}}"></script>
-    <script src="{{asset('/assets/pages/jquery.apexcharts.init.js')}}"></script>
     <script src="{{asset('/assets/pages/jquery.clipboard.init.js')}}"></script>
         <!-- Session timeout js -->
+
+      {{-- Charts --}}
+      
+      <script src="{{asset('plugins/apex-charts/apexcharts.min.js')}}"></script>
+      <script src="{{asset('/plugins/apex-charts/irregular-data-series.js')}}"></script>
+      <script src="{{asset('/plugins/apex-charts/ohlc.js')}}"></script>
+      <script src="{{asset('/assets/pages/jquery.apexcharts.init.js')}}"></script>
+
     <script src="{{asset('/plugins/bootstrap-session-timeout/bootstrap-session-timeout.min.js')}}"></script>
         
     <script src="{{asset('/assets/pages/jquery.animate.init.js')}}"></script>

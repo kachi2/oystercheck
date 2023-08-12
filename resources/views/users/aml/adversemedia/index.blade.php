@@ -199,29 +199,29 @@
                                     @foreach ($logs as $trans)
                                     <tr>
                                         <td class="px-0 py-0">
-                                            <a class="table-link" href="{{route('user.aml_pep_sanction_get_report', ['ref'=>encrypt($trans->id)])}}">
+                                            <a class="table-link" href="{{route('user.aml_adverse_media_get_report', ['ref'=>encrypt($trans->id)])}}">
                                                 <div class="px-2 py-3">{{$loop->iteration}}</div>
                                             </a>
                                         </td>
                                         <td class="px-0 py-0">
-                                            <a class="table-link" href="{{route('user.aml_pep_sanction_get_report', ['ref'=>encrypt($trans->id)])}}">
+                                            <a class="table-link" href="{{route('user.aml_adverse_media_get_report', ['ref'=>encrypt($trans->id)])}}">
                                                 <div class="px-2 py-3">{{$trans->ref}}</div>
                                             </a>
                                         </td>
                                         <td class="px-0 py-0">
-                                            <a class="table-link" href="{{route('user.aml_pep_sanction_get_report', ['ref'=>encrypt($trans->id)])}}">
+                                            <a class="table-link" href="{{route('user.aml_adverse_media_get_report', ['ref'=>encrypt($trans->id)])}}">
                                                 <div class="px-2 py-3">{{$trans->query}}</div>
                                             </a>
                                         </td>
                                         <td class="px-0 py-0">
-                                            <a class="table-link" href="{{route('user.aml_pep_sanction_get_report', ['ref'=>encrypt($trans->id)])}}">
+                                            <a class="table-link" href="{{route('user.aml_adverse_media_get_report', ['ref'=>encrypt($trans->id)])}}">
                                                 <div class="px-2 py-3">
-                                                    @if($trans->status == 'cleared')
-                                                    <span class="badge badge-soft-success">Cleared</span>
-                                                    @elseif($trans->status == 'not_cleared')
-                                                    <span class="badge badge-soft-danger">Not Cleared</span>
+                                                    @if($trans->status == 'potential-high-risk')
+                                                    <span class="badge badge-soft-danger">Potential High Risk</span>
+                                                    @elseif($trans->status == 'medium-high-risk')
+                                                    <span class="badge badge-soft-warning">Medium High Risk</span>
                                                     @else
-                                                    <span class="badge badge-soft-purple"> Review Required</span>
+                                                    <span class="badge badge-soft-success">  No Match Found </span>
                                                     @endif
                                                 </div>
                                             </a>
@@ -232,20 +232,20 @@
                                             </a>
                                         </td> --}}
                                         <td class="px-0 py-0">
-                                            <a class="table-link" href="{{route('user.aml_pep_sanction_get_report', ['ref'=>encrypt($trans->id)])}}">
+                                            <a class="table-link" href="{{route('user.aml_adverse_media_get_report', ['ref'=>encrypt($trans->id)])}}">
                                                 <div class="px-2 py-3">{{auth()->user()->client->company_name}}</div>
                                             </a>
                                         </td>
                                         <td class="px-0 py-0">
-                                            <a class="table-link" href="{{route('user.aml_pep_sanction_get_report', ['ref'=>encrypt($trans->id)])}}">
+                                            <a class="table-link" href="{{route('user.aml_adverse_media_get_report', ['ref'=>encrypt($trans->id)])}}">
                                                 <div class="px-2 py-3">{{date('jS F Y, h:iA', strtotime($trans->created_at))}}</div>
                                             </a>
                                         </td>
                                         <td class="px-0 py-0">
-                                            <a class="table-link" href="{{route('user.aml_pep_sanction_get_report', ['ref'=>encrypt($trans->id)])}}">
+                                            <a class="table-link" href="{{route('user.aml_adverse_media_get_report', ['ref'=>encrypt($trans->id)])}}">
                                                 <div class="px-2 py-3">
                                                
-                                                    <a href="{{route('user.aml_pep_sanction_get_report', ['ref'=>encrypt($trans->id)])}}">View Details</a>
+                                                    <a href="{{route('user.aml_adverse_media_get_report', ['ref'=>encrypt($trans->id)])}}">View Details</a>
                                                  
                                                 </div>
                                             </a>

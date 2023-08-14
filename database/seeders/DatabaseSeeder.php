@@ -26,10 +26,10 @@ class DatabaseSeeder extends Seeder
             // VerificationSeeder::class,
             // CandidateServiceSeeder::class,
 
-            // AdverseMediaInputSeeder::class,
-            // AmlVerificationSeeder::class,
-            PepSanctionInputSeeder::class,
-            // AdverseMediaCategorySeeder::class,
+            AdverseMediaInputSeeder::class,
+            AmlVerificationSeeder::class,
+           // PepSanctionInputSeeder::class,
+            AdverseMediaCategorySeeder::class,
                         
         ]);
     }

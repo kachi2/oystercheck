@@ -17,7 +17,7 @@ trait sandbox{
 
 public function ReqUrl(){
     $user = User::where('id', auth()->user()->id)->first();
-    if($user->client->is_activated == 1){
+    if($user->client->is_activated == 0){
         $reqUrl = 'https://api.sandbox.youverify.co/v2/api/';
     }else{
         $reqUrl = 'https://api.youverify.co/v2/api/';

@@ -10,6 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\AddressVerificationDetail;
 use Spatie\WebhookClient\Jobs\ProcessWebhookJob as SpatieProcessWebhookJob;
+
 class HandleVerificationsYouVerify extends SpatieProcessWebhookJob
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;

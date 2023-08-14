@@ -75,7 +75,7 @@
 
                                                         We’ve provided some details you can use to test this service in test mode.</p>
                                                   </div><!--end card-header-->
-                                                  {{-- <div class="card-body">
+                                                  <div class="card-body">
                                                       <p id="clipboardParagraph" class="border p-3">
                                                          {{$slug->test_data}}
                                                       </p>
@@ -85,7 +85,7 @@
                                                                data-clipboard-target="#clipboardParagraph">
                                                                <i class="far fa-copy me-2"></i>Copy</button>
                                                       </div>
-                                                  </div><!--end card-body--> --}}
+                                                  </div><!--end card-body-->
                                               </div>
                                            </div>
                                             @else 

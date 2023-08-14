@@ -18,8 +18,8 @@ class PepSanctionInputSeeder extends Seeder
 
         $data = [
 
-            // ['slug' => 'pep-sanction-list', 'name' => 'first_name', 'placeholder' => 'Enter First Name', 'type' => 'text', 'is_required' => '1', 'label' => 'First Name'],
-            // ['slug' => 'pep-sanction-list', 'name' => 'last_name', 'placeholder' => 'Enter Last Name', 'type' => 'text', 'is_required' => '1', 'label' => 'Last Name'],
+            ['slug' => 'pep-sanction-list', 'name' => 'first_name', 'placeholder' => 'Enter First Name', 'type' => 'text', 'is_required' => '1', 'label' => 'First Name'],
+            ['slug' => 'pep-sanction-list', 'name' => 'last_name', 'placeholder' => 'Enter Last Name', 'type' => 'text', 'is_required' => '1', 'label' => 'Last Name'],
             ['slug' => 'pep-sanction-list', 'name' => 'middle_name', 'placeholder' => 'Enter Middle Name', 'type' => 'text', 'is_required' => null, 'label' => 'Middle Name']
         ];
 

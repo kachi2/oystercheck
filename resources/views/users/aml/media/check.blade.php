@@ -54,7 +54,7 @@
                                     @if(UserEnvironment() == 0 && $slug->test_data != '' && $slug->test_data != null) 
 
                                     @php $test = json_decode($slug->test_data, true)@endphp 
-                                    value="{{$test[$input->name]}}"
+                                    value="{{$test[$input['name']]}}"
                                     @else
                                     value="{{old($input->name)}}"
                                     @endif

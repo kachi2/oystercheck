@@ -96,8 +96,8 @@ class AddressController extends Controller
       $datas = json_encode($data, true);
       //return $datas;
       curl_setopt_array($curl, [
-        // CURLOPT_URL => "https://api.youverify.co/v2/api/addresses/candidates",
-        CURLOPT_URL => "https://api.sandbox.youverify.co/v2/api/addresses/candidates",
+         CURLOPT_URL => $this->ReqUrl()."addresses/candidates",
+       // CURLOPT_URL => "https://api.sandbox.youverify.co/v2/api/addresses/candidates",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,
@@ -190,7 +190,8 @@ class AddressController extends Controller
         Session::flash('message', $valid->errors()->first());
         return redirect()->back()->withErrors($valid)->withInput($request->all());
       }
-      $host = 'https://api.sandbox.youverify.co/v2/api/addresses/individual/request';
+      // $host = 'https://api.sandbox.youverify.co/v2/api/addresses/individual/request';
+      $host = $this->ReqUrl().'addresses/individual/request';
       $data = [
         "candidateId" => $service_ref,
         "description" => "Verify the candidate",
@@ -244,7 +245,7 @@ class AddressController extends Controller
         }
       }
 
-      $host = 'https://api.sandbox.youverify.co/v2/api/addresses/guarantor/request';
+      $host = $this->ReqUrl().'addresses/guarantor/request';
       $data = [
         "candidateId" => $service_ref,
         "description" => "Verify the candidtate guarantor",
@@ -269,7 +270,7 @@ class AddressController extends Controller
         "subjectConsent" => $request->subject_consent,
       ];
     } else {
-      $host = 'https://api.sandbox.youverify.co/v2/api/addresses/business/request';
+      $host = $this->ReqUrl().'addresses/business/request';
       $data = [
         "candidateId" => $service_ref,
         "description" => "Verify the candidate and business",

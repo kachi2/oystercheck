@@ -77,7 +77,9 @@ class IdentityBankController extends Controller
 
             $response = curl_exec($curl);
             if (curl_errno($curl)) {
-                dd('error:' . curl_errno($curl));
+                Session::flash('alert', 'error');
+                Session::flash('message', 'An error occured, please try again later');
+                 return redirect()->back()->withErrors($validator)->withInput($request->all());
             } else {
                 $decodedResponse = json_decode($response, true);
                 // dd($decodedResponse);

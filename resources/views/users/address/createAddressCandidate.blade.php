@@ -63,8 +63,15 @@
                              <div class="row">
                                  @foreach($fields as $input)
                                  <div class="col-md-6">
-                                     <label class="mb-3" style="font-weight:bolder">{{$input->label}}</label> @if($input->is_required == 1) <span style="color:red; font-weight:bolder"> * </span> @endif
-                                     <input type="{{$input->type}}" id="{{$input->inputid}}" name="{{$input->name}}" class="form-control mb-3 custom-select" placeholder="{{$input->placeholder}}" @if($input->is_required == 1) required @endif>
+                                     <label class="mb-3" style="font-weight:500">{{$input->label}}</label> 
+                                     @if($input->is_required == 1) 
+                                     <span style="color:red; font-weight:500"> * </span> @endif
+                                     <input type="{{$input->type}}" value="{{old($input->name)}}" 
+                                     id="{{$input->inputid}}" 
+                                     name="{{$input->name}}" 
+                                     class="form-control mb-3 custom-select" 
+                                     placeholder="{{$input->placeholder}}" 
+                                     @if($input->is_required == 1) required @endif>
                                  </div><!-- end col -->
                                  <!-- end col -->
                                  @endforeach

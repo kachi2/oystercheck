@@ -23,7 +23,7 @@ class AddressVerificationCreated
     public function __construct($res, $address_verification_id)
     {
         $this->res = $res;
-        $this->$address_verification_id = $address_verification_id;
+        $this->address_verification_id = $address_verification_id;
     }
 
     /**

@@ -15,12 +15,14 @@ use App\Traits\GenerateRef;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Models\FieldInput;
+use App\Traits\sandbox;
 use App\Models\Wallet;
 
 class AddressController extends Controller
 {
   use GenerateRef;
   use generateHeaderReports;
+  use sandbox;
 
     public function __construct()
     {
@@ -37,7 +39,6 @@ class AddressController extends Controller
 
   public function showCreateCandidate($slug)
   {
-
     $data = $this->generateCreateCandidateData($slug);
     return view('users.address.createAddressCandidate', $data);
   }
@@ -56,7 +57,7 @@ class AddressController extends Controller
     ]);
     if ($valid->fails()) {
       Session::flash('alert', 'error');
-      Session::flash('message', 'Some fields are missing');
+      Session::flash('message', $valid->errors()->first());
       return redirect()->back()->withErrors($valid)->withInput($request->all());
     }
     //  dd($request->all());
@@ -122,6 +123,7 @@ class AddressController extends Controller
             'ref' => $ref,
             'user_id' => auth()->user()->id,
             'status' => 'pending',
+            'slug' => $slug->slug,
             'service_reference' => $service_ref,
             'first_name' => $request->first_name,
             "middle_name" => $request->middle_name != null ? $request->middle_name : "",
@@ -151,10 +153,8 @@ class AddressController extends Controller
 
   public function showVerificationDetailsForm($slug, $service_ref)
   {
-    $slug = decrypt($slug);
-    $data = $this->generateAddressReportVerify($slug);
+    $data = $this->generateAddressReportVerify(decrypt($slug));
     $data['service_ref'] = $service_ref;
-
     return view('users.address.verifyAddress', $data);
   }
 
@@ -166,11 +166,11 @@ class AddressController extends Controller
       return redirect()->back();
     }
 
+
     if ($get_address_verification = AddressVerification::where('service_reference', $service_ref)->first()) {
       $get_address_verification_id = $get_address_verification->id;
     }
 
-    //$logo =  Client::first();
     //  $logo_image = base64_encode(asset('/images/logo.png'));
     if ($request->slug == 'individual-address') {
       $valid = Validator::make($request->all(), [
@@ -187,10 +187,9 @@ class AddressController extends Controller
       ]);
       if ($valid->fails()) {
         Session::flash('alert', 'error');
-        Session::flash('message', 'Some fields are missing');
+        Session::flash('message', $valid->errors()->first());
         return redirect()->back()->withErrors($valid)->withInput($request->all());
       }
-
       $host = 'https://api.sandbox.youverify.co/v2/api/addresses/individual/request';
       $data = [
         "candidateId" => $service_ref,
@@ -229,7 +228,7 @@ class AddressController extends Controller
       ]);
       if ($valid->fails()) {
         Session::flash('alert', 'error');
-        Session::flash('message', 'Some fields are missing');
+        Session::flash('message', $valid->errors()->first());
         return redirect()->back()->withErrors($valid)->withInput($request->all());
       }
       if (request()->file('image')) {
@@ -254,7 +253,7 @@ class AddressController extends Controller
           'lastName' => $request->last_name,
           'mobile' => $request->phone,
           'email' => $request->email,
-          'image' =>  asset('assets/guarantors' . $image),
+          'image' =>  asset('assets/guarantors'.$image),
         ],
         "address" => [
           "flatNumber" => $request->flat_number != null ? $request->flat_number : "",
@@ -297,9 +296,11 @@ class AddressController extends Controller
     DB::beginTransaction();
     try {
       $datas = json_encode($data, true);
+
+     // dd($datas);
       // dd($datas);
       //  $res = executeCurl($datas,$host,"POST");
-
+     
       $curl = curl_init();
       curl_setopt_array($curl, [
         CURLOPT_URL => $host,
@@ -313,19 +314,23 @@ class AddressController extends Controller
         CURLOPT_FAILONERROR => 1,
         CURLOPT_HTTPHEADER => [
           "Content-Type: application/json",
-          "Token: N0R9AJ4L.PWYaM5cXggThkdCtkVSCsWz4fMsfeMIp6CKL"
+          "Token: 13qFXXvs.ChXfEklDLDLNiPFnnNMCUI8CK0QW07IVsRYQ"
         ],
       ]);
 
       $response_data = curl_exec($curl);
       if (curl_errno($curl)) {
-        dd('error:' . curl_errno($curl));
+        Session::flash('alert', 'error');
+        Session::flash('message', 'An error occured, please try again later');
+        return redirect()->back()->withErrors($valid)->withInput($request->all());
       } else {
         $res = json_decode($response_data, true);
         curl_close($curl);
 
         if ($res['success'] == true && $res['statusCode'] == 201) {
-          event(new AddressVerificationCreated($res, $get_address_verification_id));
+
+          
+         event(new AddressVerificationCreated($res, $get_address_verification_id));
 
           DB::commit();
           Session::flash('alert', 'success');
@@ -341,7 +346,9 @@ class AddressController extends Controller
       }
     } catch (\Exception $e) {
       DB::rollBack();
-      throw $e;
+      Session::flash('alert', 'danger');
+      Session::flash('message', $e);
+      return redirect()->route('addressIndex', $request->slug);
     }
   }
 

@@ -34,6 +34,7 @@ class InsertAddressVerificationPayload implements ShouldQueue
     {
         $res = $event->res;
         $get_address_verification_id = $event->address_verification_id;
+    
         AddressVerificationDetail::create([
             'address_verification_id' => $get_address_verification_id,
             'reference_id' => $res['data']['referenceId'],

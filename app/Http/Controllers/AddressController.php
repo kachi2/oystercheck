@@ -15,6 +15,7 @@ use App\Traits\GenerateRef;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Models\FieldInput;
+use App\Models\States;
 use App\Traits\sandbox;
 use App\Models\Wallet;
 
@@ -134,7 +135,7 @@ class AddressController extends Controller
             "image" => $candidate_image,
             'is_sandbox' => $this->sandbox()
           ]);
-          // return $res;
+      
           // $data = $this->generateAddressReportVerify($slug);
           // $data['service_ref'] = $service_ref;
           DB::commit();
@@ -143,7 +144,10 @@ class AddressController extends Controller
           // return view('users.address.verifyAddress', $data);
 
           // dd($service_ref);
-          return redirect()->route('showVerificationDetailsForm', ['slug' => encrypt($slug->slug), 'service_ref' => $service_ref]);
+          return redirect()->route('showVerificationDetailsForm',
+           ['slug' => encrypt($slug->slug), 'service_ref' => $service_ref,
+           'states' => States::get()
+           ]);
         }
       }
     } catch (\Exception $e) {
@@ -156,6 +160,7 @@ class AddressController extends Controller
   {
     $data = $this->generateAddressReportVerify(decrypt($slug));
     $data['service_ref'] = $service_ref;
+    $data['states'] = States::get();
     return view('users.address.verifyAddress', $data);
   }
 

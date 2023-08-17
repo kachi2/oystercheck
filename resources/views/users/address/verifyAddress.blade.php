@@ -49,11 +49,23 @@
                                              @if ($input->is_required == 1)
                                                  <span style="color:red; font-weight:bold"> * </span>
                                              @endif
+                                             @if($input->name != 'state')
                                              <input type="{{ $input->type }}" value="{{ old($input->name) }}"
                                                  id="{{ $input->inputid }}" name="{{ $input->name }}"
                                                  class="form-control mb-3 custom-select @error($input->name) is-invalid @enderror"
                                                  placeholder="{{ $input->placeholder }}"
                                                  @if ($input->is_required == 1) required @endif>
+                                            @else
+                                            <input class="form-control mb-3 "  placeholder="Select State" list="state" name="state" id="state" autocomplete="no">
+                                            <datalist id="state">
+                                             @foreach ($states as $item)
+                                             <option value="name">assas</option>
+                                             <option value="scsk"> asasas</option>
+                                             <option value="sadsds"> asasas</option>
+                                             @endforeach
+                                            </datalist>
+                                            @endif
+                                           
                                              @error($input->name)
                                                  <span class="invalid-feedback" role="alert">
                                                      {{ $message }}

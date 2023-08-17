@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder
 
             // AdverseMediaInputSeeder::class,
             // AmlVerificationSeeder::class,
-             PepSanctionInputSeeder::class,
+            //  PepSanctionInputSeeder::class,
+            StatesSeeder::class
             // AdverseMediaCategorySeeder::class,
                         
         ]);

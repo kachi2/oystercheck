@@ -11,7 +11,7 @@ use App\Models\Wallet;
 use App\Models\IdentityVerification;
 use App\Models\AddressVerification;
 use App\Models\AddressVerificationDetail;
-
+use App\Models\States;
 
 Trait generateHeaderReports
 {
@@ -45,37 +45,19 @@ public function generateHeaderReports($slug){
     }
 
     public function generateAddressReport($slug){
-        $verified= 0; $not_verified= 0; $pending = 0; $cancelled = 0; $awaiting_reschedule = 0;$not_requested = 0;
         $user = User::where('id', auth()->user()->id)->first();
         $slug = Verification::where(['slug' => $slug])->first();
         $address_verifications = AddressVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id])->with('addressVerificationDetail')->latest()->get();
         // $all_address_verifications = $address_verifications->addressVerificationDetail;
         $data['slug'] = $slug;
-        // foreach($address_verifications as $address_verification){
-        //     if(!isset($address_verification->addressVerificationDetail)){
-        //         $not_requested++;
-        //     }else{
-        //         if ($address_verification->addressVerificationDetail->status == 'pending'){
-        //             $pending++;
-        //         }elseif($address_verification->addressVerificationDetail->status == 'completed' && $address_verification->addressVerificationDetail->task_status == 'VERIFIED'){
-        //             $verified++;
-        //         }elseif($address_verification->addressVerificationDetail->status == 'awaiting_reschedule'){
-        //             $awaiting_reschedule++;
-        //         }elseif($address_verification->addressVerificationDetail->status == 'canceled'){
-        //             $cancelled++;
-        //         }elseif($address_verification->addressVerificationDetail->status == 'completed' && $address_verification->addressVerificationDetail->task_status == 'NOT_VERIFIED'){
-        //             $not_verified++;
-        //         }
-
-        //         }
-        // }
-        $data['verified'] = $verified;
-        $data['not_verified'] = $not_verified;
-        $data['pending'] = $pending;
-        $data['awaiting_reschedule'] = $awaiting_reschedule;
-        $data['cancelled']= $cancelled;
-        $data['not_requested'] = $not_requested;
+        $data['verified'] = AddressVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id, 'status' => 'verified'])->count();
+        $data['not_verified'] = AddressVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id, 'status' => 'not_verified'])->count();
+        $data['pending'] = AddressVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id, 'status' => 'pending'])->count();
+        $data['awaiting_reschedule'] = AddressVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id, 'status' => 'awaiting_reschedule'])->count();
+        $data['cancelled']= AddressVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id, 'status' => ''])->count();
+        $data['not_requested'] = AddressVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id, 'status' => 'not_requested'])->count();
         $data['fields'] = FieldInput::where(['slug'=>'candidate'])->get();
+        $data['states'] = States::get();
         $data['wallet']= Wallet::where('user_id', $user->id)->first();
        $data['logs'] = $address_verifications;
     return $data;   

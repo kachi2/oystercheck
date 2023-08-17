@@ -108,7 +108,7 @@ class AddressController extends Controller
         CURLOPT_SSL_VERIFYPEER => false,
         CURLOPT_HTTPHEADER => [
           "Content-Type: application/json",
-          "Token: N0R9AJ4L.PWYaM5cXggThkdCtkVSCsWz4fMsfeMIp6CKL"
+          "Token: ".$this->ReqToken()
         ],
       ]);
       $response = curl_exec($curl);
@@ -131,7 +131,8 @@ class AddressController extends Controller
             "phone" => $request->phone,
             "email" => $request->email != null ? $request->email : "",
             "dob" => $request->dob != null ? $request->dob : "",
-            "image" => $candidate_image
+            "image" => $candidate_image,
+            'is_sandbox' => $this->sandbox()
           ]);
           // return $res;
           // $data = $this->generateAddressReportVerify($slug);
@@ -315,7 +316,7 @@ class AddressController extends Controller
         CURLOPT_FAILONERROR => 1,
         CURLOPT_HTTPHEADER => [
           "Content-Type: application/json",
-          "Token: 13qFXXvs.ChXfEklDLDLNiPFnnNMCUI8CK0QW07IVsRYQ"
+          "Token: ".$this->ReqToken()
         ],
       ]);
 

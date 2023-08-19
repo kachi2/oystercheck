@@ -192,7 +192,7 @@
                                  <tr>
                                      <th>SN</th>
                                      <th>Address Candidate</th>
-                                     <th>Verification ID</th>
+                                     <th>Reference Id</th>
                                      <th>Status</th>
                                      <th>Initiated by</th>
                                      <th>Fee</th>
@@ -205,7 +205,7 @@
                                  <tr>
                                      <td>{{$loop->iteration}}</td>
                                      <td>{{$transaction->first_name}} {{$transaction->last_name}}</td>
-                                     <td>{{$transaction->addressVerificationDetail()->exists() ? $transaction->addressVerificationDetail->reference_id : '---'}}</td>
+                                     <td>{{$transaction->service_reference}}</td>
                                      <td>
                                          @if($transaction->addressVerificationDetail()->exists())
                                          @if($transaction->addressVerificationDetail->status == 'pending')
@@ -225,7 +225,7 @@
                                          <span class="badge badge-soft-secondary">No verification Request Yet</span>
                                          @endif
                                      </td>
-                                     <td>{{$transaction->user->name}}</td>
+                                     <td>{{$transaction->user->firstname}}</td>
                                      <td>{{$transaction->fee}}</td>
                                      <td>{{$transaction->created_at}}</td>
 
@@ -235,7 +235,7 @@
                                                  <i class="fa fa-ellipsis-h font-12 text-muted"></i>
                                              </a>
                                              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="seeMore" style="">
-                                                 <a class="dropdown-item" href="#">Copy Reference Id</a>
+                                                 {{-- <a class="dropdown-item" href="#">Copy Reference Id</a> --}}
                                                  @if($transaction->addressVerificationDetail()->exists())
                                                  <a class="dropdown-item" href="{{route('showAddressReport', ['slug' => encrypt($slug->slug), 'addressId' => encrypt($transaction->id)])}}">View Verification Report</a>
                                                  @else

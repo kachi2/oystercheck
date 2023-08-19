@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\AddressVerificationDetail;
+use App\Models\AddressVerification;
 use Spatie\WebhookClient\Jobs\ProcessWebhookJob as SpatieProcessWebhookJob;
 
 class HandleVerificationsYouVerify extends SpatieProcessWebhookJob
@@ -25,11 +26,14 @@ class HandleVerificationsYouVerify extends SpatieProcessWebhookJob
      */
     public function handle()
     {
-        $webhookCallData = json_decode($this->webhookCall,true)['payload'];
-        // logger($webhookCallData);
-        if (in_array($webhookCallData['data']['type'], ['individual', 'guarantor', 'business'])) {
-            $get_verification_details = AddressVerificationDetail::where('reference_id', $webhookCallData['data']['referenceId'])->first();
 
+    
+        $webhookCallData = json_decode($this->webhookCall,true)['payload'];
+        // print_r($webhookCallData['data']['agent']);
+        // die();
+         logger($webhookCallData);
+        if (in_array($webhookCallData['data']['type'], ['individual', 'guarantor', 'business'])) {
+            $get_verification_details = AddressVerificationDetail::where('reference_id', $webhookCallData['data']['candidate']['candidateId'])->first();
             $get_verification_details->agent = json_encode($webhookCallData['data']['agent']);
             $get_verification_details->status = $webhookCallData['data']['status'];
             $get_verification_details->task_status = $webhookCallData['data']['taskStatus'];
@@ -61,6 +65,9 @@ class HandleVerificationsYouVerify extends SpatieProcessWebhookJob
             $get_verification_details->incident_report = $webhookCallData['data']['incidentReport'];
             $get_verification_details->download_url = $webhookCallData['data']['downloadUrl'];
             $get_verification_details->save();
+
+            $get_verification = AddressVerification::where('address_verification_id', $webhookCallData['data']['candidate']['candidateId'])->first();
+            $get_verification->update(['status' => $webhookCallData['data']['status']]);
     
         }
     

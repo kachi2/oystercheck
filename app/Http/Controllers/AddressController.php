@@ -118,6 +118,7 @@ class AddressController extends Controller
       } else {
         $res = json_decode($response, true);
         if ($res['success'] == true && $res['statusCode'] == 201) {
+        //  dd($res);
           $service_ref = $res['data']['id'];
           AddressVerification::create([
             'verification_id' => $slug->id,
@@ -196,7 +197,9 @@ class AddressController extends Controller
         Session::flash('message', $valid->errors()->first());
         return redirect()->back()->withErrors($valid)->withInput($request->all());
       }
-      // $host = 'https://api.sandbox.youverify.co/v2/api/addresses/individual/request';
+
+      // dd($service_ref);
+     // $host = 'https://api.sandbox.youverify.co/v2/api/addresses/individual/request';
       $host = $this->ReqUrl().'addresses/individual/request';
       $data = [
         "candidateId" => $service_ref,
@@ -311,19 +314,19 @@ class AddressController extends Controller
       $curl = curl_init();
       curl_setopt_array($curl, [
         CURLOPT_URL => $host,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 2180,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS => $datas,
-        CURLOPT_FAILONERROR => 1,
-        CURLOPT_HTTPHEADER => [
-          "Content-Type: application/json",
-          "Token: ".$this->ReqToken()
-        ],
-      ]);
+       CURLOPT_RETURNTRANSFER => true,
+       CURLOPT_ENCODING => "",
+       CURLOPT_MAXREDIRS => 10,
+       CURLOPT_TIMEOUT => 2180,
+       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+       CURLOPT_CUSTOMREQUEST => "POST",
+       CURLOPT_POSTFIELDS => $datas,
+       CURLOPT_SSL_VERIFYPEER => false,
+       CURLOPT_HTTPHEADER => [
+         "Content-Type: application/json",
+         "Token: ".$this->ReqToken()
+       ],
+     ]);
 
       $response_data = curl_exec($curl);
       if (curl_errno($curl)) {
@@ -336,7 +339,6 @@ class AddressController extends Controller
 
         if ($res['success'] == true && $res['statusCode'] == 201) {
 
-          
          event(new AddressVerificationCreated($res, $get_address_verification_id));
 
           DB::commit();
@@ -347,9 +349,8 @@ class AddressController extends Controller
           // dd($res);
           Session::flash('alert', 'danger');
           Session::flash('message', $res['message']);
-          return redirect()->route('addressIndex', $request->slug);
+          return redirect()->back()->withInput($request->all());
         }
-        //  return $res;
       }
     } catch (\Exception $e) {
       DB::rollBack();

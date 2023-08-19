@@ -56,15 +56,17 @@
                                                  placeholder="{{ $input->placeholder }}"
                                                  @if ($input->is_required == 1) required @endif>
                                             @else
-                                            <input class="form-control mb-3 "  placeholder="Select State" list="state" name="state" id="state" autocomplete="no">
-                                            <datalist id="state">
+                                            <input class="form-control mb-3 "  placeholder="Select State" 
+                                            list="states" name="state" value="{{old('state')}}" id="state" autocomplete="off">
+                                           
+                                            <datalist id="states">
                                              @foreach ($states as $item)
-                                             <option value="name">assas</option>
-                                             <option value="scsk"> asasas</option>
-                                             <option value="sadsds"> asasas</option>
+                                             <option value="{{$item->name}}"> {{$item->name}}</option>
                                              @endforeach
                                             </datalist>
                                             @endif
+
+                                            
                                            
                                              @error($input->name)
                                                  <span class="invalid-feedback" role="alert">

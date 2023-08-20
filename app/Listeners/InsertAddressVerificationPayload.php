@@ -82,6 +82,6 @@ class InsertAddressVerificationPayload implements ShouldQueue
             'links' => json_encode($res['links']),
           ]);
 
-          dd($res);
+        
     }
 }

@@ -33,7 +33,7 @@ class HandleVerificationsYouVerify extends SpatieProcessWebhookJob
         // die();
          logger($webhookCallData);
         if (in_array($webhookCallData['data']['type'], ['individual', 'guarantor', 'business'])) {
-            $get_verification_details = AddressVerificationDetail::where('reference_id', $webhookCallData['data']['candidate']['candidateId'])->first();
+            $get_verification_details = AddressVerificationDetail::where('reference_id', $webhookCallData['data']['verificationId'])->first();
             $get_verification_details->agent = json_encode($webhookCallData['data']['agent']);
             $get_verification_details->status = $webhookCallData['data']['status'];
             $get_verification_details->task_status = $webhookCallData['data']['taskStatus'];
@@ -66,7 +66,7 @@ class HandleVerificationsYouVerify extends SpatieProcessWebhookJob
             $get_verification_details->download_url = $webhookCallData['data']['downloadUrl'];
             $get_verification_details->save();
 
-            $get_verification = AddressVerification::where('address_verification_id', $webhookCallData['data']['candidate']['candidateId'])->first();
+            $get_verification = AddressVerification::where('id', $get_verification_details->address_verification_id)->first();
             $get_verification->update(['status' => $webhookCallData['data']['status']]);
     
         }

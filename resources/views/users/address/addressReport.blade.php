@@ -1,3 +1,8 @@
+@php 
+ use Illuminate\Support\Carbon;
+
+@endphp
+
 @extends('layouts.app')
 @section('content')
 <div class="page-content">
@@ -358,6 +363,8 @@
                                                         <div class="fw-semibold m-0 font-15 me-3 text-muted col-4">Country : </div>
                                                         <div class="fw-normal font-15 col-8">{{$address_verification->addressVerificationDetail->address['country']}}</div>
                                                     </div>
+                                                    @if($address_verification->addressVerificationDetail->status != 'pending')
+
                                                     <div class="col-12 py-4 border-top pb-3">
                                                         <div class="fw-semibold m-0 font-15 mb-2">Address Location : </div>
                                                         <div class="w-100 overflow-hidden rounded"><iframe src="{{$address_verification->addressverificationDetail->map_address_url}}" width="100%" height="275" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
@@ -370,13 +377,15 @@
                                                         <div class="fw-semibold m-0 font-15 me-3 text-muted">Latitude : </div>
                                                         <div class="fw-normal font-15">{{$address_verification->addressVerificationDetail->address['latlong']['lat']}}</div>
                                                     </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            @if($address_verification->addressVerificationDetail->status != 'pending' || $address_verification->addressVerificationDetail->status != 'canceled' || $address_verification->addressVerificationDetail->status != 'awaiting_reschedule')
+                          
+                            @if($address_verification->addressVerificationDetail->status != 'pending')
                             <div class="col-12">
                                 <div class="accordion" id="images">
                                     <div class="accordion-item border-0">
@@ -431,10 +440,7 @@
                             </div>
                             @endforeach
                             @endif
-                            @endif
-
-                            @if($address_verification->addressVerificationDetail->status != 'pending' || $address_verification->addressVerificationDetail->status != 'canceled' || $address_verification->addressVerificationDetail->status != 'awaiting_reschedule')
-                            <div class="col-12">
+                           <div class="col-12">
                                 <div class="accordion" id="notes">
                                     <div class="accordion-item border-0">
                                         <h5 class="accordion-header m-0" id="headingFour">
@@ -469,9 +475,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @endif
-                            @if($address_verification->addressVerificationDetail->status != 'pending' || $address_verification->addressVerificationDetail->status != 'canceled' || $address_verification->addressVerificationDetail->status != 'awaiting_reschedule')
-                            <div class="col-12">
+                           <div class="col-12">
                                 <div class="accordion" id="buildingDescription">
                                     <div class="accordion-item border-0">
                                         <h5 class="accordion-header m-0" id="headingFive">
@@ -515,8 +519,6 @@
                                     </div>
                                 </div>
                             </div>
-                            @endif
-                            @if($address_verification->addressVerificationDetail->status != 'pending' || $address_verification->addressVerificationDetail->status != 'canceled' || $address_verification->addressVerificationDetail->status != 'awaiting_reschedule')
                             <div class="col-12">
                                 <div class="accordion" id="otherInformation">
                                     <div class="accordion-item border-0">
@@ -552,9 +554,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @endif
-                            @if($address_verification->addressVerificationDetail->status != 'pending' || $address_verification->addressVerificationDetail->status != 'canceled' || $address_verification->addressVerificationDetail->status != 'awaiting_reschedule')
-                            <div class="col-12">
+                             <div class="col-12">
                                 <div class="accordion" id="agentDetails">
                                     <div class="accordion-item border-0">
                                         <h5 class="accordion-header m-0" id="headingSix">
@@ -593,6 +593,53 @@
                                     </div>
                                 </div>
                             </div>
+                            @else 
+
+                       
+                            <div class="modal fade" id="awaiting_response_modal" data-keyboard="false"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-lg-3 text-center align-self-center">
+                                                    <img src="assets/images/widgets/btc.png" alt="" class="img-fluid">
+                                                </div><!--end col-->
+                                                <div class="col-lg-9">
+                                                    <h5>Report will be available in</h5>
+                                                   
+                                                    <table> 
+                                                        <tr>
+                                                        <th style="font-size:34px" id="days">00 : </th>
+                                                        <th style="font-size:34px" id="hours">00 : </th>
+                                                        <th style="font-size:34px" id="minutes">00 : </th>
+                                                        <th style="font-size:34px" id="seconds"> 00</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Days </td>
+                                                        <td>Hours</td>
+                                                        <td>Minutes</td>
+                                                        <td>Seconds</td>
+                                                    
+                                                    </tr>
+                                                     
+                                                
+
+                                                    </table>
+                                                </div><!--end col-->
+
+                                            </div><!--end row-->   
+                                            <p style="text-align:center; padding-top:10px">   Report will be updated automatically once its available</p>
+                                        </div><!--end modal-body-->
+                                        
+                                        <div class="modal-footer">                                                    
+                                            <button type="button" class="btn btn-soft-primary btn-sm">View Pre-Report</button>
+                                        </div><!--end modal-footer-->
+                                    </div><!--end modal-content-->
+                                </div><!--end modal-dialog-->
+                            </div><!--end modal-->
+                          
+
                             @endif
                         </div>
                     </div>
@@ -601,6 +648,34 @@
         </div>
         @endsection
         @section('script')
+
+        @php 
+
+        $time = $address_verification->addressVerificationDetail->created_at;
+        @endphp 
         <script>
+
+        $(window).on('load', function(){
+           $('#awaiting_response_modal').modal('show');
+           $('#awaiting_response_modal').modal({keyboard:false, backdrop: 'static'});
+           
+        });
+        let times = {!! json_encode( $time) !!}
+        Initiated = new Date(times).getTime();
+        setInterval(() => {
+        let reportDate = new Date().getTime();
+
+        let reports = reportDate - Initiated;
+        
+        let Days = Math.floor(reports (1000 * 60 * 60 * 24));
+        let Hours = Math.floor(reports (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+        let Minutes = Math.floor(reports (1000 * 60 * 60) / (1000 * 60)); 
+        let Seconds = Math.floor(reports (1000 * 60) / (1000)); 
+        document.getElementById("days").innerHTML  = Days;
+        document.getElementById("hours").innerHTML = Hours;
+        document.getElementById("minutes").innerHTML = Minutes;
+        document.getElementById("seconds").innerHTML = Seconds;
+        }, 1000);
+
         </script>
         @endsection

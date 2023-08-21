@@ -13,6 +13,7 @@ use App\Models\Client;
 use App\Traits\generateHeaderReports;
 use App\Traits\GenerateRef;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Session;
 use App\Models\FieldInput;
 use App\Models\States;
@@ -380,8 +381,7 @@ class AddressController extends Controller
     $address_verification->addressVerificationDetail->images = json_decode($address_verification->addressVerificationDetail->images);
     $address_verification->addressVerificationDetail->links = json_decode($address_verification->addressVerificationDetail->links);
 
-
-    // dd($address_verification);
+    $address_verification->addressVerificationDetail->created_at;
 
     return view('users.address.addressReport', ['slug' => $slug, 'address_verification' => $address_verification]);
   }

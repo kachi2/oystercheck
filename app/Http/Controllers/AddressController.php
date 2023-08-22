@@ -135,7 +135,8 @@ class AddressController extends Controller
             "email" => $request->email != null ? $request->email : "",
             "dob" => $request->dob != null ? $request->dob : "",
             "image" => $candidate_image,
-            'is_sandbox' => $this->sandbox()
+            'is_sandbox' => $this->sandbox(),
+            'expected_report_date' => Carbon::now()->addDays(4)
           ]);
       
           // $data = $this->generateAddressReportVerify($slug);

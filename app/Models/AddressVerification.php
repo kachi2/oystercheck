@@ -22,7 +22,8 @@ class AddressVerification extends Model
         'phone',
         'email',
         'dob',
-        'image'
+        'image',
+        'expected_report_date'
     ];
 
     public function user(){

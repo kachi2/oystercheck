@@ -613,7 +613,7 @@
                                                         <th style="font-size:34px" id="days">00 : </th>
                                                         <th style="font-size:34px" id="hours">00 : </th>
                                                         <th style="font-size:34px" id="minutes">00 : </th>
-                                                        <th style="font-size:34px" id="seconds"> 00</th>
+                                                        <th style="font-size:34px" id="seconds"> 00 </th>
                                                     </tr>
                                                     <tr>
                                                         <td>Days </td>
@@ -629,11 +629,13 @@
                                                 </div><!--end col-->
 
                                             </div><!--end row-->   
-                                            <p style="text-align:center; padding-top:10px">   Report will be updated automatically once its available</p>
+                                            <p style="text-align:center; padding-top:10px">   Report will be updated automatically once its available
+                                            <br> <span class="badge bg-info pt-2">Check Back on {{Date('Y-m-d H:i:s', strtotime($address_verification->expected_report_date))}} </span></p>
+
                                         </div><!--end modal-body-->
                                         
                                         <div class="modal-footer">                                                    
-                                            <button type="button" class="btn btn-soft-primary btn-sm">View Pre-Report</button>
+                                            <button type="button" class="btn btn-soft-secondary btn-sm" data-bs-dismiss="modal" >View Pre-Report</button>
                                         </div><!--end modal-footer-->
                                     </div><!--end modal-content-->
                                 </div><!--end modal-dialog-->
@@ -648,34 +650,32 @@
         </div>
         @endsection
         @section('script')
-
-        @php 
-
-        $time = $address_verification->addressVerificationDetail->created_at;
-        @endphp 
         <script>
 
         $(window).on('load', function(){
-           $('#awaiting_response_modal').modal('show');
-           $('#awaiting_response_modal').modal({keyboard:false, backdrop: 'static'});
-           
+           $('#awaiting_response_modal').modal('show', {keyboard:false, backdrop: 'static'});
         });
-        let times = {!! json_encode( $time) !!}
+
+        let times = {!! json_encode($address_verification->expected_report_date) !!}
+        console.log(times);
         Initiated = new Date(times).getTime();
         setInterval(() => {
         let reportDate = new Date().getTime();
+        let reports =  Initiated - reportDate;
+        let Days = Math.floor(reports / (1000 * 60 * 60 * 24));
+        let Hours = Math.floor((reports % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let Minutes = Math.floor((reports % (1000 * 60 * 60)) / (1000 * 60)); 
+        let Seconds = Math.floor((reports % (1000 * 60)) / (1000)); 
 
-        let reports = reportDate - Initiated;
-        
-        let Days = Math.floor(reports (1000 * 60 * 60 * 24));
-        let Hours = Math.floor(reports (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
-        let Minutes = Math.floor(reports (1000 * 60 * 60) / (1000 * 60)); 
-        let Seconds = Math.floor(reports (1000 * 60) / (1000)); 
-        document.getElementById("days").innerHTML  = Days;
-        document.getElementById("hours").innerHTML = Hours;
-        document.getElementById("minutes").innerHTML = Minutes;
-        document.getElementById("seconds").innerHTML = Seconds;
+        document.getElementById("days").innerHTML  =  num(Days) + ' : ';
+        document.getElementById("hours").innerHTML =  num(Hours) + ' : ';
+        document.getElementById("minutes").innerHTML =  num(Minutes) + ' : ';
+        document.getElementById("seconds").innerHTML = num(Seconds);
         }, 1000);
 
+
+        function num(n){
+            return n > 9 ? "" +n : "0" +n; 
+        }
         </script>
         @endsection

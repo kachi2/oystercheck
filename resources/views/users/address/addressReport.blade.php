@@ -367,8 +367,27 @@
 
                                                     <div class="col-12 py-4 border-top pb-3">
                                                         <div class="fw-semibold m-0 font-15 mb-2">Address Location : </div>
-                                                        <div class="w-100 overflow-hidden rounded"><iframe src="{{$address_verification->addressverificationDetail->map_address_url}}" width="100%" height="275" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+                                                        <div class="w-100 overflow-hidden rounded">
+                                                            {{-- <iframe
+                                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12094.57348593182!2d-74.00599512526003!3d40.72586666928451!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2598f988156a9%3A0xd54629bdf9d61d68!2sBroadway-Lafayette%20St!5e0!3m2!1spl!2spl!4v1624523797308!5m2!1spl!2spl"
+                                                            class="h-100 w-100" style="border:0;" allowfullscreen="" loading="lazy"></iframe> --}}
+                                                            {{-- <iframe src="{{$address_verification->addressverificationDetail->map_address_url}}" width="100%" height="275" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                                            </iframe> --}}
+
+
+                                                            <div style="text-decoration:none; overflow:hidden">
+                                                            <div id="embedded-map-display" style="height:100%; width:100%;max-width:100%;">
+                                                            <iframe style="height:100%;width:100%;border:0;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q={{$address_verification->addressVerificationDetail->address['buildingNumber']}}+{{$address_verification->addressVerificationDetail->address['street']}}+{{$address_verification->addressVerificationDetail->address['city']}}+{{$address_verification->addressVerificationDetail->address['lga']}},&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
+                                                            </div><a class="my-codefor-googlemap" href="https://www.bootstrapskins.com/themes" id="make-map-data"> </a>
+                                                            </div>
+
+
+                                                        </div>
+                                                           
                                                     </div>
+
+
+
                                                     <div class="col-6 d-block col-sm-3 col-xl-3 d-sm-flex">
                                                         <div class="fw-semibold m-0 font-15 me-3 text-muted">Longitude : </div>
                                                         <div class="fw-normal font-15">{{$address_verification->addressVerificationDetail->address['latlong']['lon']}}</div>

@@ -51,11 +51,14 @@
                             <div class="col-12">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <h4 class="my-4 fw-semibold text-dark font-16">Address Report - {{$address_verification->addressVerificationDetail->reference_id}}</h4>
-                                    <button type="button" class="btn btn-primary btn-square">Download Report</button>
+                                    <div>
+                                        <a id="printBtn" class="btn btn-primary btn-square">Print</a>
+                                        <a id="downloadBtn" class="btn btn-primary btn-square">Download Report</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row"  id="pdfContent">
                             <div class="col-12">
                                 @if($address_verification->addressVerificationDetail->status == 'pending')
                                 <div class="alert custom-alert alert-purple icon-custom-alert shadow-sm fade show d-flex justify-content-between" role="alert">
@@ -669,7 +672,61 @@
         </div>
         @endsection
         @section('script')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="{{asset('/assets/js/poppins64/Poppins-Bold-bold.js')}}"></script>
+        <script src="{{asset('/assets/js/poppins64/fa-solid-900-bold.js')}}"></script>
+
         <script>
+               window.jsPDF = window.jspdf.jsPDF;
+            window.html2canvas = html2canvas;
+            let downloadBtn = document.getElementById('downloadBtn');
+            downloadBtn.addEventListener("click", createPdf);
+
+            let printBtn = document.getElementById('printBtn');
+            printBtn.addEventListener("click", printPage);
+
+            function createPdf() {
+                html2canvas(document.getElementById('pdfContent')).then(canvas => {
+                    let source = $('#pdfContent')[0];
+                    const doc = new jsPDF({
+                        unit: "pt",
+                        orientation: 'portrait'
+                    });
+
+                    let margins = {
+                        top: 50,
+                        bottom: 50,
+                        left: 50,
+                        width: 500
+                    }
+
+                    let specialElementHandlers = {
+                        '#hasCharr': function(element, renderer) {
+                            return true;
+                        }
+                    };
+
+                    doc.setFont('Poppins-Bold', 'bold');
+                    doc.html(source, {
+                        x: margins.left,
+                        y: margins.top,
+                        width: margins.width,
+                        windowWidth: 900,
+                        elementHandlers: specialElementHandlers,
+                        callback: function() {
+                            doc.save("another.pdf", margins)
+                        }
+                    });
+                });
+            }
+
+            function printPage() {
+                window.print();
+                // setTimeout(() => {
+                //     window.close();
+                // }, 10000);
+            }
 
         $(window).on('load', function(){
            $('#awaiting_response_modal').modal('show', {keyboard:false, backdrop: 'static'});

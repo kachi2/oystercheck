@@ -266,7 +266,7 @@ class AddressController extends Controller
           'lastName' => $request->last_name,
           'mobile' => $request->phone,
           'email' => $request->email,
-          'image' =>  'demo.jpg',
+          'image' =>  'https://oysterchecks.com/assets/images/logo.png',
         ],
         "address" => [
           "flatNumber" => $request->flat_number != null ? $request->flat_number : "",
@@ -279,7 +279,7 @@ class AddressController extends Controller
           "city" => $request->city,
           "lga" => $request->lga != null ? $request->lga : "",
         ],
-        "subjectConsent" => $request->subject_consent,
+        "subjectConsent" => true,
       ];
     } else {
       $host = $this->ReqUrl().'addresses/business/request';

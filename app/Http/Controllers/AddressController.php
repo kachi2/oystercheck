@@ -243,7 +243,7 @@ class AddressController extends Controller
         Session::flash('message', $valid->errors()->first());
         return redirect()->back()->withErrors($valid)->withInput($request->all());
       }
-      $image = [];
+      $image = '';
       if (request()->file('image')) {
         $image = request()->file('image');
         $name =  $image->getClientOriginalName();

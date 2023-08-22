@@ -226,7 +226,7 @@ class AddressController extends Controller
         'last_name' => 'required|string',
         'mobile' => 'required|numeric',
         'email' => 'required|email',
-        'image' => 'mimes:jpeg,png,jpg',
+        'image' => 'required',
         'flat_number' => 'nullable|string',
         'building_name' => 'nullable|string',
         'building_number' => 'required|string',

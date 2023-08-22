@@ -224,7 +224,7 @@ class AddressController extends Controller
       $valid = Validator::make($request->all(), [
         'first_name' => 'required|string',
         'last_name' => 'required|string',
-        'mobile' => 'required|numeric',
+        'phone' => 'required',
         'email' => 'required|email',
         'image' => 'required',
         'flat_number' => 'nullable|string',

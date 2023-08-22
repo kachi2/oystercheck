@@ -265,7 +265,7 @@ class AddressController extends Controller
           'lastName' => $request->last_name,
           'mobile' => $request->phone,
           'email' => $request->email,
-          'image' =>  asset('assets/guarantors'.$image),
+          'image' =>  asset('assets/guarantors'.$fileName),
         ],
         "address" => [
           "flatNumber" => $request->flat_number != null ? $request->flat_number : "",

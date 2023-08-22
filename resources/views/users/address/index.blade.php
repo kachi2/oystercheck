@@ -228,7 +228,6 @@
                                      <td>{{$transaction->user->firstname}}</td>
                                      <td>{{$transaction->fee}}</td>
                                      <td>{{$transaction->created_at}}</td>
-
                                      <td>
                                          <div class="dropdown d-inline-block">
                                              <a class="dropdown-toggle arrow-none" id="seeMore" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">

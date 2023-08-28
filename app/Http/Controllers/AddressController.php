@@ -291,7 +291,7 @@ class AddressController extends Controller
           "city" => $request->city,
           "lga" => $request->local_govt != null ? $request->local_govt : "",
         ],
-        "subjectConsent" => $request->subject_consent,
+        "subjectConsent" => true,
       ];
     }
     DB::beginTransaction();
@@ -359,7 +359,7 @@ class AddressController extends Controller
 
     $address_verification->addressVerificationDetail->candidate = json_decode($address_verification->addressVerificationDetail->candidate);
     if ($address_verification->addressVerificationDetail->business != null) $address_verification->addressVerificationDetail->business = json_decode($address_verification->addressVerificationDetail->business);
-    if ($address_verification->addressVerificationDetail->guarantor != null) $address_verification->addressVerificationDetail->guarantor = json_decode($address_verification->addressVerificationDetail->guarantor);
+    if ($address_verification->addressVerificationDetail->guarantor != null) $address_verification->addressVerificationDetail->guarantor = json_decode($address_verification->addressVerificationDetail->guarantor, true);
 
     $address_verification->addressVerificationDetail->agent = json_decode($address_verification->addressVerificationDetail->agent);
     $address_verification->addressVerificationDetail->address = json_decode($address_verification->addressVerificationDetail->address);

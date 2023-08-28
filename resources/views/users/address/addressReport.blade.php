@@ -239,7 +239,7 @@
                                                     <div class="col-lg-4 align-self-center py-4 mb-3 mb-lg-0">
                                                         <div class="dastone-profile-main">
                                                             <div class="dastone-profile-main-pic">
-                                                                <img src="{{$address_verification->addresVerificationDetail->guarantor['photo']}}" alt="" height="110" class="rounded-circle">
+                                                                <img src="{{$address_verification->addressVerificationDetail->guarantor['photo']}}" alt="" height="110" class="rounded-circle">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -248,20 +248,20 @@
 
                                                     <div class="col-12 col-md-6 d-flex py-4 border-top">
                                                         <div class="fw-semibold m-0 font-15 me-3 text-muted col-4">First Name : </div>
-                                                        <div class="fw-normal font-15 col-8">{{$address_verification->addresVerificationDetail->guarantor['firstName']}}</div>
+                                                        <div class="fw-normal font-15 col-8">{{$address_verification->addressVerificationDetail->guarantor['firstName']}}</div>
                                                     </div>
                                                     <div class="col-12 col-md-6 d-flex py-4 border-top">
                                                         <div class="fw-semibold m-0 font-15 me-3 text-muted col-4">Last Name : </div>
-                                                        <div class="fw-normal font-15 col-8">{{$address_verification->addresVerificationDetail->guarantor['lastName']}}</div>
+                                                        <div class="fw-normal font-15 col-8">{{$address_verification->addressVerificationDetail->guarantor['lastName']}}</div>
                                                     </div>
                                                     <div class="col-12 col-md-6 d-flex py-4 border-top">
                                                         <div class="fw-semibold m-0 font-15 me-3 text-muted col-4">Phone : </div>
-                                                        <div class="fw-normal font-15 col-8">{{$address_verificationaddresVerificationDetail->guarantor['mobile']}}</div>
+                                                        <div class="fw-normal font-15 col-8">{{$address_verification->addressVerificationDetail->guarantor['mobile']}}</div>
                                                     </div>
-                                                    @if($address_verification->addresVerificationDetail->guarantor['email'] != null)
+                                                    @if($address_verification->addressVerificationDetail->guarantor['email'] != null)
                                                     <div class="col-12 col-md-6 d-flex py-4 border-top">
                                                         <div class="fw-semibold m-0 font-15 me-3 text-muted col-4">email : </div>
-                                                        <div class="fw-normal font-15 col-8">{{$address_verification->addresVerificationDetail->guarantor['email']}}</div>
+                                                        <div class="fw-normal font-15 col-8">{{$address_verification->addressVerificationDetail->guarantor['email']}}</div>
                                                     </div>
                                                     @endif
                                                 </div>
@@ -285,19 +285,19 @@
                                                 <div class="row border-bottom mb-5">
                                                     <div class="col-12 col-md-6 d-flex py-4 border-top">
                                                         <div class="fw-semibold m-0 font-15 me-3 text-muted col-4">Name : </div>
-                                                        <div class="fw-normal font-15 col-8">{{$address_verification->addresVerificationDetail->business['name']}}</div>
+                                                        <div class="fw-normal font-15 col-8">{{$address_verification->addressVerificationDetail->business['name']}}</div>
                                                     </div>
                                                     <div class="col-12 col-md-6 d-flex py-4 border-top">
                                                         <div class="fw-semibold m-0 font-15 me-3 text-muted col-4">Last Name : </div>
-                                                        <div class="fw-normal font-15 col-8">{{$address_verification->addresVerificationDetail->business['email']}}</div>
+                                                        <div class="fw-normal font-15 col-8">{{$address_verification->addressVerificationDetail->business['email']}}</div>
                                                     </div>
                                                     <div class="col-12 col-md-6 d-flex py-4 border-top">
                                                         <div class="fw-semibold m-0 font-15 me-3 text-muted col-4">Phone : </div>
-                                                        <div class="fw-normal font-15 col-8">{{$address_verificationaddresVerificationDetail->business['mobile']}}</div>
+                                                        <div class="fw-normal font-15 col-8">{{$address_verification->addressVerificationDetail->business['mobile']}}</div>
                                                     </div>
                                                     <div class="col-12 col-md-6 d-flex py-4 border-top">
                                                         <div class="fw-semibold m-0 font-15 me-3 text-muted col-4">Registration Number : </div>
-                                                        <div class="fw-normal font-15 col-8">{{$address_verification->addresVerificationDetail->business['registrationNumber']}}</div>
+                                                        <div class="fw-normal font-15 col-8">{{$address_verification->addressVerificationDetail->business['registrationNumber']}}</div>
                                                     </div>
                                                 </div>
                                             </div>

@@ -576,7 +576,7 @@
                                     </div>
                                 </div>
                             </div>
-                             <div class="col-12">
+                             {{-- <div class="col-12">
                                 <div class="accordion" id="agentDetails">
                                     <div class="accordion-item border-0">
                                         <h5 class="accordion-header m-0" id="headingSix">
@@ -614,7 +614,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             @else 
 
                        
@@ -628,21 +628,20 @@
                                                     <img src="assets/images/widgets/btc.png" alt="" class="img-fluid">
                                                 </div><!--end col-->
                                                 <div class="col-lg-9">
-                                                    <h5>Report will be available in</h5>
+                                                    <h5 id="title">Report will be available in</h5>
                                                    
                                                     <table> 
-                                                        <tr>
+                                                        <tr id="timer">
                                                         <th style="font-size:34px" id="days">00 : </th>
                                                         <th style="font-size:34px" id="hours">00 : </th>
                                                         <th style="font-size:34px" id="minutes">00 : </th>
                                                         <th style="font-size:34px" id="seconds"> 00 </th>
                                                     </tr>
-                                                    <tr>
+                                                    <tr id="timerHolder">
                                                         <td>Days </td>
                                                         <td>Hours</td>
                                                         <td>Minutes</td>
                                                         <td>Seconds</td>
-                                                    
                                                     </tr>
                                                      
                                                 
@@ -651,13 +650,13 @@
                                                 </div><!--end col-->
 
                                             </div><!--end row-->   
-                                            <p style="text-align:center; padding-top:10px">   Report will be updated automatically once its available
-                                            <br> <span class="badge bg-info pt-2">Check Back on {{Date('Y-m-d H:i:s', strtotime($address_verification->expected_report_date))}} </span></p>
+                                            <p style="text-align:center; padding-top:10px" id="reporter">   Report will be updated automatically once its available
+                                            <br> <span class="badge bg-info pt-2" id="dater">Check Back on {{Date('Y-m-d H:i:s', strtotime($address_verification->expected_report_date))}} </span></p>
 
                                         </div><!--end modal-body-->
                                         
                                         <div class="modal-footer">                                                    
-                                            <button type="button" class="btn btn-soft-secondary btn-sm" data-bs-dismiss="modal" >View Pre-Report</button>
+                                            <button type="button" class="btn btn-soft-info btn-sm" data-bs-dismiss="modal" >View Report</button>
                                         </div><!--end modal-footer-->
                                     </div><!--end modal-content-->
                                 </div><!--end modal-dialog-->
@@ -735,7 +734,8 @@
         let times = {!! json_encode($address_verification->expected_report_date) !!}
         console.log(times);
         Initiated = new Date(times).getTime();
-        setInterval(() => {
+     
+       let X =  setInterval(() => {
         let reportDate = new Date().getTime();
         let reports =  Initiated - reportDate;
         let Days = Math.floor(reports / (1000 * 60 * 60 * 24));
@@ -747,8 +747,21 @@
         document.getElementById("hours").innerHTML =  num(Hours) + ' : ';
         document.getElementById("minutes").innerHTML =  num(Minutes) + ' : ';
         document.getElementById("seconds").innerHTML = num(Seconds);
+        
+        if(reports < 0){
+            clearInterval(X);
+        document.getElementById("days").innerHTML  =   '';
+        document.getElementById("hours").innerHTML =  '  ';
+        document.getElementById("minutes").innerHTML =   '  ';
+        document.getElementById("timerHolder").hidden = true;
+        document.getElementById("timer").hidden = true;
+        document.getElementById("reporter").hidden = true;
+        document.getElementById("dater").hidden = true;
+        document.getElementById("title").innerHTML =   '<span style="color:red; font-size:30px; font-weight:bolder">  Awaiting Period Completed, Please Check report </span>';
+        }
         }, 1000);
 
+    
 
         function num(n){
             return n > 9 ? "" +n : "0" +n; 

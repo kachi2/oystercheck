@@ -68,18 +68,6 @@ class AddressController extends Controller
       $candidate_image = cloudinary()->upload($request->file('image')->getRealPath(), [
         'folder' => 'oysterchecks/candidates'
       ])->getSecurePath();
-
-      // $image = request()->file('image');
-      // $name =  $image->getClientOriginalName();
-      // $FileName = \pathinfo($name, PATHINFO_FILENAME);
-      // $ext =  $image->getClientOriginalExtension();
-      // $time = time().$FileName;
-      // $dd = md5($time);
-      // $fileName = $dd.'.'.$ext;
-      // if($image->move('assets/candidates', $fileName)){
-      //   $image = $fileName;
-
-      // }
     }
 
     $ref = $this->GenerateRef();
@@ -369,13 +357,9 @@ class AddressController extends Controller
 
     $address_verification = AddressVerification::where(['id' => decrypt($addressId)])->first();
 
-    $address_verification->addressVerificationDetail;
-
     $address_verification->addressVerificationDetail->candidate = json_decode($address_verification->addressVerificationDetail->candidate);
-    if ($address_verification->addressVerificationDetail->business != null)
-      $address_verification->addressVerificationDetail->business = json_decode($address_verification->addressVerificationDetail->business);
-    if ($address_verification->addressVerificationDetail->guarantor != null)
-      $address_verification->addressVerificationDetail->guarantor = json_decode($address_verification->addressVerificationDetail->guarantor);
+    if ($address_verification->addressVerificationDetail->business != null) $address_verification->addressVerificationDetail->business = json_decode($address_verification->addressVerificationDetail->business);
+    if ($address_verification->addressVerificationDetail->guarantor != null) $address_verification->addressVerificationDetail->guarantor = json_decode($address_verification->addressVerificationDetail->guarantor);
 
     $address_verification->addressVerificationDetail->agent = json_decode($address_verification->addressVerificationDetail->agent);
     $address_verification->addressVerificationDetail->address = json_decode($address_verification->addressVerificationDetail->address);

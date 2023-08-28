@@ -67,7 +67,7 @@ class HandleVerificationsYouVerify extends SpatieProcessWebhookJob
             $get_verification_details->save();
 
             $get_verification = AddressVerification::where('id', $get_verification_details->address_verification_id)->first();
-            $get_verification->update(['status' => $webhookCallData['data']['status']]);
+            $get_verification->update(['status' => $webhookCallData['data']['task_status']]);
     
         }
     

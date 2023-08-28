@@ -206,7 +206,7 @@
                                          </td>
                                          <td class="px-0 py-0">
                                              <a class="table-link" href="{{route('showBusinessReport', ['slug'=>$slug->slug, 'verificationId'=>encrypt($trans->id)])}}">
-                                                 <div class="px-2 py-3">{{auth()->user()->name}}</div>
+                                                 <div class="px-2 py-3">{{auth()->user()->firstname}}</div>
                                              </a>
                                          </td>
                                          <td class="px-0 py-0">

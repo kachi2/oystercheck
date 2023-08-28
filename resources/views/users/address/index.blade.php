@@ -114,7 +114,7 @@
                              <div class="card-body" >
                                  <div class="row d-flex justify-content-center">
                                      <div class="col">
-                                         <p class="text-black mb-0 fw-semibold">Requests Awaiting Reschedule</p>
+                                          <p class="text-black mb-0 fw-semibold">Requests Awaiting Reschedule</p>
                                          <h3 class="m-0 text-black">{{$awaiting_reschedule}}</h3>
                                      </div>
                                      <div class="col-auto align-self-center">
@@ -125,7 +125,7 @@
                                  </div>
                              </div>
                              <!--end card-body-->
-                         </div>
+                         </div> 
                          <!--end card-->
                      </div>
                      <!--end col-->

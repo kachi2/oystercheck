@@ -192,7 +192,7 @@ class BusinessController extends Controller
                         return redirect()->route('businessIndex', $slug->slug);
                     }else{
                     Session::flash('alert', 'error');
-                    Session::flash('message', $decodedResponse['message']);
+                    Session::flash('message', 'Something went wrong, try again');
                     return back()->withInput($data);
                     }
                 }
@@ -219,6 +219,7 @@ class BusinessController extends Controller
            return back();
         }
         
+        dd($data);
         $ref = $this->GenerateRef();
         $slug = Verification::where('slug', $slug)->first();
         $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
@@ -265,7 +266,7 @@ class BusinessController extends Controller
                     return back();
                 } else {
                     $decodedResponse = json_decode($response, true);
-                    // dd($decodedResponse);
+                     dd($decodedResponse);
                     if ($decodedResponse['success'] == true && $decodedResponse['statusCode'] == 200) {
                        $reasons = isset($decodedResponse['data']['reason']) ? $decodedResponse['data']['reason'] : null;
                        $reference = $decodedResponse['data']['id'] != null ? $decodedResponse['data']['id'] : null;
@@ -306,8 +307,9 @@ class BusinessController extends Controller
                        
                         return redirect()->route('businessIndex', $slug->slug);
                     }else{
+
                         Session::flash('alert', 'error');
-                        Session::flash('message', $decodedResponse['message']);
+                        Session::flash('message', 'Something went wrong, try again');
                         return back()->withInput($data);
                     }
                 }

@@ -47,19 +47,41 @@
                                  @foreach($fields as $input)
                                  @if($input->type == 'select')
                                  <div class="col-md-6 mb-3">
-                                     <label class="mb-3" style="font-weight:bolder">{{$input->label}}</label> @if($input->is_required == 1) <span style="color:red; font-weight:bolder"> * </span> @endif
-                                     <select class="select2 form-control mb-3 custom-select" style="width: 100%; height:36px;" id="{{$input->inputid}}" name="{{$input->name}}">
-                                         <option>{{$input->placeholder}}</option>
-                                         <option value="cacReg">CAC Registration Number</option>
+                                     <label class="mb-3" style="font-weight:bolder">{{$input->label}}</label> 
+                                     @if($input->is_required == 1) <span style="color:red; font-weight:bolder"> * </span> @endif
+                                     <select class="select2 form-control mb-3 custom-select" style="width: 100%; height:36px;" 
+                                     id="{{$input->inputid}}" value="{{old($input->name)}}"  name="{{$input->name}}">
+                                         <option disabled>{{$input->placeholder}}</option>
+                                         <option value="cacReg" selected>CAC Registration Number</option>
                                      </select>
                                  </div>
                                  @else
                                  <div class="col-md-6 mb-3">
                                      <label class="mb-3" style="font-weight:bolder">{{$input->label}}</label> @if($input->is_required == 1) <span style="color:red; font-weight:bolder"> * </span> @endif
-                                     <input type="{{$input->type}}" id="{{$input->inputid}}" name="{{$input->name}}" class="form-control mb-3 custom-select" placeholder="{{$input->placeholder}}" @if($input->is_required == 1) required @endif>
+                                     <input type="{{$input->type}}" value="{{old($input->name)}}" id="{{$input->inputid}}" name="{{$input->name}}" class="form-control mb-3 custom-select" placeholder="{{$input->label}}" @if($input->is_required == 1) required @endif>
                                  </div><!-- end col -->
                                  @endif
-                                 @endforeach
+                                  @endforeach
+                                  @if($input->slug == 'cac')
+                                 <div class="col-md-6 mb-3">
+                                    <select  class="select2 form-control mb-3 custom-select" name="countryCode" data-placeholder="Select Countries" >    
+                                                  <option value="ag" >Argentina</option>
+                                                  <option value="aus">Australia</option>
+                                                  <option value="by">Belarus</option>
+                                                  <option value="be">Belgium</option>
+                                                  <option value="cy">Cyprus</option>
+                                                  <option value="cn">China</option>
+                                                  <option value="ca">Canada</option>
+                                                  <option value="eg">Egypt</option>
+                                                  <option value="gh">Ghana</option>
+                                                  <option value="ng" selected>Nigeria</option>
+                                                  <option value="za">South Africa</option>
+                                                  <option value="us" >United States</option>
+                                                  <option value="uk" >United Kingdom</option> 
+                                          </select>
+                                          <small class="text-warning">Select the countries you want your search</small>
+                                    </div>
+                                 @endif
                                  <div class="col-md-12 mt-3">
                                      <div class="col-md-7 mb-3">
                                        
@@ -68,7 +90,7 @@
                                              @if(UserEnvironment() == 0)
                                              <div class="col-md-12 ">
                                                 <div class="card" >
-                                                    <div class="card-header" style="background: rgb(13, 115, 115); color:#fff">
+                                                    <div class="card-header" style="background: rgb(7, 12, 89); color:#fff">
                                                         <h4 class="card-title" style=" color:#fff">Test Data</h4>
                                                         <p class="mb-0" style="color:#fff">Copy the Test data below and paste on the input field</p>
                                                     </div><!--end card-header-->

@@ -66,17 +66,12 @@
       <!-- Responsive examples -->
     <script src="{{asset('/plugins/datatables/dataTables.responsive.min.js')}}"></script>
     <script src="{{asset('/plugins/datatables/responsive.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('/plugins/chartjs/chart.min.js')}}"></script>
-    <script src="{{asset('/assets/pages/jquery.chartjs.init.js')}}"></script>
     <script src="{{asset('/assets/pages/jquery.forms-advanced.js')}}"></script>
+
+    <script src="{{asset('/plugins/clipboard/clipboard.min.js')}}"></script>
     <script src="{{asset('/assets/pages/jquery.clipboard.init.js')}}"></script>
         <!-- Session timeout js -->
 
-      
-      <script src="{{asset('plugins/apex-charts/apexcharts.min.js')}}"></script>
-      <script src="{{asset('/plugins/apex-charts/irregular-data-series.js')}}"></script>
-      <script src="{{asset('/plugins/apex-charts/ohlc.js')}}"></script>
-      <script src="{{asset('/assets/pages/jquery.apexcharts.init.js')}}"></script>
 
     <script src="{{asset('/plugins/bootstrap-session-timeout/bootstrap-session-timeout.min.js')}}"></script>
         

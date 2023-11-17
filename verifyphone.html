@@ -1,0 +1,476 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Oysterchecks Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="Oysterchecks Comprehensive and Exceptional background checks, KYC & AML compliance Solutions</" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.png">
+
+        <!-- jvectormap -->
+        <link href="plugins/datatables/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+        <link href="plugins/datatables/buttons.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+        <!-- Responsive datatable examples -->
+        <link href="plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" /> 
+
+        <!-- App css -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body class="dark-sidenav navy-sidenav">
+        <!-- Left Sidenav -->
+        <div class="left-sidenav">
+            <!-- LOGO -->
+            <div class="brand">
+                <a href="index.html" class="logo">
+                    <span>
+                        <img src="assets/images/logo.png"  width="150px" alt="logo-large" class="logo-light">
+                        <img src="assets/images/logo.png" width="150px" alt="logo-large" class="logo-lg logo-dark">
+                      
+                    </span>  
+                </a>
+            </div>
+            <!--end logo-->
+            <div class="menu-content h-100" data-simplebar>
+                <ul class="metismenu left-sidenav-menu">
+                    <li class="menu-label mt-0">Main</li>
+                    <li>
+                        <a href="index.html"> <i data-feather="home" class="align-self-center menu-icon"></i><span>Dashboard</span></a>
+                        
+                    </li>
+    
+                    <li>
+                        <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Individual Verifications</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                             <li class="nav-item"><a class="nav-link" href="verifyphone.html"><i class="ti-control-record"></i>Verify Phone Number</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Verify Bank Information</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Verify National ID</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Verify Address</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Verify Driver's License</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Educational Check</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Driving License</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Guarantors Address Check</a></li>
+                        </ul>
+                    </li> 
+
+                    <li>
+                        <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Business Verifications</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                             <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Tax Identification Number</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Business Address</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Company Search (CAC)</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Bank Account Verification</a></li>
+                        </ul>
+                    </li> 
+
+                    <li>
+                        <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Organisations</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                             <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Police / Criminal Record </a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Political Exposed Persons </a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Professional Certificate</a></li>
+             
+                        </ul>
+                    </li>  <hr class="hr-dashed hr-menu">
+                    <li class="menu-label my-2">Account</li>
+                    <li>
+                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Wallet</span></a>
+                    </li> 
+                    <li>
+                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Transactions</span></a>
+                    </li> 
+                    <li>
+                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Sessions</span></a>
+                    </li>
+                    </li>  <hr class="hr-dashed hr-menu">
+                    <li class="menu-label my-2">Administrative Task</li>
+                    <li>
+                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Reports</span></a>
+                    </li> 
+                    <li>
+                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Settings</span></a>
+                    </li> 
+                    <li>
+                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Users</span></a>
+                    </li> 
+                    <li>
+                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Activity Log</span></a>
+                    </li> 
+                    <li>
+                        <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Manage Verifications</span></a>
+                    </li> 
+                            
+                </ul>
+    
+              
+            </div>
+        </div>
+        <!-- end left-sidenav-->
+        
+
+        <div class="page-wrapper">
+            <!-- Top Bar Start -->
+            <div class="topbar">            
+                <!-- Navbar -->
+                <nav class="navbar-custom">    
+                    <ul class="list-unstyled topbar-nav float-end mb-0">  
+                        <li class="dropdown hide-phone">
+                            <a class="nav-link dropdown-toggle arrow-none waves-light waves-effect" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="false" aria-expanded="false">
+                                <i data-feather="search" class="topbar-icon"></i>
+                            </a>
+                            
+                            <div class="dropdown-menu dropdown-menu-end dropdown-lg p-0">
+                                <!-- Top Search Bar -->
+                                <div class="app-search-topbar">
+                                    <form action="#" method="get">
+                                        <input type="search" name="search" class="from-control top-search mb-0" placeholder="Type text...">
+                                        <button type="submit"><i class="ti-search"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>                      
+
+                        <li class="dropdown notification-list">
+                            <a class="nav-link dropdown-toggle arrow-none waves-light waves-effect" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="false" aria-expanded="false">
+                                <i data-feather="bell" class="align-self-center topbar-icon"></i>
+                                <span class="badge bg-danger rounded-pill noti-icon-badge">2</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-lg pt-0">
+                            
+                                <h6 class="dropdown-item-text font-15 m-0 py-3 border-bottom d-flex justify-content-between align-items-center">
+                                    Notifications <span class="badge bg-primary rounded-pill">2</span>
+                                </h6> 
+                                <div class="notification-menu" data-simplebar>
+                                <!--end-item-->
+                                    <!-- item-->
+                                    <a href="#" class="dropdown-item py-3">
+                                        <small class="float-end text-muted ps-2">1 hr ago</small>
+                                        <div class="media">
+                                            <div class="avatar-md bg-soft-primary">
+                                                <i class="las la-user-clock bg-soft-primary thumb-sm rounded-circle"></i>  
+                                            </div>
+                                            <div class="media-body align-self-center ms-2 text-truncate">
+                                                <h6 class="my-0 fw-normal text-dark">New User was registered</h6>
+                                                <small class="text-muted mb-0">A new sub-agent to the system by Agent michael</small>
+                                            </div><!--end media-body-->
+                                        </div><!--end media-->
+                                    </a><!--end-item-->
+                                   <!--end-item-->
+                                </div>
+                                <!-- All-->
+                                <a href="javascript:void(0);" class="dropdown-item text-center text-primary">
+                                    View all <i class="fi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="false" aria-expanded="false">
+                                <span class="ms-1 nav-user-name hidden-sm ">Michael Kachi</span>
+                                <i class="las la-user-clock bg-soft-primary  rounded-circle"></i>                                 
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="#"><i data-feather="user" class="align-self-center icon-xs icon-dual me-1"></i> Profile</a>
+                                <a class="dropdown-item" href="#"><i data-feather="settings" class="align-self-center icon-xs icon-dual me-1"></i> Settings</a>
+                                <div class="dropdown-divider mb-0"></div>
+                                <a class="dropdown-item" href="#"><i data-feather="power" class="align-self-center icon-xs icon-dual me-1"></i> Logout</a>
+                            </div>
+                        </li>
+                    </ul><!--end topbar-nav-->
+        
+                    <ul class="list-unstyled topbar-nav mb-0">                        
+                        <li>
+                            <button class="nav-link button-menu-mobile">
+                                <i data-feather="menu" class="align-self-center topbar-icon"></i>
+                            </button>
+                        </li> 
+                        <li class="creat-btn">
+                            <div class="nav-link">
+                                <a class=" btn btn-sm btn-soft-primary" href="#" role="button">Supr Admin Account</a>
+                            </div>                                
+                        </li>                           
+                    </ul>
+                </nav>
+                <!-- end navbar-->
+            </div>
+            <!-- Top Bar End -->
+
+            <!-- Page Content-->
+            <div class="page-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="page-title-box">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="page-title">Phone Verifications</h4>
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"></li>
+                                        </ol>
+                                    </div><!--end col-->
+                                    <div class="col-auto align-self-center">
+                                        <a href="#" class="btn btn-sm btn-outline-primary" id="Dash_Date">
+                                            <span class="ay-name" id="Day_Name">Today:</span>&nbsp;
+                                            <span class="" id="Select_date">Jan 11</span>
+                                            <i data-feather="calendar" class="align-self-center icon-xs ms-1"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-sm btn-outline-primary">
+                                            <i data-feather="download" class="align-self-center icon-xs"></i>
+                                        </a>
+                                    </div><!--end col-->  
+                                </div><!--end row-->                                                              
+                            </div><!--end page-title-box-->
+                        </div><!--end col-->
+                    </div>
+                    <div class="row ">
+                        <div class="col-lg-12">
+                            <div class="row justify-content-center">
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card report-card ">
+                                        <div class="card-body" style="background:rgb(36, 16, 82)">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col">
+                                                    <p class="mb-0 fw-semibold text-white">Successful verifications</p>
+                                                    <h3 class="m-0 text-white">50000</h3>
+                                                    <p class="mb-0 text-truncate text-white"><span class="text-success">+50</span> this week</p>
+                                                </div>
+                                                <div class="col-auto align-self-center">
+                                                    <div class="report-main-icon bg-light-alt">
+                                                        <i data-feather="users" class="align-self-center text-muted icon-sm"></i>  
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!--end card-body--> 
+                                    </div><!--end card--> 
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card report-card">
+                                        <div class="card-body" style="background:rgb(36, 16, 82)">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col">
+                                                    <p class="text-white mb-0 fw-semibold">Failed verifications</p>
+                                                    <h3 class="m-0 text-white">200</h3>
+                                                    <p class="mb-0 text-truncate text-white"><span class="text-danger">+5</span> this week</p>
+                                                </div>
+                                                <div class="col-auto align-self-center">
+                                                    <div class="report-main-icon bg-light-alt">
+                                                        <i data-feather="users" class="align-self-center text-muted icon-sm"></i>  
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!--end card-body--> 
+                                    </div><!--end card--> 
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card report-card">
+                                        <div class="card-body" style="background:rgb(36, 16, 82)">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col">
+                                                    <p class="text-white mb-0 fw-semibold">Pending Request</p>
+                                                    <h3 class="m-0 text-white">500</h3>
+                                                    <p class="mb-0 text-truncate text-white"><span class="text-success">+20</span> this week</p>
+                                                </div>
+                                                <div class="col-auto align-self-center">
+                                                    <div class="report-main-icon bg-light-alt">
+                                                        <i data-feather="users" class="align-self-center text-muted icon-sm"></i>  
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!--end card-body--> 
+                                    </div><!--end card--> 
+                                </div> <!--end col--> 
+                              
+                              <!--end col-->                               
+                            </div><!--end row-->
+                          
+                        </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Phone Number Verify</h4>
+                        <p class="text-muted mb-0">Our phone number verification allows you to verify details used in regestring the phone number.
+                        </p>
+                    </div><!--end card-header-->
+                    <div class="card-body bootstrap-select-1">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="mb-3">Enter Phone number</label>
+                                <input type="text" class="form-control mb-3 custom-select" placeholder="phone number"> 
+                            </div><!-- end col -->                                     
+                             <!-- end col -->
+                             
+                             <div class="col-md-12">
+                            <span class="float-end"><button type="submit" class="btn btn-primary w-100"> Verify Phone</button> </span> 
+                            </div>                                               
+                        </div><!-- end row --> 
+                    </div><!-- end card-body --> 
+                </div> <!-- end card -->                               
+            </div> <!-- end col -->
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Note!</h4>
+                        <p class="text-muted mb-0">Phone Number verification is an instant verification, you will be charged N500 per verification </p>
+                    </div><!--end card-header-->
+                    <div class="card-body bootstrap-select-1">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="mb-3">Wallet Balance</label> 
+                                <button class="btn btn-soft-primary"> N3000</button>  
+                            </div>
+                            <hr>  <!-- end row -->  
+                            <div class="col-md-12">
+
+                                <label class="mb-3 text-danger">Your wallet balance is too low for this transaction</label>  
+                            </div>                                
+                            <!-- end row -->
+                        </div><!-- end row -->
+                    </div> <!-- end card-body -->
+                </div> <!-- end card -->                               
+            </div> <!-- end col -->
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Phone Verification log</h4>
+                      
+                    </div><!--end card-header-->
+                    <div class="card-body">  
+                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead>
+                            <tr>
+                                <th>#S/N</th>
+                                <th>Phone</th>
+                                <th>verified by</th>
+                                <th>Fee</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                            </thead>
+
+
+                            <tbody>
+                           
+                            <tr>
+                                <td>1</td>
+                                <td>2348039366207</td>
+                                <td>Kachi</td>
+                                <td>N400</td>
+                                <td><span class="text-success">success</span></td>
+                                <td>24/6/2021</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>2348039366207</td>
+                                <td>Kachi</td>
+                                <td>N400</td>
+                                <td><span class="text-info">pending</span></td>
+                                <td>24/6/2021</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>2348039366207</td>
+                                <td>Kachi</td>
+                                <td>N400</td>
+                                <td><span class="text-danger">failed</span></td>
+                                <td>24/6/2021</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>2348039366207</td>
+                                <td>Kachi</td>
+                                <td>N400</td>
+                                <td><span class="text-info">pending</span></td>
+                                <td>24/6/2021</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>2348039366207</td>
+                                <td>Kachi</td>
+                                <td>N400</td>
+                                <td><span class="text-success">success</span></td>
+                                <td>24/6/2021</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>2348039366207</td>
+                                <td>Kachi</td>
+                                <td>N400</td>
+                                <td><span class="text-danger">failed</span></td>
+                                <td>24/6/2021</td>
+                            </tr>
+                      
+                            </tbody>
+                        </table>        
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div> 
+                    
+
+                </div><!-- container -->
+
+                <footer class="footer text-center text-sm-start">
+                    &copy; <script>
+                        document.write(new Date().getFullYear())
+                    </script> All Rights Reserved, Oysterchecks.com <span class="text-muted d-none d-sm-inline-block float-end"> 
+                        with <i class="mdi mdi-heart text-danger"></i> by Morgans Consortium</span>
+                </footer><!--end footer-->
+            </div>
+            <!-- end page content -->
+        </div>
+        <!-- end page-wrapper -->
+
+        
+
+
+        <!-- jQuery  -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/metismenu.min.js"></script>
+        <script src="assets/js/waves.js"></script>
+        <script src="assets/js/feather.min.js"></script>
+        <script src="assets/js/simplebar.min.js"></script>
+        <script src="assets/js/moment.js"></script>
+        <script src="plugins/daterangepicker/daterangepicker.js"></script>
+
+        <!-- Required datatable js -->
+        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="plugins/datatables/dataTables.bootstrap5.min.js"></script>
+        <!-- Buttons examples -->
+        <script src="plugins/datatables/dataTables.buttons.min.js"></script>
+        <script src="plugins/datatables/buttons.bootstrap5.min.js"></script>
+        <script src="plugins/datatables/jszip.min.js"></script>
+        <script src="plugins/datatables/pdfmake.min.js"></script>
+        <script src="plugins/datatables/vfs_fonts.js"></script>
+        <script src="plugins/datatables/buttons.html5.min.js"></script>
+        <script src="plugins/datatables/buttons.print.min.js"></script>
+        <script src="plugins/datatables/buttons.colVis.min.js"></script>
+        <!-- Responsive examples -->
+        <script src="plugins/datatables/dataTables.responsive.min.js"></script>
+        <script src="plugins/datatables/responsive.bootstrap4.min.js"></script>
+        <script src="assets/pages/jquery.datatable.init.js"></script>
+
+        <!-- App js -->
+        <script src="assets/js/app.js"></script>
+        
+    </body>
+</html>

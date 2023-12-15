@@ -3,8 +3,8 @@ $(() => {
         $("#searchTerm").select2({
             minimumResultsForSearch: Infinity
         });
-
-    };
+ 
+    }; 
 
     $('option').on('click', ()=>{
         $('#searchTerm').val($(this).attr('value'));

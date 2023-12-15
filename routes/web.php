@@ -40,6 +40,8 @@ Route::get('/logouts', [HomeController::class, 'Logouts'])->name('logouts');
 
 Route::webhooks('verifications/youverify');
 #=====================LANDING PAGES ===========================
+
+Route::domain('uk.oysterchecks.com')->group(function() { 
 Route::get('/', [LandingPages::class, 'index'])->name('landing');
 Route::get('/who-we-are', [LandingPages::class, 'WhoWeAre'])->name('who-we-are');
 Route::get('/core-values', [LandingPages::class, 'CoreValues'])->name('core-values');
@@ -193,4 +195,5 @@ Route::post('/profile/update', [AdminController::class, 'StorePersonalInfo'])->n
 Route::post('/password/update', [AdminController::class, 'UpdatePassword'])->name('form_PasswordeUpdate');
 Route::post('/basic/information/update', [AdminController::class, 'UpdateBusinessInfo'])->name('basic_information');
 Route::post('/contact/information/update', [AdminController::class, 'UpdateContactInfo'])->name('contact_information');
+})
 });

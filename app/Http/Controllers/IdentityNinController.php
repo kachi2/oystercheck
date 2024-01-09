@@ -100,6 +100,8 @@ class IdentityNinController extends Controller
                 ],
             ]);
 
+      
+
             $response = curl_exec($curl);
             if (curl_errno($curl)) {
                 Session::flash('alert', 'error');
@@ -107,7 +109,6 @@ class IdentityNinController extends Controller
                 return back();
             } else {
                 $decodedResponse = json_decode($response, true);
-                // dd($decodedResponse);
                 if ($decodedResponse['success'] == true && $decodedResponse['statusCode'] == 200) {
                     if ($decodedResponse['data']['image'] != null) {
                         $response_image = cloudinary()->upload($decodedResponse['data']['image'], [

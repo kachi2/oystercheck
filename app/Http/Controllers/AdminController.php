@@ -108,7 +108,7 @@ class AdminController extends Controller
             ])->getSecurePath();
 
            }else{
-            $image = 'default.png';
+            $image_url  = 'default.png';
            }
         Client::create([
             'company_name' => $request->company_name,
@@ -116,7 +116,7 @@ class AdminController extends Controller
             'company_address' => $request->company_address,
             'company_phone' => $request->company_phone,
             'user_id' => $user->id,
-            'image'=>$image
+            'image'=>$image_url 
         ]);
 
         Session::flash('alert', 'success');

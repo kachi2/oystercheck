@@ -69,7 +69,7 @@ class IdentityPhoneNumberController extends Controller
             $curl = curl_init();
             $encodedRequestData = json_encode($requestData, true);
             curl_setopt_array($curl, [
-                CURLOPT_URL => $this->sandbox()."identity/ng/phone",
+                CURLOPT_URL => $this->ReqUrl()."/identity/ng/phone",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 1,
@@ -79,7 +79,7 @@ class IdentityPhoneNumberController extends Controller
                 CURLOPT_POSTFIELDS => $encodedRequestData,
                 CURLOPT_HTTPHEADER => [
                     "Content-Type: application/json",
-                    "Token: ".$this->ReqToken()
+                    "Token: bEhEkBLt.wFmQBZLRLe4jCvLki16ic9oTB27lwMnq8q7s"
                 ],
             ]);
 

@@ -63,7 +63,6 @@ class IdentityPhoneNumberController extends Controller
             $advance_search = true;
             $requestData['advanceSearch'] = $advance_search;
         }
-
         DB::beginTransaction();
         try {
             $curl = curl_init();

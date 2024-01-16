@@ -106,7 +106,7 @@
                             <li class="list-group-item align-items-center d-flex justify-content-between">
                                 <div class="media">
                                     <div class="me-3 align-self-center rounded">
-                                        <i class="mdi mdi-numeric-5-circle-outline font35"></i>
+                                        <i class="mdi mdi-numeric-3-circle-outline font35"></i>
                                     </div>
                                     <div class="media-body align-self-center">
                                         <h5 class="m-0">FAQs</h5>

@@ -89,7 +89,7 @@
                                 </div>
                             </li>
                           
-                            <li class="list-group-item align-items-center d-flex justify-content-between">
+                            {{-- <li class="list-group-item align-items-center d-flex justify-content-between">
                                 <div class="media">
                                     <div class="me-3 align-self-center rounded">
                                         <i class="mdi mdi-numeric-4-circle-outline font35"></i>
@@ -98,12 +98,11 @@
                                         <h5 class="m-0">Knowledge Base</h5>
                                         <p class="mb-0 text-muted">Need help carrying out an action? check here to access a pool of How to's</p>
                                     </div>
-                                    <!--end media body-->
                                 </div>
                                 <div class="align-self-center">
                                     <a href="{{route('knowledgeBase')}}" class="btn btn-sm btn-soft-primary">Let's Go <i class="las la-external-link-alt font-15"></i></a>
                                 </div>
-                            </li>
+                            </li> --}}
                             <li class="list-group-item align-items-center d-flex justify-content-between">
                                 <div class="media">
                                     <div class="me-3 align-self-center rounded">

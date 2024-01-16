@@ -308,6 +308,9 @@ class HomeController extends Controller
     return view('users.accounts.activities', [
         'activities' => ActivityLog::where('user_id',  $user->id)->latest()->get(),
     ]);
-    
+    }
+
+    public function knowledgeBase(){
+        
     }
 }

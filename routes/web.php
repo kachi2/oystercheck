@@ -101,7 +101,7 @@ Route::post('/user/password/update', [HomeController::class, 'passwordUpdate'])-
 Route::post('/user/get/data', [HomeController::class, 'GetData'])->name('query.data');
 Route::post('/user/sort/business/data/{name}', [BusinessController::class, 'bizSort'])->name('bizSort');
 Route::post('/user/sort/identity/data/{slug}', [IdentityController::class, 'IdentitySort'])->name('IdentitySort');
-Route::get('/frequently-asked-questions', [HomeController::class, 'faqs'])->name('faqs');
+Route::get('/frequently-asked-questions', [HomeController::class, 'Faqs'])->name('faqs');
 Route::get('/knowledge-base', [HomeController::class, 'knowledgeBase'])->name('knowledgeBase');
 Route::post('/user/profile/update', [ClientProfileController::class, 'StorePersonalInfo'])->name('form_profileUpdate');
 Route::post('/user/password/update', [ClientProfileController::class, 'UpdatePassword'])->name('form_PasswordeUpdate');

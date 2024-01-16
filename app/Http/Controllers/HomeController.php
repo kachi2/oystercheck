@@ -313,4 +313,8 @@ class HomeController extends Controller
     public function knowledgeBase(){
         
     }
+
+    public function Faqs(){
+        return back();
+    }
 }

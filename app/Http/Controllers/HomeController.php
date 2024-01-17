@@ -309,12 +309,4 @@ class HomeController extends Controller
         'activities' => ActivityLog::where('user_id',  $user->id)->latest()->get(),
     ]);
     }
-
-    public function knowledgeBase(){
-        
-    }
-
-    public function Faqs(){
-        return back();
-    }
 }

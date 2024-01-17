@@ -53,6 +53,9 @@ Route::get('/technology', [LandingPages::class, 'Technology'])->name('technology
 Route::get('/industry', [LandingPages::class, 'Industry'])->name('industry');
 Route::get('/resources', [LandingPages::class, 'Resources'])->name('resource');
 Route::post('/contact/form', [LandingPages::class, 'ContactForm'])->name('ContactForm');
+Route::get('/frequently-asked-questions', [LandingPages::class, 'Faqs'])->name('faqs');
+Route::get('/terms-of-use', [LandingPages::class, 'Terms'])->name('terms');
+Route::get('/knowledge-base', [LandingPages::class, 'knowledgeBase'])->name('knowledgeBase');
 
 
 // Route::get('email', [LandingPages::class, 'email'])->name('email');
@@ -101,8 +104,6 @@ Route::post('/user/password/update', [HomeController::class, 'passwordUpdate'])-
 Route::post('/user/get/data', [HomeController::class, 'GetData'])->name('query.data');
 Route::post('/user/sort/business/data/{name}', [BusinessController::class, 'bizSort'])->name('bizSort');
 Route::post('/user/sort/identity/data/{slug}', [IdentityController::class, 'IdentitySort'])->name('IdentitySort');
-Route::get('/frequently-asked-questions', [HomeController::class, 'Faqs'])->name('faqs');
-Route::get('/knowledge-base', [HomeController::class, 'knowledgeBase'])->name('knowledgeBase');
 Route::post('/user/profile/update', [ClientProfileController::class, 'StorePersonalInfo'])->name('form_profileUpdate');
 Route::post('/user/password/update', [ClientProfileController::class, 'UpdatePassword'])->name('form_PasswordeUpdate');
 Route::post('/user/basic/information/update', [ClientProfileController::class, 'UpdateBusinessInfo'])->name('basic_information');

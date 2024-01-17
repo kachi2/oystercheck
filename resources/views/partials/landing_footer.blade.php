@@ -25,14 +25,14 @@
                                         <a class="nav-link" href="#">Privacy Policy</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">About Us</a>
+                                        <a class="nav-link" href="{{route('who-we-are')}}">About Us</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Terms of Service</a>
+                                        <a class="nav-link" href="{{route('terms')}}">Terms of Service</a>
                                     </li>
                                     
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">FAQ</a>
+                                        <a class="nav-link" href="{{route('faqs')}}">FAQ</a>
                                     </li>
                                 </ul>
                             </div>
@@ -45,13 +45,13 @@
                                         <a class="nav-link" href="#">Home</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Services</a>
+                                        <a class="nav-link" href="{{route('services')}}">Services</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Industry</a>
+                                        <a class="nav-link" href="{{route('industry')}}">Industry</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">KYC</a>
+                                        <a class="nav-link" href="{{route('kyc')}}">KYC</a>
                                     </li>
                                 </ul>
                             </div>

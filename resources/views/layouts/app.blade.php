@@ -27,7 +27,6 @@
         <link href="{{asset('plugins/datatables/dataTables.bootstrap5.min.css')}}" rel="stylesheet">
         
         @yield('style')
-        
         <link href="{{asset('/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
   </head>
   <body class="dark-sidenav navy-sidenav">
@@ -38,7 +37,11 @@
           <footer class="footer text-center text-sm-start">
             &copy; <script>document.write(new Date().getFullYear())</script> 
             All Rights Reserved, Oysterchecks.com 
-            <span class="text-muted d-none d-sm-inline-block float-end"> with <i class="mdi mdi-heart text-danger"></i> by Morgans Consortium</span>
+            <span class="float-end">
+        <a href="{{route('faqs')}}" class="btn btn-sm btn-outline-blue"> FAQ </a>  
+        <a class="btn btn-sm btn-outline-blue" href="{{route('terms')}}"> Terms of Use</a> 
+        &nbsp; &nbsp;
+            <span class="text-muted d-none d-sm-inline-block float-end"> By Morgans Consortium</span>
           </footer><!--end footer-->
         </div>
     </div>

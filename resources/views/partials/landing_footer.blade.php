@@ -34,6 +34,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{route('faqs')}}">FAQ</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('terms')}}">Terms and Conditions</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

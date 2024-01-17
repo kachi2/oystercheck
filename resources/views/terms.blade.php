@@ -93,7 +93,7 @@
                         
                         How you can protect yourself:
                         
-                        Passwords:
+                        Passwords: 
                         make sure that you choose a password which can be easily remembered but cannot be guessed. Also remember to change your password regularly and never share your password with another person. Passwords should not be written down or stored on your computer. Security questions: always choose a mix of questions that you think will be difficult for another person to guess the answers to. Logging out: once you have finished a session, always remember to log out of any accounts which you have signed in for and ensure that any share computer is not left unattended at any time. Stay vigilant: check that your anti-virus software and firewall settings are kept up to date. We will never ask you for your password or send you emails asking or this type of information. If you have any concerns or questions about the security of our Site or any personal information, we collect from you, please do not hesitate to contact our marketing department on enquiries@morgansconsortium.com.
                     </p>  <strong>   10. Changes to Privacy Statement </strong>
                      <p>   Any changes to our Privacy Statement will be posted on this page of the Site. We would encourage users to check the Privacy Statement each time they use the Site. If our privacy policy changes in any way, we will place an updated version on this page. Regularly reviewing this page ensures that you are always aware of what information we collect, how we use it and under what circumstances, if any, we will share it with other parties.

@@ -22,20 +22,17 @@
                                 <h4 class="text-white">Pages</h4>
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Privacy Policy</a>
+                                        <a class="nav-link" href="{{route('terms')}}">Privacy Policy</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{route('who-we-are')}}">About Us</a>
                                     </li>
-                                    <li class="nav-item">
+                                    {{-- <li class="nav-item">
                                         <a class="nav-link" href="{{route('terms')}}">Terms of Service</a>
-                                    </li>
+                                    </li> --}}
                                     
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{route('faqs')}}">FAQ</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('terms')}}">Terms and Conditions</a>
                                     </li>
                                 </ul>
                             </div>

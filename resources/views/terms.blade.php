@@ -13,11 +13,11 @@
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-7">
                     <div class="page-header-content text-white text-center pt-sm-5 pt-md-5 pt-lg-0">
-                        <h1 class="text-white mb-0">Term of Use</h1>
+                        <h1 class="text-white mb-0">Privacy Policy</h1>
                         <div class="custom-breadcrumb">
                             <ol class="breadcrumb d-inline-block bg-transparent list-inline py-0">
                                 <li class="list-inline-item breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="list-inline-item breadcrumb-item"><a href="#">Term of Use</a></li>
+                                <li class="list-inline-item breadcrumb-item"><a href="#">Privacy Policy</a></li>
                             </ol>
                         </div>
                     </div>

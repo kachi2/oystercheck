@@ -3,12 +3,10 @@ namespace App\Traits;
 use App\Models\{User};
 
 trait sandbox{
-
     public function sandbox(){
         $user = User::where('id', auth()->user()->id)->first();
         if($user->client->is_activated == 0){
             $sandbox = 0;
-            
         }else{
             $sandbox = 1;
         }
@@ -25,6 +23,7 @@ public function ReqUrl(){
     return $reqUrl;
 }
 
+
 public function ReqToken(){
     $user = User::where('id', auth()->user()->id)->first();
     if($user->client->is_activated == 0){
@@ -33,5 +32,17 @@ public function ReqToken(){
         $reqToken = 'bEhEkBLt.wFmQBZLRLe4jCvLki16ic9oTB27lwMnq8q7s';
     }
     return $reqToken;
+}
+
+public function PaymentToken(){
+    $user = User::where('id', auth()->user()->id)->first();
+    if($user->client->is_activated == 0){
+        $data['secret'] = config('app.PAYSTACK_LIVE_SEC');
+        $data['public'] = config('app.PAYSTACK_LIVE_PUB');
+    }else{
+        $data['secret'] = config('app.PAYSTACK_TESTSECRET_KEY');
+        $data['public'] = config('app.PAYSTACK_TESTPUBLIC_KEY');
+    }
+    return $user;
 }
 }

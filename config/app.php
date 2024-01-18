@@ -53,6 +53,11 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'PAYSTACK_LIVE_SEC' => env('PAYSTACK_LIVE_SEC',''),
+    'PAYSTACK_LIVE_PUB' => env('PAYSTACK_LIVE_PUB',''),
+
+    'PAYSTACK_TESTSECRET_KEY' => env('PAYSTACK_TESTSECRET_KEY',''),
+    'PAYSTACK_TESTPUBLIC_KEY' => env('PAYSTACK_TESTPUBLIC_KEY',''),
 
     'asset_url' => env('ASSET_URL', null),
     // 'FLUTTERWAVE_KEY' => env('FLUTTERWAVE_SKEY', ''),

@@ -39,7 +39,7 @@
             All Rights Reserved, Oysterchecks.com 
             <span class="float-end">
         <a href="{{route('faqs')}}" class="btn btn-sm btn-outline-blue"> FAQ </a>  
-        <a class="btn btn-sm btn-outline-blue" href="{{route('terms')}}"> Terms of Use</a> 
+        <a class="btn btn-sm btn-outline-blue" href="{{route('terms')}}"> Privacy Policy</a> 
         &nbsp; &nbsp;
             <span class="text-muted d-none d-sm-inline-block float-end"> By Morgans Consortium</span>
           </footer><!--end footer-->

@@ -94,7 +94,7 @@ Route::get('/user/transactions/{transaction}/download', [TransactionController::
 Route::get('/user/transactions', [HomeController::class, 'UserTransactions'])->name('user.transactions');
 Route::post('/user/fund/wallet', [PaymentController::class, 'pay'])->name('fundWallet');
 Route::post('/user/fund/request', [HomeController::class, 'fundRequest'])->name('fundRequest');
-Route::get('/payment-success', [PaymentController::class, 'handleCallback']);
+Route::get('/payment/callback', [PaymentController::class, 'handleCallback']);
 Route::get('/user/payment/{trxref}', [HomeController::class, 'PaymentVerify'])->name('verify.pay');
 Route::get('/user/reports', [HomeController::class, 'UserReports'])->name('users.report');
 Route::get('/user/reports/get/', [HomeController::class, 'getReports'])->name('users.getReports');

@@ -17,12 +17,13 @@ class PaymentController extends Controller
     
     public function pay(Request $request)
     {
+
         $required_data = $request->only('customAmount', 'paymentMethod');
         $validator = Validator::make($required_data, [
-            'customAmount' => 'bail|required|integer|gte:5000',
-            'paymentMethod' => 'bail|required|string|in:card,bank_transfer'
+            'customAmount' => 'required|integer|gte:5000',
+            'paymentMethod' => 'required|string|in:card,bank_transfer'
         ])->validate();
-        
+    
         $tax = (intval($required_data['customAmount']) * 7.5)/100;
         $trans_reference = generateReference(24);
         Transaction::create([
@@ -37,12 +38,13 @@ class PaymentController extends Controller
             'payment_method' => $required_data['paymentMethod']
         ]);
         
-        $request->merge([
+     $ss =   $request->merge([
             'amount' => (intval($required_data['customAmount']) + $tax) * 100,
             'reference' => $trans_reference,
             'email' => auth()->user()->email,
             'currency' => 'NGN',
         ]);
+
         try{
             return Paystack::getAuthorizationUrl()->redirectNow();
         }catch(\Exception $e) {

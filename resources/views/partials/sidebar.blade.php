@@ -111,7 +111,7 @@
                      <li>
                         <a href="{{route('user.transactions')}}">
                             <i data-feather="credit-card" class="align-self-center menu-icon"></i>
-                            <span>Wallets Transactions</span>
+                            <span>Billing</span>
                         </a>
                     </li>
                 

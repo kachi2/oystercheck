@@ -127,4 +127,4 @@ Route::get('user/aml/adversemedia/report/{ref}',[AdverseMediaController::class, 
 // });
 });
 
-require __DIR__.'/admin.php'
+require __DIR__.'/admin.php';

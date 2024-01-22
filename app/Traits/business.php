@@ -29,7 +29,6 @@ trait business {
     public function BasicInfo($request, $image){
         return [
             'company_name' => $request->businessName,
-            'image' => $request->image, 
             'logo' => $image,
             'reg_number' => $request->registrationNumber, 
             'tax_number' => $request->taxId,

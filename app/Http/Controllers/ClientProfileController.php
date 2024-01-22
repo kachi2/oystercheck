@@ -77,7 +77,11 @@ use business;
             }
 
         $client = Client::where('user_id', auth()->user()->id)->first();
-        if($request->file('businessLogo')) $image = $this->UploadImage($request->file('businessLogo'));
+        if($request->file('businessLogo'))
+        { $image = $this->UploadImage($request->file('businessLogo'));
+        }else{
+            $image = $client->logo;
+        }
         $cc = $client->fill($this->BasicInfo($request, $image))->save();
         if($cc){
             Session::flash('alert', 'success');

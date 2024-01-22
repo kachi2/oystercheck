@@ -262,7 +262,7 @@ class HomeController extends Controller
             $clients['profileInfo'] = null;
         }
 
-        if($client->email != null && $client->logo != null && $client->company_name != null  && $client->description != null  && $client->reg_number != null && $client->tax_number != null) {
+        if($client->logo != null && $client->company_name != null  && $client->description != null  && $client->reg_number != null && $client->tax_number != null) {
             $clients['basicInfo'] = 1;
         }else{
             $clients['basicInfo'] = null;

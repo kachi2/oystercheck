@@ -136,9 +136,9 @@
                 <li class="nav-item">
                     <a class="nav-link" id="business_activation_tab3" data-bs-toggle="pill" href="#business_activation3">Verify Documents @if($Vdocs == null ) <span class="badge bg-danger"><small><i class="fa fa-times"></i></small> </span> @else  <span class="badge bg-success"><small><i class="fa fa-check"></i></small> </span> @endif</a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" id="account_settings_tab" data-bs-toggle="pill" href="#account_settings">Notification Settings</a>
-                </li>
+                </li> --}}
                 
             </ul>
         </div>
@@ -584,7 +584,7 @@
 
                 
 
-                    <div class="tab-pane fade" id="account_settings" role="tabpanel" aria-labelledby="account_settings_tab">
+                    {{-- <div class="tab-pane fade" id="account_settings" role="tabpanel" aria-labelledby="account_settings_tab">
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
@@ -593,11 +593,8 @@
                                             <div class="col">
                                                 <h4 class="card-title">Notification Settings</h4>
                                             </div>
-                                            <!--end col-->
                                         </div>
-                                        <!--end row-->
                                     </div>
-                                    <!--end card-header-->
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-12 mb-3">
@@ -609,7 +606,6 @@
                                                 <div class="col-12 col-md-4 d-flex py-4 px-4 border-bottom">
                                                     <div class="m-0 font-14 me-3 text-muted col-4">Verification ID:</div>
                                                     
-                                                    {{-- <div class="font-14 col-8 text-break">{{$cac_verification->ref}}</div> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -623,18 +619,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--end col-->
                         </div>
-                        <!--end row-->
-                    </div>
-             
-                    <!--end tab-pane-->
+                    </div> --}}
                 </div>
-                <!--end tab-content-->
             </div>
-            <!--end col-->
         </div>
-        <!--end row-->
     </div>
     @endsection
 

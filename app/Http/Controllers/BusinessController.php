@@ -218,8 +218,6 @@ class BusinessController extends Controller
            Session::flash('message', $validate->errors()->first() );
            return back();
         }
-        
-        dd($data);
         $ref = $this->GenerateRef();
         $slug = Verification::where('slug', $slug)->first();
         $userWallet = Wallet::where('user_id', auth()->user()->id)->first();

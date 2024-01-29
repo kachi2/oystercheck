@@ -116,10 +116,18 @@ use business;
             Session::flash('message', 'Image type not accepted');
             return back();
         }
-        if($request->file('businessRegistrationCert')) $Cert = $this->UploadImage($request->file('businessRegistrationCert'));
-        if($request->file('supportingDocument')) $Doc = $this->UploadImage($request->file('supportingDocument'));
+        if($request->file('businessRegistrationCert')) {
+        $Cert = $this->UploadImage($request->file('businessRegistrationCert'));
+        }else{
+            $Cert = $client->cac;
+        }
+        if($request->file('supportingDocument')) {
+            $Doc = $this->UploadImage($request->file('supportingDocument'));
+        }else{
+            $Doc = $client->others;
+        }
 
-        $files = $client->fill($this->DocumentInfo($Cert, $Doc))->save();
+        $files = $client->fill(['cac' => $Cert, 'others' => $Doc])->save();
         if($files){
             Session::flash('alert', 'success');
             Session::flash('message', 'Profile Updated Successfully');

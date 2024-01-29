@@ -559,8 +559,8 @@
                                                     <div class="form-group row my-3">
                                                         <div class="col-sm-12">
                                                             <div class="custom-control custom-switch switch-success">
-                                                                <input type="checkbox" class="custom-control-input me-2" id="customSwitchSuccess2">
-                                                                <label class="form-label text-muted" for="customSwitchSuccess2">You agree to Oysterchecks <a href="#" class="text-primary">Terms of Use</a></label>
+                                                                <input type="checkbox" class="custom-control-input me-2" id="customSwitchSuccess2" required>
+                                                                <label class="form-label text-muted" for="customSwitchSuccess2">You agree to Oysterchecks <a href="{{route('terms')}}" class="text-primary">Terms of Use</a></label>
                                                             </div>
                                                         </div>
                                                         <!--end col-->

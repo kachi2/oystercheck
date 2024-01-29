@@ -51,7 +51,9 @@ trait business {
     }
 
 
-    public function DocumentInfo($Cert, $Doc){
+    public function DocumentInfo($Cert = null, $Doc = null){
+
+        
         return [
             'cac' => $Cert, 
             'others' => $Doc

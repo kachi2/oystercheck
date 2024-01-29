@@ -76,22 +76,26 @@ use business;
                 return back();
             }
 
+        try{
         $client = Client::where('user_id', auth()->user()->id)->first();
         if($request->file('businessLogo'))
-        { $image = $this->UploadImage($request->file('businessLogo'));
+        { 
+        $image = $this->UploadImage($request->file('businessLogo'));
         }else{
             $image = $client->logo;
         }
         $cc = $client->fill($this->BasicInfo($request, $image))->save();
-        if($cc){
             Session::flash('alert', 'success');
             Session::flash('message', 'Profile Updated Successfully');
             return back();
-        }else{
+        }catch(\Exception $e){
+            Session::flash('alert', 'error');
+            Session::flash('message', 'An error occured, please try again later');
+            return back();
+        }
             Session::flash('alert', 'error');
             Session::flash('message', 'Request failed, try again');
             return back();
-        }
     }
 
 

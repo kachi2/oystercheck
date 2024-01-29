@@ -8,8 +8,9 @@ trait uploadImage{
     public function UploadImage($image){
         if($image){
             $name = $image->getClientOriginalName();
-            $ext = pathinfo($image, PATHINFO_EXTENSION);
-            $fileName = $name.'.'.$ext;
+            // $ext = pathinfo($image, PATHINFO_EXTENSION);
+            $ext = $image->getClientOriginalExtension();
+            $fileName = time().'.'.$ext;
             $image->move('assets/images',$fileName);
         }
         return $fileName;

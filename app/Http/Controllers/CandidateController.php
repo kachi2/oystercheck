@@ -104,6 +104,7 @@ class CandidateController extends Controller
           Mail::to($request->email)->send( new UserOnboard($data));
           sleep(2);
           $candidate = User::latest()->first();
+
           Candidate::create([
             'user_id' => $candidate->id,
             'client_id' => auth()->user()->id,
@@ -111,12 +112,12 @@ class CandidateController extends Controller
             'phone' => $request->phone,
             'state'=>$request->state,
             'city' => $request->city,
-            'address'=>$request->address,
+            'address'=>$request->address, 
             'country' => $request->country,
             'company' => $request->company,
             'email_status' => 'Email Sent',
             'status' => 'not verified',
-            'is_sanbox' => $this->sandbox()
+            'is_sandbox' => $this->sandbox()
           ]);
           foreach($request->verifyServices as $key => $value){
             CandidateVerification::create([

@@ -16,18 +16,4 @@ class EmployeeDto {
     {
         
     }
-
-
-    // public function fromRequest(Request $request){
-
-    //    $data = [
-
-    //     ''
-
-    //    ];
-
-    //    return $data;
-
-    // }
-
 }

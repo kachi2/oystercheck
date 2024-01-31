@@ -163,6 +163,19 @@ class AddressController extends Controller
       return redirect()->back();
     }
 
+    $slug = Verification::whereSlug($request->slug)->first();
+      $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
+      if (isset($slug->discount) && $slug->discount > 0) {
+          $amount = ($slug->fee - $slug->discount);
+      } else {
+          $amount = $slug->fee;
+      }
+      if ($userWallet->avail_balance < $amount) {
+          Session::flash('alert', 'error');
+          Session::flash('message', 'Your walllet is too low for this transaction');
+          return back();
+      }
+
 
     if ($get_address_verification = AddressVerification::where('service_reference', $service_ref)->first()) {
       $get_address_verification_id = $get_address_verification->id;
@@ -335,6 +348,12 @@ class AddressController extends Controller
           DB::commit();
           Session::flash('alert', 'success');
           Session::flash('message', 'Address submitted for verification');
+          if($this->sandbox() == 1){
+            $reference = $res['data']['id'];
+            $reasons = 'Payment for '.$slug->name;
+            $account = $request->pin ;
+            $this->chargeUser($amount, $reference , $reasons, $account);
+        }
           return redirect()->route('addressIndex', $request->slug);
         } else {
           // dd($res);

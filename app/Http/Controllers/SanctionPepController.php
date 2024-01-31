@@ -58,7 +58,7 @@ class SanctionPepController extends Controller
         if($this->sandbox() == 1){
         $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
         if (isset($slug->discount) && $slug->discount > 0) {
-            $amount = ($slug->discount * $slug->fee) / 100;
+            $amount = ($slug->fee - $slug->discount);
         } else {
             $amount = $slug->fee;
         }

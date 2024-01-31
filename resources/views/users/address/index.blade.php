@@ -241,7 +241,7 @@
                                                  <a class="dropdown-item" href="{{route('showVerificationDetailsForm', ['slug' => encrypt($slug->slug), 'service_ref' => $transaction->service_reference])}}">Make a Verification Request</a>
                                                  @endif
                                              </div>
-                                         </div>
+                                         </div> 
                                      </td>
                                      <!-- <td> @if($transaction->status == 'successful')
                                      <a href="{{route('verify.details', encrypt($trans->id))}}">View Details</a>

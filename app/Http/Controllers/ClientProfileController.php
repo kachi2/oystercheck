@@ -76,7 +76,7 @@ use business;
                 return back();
             }
 
-        try{
+            try{
         $client = Client::where('user_id', auth()->user()->id)->first();
         if($request->file('businessLogo'))
         { 
@@ -84,19 +84,16 @@ use business;
         }else{
             $image = $client->logo;
         }
-        $cc = $client->fill($this->BasicInfo($request, $image))->save();
+         $client->fill($this->BasicInfo($request, $image))->save();
+        }catch(\Exception $E){
             Session::flash('alert', 'success');
             Session::flash('message', 'Profile Updated Successfully');
-            return back();
-        }catch(\Exception $e){
-            Session::flash('alert', 'error');
-            Session::flash('message', 'An error occured, please try again later');
             return back();
         }
             Session::flash('alert', 'error');
             Session::flash('message', 'Request failed, try again');
             return back();
-    }
+        }
 
 
     public function UpdateContactInfo(Request $request){

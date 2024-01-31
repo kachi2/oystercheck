@@ -65,7 +65,7 @@ class AdverseMediaController extends Controller
       if($this->sandbox() == 1){
       $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
       if (isset($slug->discount) && $slug->discount > 0) {
-          $amount = ($slug->discount * $slug->fee) / 100;
+          $amount = ( $slug->fee - $slug->discount);
       } else {
           $amount = $slug->fee;
       }
@@ -138,12 +138,12 @@ class AdverseMediaController extends Controller
                   DB::commit();
                   Session::flash('alert', 'success');
                   Session::flash('message', 'Verification Successful');
-                //   if($this->sandbox() == 1){
-                //       $reference = $decodedResponse['data']['id'];
-                //       $reasons = 'Payment for '.$slug->name;
-                //       $account = $request->pin ;
-                //       $this->chargeUser($amount, $reference , $reasons, $account);
-                //   }
+                  if($this->sandbox() == 1){
+                      $reference = $decodedResponse['data']['id'];
+                      $reasons = 'Payment for '.$slug->name;
+                      $account = $request->pin ;
+                      $this->chargeUser($amount, $reference , $reasons, $account);
+                  }
                   return redirect()->route('user.aml_'.$slug->slug, $slug->slug);
               }else{
                   Session::flash('alert', 'error');

@@ -189,10 +189,17 @@
                                                 <td><p style="font-size:9px">{{$ss->QA_review}}</p></td>
 
                                                 <td>
-                                                 
-                                                    @if($ss->status == "pending"  || $ss->status  == null )
-                                                     <small>  <a  style="color:#fff"  class="btn btn-sm btn-info" href="{{route('candidate.request-verification', encrypt($ss->id))}}"> Request Verification</a>  </small>
-                                                     @endif
+                                                    <div class="dropdown d-inline-block float-end">
+                                                        <a class="dropdown-toggle mr-n2 mt-n2" id="drop3" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                                            <i class="las la-ellipsis-v font-14 text-muted"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="drop3" style="">
+                                                            @if($ss->status == "pending"  || $ss->status  == null )
+                                                            <a   class="p-1" href="{{route('candidate.request-verification', encrypt($ss->id))}}"> Request Verification</a> 
+                                                            @endif
+                                                            {{-- <a class="dropdown-item" href="#">Delete</a> --}}
+                                                        </div>
+                                                    </div>
                                                     </td>
                                                   
                                             </tr>

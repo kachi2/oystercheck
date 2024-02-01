@@ -33,7 +33,7 @@
                    <div class="card-header">
                        <h4 class="card-title">Create Employee Reference </h4>
                    </div><!--end card-header-->
-                      <form method="post" action="{{route('candidate.employer-reference.store', ['user_id' => $user_id, 'id' => $user_id ])}}" class="add-candidate-form">
+                      <form method="post" action="{{route('candidate.employer-reference.store', ['user_id' => $user_id, 'id' => $id ])}}" class="add-candidate-form">
                      @csrf
                    <div class="card-body bootstrap-select-1">
                        <div class="row">

@@ -42,6 +42,9 @@ Route::get('/logouts', [HomeController::class, 'Logouts'])->name('logouts');
 require __DIR__.'/landing.php';
 
 // Route::get('email', [LandingPages::class, 'email'])->name('email');
+Route::get('/user/verification/employee-reference/questions/{user_id}/{candidate_verification_id}/', [EmployeeRefController::class,'RedirectToQuestions'])->name('candidate.employer-reference.questions');
+Route::post('/user/verifications/employee-reference/questions/{user_id}/{candidate_verification_id}/', [EmployeeRefController::class,'StoreAnswers'])->name('candidate.employer-reference.store.answers');
+
 #===================== USERS ROUTE ===============================
 Route::group(['middleware' => ['clients', 'auth']], function() { 
 Route::get('/getting-started', [HomeController::class, 'gettingStarted'])->name('instructions');
@@ -70,6 +73,7 @@ Route::post('/user/address/verification/candidate/create/{slug}', [AddressContro
 //candidate previous employer routes 
 Route::get('/user/verification/employee-reference/{user_id}/{id}', [EmployeeRefController::class,'create'])->name('candidate.employer-reference');
 Route::post('/user/verification/employee-reference/store/{user_id}/{id}', [EmployeeRefController::class,'store'])->name('candidate.employer-reference.store');
+
 
 Route::get('/user/candidate/index', [CandidateController::class, 'CandidateIndex'])->name('candidate.index');
 Route::get('/user/candidate/create', [CandidateController::class, 'CadidateCreate'])->name('candidate.create');

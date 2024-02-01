@@ -15,10 +15,15 @@ class CreateEmployeeReferencesTable extends Migration
     {
         Schema::create('employee_references', function (Blueprint $table) {
             $table->id();
-            $table->tinyText('question')->nullable();
-            $table->string('input_type')->nullable();
-            $table->tinyText('extras')->nullable();
-            $table->tinyText('metas')->nullable();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('candidate_verification_id')->constrained();
+            $table->string('company_name')->nullable();
+            $table->string('company_address')->nullable();
+            $table->string('company_contact')->nullable();
+            $table->string('is_read')->nullable();
+            $table->string('start_year')->nullable();
+            $table->string('end_year')->nullable();
+            $table->string('position')->nullable();
             $table->timestamps();
         });
     }

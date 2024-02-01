@@ -187,21 +187,22 @@
                                                  <td><span class="badge badge-soft-warning">Pending</span></td>
                                                 @endif
                                                 <td><p style="font-size:9px">{{$ss->QA_review}}</p></td>
-
-                                                <td>
-                                                    <div class="dropdown d-inline-block float-end">
-                                                        <a class="dropdown-toggle mr-n2 mt-n2" id="drop3" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                                            <i class="las la-ellipsis-v font-14 text-muted"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="drop3" style="">
-                                                            @if($ss->status == "pending"  || $ss->status  == null )
-                                                            <a   class="p-1" href="{{route('candidate.request-verification', encrypt($ss->id))}}"> Request Verification</a> 
-                                                            @endif
-                                                            {{-- <a class="dropdown-item" href="#">Delete</a> --}}
-                                                        </div>
-                                                    </div>
+                                                    <td>
+                                                        <div class="dropdown d-inline-block">
+                                                            <a class="dropdown-toggle arrow-none" id="seeMore" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                                                <i class="fa fa-ellipsis-h font-12 text-muted"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="seeMore" style="">
+                                                                {{-- <a class="dropdown-item" href="#">Copy Reference Id</a> --}}
+                                                                @if($ss->is_adminUpload)
+                                                                <a   class="btn btn-sm" href="{{route('candidate.request-verification', encrypt($ss->id))}}"> Request Verification</a> 
+                                                                @endif
+                                                                @if($ss->service->required_external_verify)
+                                                                <a   class="btn btn-sm" href="{{route('candidate.employer-reference',['user_id' => encrypt($ss->user_id),  'id' => encrypt($ss->id) ])}}">  Request Employer Reference</a> 
+                                                                @endif
+                                                            </div>
+                                                        </div> 
                                                     </td>
-                                                  
                                             </tr>
                                             @include('users.candidates.modals')
                                             @endforeach

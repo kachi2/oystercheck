@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFiexldToCandidateServices extends Migration
+class CreateEmployeeRefQuestionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class AddFiexldToCandidateServices extends Migration
      */
     public function up()
     {
-        Schema::table('candidate_services', function (Blueprint $table) {
-            //
-
-            $table->integer('required_external_verify')->nullable();
-            $table->string('request_status')->nullable();
+        Schema::create('employee_ref_questions', function (Blueprint $table) {
+            $table->id();
+            $table->tinyText('question')->nullable();
+            $table->string('input_type')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -28,8 +28,6 @@ class AddFiexldToCandidateServices extends Migration
      */
     public function down()
     {
-        Schema::table('candidate_services', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('employee_ref_questions');
     }
 }

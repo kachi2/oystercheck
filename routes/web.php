@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\{AdminBusinessController, AdminAddressController,
 use App\Http\Controllers\CustomVerification;
 use App\Http\Controllers\SanctionPepController;
 use App\Http\Controllers\AdverseMediaController;
+use App\Http\Controllers\EmployeeRefController;
 use App\Http\Middleware\ClientMiddleware;
 
 // use App\Models\Transaction;
@@ -65,6 +66,10 @@ Route::get('/user/address/verification/{slug}/{addressId}', [AddressController::
 Route::post('/user/address/verification/store/{slug}', [AddressController::class,'submitAddressVerify'])->name('AddressStore');
 Route::get('/user/address/verification/{slug}/candidate/{service_ref}', [AddressController::class, 'showVerificationDetailsForm'])->name('showVerificationDetailsForm');
 Route::post('/user/address/verification/candidate/create/{slug}', [AddressController::class,'createCandidate'])->name('createCandidate');
+
+//candidate previous employer routes 
+Route::get('/user/verification/employee-reference/{user_id}/{id}', [EmployeeRefController::class,'create'])->name('candidate.employer-reference');
+Route::post('/user/verification/employee-reference/store/{user_id}/{id}', [EmployeeRefController::class,'store'])->name('candidate.employer-reference.store');
 
 Route::get('/user/candidate/index', [CandidateController::class, 'CandidateIndex'])->name('candidate.index');
 Route::get('/user/candidate/create', [CandidateController::class, 'CadidateCreate'])->name('candidate.create');

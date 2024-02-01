@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFieldToAddressVerification extends Migration
+class AddFiexldToCandidateServices extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AddFieldToAddressVerification extends Migration
      */
     public function up()
     {
-        Schema::table('address_verifications', function (Blueprint $table) {
-            //
-            // $table->dateTime('expected_report_date')->nullable();
+        Schema::table('candidate_services', function (Blueprint $table) {
+            // //
+            // $table->integer('required_external_verify')->nullable();
+            // $table->string('request_status')->nullable();
         });
     }
 
@@ -26,8 +27,9 @@ class AddFieldToAddressVerification extends Migration
      */
     public function down()
     {
-        Schema::table('address_verification', function (Blueprint $table) {
+        Schema::table('candidate_services', function (Blueprint $table) {
             //
+            
         });
     }
 }

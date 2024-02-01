@@ -197,10 +197,11 @@
                             <tbody>
                               @foreach ($verifications as $verify)
                             <tr>
+                                <label for="service-checkbox">
                                 <td>{{$verify->name}}</td>
                                 {{-- <td>{{$verify->fee}}</td> --}}
-
-                                <td><input type="checkbox" class="service-checkbox "  name="verifyServices[]" value="{{$verify->id}}" data-price="{{$verify->fee}}"> </td>
+                                <td><input type="checkbox"  id="service-checkbox" class="service-checkbox "  name="verifyServices[]" value="{{$verify->id}}" data-price="{{$verify->fee}}"> </td>
+                            </label>
                             </tr>
                               
                                 @endforeach

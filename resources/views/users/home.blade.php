@@ -132,7 +132,7 @@
                                                             </div></a>
                                                         </td>
                                                         <td class="px-0 py-0"><div class="px-2 py-3">{{auth()->user()->firstname . ' '.auth()->user()->lastname}}</div></td>
-                                                        <td class="px-0 py-0"><div class="px-2 py-3">{{date('d/M/Y h:iA', strtotime($trans->requested_at))}}</div></td>
+                                                        <td class="px-0 py-0"><div class="px-2 py-3">{{date('d-M-Y h:iA', strtotime($trans->created_at))}}</div></td>
                                                         <td class="px-0 py-0"><div class="px-2 py-3"> @if($trans->status == 'found')
                   
                                                          @endif
@@ -231,7 +231,7 @@
                                                     <td>{{$trans->purpose}}</td>
                                                     <td>{{$trans->type}}</td>
                                                     <td>{{$trans->amount}}</td>
-                                                    <td >{{$trans->created_at->DiffForHumans()}}</td>
+                                                    <td >{{$trans->created_at->format('d-m-y h:i:s a')}}</td>
                                                 </tr>       
                                             @endforeach
                                                 <!--end tr-->                            

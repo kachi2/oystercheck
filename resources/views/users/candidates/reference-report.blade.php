@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
-        <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
          <title>{{ config('app.name', 'Oysterchecks Comprehensive and Exceptional background checks') }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta content="Oysterchecks Comprehensive and Exceptional background checks, KYC & AML compliance Solutions</" name="description" />
@@ -61,9 +61,9 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="my-4 d-flex justify-content-between align-items-center">
-                                    <p class="fw-semibold text-dark font-16"> Candidate: {{strtoupper($employeeReference->user->firstname.' '.$employeeReference->user->lastname)}}  </p>
-                                    <p class="fw-semibold text-dark font-16"> Company: {{strtoupper($employeeReference->company_name)}}  </p>
-                                    <p class="fw-semibold text-dark font-16"> Company Email: {{strtoupper($employeeReference->company_address)}}  </p>
+                                    <p class="fw-semibold text-dark font-16"> <span class=" text-muted"> Candidate: </span> {{strtoupper($employeeReference->user->firstname.' '.$employeeReference->user->lastname)}}  </p>
+                                    <p class="fw-semibold text-dark font-16"> <span class=" text-muted">Company:  </span>{{strtoupper($employeeReference->company_name)}}  </p>
+                                    <p class="fw-semibold text-dark font-16"><span class=" text-muted"> Company Email: </span> {{strtoupper($employeeReference->company_address)}}  </p>
                                     <div>
                                         {{-- <a id="printBtn" class="btn btn-primary btn-square">Print</a>
                                         <a id="downloadBtn" class="btn btn-primary btn-square">Download Report</a> --}}
@@ -83,69 +83,33 @@
                         <div class="row mt-3">
                             <div class="col-12">
                                 <div class="row">
-                                    @forelse ($answers as $)
-                                        
-                                    @empty
-                                        
-                                    @endforelse
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-4">First Name:</div>
-                                        <div class="font-14 col-8">
-                                            <span class="ms-2 badge bg-success">Validated</span>
+                                    @forelse ($answers as $ans)
+                                  
+                                    @if($ans->ReferenceAnswers->input_type == "hidden")
+                                    <div class="col-12 mt-2">
+                                        <div class="py-3 px-4 bg-light">
+                                            <h2 class="font-16 m-0 lh-base">{{$ans->ReferenceAnswers->question}}</h2>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-4">Middle Name:</div>
-                                        <div class="font-14 col-8"></div>
-                                    </div>
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-4">Phone Number:</div>
-                                        <div class="font-14 col-8"></div>
-                                    </div>
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-4">Email Address:</div>
-                                        <div class="font-14 col-8"></div>
-                                    </div>
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-4">Date of Birth:</div>
-                                        <div class="font-14 col-8">
-                                            <span class="ms-2 font-12 text-info" style="text-decoration: line-through;"></span>
-                                            <span class="ms-3 badge bg-danger">Not a match</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-4">Gender:</div>
-                                        <div class="font-14 col-8"></div>
-                                    </div>
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-4">License Number:</div>
-                                        <div class="font-14 col-8"></div>
-                                    </div>
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-4">Expiry Date:</div>
-                                        <div class="font-14 col-8"></div>
-                                    </div>
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-4">issued Date:</div>
-                                        <div class="font-14 col-8"></div>
-                                    </div>
-                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
-                                        <div class="m-0 font-14 me-3 text-muted col-4">Country:</div>
-                                        <div class="font-14 col-8"></div>
-                                    </div>
-                                
-                                </div>
-                            </div>
-                            <div class="col-12 mt-2">
-                                <div class="py-3 px-4 bg-light">
-                                    <h2 class="font-16 m-0 lh-base">Validation Messages</h2>
-                                </div>
-                            </div>
-                            <div class="col-auto mt-3">
-                                <div class="alert alert-warning border-0 font-15" role="alert">
+                                    @elseif($ans->ReferenceAnswers->input_type == "select")
                                  
+                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
+                                        <div class="m-0 font-14 me-3 text-muted col-4">{{$ans->ReferenceAnswers->question}}</div>
+                                        <div class="font-14 col-8">{{$ans->answer}}</div>
+                                    </div>
+                                    @elseif($ans->ReferenceAnswers->input_type == "text") 
+                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
+                                        <div class="m-0 font-14 me-3 text-muted col-4">{{$ans->ReferenceAnswers->question}}</div>
+                                        <div class="font-14 col-8">{{$ans->answer}}</div>
+                                    </div>
+                                    @endif
+                                    @empty
+                                    @endforelse
                                 </div>
+                                <button class="btn btn-warning" onclick="print()"> Print Document</button>
                             </div>
+                          
+                           
                         </div>
                     </div>
                 </div>

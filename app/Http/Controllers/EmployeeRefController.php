@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
@@ -116,8 +117,9 @@ class EmployeeRefController extends Controller
 
       public function PDFGenerator($candidate_verification_id, $user_id){
        $employeeReference = CandidateVerification::where(['id' => decrypt($candidate_verification_id), 'user_id' => decrypt($user_id)])->first()->employeeReference;
-       $answers = EmployeeRefAnswer::where('employee_reference_id', $employeeReference->id)->get();
-        return view('users.candidates.reference-report')
+       $answers = EmployeeRefAnswer::where(['employee_reference_id' => $employeeReference->id, 'user_id' => decrypt($user_id)])->get();
+      
+       return view('users.candidates.reference-report')
         ->with('employeeReference',$employeeReference)
         ->with('answers', $answers);
       }

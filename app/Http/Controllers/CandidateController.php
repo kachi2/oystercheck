@@ -136,7 +136,7 @@ class CandidateController extends Controller
           }catch(\Exception $e){
             DB::rollBack();
             Session::flash('alert', 'error');
-            Session::flash('message', 'Unable to create candidate, please try again'.$e);
+            Session::flash('message', 'Unable to create candidate, please try again'.$e->getMessage());
             return redirect()->back()->withInput($request->all());
           }
         

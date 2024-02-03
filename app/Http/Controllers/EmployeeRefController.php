@@ -70,10 +70,10 @@ class EmployeeRefController extends Controller
 
      Mail::to($request->company_email)->send(new EmployeeReferenceMail($data));
       }
+      DB::commit(); 
         Session::flash('alert', 'success');
         Session::flash('message','Email successfully sent to employer to provide candidate reference');
           return redirect()->back();
-      DB::commit();
     }catch(\Exception $e){
       DB::rollback();
       Session::flash('alert', 'error');

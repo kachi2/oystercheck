@@ -15,8 +15,8 @@ class AddFiexldToCandidateServices extends Migration
     {
         Schema::table('candidate_services', function (Blueprint $table) {
             // //
-            // $table->integer('required_external_verify')->nullable();
-            // $table->string('request_status')->nullable();
+            $table->integer('required_external_verify')->nullable();
+            $table->string('request_status')->nullable();
         });
     }
 

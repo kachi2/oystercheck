@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Mail\EmployeeReferenceMail;
+use App\Models\CandidateVerification;
+use App\Models\EmployeeRefAnswer;
 use App\Models\EmployeeReference;
 use App\Models\EmployeeRefQuestion;
 use Illuminate\Http\Request;
@@ -66,7 +68,6 @@ class EmployeeRefController extends Controller
       ];
 
      Mail::to($request->company_email)->send(new EmployeeReferenceMail($data));
-   
       }
         Session::flash('alert', 'success');
         Session::flash('message','Email successfully sent to employer to provide candidate reference');
@@ -81,6 +82,7 @@ class EmployeeRefController extends Controller
     }
 
       public function RedirectToQuestions($user_id, $candidate_verification_id){
+        $ref = EmployeeReference::where(['candidate_verification_id' =>  decrypt($candidate_verification_id)])->first();
 
         $questions = EmployeeRefQuestion::get();
         foreach($questions as $qq){
@@ -89,20 +91,34 @@ class EmployeeRefController extends Controller
         return view('users.employee-ref.reference-questions')
         ->with('user_id', $user_id)
         ->with('candidate_verification_id', $candidate_verification_id)
-        ->with('questions', $questions);
+        ->with('questions', $questions)
+        ->with('employee_reference_id', $ref->id);
       }
 
       public function StoreAnswers(Request $request, $user_id, $candidate_verification_id){
         $questions = EmployeeRefQuestion::get();
         foreach($questions as $qq){
-          $qq->name = str_replace(['/', ' ', '+', '\'', '?', '-', ',', ':'], '', $qq->question);
+          $name = str_replace(['/', ' ', '+', '\'', '?', '-', ',', ':'], '', $qq->question);
+          $check = EmployeeRefAnswer::where(['user_id' => decrypt($user_id), 'employee_ref_question_id' => $qq->id])->first();
+        //  dd($request->all());
+          if($check){
+          EmployeeRefAnswer::create([
+            'user_id' => decrypt($user_id),
+            'candidate_verification_id' => decrypt($candidate_verification_id),
+            'employee_reference_id' => $request->employee_reference_id,
+            'employee_ref_question_id' => $qq->id,
+            'answer' => $request->$name
+          ]);
         }
-        
+        }
+        return view('users.employee-ref.greetings-page');
+      }
 
-          $data = [
-
-
-          ];
-
+      public function PDFGenerator($candidate_verification_id, $user_id){
+       $employeeReference = CandidateVerification::where(['id' => decrypt($candidate_verification_id), 'user_id' => decrypt($user_id)])->first()->employeeReference;
+       $answers = EmployeeRefAnswer::where('employee_reference_id', $employeeReference->id)->get();
+        return view('users.candidates.reference-report')
+        ->with('employeeReference',$employeeReference)
+        ->with('answers', $answers);
       }
 }

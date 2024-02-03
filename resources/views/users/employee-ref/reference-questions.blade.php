@@ -39,6 +39,7 @@
                    <div class="card-body bootstrap-select-1">
                        <div class="row">
                     
+                        <input type="hidden" name="employee_reference_id"  value="{{$employee_reference_id}}">
                         @foreach ($questions as  $ss)
                         @if($ss->input_type == "hidden")
                         <hr>
@@ -53,7 +54,7 @@
                            <div class="col-md-6">
                                <label class="mb-3" style="font-weight:bolder"> {{$ss->question}}</label>
                                 <span style="color:red; font-weight:bolder"> * </span> 
-                               <select type="{{$ss->input_type}}"  name="{{$ss->name.'_'.$ss->id}}" value="{{old($ss->name)}}" class="form-control mb-3 custom-select @error('company_name') is-invalid @enderror"> 
+                               <select type="{{$ss->input_type}}"  name="{{$ss->name}}" value="{{old($ss->name)}}" class="form-control mb-3 custom-select @error('company_name') is-invalid @enderror"> 
                                 <option value="very poor" style="color:red">Please Select Option</option>
                                 <option value="Excellent">Excellent</option>
                                 <option value="Very Good">Very Good</option>

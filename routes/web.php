@@ -73,7 +73,7 @@ Route::post('/user/address/verification/candidate/create/{slug}', [AddressContro
 //candidate previous employer routes 
 Route::get('/user/verification/employee-reference/{user_id}/{id}', [EmployeeRefController::class,'create'])->name('candidate.employer-reference');
 Route::post('/user/verification/employee-reference/store/{user_id}/{id}', [EmployeeRefController::class,'store'])->name('candidate.employer-reference.store');
-
+Route::get('/user/pdf/generate/{candidate_verification_id}/{user_id}', [EmployeeRefController::class,'PDFGenerator'])->name('candidate.employer-reference.PDF');
 
 Route::get('/user/candidate/index', [CandidateController::class, 'CandidateIndex'])->name('candidate.index');
 Route::get('/user/candidate/create', [CandidateController::class, 'CadidateCreate'])->name('candidate.create');

@@ -197,9 +197,12 @@
                                                                 @if($ss->is_adminUpload)
                                                                 <a   class="btn btn-sm" href="{{route('candidate.request-verification', encrypt($ss->id))}}"> Request Verification</a> 
                                                                 @endif
-                                                                @if($ss->service->required_external_verify)
-                                                                <a   class="btn btn-sm" href="{{route('candidate.employer-reference',['user_id' => encrypt($ss->user_id),  'id' => encrypt($ss->id) ])}}">  Request Employer Reference</a> 
-                                                                @endif
+                                                                @if($ss->service->required_external_verify == 1 & $ss->status == "pending")
+                                                                <a   class="btn btn-sm" href="{{route('candidate.employer-reference',['user_id' => encrypt($ss->user_id),  'id' => encrypt($ss->id) ])}}">  Request Reference</a> 
+                                                                @elseif($ss->service->required_external_verify == 1 & $ss->status == "success")
+                                                                <a   class="btn btn-sm" href="{{route('candidate.employer-reference.PDF',['candidate_verification_id' => encrypt($ss->id), 'user_id' => encrypt($ss->user_id)])}}">  Generate Reference</a> 
+                                                                {{-- user_id/candidate_verification_id/employee_ref_answer_id --}}
+                                                               @endif
                                                             </div>
                                                         </div> 
                                                     </td>

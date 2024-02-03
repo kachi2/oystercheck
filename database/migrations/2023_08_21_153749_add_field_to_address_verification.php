@@ -15,7 +15,7 @@ class AddFieldToAddressVerification extends Migration
     {
         Schema::table('address_verifications', function (Blueprint $table) {
             //
-            $table->dateTime('expected_report_date')->nullable();
+            // $table->dateTime('expected_report_date')->nullable();
         });
     }
 

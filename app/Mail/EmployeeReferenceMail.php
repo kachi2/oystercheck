@@ -31,6 +31,6 @@ class EmployeeReferenceMail extends Mailable
      */
     public function build()
     {
-        return $this->from('support@mazeoptions.com', 'Oysterchecks')->subject('Employee Reference Form')->view('emails.employee-reference')->with('data', $this->data);
+        return $this->from('support@oysterchecks.com', 'Oysterchecks')->subject('Employee Reference Form')->view('emails.employee-reference')->with('data', $this->data);
     }
 }

@@ -102,7 +102,7 @@ class EmployeeRefController extends Controller
           $name = str_replace(['/', ' ', '+', '\'', '?', '-', ',', ':'], '', $qq->question);
           $check = EmployeeRefAnswer::where(['user_id' => decrypt($user_id), 'employee_ref_question_id' => $qq->id])->first();
         //  dd($request->all());
-          if($check){
+          if(!$check){
           EmployeeRefAnswer::create([
             'user_id' => decrypt($user_id),
             'candidate_verification_id' => decrypt($candidate_verification_id),

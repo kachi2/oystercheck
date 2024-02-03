@@ -159,7 +159,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            
+                                             
                                             @foreach ($services as $ss )
                                             <tr>
                                                 <td>{{$ss->service->name}}</td>

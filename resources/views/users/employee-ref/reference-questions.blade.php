@@ -54,8 +54,8 @@
                            <div class="col-md-6">
                                <label class="mb-3" style="font-weight:bolder"> {{$ss->question}}</label>
                                 <span style="color:red; font-weight:bolder"> * </span> 
-                               <select type="{{$ss->input_type}}"  name="{{$ss->name}}" value="{{old($ss->name)}}" class="form-control mb-3 custom-select @error('company_name') is-invalid @enderror"> 
-                                <option value="very poor" style="color:red">Please Select Option</option>
+                               <select type="{{$ss->input_type}}"  name="{{$ss->name}}" value="{{old($ss->name)}}" class="form-control mb-3 custom-select @error('company_name') is-invalid @enderror" required> 
+                                <option disabled selected >Please Select Option</option>
                                 <option value="Excellent">Excellent</option>
                                 <option value="Very Good">Very Good</option>
                                 <option value="good">Good</option>
@@ -63,12 +63,20 @@
                                 <option value="Poor">Poor</option>
                                </select>
                            </div>
-                           @else
+                           @elseif($ss->input_type == "textarea")
+
                            <div class="col-md-6">
                             <label class="mb-3" style="font-weight:bolder"> {{$ss->question}}</label>
                              <span style="color:red; font-weight:bolder"> * </span> 
-                            <input type="{{$ss->input_type}}"  name="{{$ss->name}}" value="{{old($ss->name)}}" class="form-control mb-3 custom-select @error('company_name') is-invalid @enderror" 
-                            placeholder="Enter answer"> 
+                            <textarea  name="{{$ss->name}}"  class="form-control mb-3 custom-select @error($ss->name) is-invalid @enderror" 
+                            placeholder="Enter answer"  required="">  {{old($ss->name)}} </textarea>
+                        </div>
+                           @else 
+                           <div class="col-md-6">
+                            <label class="mb-3" style="font-weight:bolder"> {{$ss->question}}</label>
+                             <span style="color:red; font-weight:bolder"> * </span> 
+                            <input type="{{$ss->input_type}}"  name="{{$ss->name}}" value="{{old($ss->name)}}" class="form-control mb-3 custom-select @error($ss->name) is-invalid @enderror" 
+                            placeholder="Enter answer" required> 
                         </div>
                            @endif
                         @endforeach

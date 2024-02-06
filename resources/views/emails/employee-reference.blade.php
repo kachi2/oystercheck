@@ -32,9 +32,9 @@
                         <tr>
                             <td class="px-3 px-sm-1 pb-2" style="padding-bottom: 12px !important;padding-right: 44px !important;padding-left: 44px !important;">
                                 <!-- <p style="margin-top: 0;margin-bottom: 16px;">Hi Ishtiyak,</p> -->
-                                <p style="margin-top: 0;margin-bottom: 16px;">{{ucfirst($data['candidate_name'])}} has applied to us for the post of {{$data['position']}} and has given us your name as a referee. We  would be grateful for your views on {{ucfirst($data['candidate_name'])}}’s suitability for this position.  </p>
-                                <p style="margin-top: 0;margin-bottom: 16px;">We would be most grateful if you could complete the  reference form.</p>
+                                <p style="margin-top: 0;margin-bottom: 16px;">{{ucfirst($data['candidate_name'])}} has applied to us for the post of {{$data['position']}} and has given us your name as a reference. We  would be grateful for your views on {{ucfirst($data['candidate_name'])}}’s suitability for this position.  </p>
                                 <p style="margin: 0 !important;">We would be grateful if you could confirm details of {{ucfirst($data['candidate_name'])}} employment dates, and supply a reference as to (his/her) suitability to carry out the duties in the enclosed job description. Please can you also confirm whether you know of any reason why {{ucfirst($data['candidate_name'])}} would be unsuitable.</p>
+                                <p style="margin-top: 0;margin-bottom: 16px;">We would be most grateful if you could complete the  reference form.</p>
                                 <br>
                                 <a href="{{route('candidate.employer-reference.questions',['user_id' => encrypt($data['user_id']), 'candidate_verification_id' => encrypt($data['candidate_verification_id'])])}}"
                                     target="_blank" class="email-btn"

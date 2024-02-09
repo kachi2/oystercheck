@@ -31,7 +31,7 @@ class CandidateController extends Controller
     }
     
     public function CandidateIndex(){
-        
+     
         $candidate['candidate'] = Candidate::where(['client_id' => auth()->user()->id, 'is_sandbox' => $this->sandbox()])->get();
         $candidate['pending'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'pending','status'=>null, 'is_sandbox' => $this->sandbox()])->get();
         $candidate['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'verified', 'is_sandbox' => $this->sandbox()])->get();
@@ -148,6 +148,7 @@ class CandidateController extends Controller
     }
 
     public function CandidateDetails($id){
+        
         $data['pending'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'pending', 'status'=>null, 'is_sandbox' => $this->sandbox()])->get();
         $data['candidates'] = Candidate::where(['client_id' => auth()->user()->id, 'is_sandbox' => $this->sandbox()])->get();
         $data['verified'] = Candidate::where(['client_id' => auth()->user()->id, 'status'=>'verified', 'is_sandbox' => $this->sandbox()])->get();

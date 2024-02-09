@@ -105,12 +105,9 @@ class CandidateController extends Controller
           Mail::to($request->email)->send( new UserOnboard($data));
           sleep(2);
           $candidate = User::latest()->first();
-
-          $client = Client::where('user_id', auth()->user()->id)->first();
-
           Candidate::create([
             'user_id' => $candidate->id,
-            'client_id' => $client->id,
+            'client_id' => client_id(),
             'email' => $request->email,
             'phone' => $request->phone,
             'state'=>$request->state,
@@ -125,7 +122,7 @@ class CandidateController extends Controller
           foreach($request->verifyServices as $key => $value){
             CandidateVerification::create([
                 'user_id' => $candidate->id,
-                'client_id' => auth()->user()->id,
+                'client_id' => client_id(),
                 'candidate_services_id' => $value,
                 'status' => 'pending',
                 'is_paid' => '0',
@@ -183,12 +180,10 @@ class CandidateController extends Controller
 
 
         if($valid->fails()){
-            Session::flash('alert', 'success');
-            Session::flash('message', 'Image Files Request'); 
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Image Files Not Support'); 
+            return back();
         }
-        Session::flash('alert', 'success');
-        Session::flash('message', 'Files uploaded successfully');
-
 
         foreach($request->images as $key => $image){
             $name =  $image->getClientOriginalName();

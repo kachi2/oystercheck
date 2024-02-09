@@ -91,7 +91,7 @@ class CandidatesDocsReviewController extends Controller
     if($candidate){
       $status = [];
       $check = CandidateVerification::where(['user_id' => $candidate->user_id])->where(['status' => 'pending'])->orwhere(['status' => 'failed'])->orWhere(['status' => null])->get();
-      dd($check);
+    
       if(count($check) > 0){
         Session::flash('alert', 'error');
         Session::flash('message', 'Please approve all documents before proceeding with this step, some documents are either pending or cancelled');

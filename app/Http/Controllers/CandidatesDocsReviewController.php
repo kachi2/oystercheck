@@ -90,7 +90,8 @@ class CandidatesDocsReviewController extends Controller
     $candidate = Candidate::whereUserId(decrypt($user_id))->first();
     if($candidate){
       $status = [];
-      $check = CandidateVerification::where(['user_id' => $candidate->user_id, 'status' => null, 'status' => 'pending', 'status' => 'failed'])->get();
+      $check = CandidateVerification::where(['user_id' => $candidate->user_id])->where(['status' => 'pending'])->orwhere(['status' => 'failed'])->orWhere(['status' => null])->get();
+      dd($check);
       if(count($check) > 0){
         Session::flash('alert', 'error');
         Session::flash('message', 'Please approve all documents before proceeding with this step, some documents are either pending or cancelled');
@@ -109,8 +110,7 @@ class CandidatesDocsReviewController extends Controller
   public function DisApproveCandidate($user_id){
     $candidate = Candidate::whereUserId(decrypt($user_id))->first();
     if($candidate){
-      $status = [];
-      $check = CandidateVerification::where(['user_id' => $candidate->user_id, 'status' => null, 'status' => 'pending', 'status' => 'approved'])->get();
+      $check = CandidateVerification::where(['user_id' => $candidate->user_id])->where(['status' => 'pending'])->orwhere(['status' => 'approved'])->orWhere(['status' => null])->get();
       if(count($check) > 0){
         Session::flash('alert', 'error');
         Session::flash('message', 'Please reject all documents before proceeding with this step, some documents are either pending or approved');

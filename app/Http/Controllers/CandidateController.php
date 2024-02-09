@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\Models\CandidateVerification;
+use App\Models\Client;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use App\Traits\sandbox;
@@ -105,9 +106,11 @@ class CandidateController extends Controller
           sleep(2);
           $candidate = User::latest()->first();
 
+          $client = Client::where('user_id', auth()->user()->id)->first();
+
           Candidate::create([
             'user_id' => $candidate->id,
-            'client_id' => auth()->user()->id,
+            'client_id' => $client->id,
             'email' => $request->email,
             'phone' => $request->phone,
             'state'=>$request->state,
@@ -152,7 +155,7 @@ class CandidateController extends Controller
         $candidate = Candidate::where('id', decrypt($id))->first();
         $data['candidate'] = Candidate::where(['user_id' => $candidate->user_id, 'is_sandbox' => $this->sandbox()])->first();
         $data['services'] = CandidateVerification::where('user_id', $candidate->user_id)->get();
-        return view('users.candidates.details', $data);
+        return view('users.candidates.details', $data); 
     }
 
 

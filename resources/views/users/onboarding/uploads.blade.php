@@ -57,7 +57,7 @@
                                     </p>
                                     
 
-                                    <input type="file" id="input-file-now" class="dropify" name="images[]" va/>   
+                                    <input type="file" id="input-file-now" class="dropify" multiple name="images[]" va/>   
                                     <input type="hidden" name="candidate[]" value="{{$ss->id}}">                                            
                                 </div><!--end card-body-->
                             

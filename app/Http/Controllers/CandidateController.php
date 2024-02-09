@@ -181,7 +181,7 @@ class CandidateController extends Controller
             $fileName = \pathinfo($name, PATHINFO_FILENAME);
             $ext =  $image->getClientOriginalExtension();
             $exts =  ['pdf', 'jpg', 'jpeg', 'png'];
-            if(!in_array($ext, $exts)){
+            if(!in_array(strtolower($ext), $exts)){
                 Session::flash('alert', 'error');
                 Session::flash('message', 'File Format not Accepted, try again');
                 return redirect()->back();

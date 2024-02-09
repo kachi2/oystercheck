@@ -165,7 +165,7 @@ class CandidateController extends Controller
         $user = User::where('id', auth()->user()->id)->first();
         if($user->user_type == 1){
             Candidate::where('user_id', $user->id)->update(['email_status' => 'Email Read']);
-            $service = CandidateVerification::where(['user_id' => $user->id])->where('final_doc', '=', null)->get();
+            $service = CandidateVerification::where(['user_id' => $user->id])->where('doc', '=', null)->get();
             // dd($service);
             return view('users.onboarding.uploads', ['service'=> $service]);
         }else{

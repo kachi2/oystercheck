@@ -66,8 +66,9 @@ class CandidatesDocsReviewController extends Controller
       if ($candidate->status == 'approved' || $candidate->status == 'failed') return back();
       if($request->reupload == '1'){
         $candidate->update([
-          'status' => 'failed',
+          'status' => 'retry',
           'final_doc' => null,
+          'doc' => null,
           'review' => $request->note
           ]);
       }else{

@@ -174,21 +174,18 @@ class CandidateController extends Controller
     }
 
     public function CandidateFileStore(Request $request){  
-        $valid = Validator::make($request->all(), [
-            'images' => ['required', 'mimes:jpeg, png, jpg, pdf']
-        ]);
-
-
-        if($valid->fails()){
-            Session::flash('alert', 'error');
-            Session::flash('message', 'Image Files Not Support'); 
-            return back();
-        }
+  
 
         foreach($request->images as $key => $image){
             $name =  $image->getClientOriginalName();
             $fileName = \pathinfo($name, PATHINFO_FILENAME);
             $ext =  $image->getClientOriginalExtension();
+            $exts =  ['pdf', 'jpg', 'jpeg', 'png'];
+            if(!in_array($ext, $exts)){
+                Session::flash('alert', 'error');
+                Session::flash('message', 'File Format not Accepted, try again');
+                return redirect()->back();
+            }
             $fileName = $fileName.'.'.$ext;
             $upload =  CandidateVerification::where(['id' => $request->candidate[$key], 'user_id' => auth()->user()->id ])->first();
             if($upload->doc == null){

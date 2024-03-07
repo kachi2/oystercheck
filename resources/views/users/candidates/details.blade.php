@@ -137,6 +137,13 @@
                                                             <i class="fa fa-times badge badge-danger"> </i> Reject</a>
                                                     @endif
                                                     @endif
+                                                    <div class="p-2">
+                                                        <form action="{{route('ResendOnboardingEmail',encrypt($candidate->user->id))}}" method="post">
+                                                            @csrf
+                                                        <button class="btn btn-info"> Resend Onboarding Email</button>
+                                                    </form>
+                                                    </div>
+                                                    
                                         </div><!--end col-->
                                         <div class="col-lg-9 align-self-center">
                                             <div class="single-pro-detail">

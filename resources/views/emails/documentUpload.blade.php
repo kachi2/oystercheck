@@ -23,13 +23,13 @@ body, td {font-family: "Open Sans", sans-serif!important;}
             <div style="text-align: center; padding: 0 0 10px 0;">
                 Login Details 
 
-                <span style=" font-weight: 400; font-size: 15px;">Unique Email: <span>{{$data["email"]}}</span></span>
-                <span style="font-weight: 400; font-size: 15px;">Password: <span>{{$data["password"]}}</span></span>
+                <span style=" font-weight: 400; font-size: 15px;">Unique Email: <span>{{$data["email"]}}</span></span> <br>
+                <span style="font-weight: 400; font-size: 15px;">Password: <span>{{$data["password"]}}</span></span> <br>
 
-                <a href="{{route('candidate.FileUpload')}}" style="display: inline-block; padding: 15px 10px 15px 10px; background-color: #f13f61; font-weight: 600; font-size: 1.2em; color: #ffffff; text-align: center; text-transform: uppercase; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; -o-border-radius: 3px; text-decoration: none; min-width: 200px;">Submit Form</a>
+                <a href="{{route('candidate.homepage')}}" style="display: inline-block; padding: 4px 4px 4px 4px; background-color: #f13f61; font-weight: 600; font-size: 1.2em; color: #ffffff; text-align: center; text-transform: uppercase; border-radius: 3px; -o-border-radius: 3px; text-decoration: none; min-width: 200px;" class="btn-sm">Submit Form</a>
             </div>
 
-            <p style="margin: 0;padding: 10px 0 10px 0; font-size:1em; line-height: 20px; color: #555555;">Completion is due within 24 hours to avoid a delay to your start date.</p>
+            <p style="margin: 0;padding: 10px 0 10px 0; font-size:1em; line-height: 20px; color: #555555;">Completion is due within 7 days to avoid a delay to your start date.</p>
 
             <p style="margin: 0;padding: 0 0 10px 0; font-size:1em; line-height: 20px; color: #555555;"> In the next business day, your personal PES coordinator will send you an introductory email with their information, detailing the rest of the required steps in the process.</p>
 

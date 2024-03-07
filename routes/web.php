@@ -114,6 +114,7 @@ Route::post('/request/candiate/custom/verification/store/{id}', [CustomVerificat
 
 ###### candidates routes  
 
+Route::post('candidate/onboarding/email/{userId}', [CandidateController::class, 'ResendOnboardingEmail'])->name('ResendOnboardingEmail');
 Route::get('/user/candidate/upload/', [CandidateController::class, 'CandidateFileUpload'])->name('candidate.FileUpload');
 Route::post('/user/candidate/upload/store', [CandidateController::class, 'CandidateFileStore'])->name('candidate.FileStore');
 Route::get('/user/candidate/upload/index', [CandidateController::class, 'candidateHomePage'])->name('candidate.homepage');

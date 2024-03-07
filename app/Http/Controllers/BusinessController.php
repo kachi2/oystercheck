@@ -264,7 +264,7 @@ class BusinessController extends Controller
                     return back();
                 } else {
                     $decodedResponse = json_decode($response, true);
-                     dd($decodedResponse);
+                    
                     if ($decodedResponse['success'] == true && $decodedResponse['statusCode'] == 200) {
                        $reasons = isset($decodedResponse['data']['reason']) ? $decodedResponse['data']['reason'] : null;
                        $reference = $decodedResponse['data']['id'] != null ? $decodedResponse['data']['id'] : null;
@@ -417,10 +417,15 @@ class BusinessController extends Controller
         $this->RedirectUser();
         $user = auth()->user();
         if($slug == 'cac'){
-            $cac_verification = CacVerification::where(['id'=>$verification_id, 'user_id'=>$user->id, 'is_sandbox' => $this->sandbox() ])->first();
+            dd( $verification_id);
+            $cac_verification = CacVerification::where(['id'=>$verification_id, 'user_id'=>$user->id])->first();
             if($cac_verification){
                 return view('users.business.reports.cac_report', ['cac_verification'=>$cac_verification]);
             }
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Something went wrong, try again');
+            return back();
+
         }elseif($slug == 'tin'){
             $tin_verification = TinVerification::where(['id'=>$verification_id, 'user_id'=>$user->id, 'is_sandbox' => $this->sandbox()])->first();
             if($tin_verification){
@@ -428,6 +433,10 @@ class BusinessController extends Controller
             }
         }else{
 
+            
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Something went wrong, try again');
+            return back();
         }
     }
 }

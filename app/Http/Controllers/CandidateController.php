@@ -25,8 +25,8 @@ class CandidateController extends Controller
        // $this->middleware('auth:admin');
     }
 
-    public function GeneratePassword($name){
-        $pass = substr($name, 0, 5).rand(111,999);
+    public function GeneratePassword($name = null){
+        $pass =substr(str_replace(['+', '=', '/'], '', \base64_encode(random_bytes(15))), 0,10);
         return $pass;
     }
     
@@ -101,7 +101,7 @@ class CandidateController extends Controller
           $create = User::create($data);
           if($create){
           $data['password']  = $password;
-        //   Mail::to($request->email)->send( new UserAccount($data));
+         Mail::to($request->email)->send( new UserAccount($data));
           Mail::to($request->email)->send( new UserOnboard($data));
           sleep(2);
           $candidate = User::latest()->first();
@@ -218,4 +218,30 @@ class CandidateController extends Controller
         $documents = CandidateVerification::where('user_id', auth()->user()->id)->get();
         return view('users.onboarding.index', ['service'=> $documents]);
     }
+
+    public function ResendOnboardingEmail($userId){
+        $user = User::whereId(decrypt($userId))->first();
+        $password =$this->GeneratePassword();
+        $user->update(['password' =>$password]);
+        $data['email'] = $user->email;
+       $data['password']  = $password;
+       $data['firstname'] = $user->firstname;
+       $data['lastname'] = $user->lastname;
+       try{
+        Mail::to($user->email)->send( new UserAccount($data));
+        Mail::to($user->email)->send( new UserOnboard($data));
+        Session::flash('alert', 'success');
+        Session::flash('message', 'Email Sent Successfully');
+        return back();
+       }catch(\Exception $e){
+        Session::flash('alert', 'error');
+        Session::flash('message', 'Email could not be sent, an error occured');
+        
+        return back();
+       }
+
+       return back();
+}
+
+
 }

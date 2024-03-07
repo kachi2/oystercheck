@@ -21,7 +21,7 @@ body, td {font-family: "Open Sans", sans-serif!important;}
             <p style="margin: 0;padding: 0 0 20px 0; font-size:1em; line-height: 20px; color: #555555;">As you are aware, your recent offer requires you to undergo specific background checks before you can start in your new role. As your first step, please click the button below to complete your online PES form.</p>
 
             <div style="text-align: center; padding: 0 0 10px 0;">
-                Login Details 
+                Login Details <br>
 
                 <span style=" font-weight: 400; font-size: 15px;">Unique Email: <span>{{$data["email"]}}</span></span> <br>
                 <span style="font-weight: 400; font-size: 15px;">Password: <span>{{$data["password"]}}</span></span> <br>

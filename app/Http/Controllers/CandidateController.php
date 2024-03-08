@@ -222,7 +222,7 @@ class CandidateController extends Controller
     public function ResendOnboardingEmail($userId){
         $user = User::whereId(decrypt($userId))->first();
         $password =$this->GeneratePassword();
-        $user->update(['password' =>$password]);
+        $user->update(['password' => Hash::make($password)]);
         $data['email'] = $user->email;
        $data['password']  = $password;
        $data['firstname'] = $user->firstname;

@@ -417,8 +417,7 @@ class BusinessController extends Controller
         $this->RedirectUser();
         $user = auth()->user();
         if($slug == 'cac'){
-            dd( $verification_id);
-            $cac_verification = CacVerification::where(['id'=>$verification_id, 'user_id'=>$user->id])->first();
+            $cac_verification = CacVerification::where(['id'=>decrypt($verification_id), 'user_id'=>$user->id])->first();
             if($cac_verification){
                 return view('users.business.reports.cac_report', ['cac_verification'=>$cac_verification]);
             }
@@ -427,7 +426,7 @@ class BusinessController extends Controller
             return back();
 
         }elseif($slug == 'tin'){
-            $tin_verification = TinVerification::where(['id'=>$verification_id, 'user_id'=>$user->id, 'is_sandbox' => $this->sandbox()])->first();
+            $tin_verification = TinVerification::where(['id'=>decrypt($verification_id), 'user_id'=>$user->id])->first();
             if($tin_verification){
                 return view('users.business.reports.tin_report', ['tin_verification'=>$tin_verification]);
             }

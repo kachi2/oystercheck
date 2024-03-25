@@ -41,6 +41,7 @@ class AddressController extends Controller
 
   public function showCreateCandidate($slug)
   {
+   
     $data = $this->generateCreateCandidateData($slug);
     return view('users.address.createAddressCandidate', $data);
   }
@@ -54,7 +55,7 @@ class AddressController extends Controller
       'last_name' => 'required|string',
       'phone' => 'required|numeric',
       'email' => 'nullable|email',
-      'dob' => 'nullable|date_format:"Y-m-d"',
+      // 'dob' => 'nullable|date_format:"Y-m-d"',
       'image' => 'required|image|mimes:jpeg,png,jpg|max:2048'
     ]);
     if ($valid->fails()) {
@@ -79,8 +80,8 @@ class AddressController extends Controller
         "middleName" => $request->middle_name != null ? $request->middle_name : "",
         "lastName" => $request->last_name,
         "mobile" => $request->phone,
-        "email" => $request->email != null ? $request->email : "",
-        "dateOfBirth" => $request->dob != null ? $request->dob : "",
+        "email" => $request->email != null ? $request->email : "user@gmail.com",
+        "dateOfBirth" => "2000-12-15",
         "image" => $candidate_image
       ];
       $datas = json_encode($data, true);
@@ -107,7 +108,7 @@ class AddressController extends Controller
       } else {
         $res = json_decode($response, true);
         if ($res['success'] == true && $res['statusCode'] == 201) {
-        //  dd($res);
+    
           $service_ref = $res['data']['id'];
           AddressVerification::create([
             'verification_id' => $slug->id,
@@ -132,7 +133,7 @@ class AddressController extends Controller
           DB::commit();
           Session::flash('alert', 'success');
           Session::flash('message', 'Candidate Created Successfully');
-          // return view('users.address.verifyAddress', $data);
+          //  return view('users.address.verifyAddress', $data);
 
           // dd($service_ref);
           return redirect()->route('showVerificationDetailsForm',
@@ -149,6 +150,8 @@ class AddressController extends Controller
 
   public function showVerificationDetailsForm($slug, $service_ref)
   {
+
+
     $data = $this->generateAddressReportVerify(decrypt($slug));
     $data['service_ref'] = $service_ref;
     $data['states'] = States::get();
@@ -184,15 +187,15 @@ class AddressController extends Controller
     //  $logo_image = base64_encode(asset('/images/logo.png'));
     if ($request->slug == 'individual-address') {
       $valid = Validator::make($request->all(), [
-        'flat_number' => 'nullable|string',
-        'building_name' => 'nullable|string',
+        'flat_number' => 'nullable',
+        'building_name' => 'nullable',
         'building_number' => 'required|string',
         'landmark' => 'required|string',
         'street' => 'required|string',
-        'sub_street' => 'nullable|string',
+        'sub_street' => 'nullable',
         'state' => 'required|string',
         'city' => 'required|string',
-        'lga' => 'nullable|string',
+        'lga' => 'nullable',
         'subject_consent' => 'required|accepted'
       ]);
       if ($valid->fails()) {
@@ -208,15 +211,15 @@ class AddressController extends Controller
         "candidateId" => $service_ref,
         "description" => "Verify the candidate",
         "address" => [
-          "flatNumber" => $request->flat_number != null ? $request->flat_number : "",
-          "buildingName" => $request->building_name != null ? $request->building_name : "",
+          "flatNumber" => $request->flat_number?? "",
+          "buildingName" => $request->building_name??"",
           "buildingNumber" => $request->building_number,
           "landmark" => $request->landmark,
           "street" => $request->street,
-          "subStreet" => $request->sub_street != null ? $request->sub_street : "",
+          "subStreet" => $request->sub_street??"",
           "state" => $request->state,
           "city" => $request->city,
-          "lga" => $request->lga != null ? $request->lga : "",
+          "lga" => $request->lga??"",
         ],
         "subjectConsent" => $request->subject_consent ? true : false,
 
@@ -228,12 +231,12 @@ class AddressController extends Controller
         'phone' => 'required',
         'email' => 'required|email',
         'image' => 'required',
-        'flat_number' => 'nullable|string',
-        'building_name' => 'nullable|string',
+        'flat_number' => 'nullable',
+        'building_name' => 'nullable',
         'building_number' => 'required|string',
         'landmark' => 'required|string',
         'street' => 'required|string',
-        'sub_street' => 'nullable|string',
+        'sub_street' => 'nullable',
         'state' => 'required|string',
         'city' => 'required|string',
         'lga' => 'nullable|string',
@@ -345,6 +348,8 @@ class AddressController extends Controller
 
          event(new AddressVerificationCreated($res, $get_address_verification_id));
 
+         AddressVerification::where('service_reference', $service_ref)->update(['reference_key' => $res['data']['referenceId'], 'is_reference' => 1]);
+        
           DB::commit();
           Session::flash('alert', 'success');
           Session::flash('message', 'Address submitted for verification');

@@ -55,7 +55,7 @@ class AddressController extends Controller
       'last_name' => 'required|string',
       'phone' => 'required|numeric',
       'email' => 'nullable|email',
-      // 'dob' => 'nullable|date_format:"Y-m-d"',
+      'dob' => 'nullable|date_format:"Y-m-d"',
       'image' => 'required|image|mimes:jpeg,png,jpg|max:2048'
     ]);
     if ($valid->fails()) {
@@ -81,7 +81,7 @@ class AddressController extends Controller
         "lastName" => $request->last_name,
         "mobile" => $request->phone,
         "email" => $request->email != null ? $request->email : "user@gmail.com",
-        "dateOfBirth" => "2000-12-15",
+        "dateOfBirth" =>$request->dob??"2000-12-15",
         "image" => $candidate_image
       ];
       $datas = json_encode($data, true);
@@ -109,20 +109,22 @@ class AddressController extends Controller
         $res = json_decode($response, true);
         if ($res['success'] == true && $res['statusCode'] == 201) {
     
-          $service_ref = $res['data']['id'];
+
+          // dd($res);
           AddressVerification::create([
             'verification_id' => $slug->id,
-            'ref' => $ref,
+            'ref' => $res['data']['id'],
             'user_id' => auth()->user()->id,
             'status' => 'pending',
             'slug' => $slug->slug,
-            'service_reference' => $service_ref,
+            'service_reference' => $res['data']['id'],
+            'candidate_id' => $res['data']['youverifyCandidateId'],
             'first_name' => $request->first_name,
-            "middle_name" => $request->middle_name != null ? $request->middle_name : "",
+            "middle_name" => $res['data']['middleName']??"",
             'last_name' => $request->last_name,
-            "phone" => $request->phone,
-            "email" => $request->email != null ? $request->email : "",
-            "dob" => $request->dob != null ? $request->dob : "",
+            "phone" => $res['data']['mobile'],
+            "email" => $res['data']['email']??"",
+            "dob" => $res['data']['dateOfBirth']??'',
             "image" => $candidate_image,
             'is_sandbox' => $this->sandbox(),
             'expected_report_date' => Carbon::now()->addDays(4)
@@ -136,25 +138,28 @@ class AddressController extends Controller
           //  return view('users.address.verifyAddress', $data);
 
           // dd($service_ref);
-          return redirect()->route('showVerificationDetailsForm',
-           ['slug' => encrypt($slug->slug), 'service_ref' => $service_ref,
+          return back()->with([
            'states' => States::get()
            ]);
         }
       }
     } catch (\Exception $e) {
       DB::rollBack();
-      throw $e;
+      return back()->with(['errors' => $e->getMessage()]);
     }
   }
 
-  public function showVerificationDetailsForm($slug, $service_ref)
+  public function showVerificationDetailsForm(Request $req, $slug, $service_ref)
   {
+    if($slug == ' '){
+      $slug = $req->slug;
+    }
 
-
+   
     $data = $this->generateAddressReportVerify(decrypt($slug));
     $data['service_ref'] = $service_ref;
     $data['states'] = States::get();
+    $data['address'] = Verification::where('report_type', '=', 'address')->get();
     return view('users.address.verifyAddress', $data);
   }
 
@@ -162,25 +167,25 @@ class AddressController extends Controller
   {
     if (!isset($service_ref)) {
       Session::flash('alert', 'error');
-      Session::flash('message', 'Bad payload, reload page');
+      Session::flash('message', 'Bad payload, refresh page');
       return redirect()->back();
     }
 
     $slug = Verification::whereSlug($request->slug)->first();
       $userWallet = Wallet::where('user_id', auth()->user()->id)->first();
-      if (isset($slug->discount) && $slug->discount > 0) {
-          $amount = ($slug->fee - $slug->discount);
-      } else {
-          $amount = $slug->fee;
-      }
-      if ($userWallet->avail_balance < $amount) {
+      // if (isset($slug->discount) && $slug->discount > 0) {
+      //     $amount = ($slug->fee - $slug->discount);
+      // } else {
+      //     $amount = $slug->fee;
+      // }
+      if ($userWallet->avail_balance < $slug->fee) {
           Session::flash('alert', 'error');
           Session::flash('message', 'Your walllet is too low for this transaction');
           return back();
       }
 
-
-    if ($get_address_verification = AddressVerification::where('service_reference', $service_ref)->first()) {
+      $get_address_verification = AddressVerification::where('service_reference', $service_ref)->first();
+    if ($get_address_verification){
       $get_address_verification_id = $get_address_verification->id;
     }
 
@@ -346,9 +351,10 @@ class AddressController extends Controller
 
         if ($res['success'] == true && $res['statusCode'] == 201) {
 
+        
          event(new AddressVerificationCreated($res, $get_address_verification_id));
 
-         AddressVerification::where('service_reference', $service_ref)->update(['reference_key' => $res['data']['referenceId'], 'is_reference' => 1]);
+        //  AddressVerification::where('service_reference', $service_ref)->update(['reference_key' => $res['data']['referenceId'], 'is_reference' => 1]);
         
           DB::commit();
           Session::flash('alert', 'success');
@@ -359,7 +365,9 @@ class AddressController extends Controller
             $account = $request->pin ;
             $this->chargeUser($amount, $reference , $reasons, $account);
         }
-          return redirect()->route('addressIndex', $request->slug);
+          Session::flash('alert', 'success');
+          Session::flash('message', $res['message']);
+          return redirect()->back();
         } else {
           // dd($res);
           Session::flash('alert', 'danger');
@@ -371,7 +379,7 @@ class AddressController extends Controller
       DB::rollBack();
       Session::flash('alert', 'danger');
       Session::flash('message', $e);
-      return redirect()->route('addressIndex', $request->slug);
+      return back();
     }
   }
 

@@ -15,7 +15,7 @@ class AddFielsxdToAddressVerifications extends Migration
     {
         Schema::table('address_verifications', function (Blueprint $table) {
             //
-            $table->string('reference_key')->nullable();
+            $table->string('candidate_id')->nullable();
         });
     }
 
@@ -27,7 +27,7 @@ class AddFielsxdToAddressVerifications extends Migration
     public function down()
     {
         Schema::table('address_verifications', function (Blueprint $table) {
-            //
+            $table->dropColumn('candidate_id');
         });
     }
 }

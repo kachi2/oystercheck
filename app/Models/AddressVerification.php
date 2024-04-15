@@ -23,7 +23,8 @@ class AddressVerification extends Model
         'email',
         'dob',
         'image',
-        'expected_report_date'
+        'expected_report_date',
+        'candidate_id'
     ];
 
     public function user(){
@@ -36,6 +37,6 @@ class AddressVerification extends Model
 
     public function addressVerificationDetail()
     {
-        return $this->hasOne(AddressVerificationDetail::class, 'address_verification_id');
+        return $this->hasMany(AddressVerificationDetail::class, 'address_verification_id', 'id');
     }
 }

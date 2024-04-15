@@ -35,6 +35,14 @@ use App\Http\Middleware\ClientMiddleware;
 
 
 
+Route::get('pdf/', function(){
+
+    return view('pdf');
+});
+
+
+
+
 require __DIR__.'/auth.php';
 
 Route::get('/logouts', [HomeController::class, 'Logouts'])->name('logouts');

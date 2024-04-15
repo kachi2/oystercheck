@@ -7,7 +7,7 @@
                  <div class="page-title-box">
                      <div class="row">
                          <div class="col">
-                             <h4 class="page-title">{{$slug->name}}</h4>
+                             <h4 class="page-title">Candidate List</h4>
                              <ol class="breadcrumb">
                                  <li class="breadcrumb-item"></li>
                              </ol>
@@ -36,7 +36,7 @@
                              <div class="card-body" >
                                  <div class="row d-flex justify-content-center">
                                      <div class="col">
-                                         <p class="mb-0 fw-semibold text-black">Verified Requests</p>
+                                         <p class="mb-0 fw-semibold text-black">Total Candidates</p>
                                          <h3 class="m-0 text-black">{{$verified}}</h3>
                                      </div>
                                      <div class="col-auto align-self-center">
@@ -55,7 +55,7 @@
                              <div class="card-body" >
                                  <div class="row d-flex justify-content-center">
                                      <div class="col">
-                                         <p class="text-black mb-0 fw-semibold">Unverified Requests</p>
+                                         <p class="text-black mb-0 fw-semibold">Pending Requests</p>
                                          <h3 class="m-0 text-black">{{$not_verified}}</h3>
                                      </div>
                                      <div class="col-auto align-self-center">
@@ -74,7 +74,7 @@
                              <div class="card-body" >
                                  <div class="row d-flex justify-content-center">
                                      <div class="col">
-                                         <p class="text-black mb-0 fw-semibold">Pending Requests</p>
+                                         <p class="text-black mb-0 fw-semibold">Results Received</p>
                                          <h3 class="m-0 text-black">{{$pending}}</h3>
                                      </div>
                                      <div class="col-auto align-self-center">
@@ -89,7 +89,7 @@
                          <!--end card-->
                      </div>
                      <!--end col-->
-                     <div class="col-md-6 col-lg-4">
+                     {{-- <div class="col-md-6 col-lg-4">
                          <div class="card report-card">
                              <div class="card-body" >
                                  <div class="row d-flex justify-content-center">
@@ -147,7 +147,7 @@
                              <!--end card-body-->
                          </div>
                          <!--end card-->
-                     </div>
+                     </div> --}}
                      <!--end col-->
                      <!--end col-->
                  </div>
@@ -193,10 +193,8 @@
                                      <th>SN</th>
                                      <th>Address Candidate</th>
                                      <th>Reference Id</th>
-                                     <th>Status</th>
                                      <th>Initiated by</th>
-                                     <th>Fee</th>
-                                     <th>Date Requested</th>
+                                     <th>Date Created</th>
                                      <th>Action</th>
                                  </tr>
                              </thead>
@@ -206,7 +204,7 @@
                                      <td>{{$loop->iteration}}</td>
                                      <td>{{$transaction->first_name}} {{$transaction->last_name}}</td>
                                      <td>{{$transaction->service_reference}}</td>
-                                     <td>
+                                     {{-- <td>
                                          @if($transaction->addressVerificationDetail()->exists())
                                          @if($transaction->addressVerificationDetail->status == 'pending')
                                          <span class="badge badge-soft-purple">Pending</span>
@@ -224,9 +222,8 @@
                                          @else
                                          <span class="badge badge-soft-secondary">No verification Request Yet</span>
                                          @endif
-                                     </td>
+                                     </td> --}}
                                      <td>{{$transaction->user->firstname}}</td>
-                                     <td>{{$transaction->fee}}</td>
                                      <td>{{$transaction->created_at}}</td>
                                      <td>
                                          <div class="dropdown d-inline-block">
@@ -235,24 +232,17 @@
                                              </a>
                                              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="seeMore" style="">
                                              {{-- <a class="dropdown-item" href="#">Copy Reference Id</a> --}}
-                                                 @if($transaction->addressVerificationDetail()->exists())
-                                                 <a class="dropdown-item" href="{{route('showAddressReport', ['slug' => encrypt($slug->slug), 'addressId' => encrypt($transaction->id)])}}">View Verification Report</a>
-                                                 @else
+                                                 {{-- @if($transaction->addressVerificationDetail()->exists()) --}}
+                                                 <a class="dropdown-item " style="border-bottom: 1px solid #83818154" href="{{route('showAddressReport', ['slug' => encrypt($slug->slug), 'addressId' => encrypt($transaction->id)])}}">View Verification Report</a>
+                                                 {{-- @else --}}
                                                  <a class="dropdown-item" href="{{route('showVerificationDetailsForm', ['slug' => encrypt($slug->slug), 'service_ref' => $transaction->service_reference])}}">Make a Verification Request</a>
-                                                 @endif
-                                                 @if ($transaction->is_reference === 0 )
-                                                 <a class="dropdown-item" href="{{route('showVerificationDetailsForm', ['slug' => encrypt('reference-address'), 'service_ref' => $transaction->service_reference])}}">Request Reference Verification </a>
-                                                 @elseif($transaction->is_reference === 1)
-                                                 <a class="dropdown-item" href="{{route('showAddressReport', ['slug' => encrypt($slug->slug), 'addressId' => encrypt($transaction->id)])}}">View Reference Report</a>
-
-                                                 @endif
+                                                 {{-- @endif --}}
+                                                 
                                              </div>
                                          </div> 
                                      </td>
-                                     <!-- <td> @if($transaction->status == 'successful')
-                                     <a href="{{route('verify.details', encrypt($trans->id))}}">View Details</a>
-                                     @endif
-                                 </td> -->
+                                   
+                                 </td> 
                                  </tr>
                                  @endforeach
                              </tbody>

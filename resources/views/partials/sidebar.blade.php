@@ -73,9 +73,7 @@
                          <li>
                         <a href="javascript: void(0);"><i data-feather="map-pin" class="align-self-center menu-icon"></i><span>Address Verification</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
-                        @foreach ($address as $add)
-                             <li class="nav-item"><a class="nav-link" href="{{route('addressIndex',$add->slug)}}"><i class="ti-control-record"></i>{{$add->name}}</a></li>
-                         @endforeach
+                             <li class="nav-item"><a class="nav-link" href="{{route('addressIndex',$address[0]->slug)}}"><i class="ti-control-record"></i>Create Candidate</a></li>
                         </ul>
                     </li> 
                     <hr class="hr-dashed hr-menu">

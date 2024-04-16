@@ -45,21 +45,18 @@ public function generateHeaderReports($slug){
     }
 
     public function generateAddressReport($slug){
+
         $user = User::where('id', auth()->user()->id)->first();
         $slug = Verification::where(['slug' => $slug])->first();
-        $address_verifications = AddressVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id])->with('addressVerificationDetail')->latest()->get();
-        // $all_address_verifications = $address_verifications->addressVerificationDetail;
+        $address_verifications = AddressVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id])->latest()->get();
+        // dd($address_verifications[0]?->user_id);
+        $data['verifications'] = $address_verifications;
         $data['slug'] = $slug;
-        $data['verified'] = AddressVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id, 'status' => 'verified'])->count();
-        $data['not_verified'] = AddressVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id, 'status' => 'not_verified'])->count();
-        $data['pending'] = AddressVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id, 'status' => 'pending'])->count();
-        $data['awaiting_reschedule'] = AddressVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id, 'status' => 'awaiting_reschedule'])->count();
-        $data['cancelled']= AddressVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id, 'status' => ''])->count();
-        $data['not_requested'] = AddressVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id, 'status' => 'not_requested'])->count();
+        $data['address_verifications'] = $address_verifications->load('addressVerificationDetail');
+        $data['results'] = AddressVerificationDetail::where(['address_verification_id'=>$address_verifications[0]?->id, 'status' => 'completed'])->count();
         $data['fields'] = FieldInput::where(['slug'=>'candidate'])->get();
         $data['states'] = States::get();
         $data['wallet']= Wallet::where('user_id', $user->id)->first();
-       $data['logs'] = $address_verifications;
     return $data;   
     }
 

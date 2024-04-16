@@ -76,6 +76,7 @@ Route::get('/user/address/verification/{slug}/candidate/create', [AddressControl
 Route::get('/user/address/verification/{slug}/{addressId?}', [AddressController::class, 'verificationReport'])->name('showAddressReport');
 Route::post('/user/address/verification/store/{slug}', [AddressController::class,'submitAddressVerify'])->name('AddressStore');
 Route::get('/user/address/verification/{slug}/candidate/{service_ref}', [AddressController::class, 'showVerificationDetailsForm'])->name('showVerificationDetailsForm');
+Route::get('/user/address/verifications/{verification_id}', [AddressController::class, 'ViewCandidateAddresses'])->name('ViewCandidateAddresses');
 Route::post('/user/address/verification/candidate/create/{slug}', [AddressController::class,'createCandidate'])->name('createCandidate');
 
 //candidate previous employer routes 

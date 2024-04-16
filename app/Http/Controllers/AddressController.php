@@ -36,6 +36,7 @@ class AddressController extends Controller
   {
 
     $data = $this->generateAddressReport($slug);
+
     return view('users.address.index', $data);
   }
 
@@ -109,7 +110,6 @@ class AddressController extends Controller
         $res = json_decode($response, true);
         if ($res['success'] == true && $res['statusCode'] == 201) {
     
-
           // dd($res);
           AddressVerification::create([
             'verification_id' => $slug->id,
@@ -363,10 +363,8 @@ class AddressController extends Controller
             $reference = $res['data']['id'];
             $reasons = 'Payment for '.$slug->name;
             $account = $request->pin ;
-            $this->chargeUser($amount, $reference , $reasons, $account);
+            $this->chargeUser($slug->fee, $reference , $reasons, $account);
         }
-          Session::flash('alert', 'success');
-          Session::flash('message', $res['message']);
           return redirect()->back();
         } else {
           // dd($res);
@@ -383,23 +381,48 @@ class AddressController extends Controller
     }
   }
 
+
+  public function ViewCandidateAddresses($verification_id){
+
+    $verification = AddressVerificationDetail::where('address_verification_id', decrypt($verification_id))->get();
+    // dd(decrypt($verification_id));
+    $data['candidate'] =  $verification[0]->addressVerification->first_name . $verification[0]->addressVerification->last_name;
+    $data['verified'] = AddressVerificationDetail::where(['address_verification_id' => decrypt($verification_id), 'status' => 'completed'])->get();
+    $data['not_verified']  = AddressVerificationDetail::where(['address_verification_id' => decrypt($verification_id), 'status' => 'pending'])->get();
+    $data['verification'] = $verification;
+    // dd($data);
+    return view('users.address.verifications', $data);
+  }
   public function verificationReport($slug, $addressId)
   {
-    $slug = Verification::where('slug', decrypt($slug))->first();
+    
+    if($slug == 'guarantor')
+    {
+      $slug = 'reference-address';
+    }else{
+      $slug = $slug.'-address';
+    }
 
-    $address_verification = AddressVerification::where(['id' => decrypt($addressId)])->first();
 
-    $address_verification->addressVerificationDetail->candidate = json_decode($address_verification->addressVerificationDetail->candidate);
-    if ($address_verification->addressVerificationDetail->business != null) $address_verification->addressVerificationDetail->business = json_decode($address_verification->addressVerificationDetail->business);
-    if ($address_verification->addressVerificationDetail->guarantor != null) $address_verification->addressVerificationDetail->guarantor = json_decode($address_verification->addressVerificationDetail->guarantor, true);
+    $slug = Verification::where('slug', $slug)->first();
+  
+   
+    $address_verification = AddressVerificationDetail::where(['id' => decrypt($addressId)])->first();
 
-    $address_verification->addressVerificationDetail->agent = json_decode($address_verification->addressVerificationDetail->agent);
-    $address_verification->addressVerificationDetail->address = json_decode($address_verification->addressVerificationDetail->address);
-    $address_verification->addressVerificationDetail->notes = json_decode($address_verification->addressVerificationDetail->notes);
-    $address_verification->addressVerificationDetail->images = json_decode($address_verification->addressVerificationDetail->images);
-    $address_verification->addressVerificationDetail->links = json_decode($address_verification->addressVerificationDetail->links);
+    $address_verification->candidate = json_decode($address_verification->candidate);
+    if ($address_verification->business != null) $address_verification->business = json_decode($address_verification->business);
+    if ($address_verification->guarantor != null) $address_verification->guarantor = json_decode($address_verification->guarantor, true);
+  
 
-    $address_verification->addressVerificationDetail->created_at;
+    $address_verification->agent = json_decode($address_verification->agent);
+    $address_verification->address = json_decode($address_verification->address);
+    $address_verification->notes = json_decode($address_verification->notes);
+    $address_verification->images = json_decode($address_verification->images);
+    $address_verification->links = json_decode($address_verification->links);
+
+    $address_verification->created_at;
+
+
 
     return view('users.address.addressReport', ['slug' => $slug, 'address_verification' => $address_verification]);
   }

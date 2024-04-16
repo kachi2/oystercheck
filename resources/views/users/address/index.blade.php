@@ -37,7 +37,7 @@
                                  <div class="row d-flex justify-content-center">
                                      <div class="col">
                                          <p class="mb-0 fw-semibold text-black">Total Candidates</p>
-                                         <h3 class="m-0 text-black">{{$verified}}</h3>
+                                         <h3 class="m-0 text-black">{{count($address_verifications)}}</h3>
                                      </div>
                                      <div class="col-auto align-self-center">
                                          <div class="report-main-icon bg-light-alt">
@@ -55,8 +55,8 @@
                              <div class="card-body" >
                                  <div class="row d-flex justify-content-center">
                                      <div class="col">
-                                         <p class="text-black mb-0 fw-semibold">Pending Requests</p>
-                                         <h3 class="m-0 text-black">{{$not_verified}}</h3>
+                                         <p class="text-black mb-0 fw-semibold">Total Verifications Sent</p>
+                                         <h3 class="m-0 text-black">{{count($verifications)}}</h3>
                                      </div>
                                      <div class="col-auto align-self-center">
                                          <div class="report-main-icon bg-light-alt">
@@ -74,8 +74,8 @@
                              <div class="card-body" >
                                  <div class="row d-flex justify-content-center">
                                      <div class="col">
-                                         <p class="text-black mb-0 fw-semibold">Results Received</p>
-                                         <h3 class="m-0 text-black">{{$pending}}</h3>
+                                         <p class="text-black mb-0 fw-semibold">Total Results Received</p>
+                                         <h3 class="m-0 text-black">{{$results}}</h3>
                                      </div>
                                      <div class="col-auto align-self-center">
                                          <div class="report-main-icon bg-light-alt">
@@ -199,7 +199,7 @@
                                  </tr>
                              </thead>
                              <tbody>
-                                 @foreach ($logs as $transaction)
+                                 @foreach ($verifications as $transaction)
                                  <tr>
                                      <td>{{$loop->iteration}}</td>
                                      <td>{{$transaction->first_name}} {{$transaction->last_name}}</td>
@@ -232,9 +232,9 @@
                                              </a>
                                              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="seeMore" style="">
                                              {{-- <a class="dropdown-item" href="#">Copy Reference Id</a> --}}
-                                                 {{-- @if($transaction->addressVerificationDetail()->exists()) --}}
-                                                 <a class="dropdown-item " style="border-bottom: 1px solid #83818154" href="{{route('showAddressReport', ['slug' => encrypt($slug->slug), 'addressId' => encrypt($transaction->id)])}}">View Verification Report</a>
-                                                 {{-- @else --}}
+                                                 @if($transaction->addressVerificationDetail()->exists())
+                                                 <a class="dropdown-item " style="border-bottom: 1px solid #83818154" href="{{route('ViewCandidateAddresses', encrypt($transaction->id))}}">View Verifications</a>
+                                                 @endif
                                                  <a class="dropdown-item" href="{{route('showVerificationDetailsForm', ['slug' => encrypt($slug->slug), 'service_ref' => $transaction->service_reference])}}">Make a Verification Request</a>
                                                  {{-- @endif --}}
                                                  

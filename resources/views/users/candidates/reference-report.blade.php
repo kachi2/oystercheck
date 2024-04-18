@@ -102,6 +102,11 @@
                                         <div class="m-0 font-14 me-3 text-muted col-4">{{$ans->ReferenceAnswers->question}}</div>
                                         <div class="font-14 col-8">{{$ans->answer}}</div>
                                     </div>
+                                    @else 
+                                    <div class="col-12 col-md-6 d-flex py-4 px-4 border-bottom">
+                                        <div class="m-0 font-14 me-3 text-muted col-4">{{$ans->ReferenceAnswers->question}}</div>
+                                        <div class="font-14 col-8">{{$ans->answer}}</div>
+                                    </div>
                                     @endif
                                     @empty
                                     @endforelse

@@ -111,7 +111,7 @@ class AddressController extends Controller
         if ($res['success'] == true && $res['statusCode'] == 201) {
     
           // dd($res);
-          AddressVerification::create([
+         $ss = AddressVerification::create([
             'verification_id' => $slug->id,
             'ref' => $res['data']['id'],
             'user_id' => auth()->user()->id,
@@ -130,6 +130,7 @@ class AddressController extends Controller
             'expected_report_date' => Carbon::now()->addDays(4)
           ]);
       
+          dd($ss);
           // $data = $this->generateAddressReportVerify($slug);
           // $data['service_ref'] = $service_ref;
           DB::commit();

@@ -34,9 +34,7 @@ class AddressController extends Controller
 
   public function AddressIndex($slug)
   {
-
     $data = $this->generateAddressReport($slug);
-
     return view('users.address.index', $data);
   }
 

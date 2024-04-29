@@ -24,7 +24,8 @@ class AddressVerification extends Model
         'dob',
         'image',
         'expected_report_date',
-        'candidate_id'
+        'candidate_id',
+        'is_sandbox'
     ];
 
     public function user(){

@@ -54,7 +54,7 @@ class AddressController extends Controller
       'first_name' => 'required|string',
       'middle_name' => 'nullable|string',
       'last_name' => 'required|string',
-      'phone' => 'required|numeric',
+      'phone' => 'required|min:11|max:11',
       'email' => 'nullable|email',
       'dob' => 'nullable|date_format:"Y-m-d"',
       'image' => 'required|image|mimes:jpeg,png,jpg|max:2048'
@@ -86,7 +86,7 @@ class AddressController extends Controller
         "image" => $candidate_image
       ];
       $datas = json_encode($data, true);
-      //return $datas;
+      // return $datas;
       curl_setopt_array($curl, [
          CURLOPT_URL => $this->ReqUrl()."addresses/candidates",
        // CURLOPT_URL => "https://api.sandbox.youverify.co/v2/api/addresses/candidates",
@@ -104,14 +104,10 @@ class AddressController extends Controller
         ],
       ]);
       $response = curl_exec($curl);
-      if (curl_errno($curl)) {
-        dd('error:' . curl_errno($curl));
-      } else {
         $res = json_decode($response, true);
         if ($res['success'] == true && $res['statusCode'] == 201) {
-    
           // dd($res);
-         $ss = AddressVerification::create([
+          AddressVerification::create([
             'verification_id' => $slug->id,
             'ref' => $res['data']['id'],
             'user_id' => auth()->user()->id,
@@ -130,7 +126,6 @@ class AddressController extends Controller
             'expected_report_date' => Carbon::now()->addDays(4)
           ]);
       
-          dd($ss);
           // $data = $this->generateAddressReportVerify($slug);
           // $data['service_ref'] = $service_ref;
           DB::commit();
@@ -138,15 +133,16 @@ class AddressController extends Controller
           Session::flash('message', 'Candidate Created Successfully');
           //  return view('users.address.verifyAddress', $data);
 
-          // dd($service_ref);
+          //  dd($service_ref);
           return back()->with([
            'states' => States::get()
            ]);
         }
-      }
     } catch (\Exception $e) {
       DB::rollBack();
-      return back()->with(['errors' => $e->getMessage()]);
+      Session::flash('alert', 'error');
+      Session::flash('message', 'Something went wrong, Pleae try again');
+      return back()->with(['errors' => $e->getMessage()])->withInput($request->all());
     }
   }
 

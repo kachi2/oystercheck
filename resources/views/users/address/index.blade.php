@@ -37,7 +37,7 @@
                                  <div class="row d-flex justify-content-center">
                                      <div class="col">
                                          <p class="mb-0 fw-semibold text-black">Total Candidates</p>
-                                         <h3 class="m-0 text-black">{{count($address_verifications)}}</h3>
+                                         <h3 class="m-0 text-black">{{isset($address_verifications)?count($address_verifications):'0'}}</h3>
                                      </div>
                                      <div class="col-auto align-self-center">
                                          <div class="report-main-icon bg-light-alt">
@@ -56,7 +56,7 @@
                                  <div class="row d-flex justify-content-center">
                                      <div class="col">
                                          <p class="text-black mb-0 fw-semibold">Total Verifications Sent</p>
-                                         <h3 class="m-0 text-black">{{count($verifications)}}</h3>
+                                         <h3 class="m-0 text-black">{{isset($verifications)?count($verifications):''}}</h3>
                                      </div>
                                      <div class="col-auto align-self-center">
                                          <div class="report-main-icon bg-light-alt">
@@ -75,7 +75,7 @@
                                  <div class="row d-flex justify-content-center">
                                      <div class="col">
                                          <p class="text-black mb-0 fw-semibold">Total Results Received</p>
-                                         <h3 class="m-0 text-black">{{$results}}</h3>
+                                         <h3 class="m-0 text-black">{{isset($results)??'0'}}</h3>
                                      </div>
                                      <div class="col-auto align-self-center">
                                          <div class="report-main-icon bg-light-alt">

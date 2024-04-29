@@ -12,9 +12,11 @@ use App\Models\IdentityVerification;
 use App\Models\AddressVerification;
 use App\Models\AddressVerificationDetail;
 use App\Models\States;
+use App\Traits\sandbox;
 
 Trait generateHeaderReports
 {
+    use sandbox;
 
 
 public function generateHeaderReports($slug){
@@ -48,12 +50,15 @@ public function generateHeaderReports($slug){
 
         $user = User::where('id', auth()->user()->id)->first();
         $slug = Verification::where(['slug' => $slug])->first();
-        $address_verifications = AddressVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id])->latest()->get();
+        $address_verifications = AddressVerification::where(['user_id' => $user->id, 'verification_id'=>$slug->id, 'is_sandbox' => $this->sandbox()])->latest()->get();
         // dd($address_verifications[0]?->user_id);
+
         $data['verifications'] = $address_verifications;
         $data['slug'] = $slug;
+        if(count($address_verifications) > 0){
         $data['address_verifications'] = $address_verifications->load('addressVerificationDetail');
         $data['results'] = AddressVerificationDetail::where(['address_verification_id'=>$address_verifications[0]?->id, 'status' => 'completed'])->count();
+         }
         $data['fields'] = FieldInput::where(['slug'=>'candidate'])->get();
         $data['states'] = States::get();
         $data['wallet']= Wallet::where('user_id', $user->id)->first();

@@ -13,6 +13,7 @@ use App\Models\Client;
 use App\Traits\generateHeaderReports;
 use App\Traits\GenerateRef;
 use Illuminate\Support\Facades\DB;
+use App\Models\Transaction;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Session;
 use App\Models\FieldInput;
@@ -163,7 +164,7 @@ class AddressController extends Controller
     if (!isset($service_ref)) {
       Session::flash('alert', 'error');
       Session::flash('message', 'Bad payload, refresh page');
-      return redirect()->back();
+      return redirect()->back()->withInput($request->all());
     }
 
     $slug = Verification::whereSlug($request->slug)->first();
@@ -371,8 +372,9 @@ class AddressController extends Controller
     } catch (\Exception $e) {
       DB::rollBack();
       Session::flash('alert', 'danger');
-      Session::flash('message', $e);
-      return back();
+      Session::flash('message', 'Something went wrong, Please try again');
+      // Session::flash('message', $e->getMessage());
+      return redirect()->back()->withInput($request->all());
     }
   }
 
@@ -420,5 +422,32 @@ class AddressController extends Controller
 
 
     return view('users.address.addressReport', ['slug' => $slug, 'address_verification' => $address_verification]);
+  }
+
+  public function chargeUser($amount, $ext_ref, $type, $acount)
+  {
+      $user = User::where('id', auth()->user()->id)->first();
+      $wallet = Wallet::where('user_id', $user->id)->first();
+      $newWallet = $user->wallet->avail_balance - $amount;
+      $update = Wallet::where('user_id', $user->id)
+          ->update([
+              'book_balance' => $wallet->avail_balance,
+              'avail_balance' => $newWallet,
+          ]);
+      $refs = $this->GenerateRef();
+      Transaction::create([
+          'ref' => $refs,
+          'user_id' => $user->id,
+          'external_ref' => $ext_ref,
+          'purpose' => $type,
+          'service_type' => $type,
+          'total_amount_payable' => $amount,
+          'payment_method' => 'Wallet Payment',
+          'type'  => 'DEBIT',
+          'amount' => $amount,
+          'prev_balance' => $wallet->avail_balance,
+          'avail_balance' => $newWallet
+      ]);
+      return $update;
   }
 }

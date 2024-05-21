@@ -401,14 +401,14 @@ class AddressController extends Controller
 
     $slug = Verification::where('slug', $slug)->first();
   
+
    
     $address_verification = AddressVerificationDetail::where(['id' => decrypt($addressId)])->first();
-
-    $address_verification->candidate = json_decode($address_verification->candidate);
+    $address_verification->candidate = json_decode($address_verification->candidate,true);
     if ($address_verification->business != null) $address_verification->business = json_decode($address_verification->business);
     if ($address_verification->guarantor != null) $address_verification->guarantor = json_decode($address_verification->guarantor, true);
   
-
+// dd(  $address_verification->candidate);
     $address_verification->agent = json_decode($address_verification->agent);
     $address_verification->address = json_decode($address_verification->address);
     $address_verification->notes = json_decode($address_verification->notes);

@@ -365,7 +365,7 @@ class AddressController extends Controller
           return redirect()->back();
         } else {
           Session::flash('alert', 'danger');
-          Session::flash('message','Something Went wrong, Please try again');
+          Session::flash('message', $res['message']);
           return redirect()->back()->withInput($request->all());
         }
       }

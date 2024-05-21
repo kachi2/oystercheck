@@ -372,7 +372,7 @@ class AddressController extends Controller
     } catch (\Exception $e) {
       DB::rollBack();
       Session::flash('alert', 'danger');
-      Session::flash('message', $valid->errors()->first());
+      Session::flash('message', $e->getMessage());
       return redirect()->back()->withErrors($valid)->withInput($request->all());
     }
   }

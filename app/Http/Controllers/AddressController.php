@@ -364,14 +364,14 @@ class AddressController extends Controller
         Session::flash('message', 'Address submitted for verification');
           return redirect()->back();
         } else {
-          Session::flash('alert', 'danger');
+          Session::flash('alert', 'error');
           Session::flash('message', $res['message']);
           return redirect()->back()->withInput($request->all());
         }
       }
     } catch (\Exception $e) {
       DB::rollBack();
-      Session::flash('alert', 'danger');
+      Session::flash('alert', 'error');
       Session::flash('message', $e->getMessage());
       return redirect()->back()->withErrors($valid)->withInput($request->all());
     }

@@ -174,12 +174,13 @@ class AddressController extends Controller
       // } else {
       //     $amount = $slug->fee;
       // }
+      if($this->sandbox() == 1){
       if ($userWallet->avail_balance < $slug->fee) {
           Session::flash('alert', 'error');
           Session::flash('message', 'Your walllet is too low for this transaction');
           return redirect()->back()->withInput($request->all());
       }
-
+    }
       $get_address_verification = AddressVerification::where('service_reference', $service_ref)->first();
     if ($get_address_verification){
       $get_address_verification_id = $get_address_verification->id;

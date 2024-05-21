@@ -163,7 +163,7 @@ class AddressController extends Controller
   {
     if (!isset($service_ref)) {
       Session::flash('alert', 'error');
-      Session::flash('message', 'Bad payload, refresh page');
+      Session::flash('message', 'Bad request, refresh page');
       return redirect()->back()->withInput($request->all());
     }
 
@@ -177,7 +177,7 @@ class AddressController extends Controller
       if ($userWallet->avail_balance < $slug->fee) {
           Session::flash('alert', 'error');
           Session::flash('message', 'Your walllet is too low for this transaction');
-          return back();
+          return redirect()->back()->withInput($request->all());
       }
 
       $get_address_verification = AddressVerification::where('service_reference', $service_ref)->first();
@@ -353,28 +353,26 @@ class AddressController extends Controller
         //  AddressVerification::where('service_reference', $service_ref)->update(['reference_key' => $res['data']['referenceId'], 'is_reference' => 1]);
         
           DB::commit();
-          Session::flash('alert', 'success');
-          Session::flash('message', 'Address submitted for verification');
           if($this->sandbox() == 1){
             $reference = $res['data']['id'];
             $reasons = 'Payment for '.$slug->name;
             $account = $request->pin ;
             $this->chargeUser($slug->fee, $reference , $reasons, $account);
         }
+        Session::flash('alert', 'success');
+        Session::flash('message', 'Address submitted for verification');
           return redirect()->back();
         } else {
-          // dd($res);
           Session::flash('alert', 'danger');
-          Session::flash('message', $res['message']);
+          Session::flash('message','Something Went wrong, Please try again');
           return redirect()->back()->withInput($request->all());
         }
       }
     } catch (\Exception $e) {
       DB::rollBack();
       Session::flash('alert', 'danger');
-      Session::flash('message', 'Something went wrong, Please try again');
-      // Session::flash('message', $e->getMessage());
-      return redirect()->back()->withInput($request->all());
+      Session::flash('message', $valid->errors()->first());
+      return redirect()->back()->withErrors($valid)->withInput($request->all());
     }
   }
 

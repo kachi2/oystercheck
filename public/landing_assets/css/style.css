@@ -10,7 +10,7 @@
 01. RESET CSS
 02. BASE TYPOGRAPHY
 03. PRE DEFINE CLASS CSS
-04. HEADER CSS
+04. HEADER CSS 
 05. HERO SECTION CSS
 06. CEO MESSAGE SECTION CSS
 07. FEATURE SECTION CSS
@@ -208,8 +208,12 @@ strong, b {
     background: #f4f4f4;
 }
 
+.testimonial-light-bg {
+    background: #F8F9FF;
+}
+
 .primary-bg {
-    background: #1351a8;;
+    background: #162E66;;
 }
 
 .secondary-bg {
@@ -220,7 +224,7 @@ strong, b {
     background: #ff6492;
 }
 .color-primary {
-    color: #1351a8;
+    color: #162E66;
 }
 
 .color-secondary {
@@ -230,7 +234,7 @@ strong, b {
     color: #ff6492;
 }
 .gradient-bg {
-    background: linear-gradient(75deg, #1351a8 10%, #162e66) !important;
+    background: #0A142F!important;
 }
 
 .white-bg {
@@ -242,7 +246,7 @@ a {
 }
 
 a:hover {
-    color: #1351a8;
+    color: #162E66;
     text-decoration: none;
 }
 
@@ -255,7 +259,7 @@ a:hover {
 }
 
 .color-2 {
-    color: #1351a8;
+    color: #162E66;
 }
 
 .color-2-bg {
@@ -319,11 +323,11 @@ a:hover {
 
 }
 .accent-solid-btn{
-    background: #ff6492;
+    background: #162e66;
     color: #ffffff;
 }
 .accent-solid-btn:hover{
-    background: #fb3972;
+    background: #162e66b9;
     color: #ffffff;
 }
 .accent-outline-btn{
@@ -339,25 +343,53 @@ a:hover {
     color: #162e66;
 }
 
+.custom-register {
+    background-color: #fff  !important; /* Green */
+    color: #162E66  !important;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    width:100px;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+.custom-login {
+    width:100px;
+    background-color: transparent;
+    color: #162E66;
+    border: 2px solid white;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.custom-login :hover{
+    color: #fff;
+}
+
 .secondary-solid-btn {
     color: #fff;
-    background: #1351a8;
-    border: 1px solid #1351a8;
+    background: #162E66;
+    border: 1px solid #162E66;
+    border-radius: 20px;
 }
 
 .secondary-solid-btn:hover {
     background: transparent;
-    color: #1351a8;
+    color: #162E66;
     -webkit-box-shadow: none;
     box-shadow: none;
 }
 .secondary-outline-btn{
-    color: #1351a8;
+    color: #162E66;
     display: inline-block;
-    border: 1px solid #1351a8;
+    border: 1px solid #162E66;
 }
 .secondary-outline-btn:hover{
-    background: #1351a8;
+    background: #162E66;
     color: #ffffff;
 }
 .outline-btn {
@@ -378,7 +410,31 @@ a:hover {
     opacity: 0;
     transition: 400ms;
     text-shadow: 0 0.5px 0.3px rgba(0,0,0,.1);
-    background-image: linear-gradient(to bottom, #1351a8, #162477);
+    background-image: linear-gradient(to bottom, #162E66, #162477);
+}
+
+.about-content-left h2{
+    font-size: 24px;
+    line-height: 35.5px;
+    color:#162E66;
+    font-weight: 700;
+    text-align: justify;
+}
+
+.about-content-leftt h2{
+    font-size: 50px;
+    line-height: 60.5px;
+    color:#162E66;
+    font-weight: 700;
+    text-align: left;
+}
+
+.about-content-left p{
+    font-size: 24px;
+    line-height: 35.5px;
+    color:#162E66;
+    font-weight: 300;
+    text-align: justify;
 }
 
 .outline-btn:hover:after{
@@ -386,7 +442,7 @@ a:hover {
 }
 .outline-btn:hover{
     color: #ffffff;
-    background-image: linear-gradient(to bottom, #1351a8,#162477);
+    background-image: linear-gradient(to bottom, #162E66,#162477);
 }
 .primary-bg h1, .primary-bg p {
     color: #fff;
@@ -483,9 +539,29 @@ select.form-control.has-value {
 select.form-control.has-value{
     height: 52px;
 }
-.section-heading h2 span {
+.section-headingWorks h2{
+    font-weight: 600;
+    font-size: 43px;
+    line-height: 60px;
+    text-align: left;
+}
+
+.section-heading h2  {
+    font-weight: 700;
+    font-size: 60.75px;
+    line-height: 72.9px;
+}
+
+.section-headingfaq h2  {
+    font-weight: 700;
+    font-size:48px;
+    line-height: 57.6px;
+}
+
+.section-headingfaq p{
     font-weight: 400;
-    font-size: 2rem;
+    font-size:18px;
+    line-height: 27.6px;
 }
 
 .z-index {
@@ -498,6 +574,12 @@ select.form-control.has-value{
 @media (max-width: 576px){
     .height-lg-100vh {
         height: auto;
+    }
+    .section-headingWorks h2{
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 60px;
+        text-align: center;
     }
 }
 .custom-badge {
@@ -576,7 +658,7 @@ select.form-control.has-value{
 }
 
 .topbar-text ul li a:hover {
-    color: #1351a8;
+    color: #162E66;
 }
 
 .gradient-bg .topbar-text ul li, .gradient-bg .topbar-text ul li a{
@@ -607,6 +689,9 @@ select.form-control.has-value{
 .white-bg.custom-nav ul li a:hover {
     opacity: 1;
 }
+.bg-transparent {
+    background-color: #162e66 !important;
+}
 .bg-transparent ul li a{
     color: #ffffff;
 }
@@ -615,7 +700,7 @@ select.form-control.has-value{
 }
 
 .bg-transparent.affix {
-    background: linear-gradient(75deg, #1351a8 5%, #162e66) !important;
+    background: linear-gradient(75deg, #162E66 5%, #162e66) !important;
 }
 
 .navbar-toggler{
@@ -794,7 +879,7 @@ select.form-control.has-value{
 
 @media (min-width: 320px) and (max-width: 992px) {
     .navbar.bg-transparent {
-        background: linear-gradient(75deg, #1351a8 5%, #162e66) !important;
+        background: linear-gradient(75deg, #162E66 5%, #162e66) !important;
         padding: .45rem 1rem !important;
     }
     .navbar.custom-nav{
@@ -1194,8 +1279,14 @@ select.form-control.has-value{
 }
 .hero-slider-content h1{
     font-size: 50px;
-    line-height: initial;
-    font-weight: 700;
+    line-height: 60px;
+    font-weight: 900;
+}
+
+.hero-slider-content p{
+    font-size: 16px;
+    line-height: 41px;
+    font-weight: 300;
 }
 
 
@@ -1261,26 +1352,26 @@ select.form-control.has-value{
     bottom: 0;
 }
 .gradient-overly-right-light:before {
-    background: -webkit-gradient(linear, left top, right top, color-stop(0, #1351a8), to(transparent));
+    background: -webkit-gradient(linear, left top, right top, color-stop(0, #162E66), to(transparent));
     background: linear-gradient(to right, #fff4f4 30%, rgba(26, 44, 121, 0.18) 100%);
 
 }
 .gradient-overly-right-color:before {
-    background: -webkit-gradient(linear, left top, right top, color-stop(0, #1351a8), to(transparent));
-    background: linear-gradient(to right, #1351a8 30%, rgba(26, 44, 121, 0.18) 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0, #162E66), to(transparent));
+    background: linear-gradient(to right, #162E66 30%, rgba(26, 44, 121, 0.18) 100%);
 
 }
 .gradient-overly-left:before {
-    background: -webkit-gradient(linear, left top, right top, color-stop(0, #1351a8), to(transparent));
-    background: linear-gradient(to left, #1351a8 30%, rgba(26, 44, 121, 0.18) 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0, #162E66), to(transparent));
+    background: linear-gradient(to left, #162E66 30%, rgba(26, 44, 121, 0.18) 100%);
 }
 .gradient-overly-bottom:before {
-    background: -webkit-gradient(linear, left top, right top, color-stop(0, #1351a8), to(transparent));
-    background: linear-gradient(to bottom, #1351a8 45%, rgba(26, 44, 121, 0.18) 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0, #162E66), to(transparent));
+    background: linear-gradient(to bottom, #162E66 45%, rgba(26, 44, 121, 0.18) 100%);
 }
 .gradient-overly-top:before {
-    background: -webkit-gradient(linear, left top, right top, color-stop(0, #1351a8), to(transparent));
-    background: linear-gradient(to top, #1351a8 35%, rgba(26, 44, 121, 0.18) 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0, #162E66), to(transparent));
+    background: linear-gradient(to top, #162E66 35%, rgba(26, 44, 121, 0.18) 100%);
 }
 
 
@@ -1357,10 +1448,10 @@ select.form-control.has-value{
     background: #ffffff;
 }
 .custom-dot.owl-theme .owl-dots button.owl-dot span:hover{
-    background: #1351a8;
+    background: #162E66;
 }
 .custom-dot.owl-theme .owl-dots button.owl-dot.active span{
-    background: #1351a8;
+    background: #162E66;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.12);
 }
 .custom-dot.owl-theme .owl-dots .owl-dot span{
@@ -1376,15 +1467,15 @@ select.form-control.has-value{
 }
 
 .custom-arrow.owl-theme .owl-nav button:hover{
-    background: #1351a8;
-    border-color: #1351a8;
+    background: #162E66;
+    border-color: #162E66;
 }
 .custom-arrow.owl-theme .owl-nav button:hover span{
     color: #ffffff;
 }
 .custom-arrow.owl-theme .owl-nav button span{
     font-size: 25px;
-    color: #1351a8;
+    color: #162E66;
 }
 .custom-arrow-bottom-center.owl-theme .owl-nav{
     width: 100%;
@@ -1445,7 +1536,7 @@ select.form-control.has-value{
     font-weight: 600;
 }
 .custom-indicators li.active button{
-    background: #1351a8;
+    background: #162E66;
     color: #ffffff;
 }
 .custom-indicators li.active button span{
@@ -1652,7 +1743,7 @@ select.form-control.has-value{
 }
 
 .core-services-single:hover {
-    background: linear-gradient(75deg, #1351a8 10%, #162e66);
+    background: linear-gradient(75deg, #162E66 10%, #162e66);
     color: #fff;
 }
 
@@ -1940,18 +2031,22 @@ select.form-control.has-value{
     border-radius: 4px;
     background: transparent;
     margin-right: 5px;
-    border: 1px dashed #1351a8;
+    background-color: #D0D5E0;
+    color:#162E66;
+    width:250px;
+    height:50px;
     transition: all 0.3s ease-in;
     font-size: 13px;
     text-transform: uppercase;
     font-weight: 600;
-   font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    border: none;
 }
 
-.filter-btn:hover {
-    background: #1351a8;
+/* .filter-btn:hover {
+    background: #162E66;
     color: #ffffff;
-}
+} */
 
 button.filter-btn:focus {
     outline: none;
@@ -1959,8 +2054,9 @@ button.filter-btn:focus {
 }
 
 .mixitup-control-active {
-    background: #1351a8;
+    background: #162E66;
     color: #ffffff;
+    border-top-left-radius: 10px;
 }
 
 .mixitup-control-active[data-filter]:after {
@@ -1973,6 +2069,39 @@ button.filter-btn:focus {
 /*portfolio container*/
 
 .portfolio-container {
+    text-align: justify;
+}
+
+.portfolio-container .hero-slider-content p{
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 39px;
+    color:black;
+}
+.portfolio-container .financial{
+ color: #14274E;
+ font-size:27px;
+    font-weight: 300;
+    line-height: 46px;
+}
+.portfolio-container .hero-slider-content p{
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 39px;
+    color:black;
+}
+.portfolio-container .hero-slider-content h4{
+    color:#313131;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 39px;
+}
+
+.portfolio-container .screen{
+    color:#313131;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 39px;
     text-align: justify;
 }
 
@@ -1999,9 +2128,9 @@ button.filter-btn:focus {
 }
 
 .portfolio-wrapper .content-overlay {
-    background: #1351a8;
-    background: -webkit-linear-gradient(left, #1351a8 2%, #162477 82%);
-    background: linear-gradient(to right, #1351a8 2%, #162477 82%);
+    background: #162E66;
+    background: -webkit-linear-gradient(left, #162E66 2%, #162477 82%);
+    background: linear-gradient(to right, #162E66 2%, #162477 82%);
     position: absolute;
     height: 100%;
     width: 100%;
@@ -2145,12 +2274,12 @@ a.detail-link span {
     vertical-align: middle;
     -webkit-transition-duration: .3s;
     transition-duration: .3s;
-    color: #1351a8;
+    color: #162E66;
 }
 
 
 a.detail-link:hover {
-    color: #1351a8;
+    color: #162E66;
 }
 a.detail-link:hover span{
     transform: translateX(3px);
@@ -2183,7 +2312,7 @@ a.detail-link:hover span{
     z-index: -1;
     left: 0;
     right: 0;
-    border: 3px solid #1351a8;
+    border: 3px solid #162E66;
 }
 .work-process-list li span:after{
     position: absolute;
@@ -2195,7 +2324,7 @@ a.detail-link:hover span{
     z-index: -1;
     left: 0;
     right: 0;
-    border: 3px solid #1351a8;
+    border: 3px solid #162E66;
 }
 .work-process-list li span{
     width: 50px;
@@ -2249,7 +2378,7 @@ a.detail-link:hover span{
     transform: scale(1.25);
     background: #ffffff;
     border-color: transparent;
-    color: #1351a8;
+    color: #162E66;
 }
 .step::before {
     -webkit-transition: all 0.2s;
@@ -2495,6 +2624,7 @@ a.detail-link:hover span{
 .feature-tabs li{
     position: relative;
     margin: 0 15px;
+    
 }
 .feature-tabs li:first-child{
     margin-left: 0;
@@ -2516,7 +2646,7 @@ a.detail-link:hover span{
     position: absolute;
     content: "";
     width: 50%;
-    background: rgba(0,0,0,.2);
+    border-left: 3px solid #2947A9;
     -webkit-transition: all .7s cubic-bezier(.19,1,.22,1) 0s;
     transition: all .7s cubic-bezier(.19,1,.22,1) 0s;
     height: 2px;
@@ -2524,10 +2654,11 @@ a.detail-link:hover span{
 }
 .feature-tabs li a.active:before{
     width: 100%;
-    background: #1351a8;
+    background: #2947A9;
+    border-left: 3px solid #2947A9;
 }
 .feature-tabs li a.active{
-    color: #1351a8; !important;
+    color: #2947A9 !important;
 }
 @media (min-width: 320px) and (max-width: 414px){
     .feature-tabs-wrap ul li{
@@ -2635,7 +2766,7 @@ a.detail-link:hover span{
     color: #757575;
 }
 .team-overly-content ul li a:hover{
-    color: #1351a8;
+    color: #162E66;
 }
 .team-info{
     display: block;
@@ -2673,10 +2804,10 @@ a.detail-link:hover span{
 
 
 .staff-member .overlay {
-    background: #1351a8;
-    background: -moz-linear-gradient(left, #1351a8 2%, #162477 82%);
-    background: -webkit-linear-gradient(left, #1351a8 2%, #162477 82%);
-    background: linear-gradient(to right, #1351a8 2%, #162477 82%);
+    background: #162E66;
+    background: -moz-linear-gradient(left, #162E66 2%, #162477 82%);
+    background: -webkit-linear-gradient(left, #162E66 2%, #162477 82%);
+    background: linear-gradient(to right, #162E66 2%, #162477 82%);
     color: #fff;
     position: absolute;
     top: 0;
@@ -2747,7 +2878,7 @@ a.detail-link:hover span{
     display: block;
 }
 .staff-member .overlay ul.social li a:hover span{
-    color: #1351a8;
+    color: #162E66;
 }
 .staff-member .overlay ul.social {
     -webkit-transform: translateY(10px);
@@ -2835,7 +2966,7 @@ a.video-play-icon-without-bip:hover{
     -webkit-animation: ripple-white 1s linear infinite;
     animation: ripple-white 1s linear infinite;
     -webkit-transition: .5s;
-    background-color: #1351a8;
+    background-color: #162E66;
 }
 @-webkit-keyframes ripple {
     0% {
@@ -2989,7 +3120,7 @@ a.video-play-icon-without-bip:hover{
 }
 
 .project-info-list li{
-    border-left: 4px solid #1351a8;
+    border-left: 4px solid #162E66;
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
 }
 .project-info-list li a{
@@ -3083,7 +3214,7 @@ a.video-play-icon-without-bip:hover{
 
 .testimonial-wrap span.icon {
     font-size: 35px;
-    color: #1351a8;
+    color: #162E66;
 }
 
 .testimonial-wrap blockquote {
@@ -3127,6 +3258,13 @@ a.video-play-icon-without-bip:hover{
 .author-img {
     width: 4.425rem;
     height: 4.425rem;
+    line-height: 4.425rem;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+}
+.author-imgg {
+    width: 10.425rem;
+    height: .425rem;
     line-height: 4.425rem;
     border-radius: 50%;
     border: 2px solid #ffffff;
@@ -3610,7 +3748,34 @@ figure {
     }
 }
 
+/*=========================================
+            23. Employment cheks
+============================================*/
 
+.card.single-employment-pack{
+    transition: all 0.2s ease 0s;
+    border: none;
+    border-top: 4px solid transparent;
+}
+
+.card.single-employment-pack h5{
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.single-employment-pack:hover {
+    box-shadow: 0 1rem 3rem rgba(31,45,61,.125)!important;
+    transform: translate(0, -5px);
+    border-top: 4px solid #162e66;;
+}
+.single-employment-pack .card-body {
+    color: rgb(132, 146, 166);
+    flex: 1 1 auto;
+    padding: 1.5rem;
+}
 /*=========================================
             23. PRICING CSS
 ============================================*/
@@ -3639,6 +3804,29 @@ figure {
     position: relative;
     background: transparent;
 }
+.simplepricing-header{
+    position: relative;
+    background: transparent;
+}
+.simplepricing-header h2{
+    font-weight: 800;
+    font-size:24px;
+    line-height: 32px;
+    color: #171923;
+}
+.simplepricing-header p{
+    font-weight: 800;
+    font-size:60px;
+    line-height: 60px;
+    color: #171923;
+}
+.simplepricing-headerr{
+    font-weight:500;
+    font-size: 18px;
+    line-height: 28px;
+    text-align: center;
+    color:#171923;
+}
 .pricing-img{
     width: 120px;
     height: 120px;
@@ -3664,11 +3852,49 @@ figure {
     margin-left: -40%;
     height: 1px;
     background: radial-gradient(at center center, rgb(222, 228, 239) 0px, rgba(255, 255, 255, 0) 75%);
+  
+}
+.vetting_title{
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 60px;
+    text-align: left;
+}
+.pricing-feature-para li{
+    font-size: 14px;
+    line-height: 28px;
+    text-align: left;
 }
 
 .pricing-feature-list li{
     font-size: 14px;
     line-height: 28px;
+    text-align: left;
+    color:#1A1A1A;
+    
+}
+
+.pricing-clearance-list li{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    text-align: left;
+    color:#2D3748;
+    padding-bottom: 10px;
+}
+
+.clearance-feature-list{
+    padding-top: 20px;
+}
+
+.clearance-feature-list li{
+    font-size: 20px;
+    line-height: 30px;
+    text-align: left;
+    font-weight:500;
+    padding-bottom: 20px;
+  
+    color:#1A1A1A;
 }
 
 /*price new style*/
@@ -3720,13 +3946,76 @@ a.pricing-value {
     text-decoration: none;
     color: #757575;
 }
+.decision{
+    font-size: 25px; 
+    font-weight:600;
+}
+.commission h5{
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 86.4px;
+    text-align: left;
+}
+
+.commission p{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    width:80%
+}
+.commission h3{
+    font-size: 40px;
+    font-weight: 600;
+    text-align: left;
+    line-height: 54.4px;
+}
+.commission span{
+    text-align: left;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 32px;
+}
 
 /*=========================================
            24. SINGLE PAGE HEADER CSS
 ============================================*/
 @media (min-width: 320px) and (max-width: 576px){
+    .commission h5{
+        font-size: 54px;
+        font-weight: 600;
+        line-height: 86.4px;
+        text-align: center;
+    }
+    
+    .commission p{
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        text-align: center;
+    }
+    .commission h3{
+        font-size: 30px;
+        font-weight: 600;
+        text-align: center;
+        line-height: 54.4px;
+    }
+    .commission span{
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 32px;
+        text-align: center;
+    }
     .page-header-content{
         padding-top: 3rem !important;
+    }
+    .decision{
+        margin-top: 60px;
+        margin-bottom: 30px;
+        font-size: 18px !important;
+    }
+    .featureproject{
+        margin-top: 80px;
     }
 
 }
@@ -3836,6 +4125,7 @@ a.pricing-value {
 
 .copyright-text {
     font-size: 13px;
+    color:#fff;
 }
 
 .social-list li a {
@@ -4031,7 +4321,7 @@ a.pricing-value {
     color: #5d5d5d;
 }
 .post-header .post-title a:hover{
-    color: #1351a8;
+    color: #162E66;
 }
 .post-meta {
     list-style: none;
@@ -4044,7 +4334,7 @@ a.pricing-value {
     opacity: 0.8;
 }
 .post-meta a:hover{
-    color: #1351a8;
+    color: #162E66;
     opacity: 1;
 }
 .post-meta > li {
@@ -4080,7 +4370,7 @@ a.pricing-value {
     transition: all .3s ease-in-out;
 }
 .post-content blockquote:hover {
-    border-color: #1351a8;
+    border-color: #162E66;
 }
 .blockquote {
     font-weight: 500;
@@ -4149,7 +4439,7 @@ a.pricing-value {
     color: #222;
 }
 .comment-reply > a:hover, .comment-reply > a:focus, .comment-reply-shop > a:hover, .comment-reply-shop > a:focus {
-    background: #1351a8;
+    background: #162E66;
     color: #fff;
 }
 
@@ -4178,7 +4468,7 @@ a.pricing-value {
     color: #162e66;
 }
 .custom-pagination-nav ul li a.page-link:hover{
-    background: #1351a8;
+    background: #162E66;
     color: #FFFFFF;
 }
 .custom-pagination-nav ul li.page-item:first-child .page-link,
@@ -4189,11 +4479,11 @@ a.pricing-value {
 }
 .custom-pagination-nav ul li.page-item:first-child .page-link:hover,
 .custom-pagination-nav ul li.page-item:last-child .page-link:hover{
-    color: #1351a8;
+    color: #162E66;
 }
 .custom-pagination-nav ul li.page-item.active .page-link{
-    background-color: #1351a8;
-    border-color: #1351a8;
+    background-color: #162E66;
+    border-color: #162E66;
 }
 /*blog sidebar*/
 
@@ -4256,7 +4546,7 @@ button, [type="button"], [type="reset"], [type="submit"] {
     font-size: 14px;
 }
 .widget a:hover{
-    color: #1351a8;
+    color: #162E66;
 }
 .widget-recent-entries-custom .wi {
     float: left;

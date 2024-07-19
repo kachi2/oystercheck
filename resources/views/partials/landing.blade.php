@@ -15,6 +15,7 @@
                     <li>
                         <a href="{{route('landing')}}" > Home</a> 
                     </li>
+                    <li><a href="{{route('about-us')}}" >About Us</a>
                         <ul class="sub-menu">
                             <li><a href="{{route('about-us')}}" >About Us</a></li>
                             <li><a href="{{route('who-we-are')}}">Who we are</a></li>

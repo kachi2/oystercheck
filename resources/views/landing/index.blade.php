@@ -78,7 +78,7 @@
                 <div class="col-md-12 col-lg-5">
                     <div class="d-flex flex-column-reverse align-items-end ">
                         <div class="action-btns mt-3 " style="padding-top: 40px">
-                            <a href="#" class="btn secondary-solid-btn">Learn more <i class="fas fa-arrow-right ml-2" ></i></a>
+                            {{-- <a href="#" class="btn secondary-solid-btn">Learn more <i class="fas fa-arrow-right ml-2" ></i></a> --}}
                         </div>
                     </div>
                 </div>
@@ -99,9 +99,9 @@
                             <p class="card-text text-justify" id="card-text2">Access our comprehensive data sets, which have been compiled
                                 from over 20,000 government sources, allowing you to identify
                                 politically exposed persons and their close associates.</p>
-                            <a href="#" id="read-more-link2" class="read-more">Read more</a>
+                            <a href="{{route('about-us')}}" id="read-more-link2" class="read-more">Read more</a>
                             <div class="action-btns mt-0 ">
-                                <a href="#" class="btn outline-btn mt-3">Learn more <i class="fas fa-arrow-right ml-2" ></i></a>
+                                {{-- <a href="#" class="btn outline-btn mt-3">Learn more <i class="fas fa-arrow-right ml-2" ></i></a> --}}
                             </div>
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                             <h5 class="card-title">Sanction Screening</h5>
                             <p class="card-text text-justify">Screen against thousands of government regulatory and law enforcement watchlists, and over 100 International and National Sanctions lists that are updated daily.</p>
                             <div class="action-btns mt-0 ">
-                                <a href="#" class="btn outline-btn mt-3">Learn more <i class="fas fa-arrow-right ml-2" ></i></a>
+                                {{-- <a href="#" class="btn outline-btn mt-3">Learn more <i class="fas fa-arrow-right ml-2" ></i></a> --}}
                             </div>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                             <h5 class="card-title">Know Your Business Check</h5>
                             <p class="card-text text-justify">Primary source company intelligence via Know Your Business (KYB) Solution. Access primary source, company intelligence to optimize your KYC processes.</p>
                             <div class="action-btns mt-0 ">
-                                <a href="#" class="btn outline-btn mt-3">Learn more <i class="fas fa-arrow-right ml-2" ></i></a> 
+                                {{-- <a href="#" class="btn outline-btn mt-3">Learn more <i class="fas fa-arrow-right ml-2" ></i></a>  --}}
                             </div>
                         </div>
                     </div>
@@ -141,7 +141,7 @@
                             <p class="card-text text-justify">Work with our accredited advisers to assess the money
                                 laundering and terrorism financing risk to your business.</p><br>
                             <div class="action-btns mt-0 ">
-                                <a href="#" class="btn outline-btn mt-3">Learn more <i class="fas fa-arrow-right ml-2" ></i></a> 
+                                {{-- <a href="#" class="btn outline-btn mt-3">Learn more <i class="fas fa-arrow-right ml-2" ></i></a>  --}}
                             </div>
                         </div>
                     </div>
@@ -155,9 +155,9 @@
                                 MemberCheck, a sister company of NameScan, trusted by many companies for their AML/CTF needs, proudly introduces Identity Verification (IDV), a Know Your Customer
                                  (KYC) solution that verifies the identity of individuals.
                             </p>
-                            <a href="#" id="read-more-link" class="read-more">Read more</a>
+                            {{-- <a href="#" id="read-more-link" class="read-more">Read more</a> --}}
                             <div class="action-btns mt-0 ">
-                                <a href="#" class="btn outline-btn mt-3">Learn more <i class="fas fa-arrow-right ml-2" ></i></a> 
+                                {{-- <a href="#" class="btn outline-btn mt-3">Learn more <i class="fas fa-arrow-right ml-2" ></i></a>  --}}
                             </div>
                         </div>
                     </div>

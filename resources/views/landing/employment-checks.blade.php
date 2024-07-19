@@ -294,7 +294,7 @@
    
 
     {{-- faq --}}
-    <section class="promo-section ptb-100">
+    {{-- <section class="promo-section ptb-100">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
@@ -387,7 +387,7 @@
             </div>
             <!--pricing faq end-->
         </div>
-    </section>
+    </section> --}}
 
    
 

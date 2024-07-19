@@ -171,9 +171,9 @@
                     <div style="background-color: #162E66" class=" text-white section-heading commission text-left mb-5 p-4" >
                         <h3 class=" text-white">About us</h3>
                         <span class="lead">
-                            For more than 30 years we have been delivering world-class checks and we’ve built many lasting
+                            For more than 5 years we have been delivering world-class checks and we’ve built many lasting
                              relationships along the way. <br> <br> We’ve matured into an industry leader and trusted resource for 
-                             those seeking quality, innovation and reliability when building in the U.S. 
+                             those seeking quality, innovation and reliability when building in the Nigeria. 
                         </span>
                         <br><br>
                         <a href="#" class="btn outline-btn align-items-center" style="background-color: #fff">More on Our History<span class="ti-arrow-right pl-2"></span></a>
@@ -212,7 +212,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-lg-8"> 
+                {{-- <div class="col-lg-8"> 
                     <div class="tab-content feature-tab-content">
                         <div class="tab-pane active" id="feature-tab-1">
                             <div class="row">
@@ -380,14 +380,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                    
                    
             </div>
         </div>
     </section>
 
-    <section class="call-to-action py-5" style="background: url('{{asset('/landing_assets/img/consult_img.png')}}')no-repeat bottom center / cover; height: 250px;">
+    {{-- <section class="call-to-action py-5" style="background: url('{{asset('/landing_assets/img/consult_img.png')}}')no-repeat bottom center / cover; height: 250px;">
         <div class="container">
             <div class="row justify-content-around align-items-center">
                 <div class="col-md-7">
@@ -403,9 +403,9 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
-    <section class="testimonial-section ptb-100">
+    {{-- <section class="testimonial-section ptb-100">
         <div class="container">
             <div class="row ">
                 <div class="col-md-9 col-lg-8">
@@ -549,10 +549,10 @@
             </div>
             </div>
         </div>
-    </section>
+    </section> --}}
   
    
-    <section class="contact-us-section ptb-100 gray-light-bg">
+    {{-- <section class="contact-us-section ptb-100 gray-light-bg">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6">
@@ -614,7 +614,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     
  
 

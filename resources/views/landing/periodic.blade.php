@@ -119,7 +119,7 @@
         </div>
     </section>
     
-    <section class="contact-us-section ptb-100">
+    {{-- <section class="contact-us-section ptb-100">
         <div class="container">
             <div class="row align-items-center justify-content-between">
                 <div class="col-md-5 col-lg-5">
@@ -255,7 +255,7 @@
         </div>
         </div>
     </section>
-  
+   --}}
     
  
 

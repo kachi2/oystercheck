@@ -150,7 +150,7 @@
     </section>
     <!--promo section end-->
 
-    <section class="contact-us-section ptb-100">
+    {{-- <section class="contact-us-section ptb-100">
         <div class="container">
             <div class="row justify-content-around">
                 <div class="col-md-5">
@@ -211,7 +211,7 @@
                
             </div>
         </div>
-    </section>
+    </section> --}}
 
    
 

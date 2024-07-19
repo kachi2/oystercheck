@@ -331,7 +331,7 @@
                         <div class="pt-4 pl-4"><h5>BS7858 Vetting</h5></div>
                        
                         <div class="card-header py-4 border-0 pricing-header" style="color: #000">
-                            <div class="h1  mb-0">$<span class="price font-weight-bolder" >700</span></div>
+                            <div class="h1  mb-0">N<span class="price font-weight-bolder" >150,000</span></div>
                             
                         </div>
                         <div class="card-body">
@@ -354,7 +354,7 @@
                         <div class="pt-4 pl-4"><h5>BPSS clearance</h5></div>
                         
                         <div class="card-header py-4 border-0 pricing-header" style="color: #000">
-                            <div class="h1 mb-0">$<span class="price font-weight-bolder">1200</span><sub style="color:#1A1A1A; font-size:12px; line-height:16.8px">/ month</sub></div>
+                            <div class="h1 mb-0">N<span class="price font-weight-bolder">2500,00</span><sub style="color:#1A1A1A; font-size:12px; line-height:16.8px">/ month</sub></div>
 
 
                         </div>

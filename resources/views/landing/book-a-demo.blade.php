@@ -36,7 +36,7 @@
                                 <img class="mr-2" src="{{asset('/landing_assets/img/Check_icon.png')}}" 
                                 style="width:18px; height:18px; padding-top:3px; line-height:15px" > Stay ahead of new and unknown fraud</li>
                         </ul>
-                        <p style="font-size: 12px">Trusted by</p>
+                        {{-- <p style="font-size: 12px">Trusted by</p> --}}
                         <style>
                             /* Define the opacity-effect class */
                             .opacity-effect {
@@ -50,7 +50,7 @@
                                 opacity: 1;
                             }
                         </style>
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col">
                                 <img class="mr-4 opacity-effect" src="{{asset('/landing_assets/img/inDrive_img.png')}}"   alt="inDrive_img">
                                 <img class="mr-4 opacity-effect" src="{{asset('/landing_assets/img/alibaba_img.png')}}"   alt="alibaba_img">
@@ -66,7 +66,7 @@
                           
                             </div>
                            
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="col-md-12 col-lg-6">
@@ -336,7 +336,7 @@
     </section>
 
     
-    <section class="contact-us-section ptb-100">
+    {{-- <section class="contact-us-section ptb-100">
         <div class="container">
             <div class="row align-items-center justify-content-between">
                 <div class="col-md-5 col-lg-5">
@@ -471,7 +471,7 @@
             </div>
         </div>
         </div>
-    </section>
+    </section> --}}
   
     
  

@@ -23,9 +23,9 @@
                             <li><a href="{{route('about-us')}}">Why Choose Us</a></li>
                         </ul>
                     </li>
-                    <li><a href="{{route('employment-checks')}}" >Employment Checks</a></li>
                       <li><a  href="#" class="dropdown-toggle">Services</a>
                         <ul class="sub-menu">
+                            <li><a href="{{route('employment-checks')}}" >Employment Checks</a></li>
                             <li><a href="{{route('periodic')}}">Periodic KYC</a></li>
                             <li><a href="{{route('transaction')}}">Transaction</a></li>
                             <li><a href="{{route('aml-solution')}}">AML Solution</a></li>

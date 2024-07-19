@@ -15,13 +15,14 @@
                     <li>
                         <a href="{{route('landing')}}" > Home</a> 
                     </li>
-                    <li><a href="{{route('about-us')}}" >About Us</a>
+                    <li><a href="{{route('about-us')}}" class="dropdown-toggle">About Us</a>
                         <ul class="sub-menu">
                             <li><a href="{{route('about-us')}}" >About Us</a></li>
                             <li><a href="{{route('who-we-are')}}">Who we are</a></li>
                             <li><a href="{{route('core-values')}}">Core values</a></li>
                             <li><a href="{{route('mission')}}">Mission </a></li>
                             <li><a href="{{route('about-us')}}">Why Choose Us</a></li>
+                            <li><a  href="{{route('industry')}}">Industry</a></li>
                         </ul>
                     </li>
                       <li><a  href="#" class="dropdown-toggle">Services</a>
@@ -35,7 +36,6 @@
                         </ul>
                     </li>
                     <li><a href="{{route('technology')}}">Technology</a></li>
-                    <li><a  href="{{route('industry')}}">Industry</a></li>
                     <li><a  href="{{route('contact-us')}}">Contact Us</a></li>
                     <li><a href="{{route('book-a-demo')}}">Book a Demo</a></li>
                    

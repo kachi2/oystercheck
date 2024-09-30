@@ -9,7 +9,7 @@ use App\Models\CandidateVerification;
 use Illuminate\Support\Facades\Session;
 
 class AdminCandidateController extends Controller
-{
+{ 
     //
     public function CandidateIndex(){
         $candidate['candidate'] = Candidate::get();

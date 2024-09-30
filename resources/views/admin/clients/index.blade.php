@@ -14,7 +14,7 @@ use App\Models\User as User;
                                         <h4 class="page-title">All Clients</h4>
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"></li>
-                                        </ol>
+                                        </ol> 
                                     </div><!--end col-->
                                     <div class="col-auto align-self-center">
                                         <a href="#" class="btn btn-sm btn-outline-primary" id="Dash_Date">
@@ -62,7 +62,8 @@ use App\Models\User as User;
                                 @elseif($client->is_admin_verified == User::ADMIN_SUSPENDED) <span class="badge bg-danger">Suspended </span> 
                                 @else <span class="badge bg-warnig"> Pending</span></td>
                                 @endif
-                                <td> {{$client->user->activities->created_at->format('d/m/y H:I')}}</td>
+                                {{-- <td> {{$client->user->activities->created_at->format('d/m/y H:I')}}</td>  --}}
+                                <td></td>
                                 <td> {{$client->user->activities->ip_address}}</td>
                                 <td> {{$client->user->created_at}}</td>
                                 <td>

@@ -9,11 +9,17 @@
             <div class="row align-items-center">
                 <div class="col-md-12 col-lg-6">
                     <div class="hero-slider-content z-index position-relative">
-                        <h1 class="text-white">Instant background checks for the right talent</h1>
-                        <p class="lead text-white">A better way to verify a candidate's information and background during the recruitment process. </p>
-                       
-                        
+                        <span className="text-white text-uppercase">Digital Verifications</span>
+                        <h1 class="text-white">Background Checking Services
+                        </h1>
+                        <p class="text-white">Comprehensive and Exceptional background<br/> checks, KYC & AML compliance Solutions </p>
+                        <div class="action-btns mt-3">
+                            <a class="btn secondary-solid-btn" style="font-size: 12px; color:#162E66; background-color:#fff" href="{{ route('login') }}" >Get Started Now</a>
+                        </div>
+
+                    
                     </div>
+                  
                 </div>
                 <div class="col-md-12 col-lg-6">
                     <div class="hero-animation-img">

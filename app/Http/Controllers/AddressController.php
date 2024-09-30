@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+ 
 use App\Events\AddressVerificationCreated;
 use Illuminate\Http\Request;
 use App\Models\AddressVerification;

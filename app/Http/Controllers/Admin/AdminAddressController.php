@@ -11,7 +11,7 @@ use App\Models\AddressVerification;
 class AdminAddressController extends Controller
 {
     //
-
+ 
     public function AddressIndex($slug){
         $slug = Verification::where(['slug' => $slug])->first();
         $data['slug'] = Verification::where(['slug' => $slug->slug])->first();
@@ -20,5 +20,5 @@ class AdminAddressController extends Controller
         $data['pending'] = AddressVerification::where(['status'=>'pending', 'verification_id'=>$slug->id])->get();          
         $data['logs'] = AddressVerification::where(['verification_id'=>$slug->id])->latest()->get();
         return view('admin.address.index', $data);
-    }
+    } 
 }

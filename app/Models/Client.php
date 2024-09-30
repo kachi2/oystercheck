@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
-    use HasFactory;
+    use HasFactory; 
 
     protected $fillable = [
         'email', 'user_id', 'company_name', 'company_email', 'company_address', 'company_phone', 'image', 'is_activated', 'logo', 'reg_number', 'tax_number', 'description', 'website', 'facebook', 'instagram', 'linkedin', 'cac', 'others' 

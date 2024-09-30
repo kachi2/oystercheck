@@ -7,7 +7,7 @@
                 <div class="page-title-box">
                     <div class="row">
                         <div class="col">
-                            <h4 class="page-title">{{$slug['slug']}} Verification</h4>
+                            <h4 class="page-title">Business Verification</h4>
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"></li>
                             </ol>
@@ -28,97 +28,20 @@
             </div>
             <!--end col-->
         </div>
-        <div class="row ">
-            <div class="col-lg-12">
-                <div class="row justify-content-center">
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card report-card ">
-                            <div class="card-body">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col">
-                                        <p class="mb-0 fw-semibold text-black">Successful {{$slug['slug']}} verifications</p>
-                                        <h3 class="m-0 text-black">{{count($success)}}</h3>
-                                    </div>
-                                    <div class="col-auto align-self-center">
-                                        <div class="report-main-icon bg-light-alt">
-                                            <i data-feather="users" class="align-self-center text-muted icon-sm"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end card-body-->
-                        </div>
-                        <!--end card-->
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card report-card">
-                            <div class="card-body">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col">
-                                        <p class="text-black mb-0 fw-semibold">Failed {{$slug['slug']}} verifications</p>
-                                        <h3 class="m-0 text-black">{{count($failed)}}</h3>
-                                    </div>
-                                    <div class="col-auto align-self-center">
-                                        <div class="report-main-icon bg-light-alt">
-                                            <i data-feather="users" class="align-self-center text-muted icon-sm"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end card-body-->
-                        </div>
-                        <!--end card-->
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card report-card">
-                            <div class="card-body" >
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col">
-                                        <p class="text-black b-0 fw-semibold">Pending Request</p>
-                                        <h3 class="m-0 text-black">{{count($pending)}}</h3>
-                                    </div>
-                                    <div class="col-auto align-self-center">
-                                        <div class="report-main-icon bg-light-alt">
-                                            <i data-feather="users" class="align-self-center text-muted icon-sm"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end card-body-->
-                        </div>
-                        <!--end card-->
-                    </div>
-                    <!--end col-->
-                    <!--end col-->
-                </div>
-                <!--end row-->
-            </div>
-        </div>
-        {{-- <div class="row">
-            <div class="col-lg-12">
-                <div class="card mb-3" style="background:#f1f5fa">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card-body">
-                                <h5 class="card-title">Verify a Business ({{$slug->name}}) </h5>
-                                <p class="card-text mb-0">Seamless KYC and business verification and get key insights and analysis for every verification.</p>
-                                <p class="card-text mb-0"><small class="text-muted">Use the "Verify Candidate" button to initiate the verification process.</small></p>
-                            </div>
-                        </div>
-                        <div class="col-md-6 align-self-center">
-                            <div class="card-body d-flex justify-content-lg-end justify-content-center">
-                                <a type="button" class="btn btn-primary " href="{{route('businessCheck', $slug->slug)}}">Verify Business</a>
 
-                            </div>
-                        </div>
-                        <!--end col-->
-                        <!--end col-->
-                    </div>
-                    <!--end row-->
-                </div>
-                <!--end card-->
-            </div>
-        </div> --}}
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="d-flex flex-wrap">
+                    @foreach($business as $biz ) 
+                        <a class="btn m-2 {{ request()->is('admin/business/'.$biz->slug) ? 'btn-primary' : 'btn-secondary' }}" href="{{route('admin.businessIndex',$biz->slug)}}">
+                            {{ strlen($biz->name) == 3 ? strtoupper($biz->name) : ucwords(str_replace('-', ' ', $biz->name)) }} Verification
+                        </a>
+                    @endforeach
+                </div><!--end flex container-->
+            </div><!--end col-->
+        </div><!--end row-->
+
+        
         <div class="row">
             <div class="col-12">
                 <div class="card">

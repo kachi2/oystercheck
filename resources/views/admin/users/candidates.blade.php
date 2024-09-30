@@ -50,7 +50,7 @@
                             <tbody>
                             @foreach ($candidate as $cand )
                                <tr>
-                                <td>#{{$cand->id}}</td>
+                                <td>{{$cand->id}}</td>
                                 <td>{{$cand->user->name}}</td>
                                 <td>{{$cand->user->email}}</td>
                                 <td>{{$cand->phone}}</td>
@@ -59,8 +59,9 @@
                                     @elseif($cand->status == "rejected")
                                     <td><span class="badge badge-soft-danger">Rejected</span></td>
                                     @else
-                                     <td>
-                                        <form action="{{route('VerifyCandidate',encrypt($cand->user_id))}}" method="post" id="form1">
+                                     <td> 
+                                        <form action="" method="post" id="form1">
+                                            {{-- <form action="{{route('VerifyCandidate',encrypt($cand->user_id))}}" method="post" id="form1"> --}}
                                             @csrf
                                             <select class="p-1" style="border:1px solid green; border-radius:5px" id="verify" name="verify" >
                                         <option class="badge badge-soft-warning " value="0">Pending</option>

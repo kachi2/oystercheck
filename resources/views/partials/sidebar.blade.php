@@ -25,7 +25,7 @@
                     <hr class="hr-dashed hr-menu">
                     
                     <li class="menu-label my-2">Candidate Onboarding</li>
-                    <li>
+                    <li> 
                         <a href="javascript: void(0);">
                             <i data-feather="user-plus" class="align-self-center menu-icon"></i>
                             <span>Candidate Onboarding</span>
@@ -50,7 +50,7 @@
                             <span class="menu-arrow">
                                 <i class="mdi mdi-chevron-right"></i>
                             </span>
-                        </a>
+                        </a> 
                         <ul class="nav-second-level" aria-expanded="false">
                             @foreach($sidebar as $menu)
                             <li class="nav-item">
@@ -69,7 +69,7 @@
                              <li class="nav-item"><a class="nav-link" href="{{route('businessIndex',$biz->slug)}}"><i class="ti-control-record"></i>{{$biz->name}}</a></li>
                            @endforeach
                         </ul>
-                    </li> 
+                    </li>  
                          <li>
                         <a href="javascript: void(0);"><i data-feather="map-pin" class="align-self-center menu-icon"></i><span>Address Verification</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">

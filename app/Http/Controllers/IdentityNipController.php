@@ -12,7 +12,7 @@ use App\Traits\GenerateRef;
 use App\Models\Transaction;
 use App\Traits\sandbox;
 use App\Models\User;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Session; 
 
 
 class IdentityNipController extends Controller
@@ -163,7 +163,7 @@ class IdentityNipController extends Controller
                         'last_name' => $decodedResponse['data']['lastName'],
                         'pin' => $request->pin,
                         'is_sandbox' => $this->sandbox()
-                    ]);
+                    ]); 
                     DB::commit();
                     Session::flash('alert', 'success');
                     Session::flash('message', 'Verification Successful');

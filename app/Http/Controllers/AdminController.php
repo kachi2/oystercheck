@@ -48,8 +48,9 @@ class AdminController extends Controller
 
 
     public function Index(){
-        $data = $this->IdentityIndex();
-        return view('admin.verifications.index', $data);
+        $data = $this->IdentityIndex(); 
+        
+        return view('admin.verifications.index', $data, );
     }
 
 
@@ -98,7 +99,7 @@ class AdminController extends Controller
        $user = User::latest()->first();
         Wallet::create([
             'user_id' => $user->id,
-            'book_balance' => 0,
+            'book_balance' => 0, 
             'avail_balance' => 0,
             'total_balance' => 0,
         ]);
@@ -117,7 +118,7 @@ class AdminController extends Controller
             'company_phone' => $request->company_phone,
             'user_id' => $user->id,
             'image'=>$image_url 
-        ]);
+        ]); 
 
         Session::flash('alert', 'success');
         Session::flash('message', 'Client created successfully');
@@ -308,9 +309,31 @@ class AdminController extends Controller
             }
         }
 
-        public function UserTransactions(){
-            $data['balances'] = Wallet::first();
-            $data['transactions'] = Transaction::latest()->paginate(20);
-            return view('users.accounts.transactions', $data);
-        }
+    public function UserTransactions(){
+        $data['balances'] = Wallet::first();
+        $data['transactions'] = Transaction::latest()->paginate(20);
+        return view('users.accounts.transactions', $data);
+    }
+
+    public function UserReports(){
+        $labels = ['M', 'T', 'W', 'T', 'F'];
+        $data2023 = [65, 59, 80, 81, 56];
+        $data2024 = [28, 48, 40, 19, 86];
+        $data2025 = [20, 40, 30, 10, 70];
+
+       return view('admin.auditReport.index', compact('labels', 'data2023', 'data2024' ,'data2025'));
+    }
+
+    public function UserActivity(){
+        
+       return view('admin.activityReport.index');
+    }
+
+    public function Profile(){
+        return view('admin.settings.index');
+    }
+
+    public function getTransaction(){
+        return view('admin.transaction.index');
+    }
 }

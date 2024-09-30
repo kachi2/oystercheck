@@ -10,7 +10,7 @@ use App\Models\IdentityVerification;
 
 class AdminIdentityController extends Controller
 {
-    //
+    // 
     public function getVerify($slug){
         $user = auth()->user();
         $slug = Verification::where('slug', $slug)->first();
@@ -75,14 +75,14 @@ class AdminIdentityController extends Controller
         $slug = Verification::where('slug', $slug)->first();
         $data['slug'] = $slug;
         if ($slug) {
-            if ($slug->slug == 'bvn') {
+            if ($slug->slug == 'bvn') { 
                 $bvn_verification = BvnVerification::where(['id'=>$verificationId])->first();
                 if($bvn_verification){
                     return view('admin.verifications.identity_reports.bvn_report', ['bvn_verification'=>$bvn_verification]);
                 }
             } elseif ($slug->slug == 'nip') {
                 $nip_verification = NipVerification::where(['id'=>$verificationId])->first();
-                if($nip_verification){
+                if($nip_verification){ 
                     return view('admin.verifications.identity_reports.nip_report', ['nip_verification'=>$nip_verification]);
                 }
             } elseif ($slug->slug == 'nin') {

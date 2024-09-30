@@ -70,7 +70,7 @@ Route::get('/user/business/check/{slug}', [BusinessController::class, 'businessC
 Route::post('/user/business/verify/{slug}', [BusinessController::class, 'BusinessStore'])->name('businessStore');
 Route::get('/user/business/{slug}/{verificationId}', [BusinessController::class, 'BusinessReport'])->name('showBusinessReport');
 
-
+ 
 Route::get('/user/address/verification/{slug}', [AddressController::class,'AddressIndex'])->name('addressIndex');
 Route::get('/user/address/verification/{slug}/candidate/create', [AddressController::class,'showCreateCandidate'])->name('showCreateCandidate');
 Route::get('/user/address/verification/{slug}/{addressId?}', [AddressController::class, 'verificationReport'])->name('showAddressReport');

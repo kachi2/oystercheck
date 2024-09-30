@@ -17,7 +17,7 @@
                             <a href="{{route('login')}}" class="btn secondary-solid-btn">Get Started Now</a>
                         </div>
                     </div>
-                </div>
+                </div> 
                 <div class="col-md-12 col-lg-6">
                     <div class="img-wrap counter-number d-inline-flex align-items-center mb-4" >
                         <img src="{{asset('/landing_assets/fontpage.png')}}" alt="hero single" class="custom-width img-fluid">

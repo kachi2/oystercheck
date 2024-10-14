@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ActivityLog extends Model
-{
+{ 
     use HasFactory;
 
     protected $fillable = [
@@ -14,7 +14,7 @@ class ActivityLog extends Model
         'user_id', 'activity', 'ip_address', 'user_agent'
 
     ];
-
+ 
     public function user(){
         return $this->belongsTo(User::class);
     }

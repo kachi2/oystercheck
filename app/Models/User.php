@@ -31,7 +31,7 @@ const ADMIN_PENDING = 0;
         'password',
         'role_id',
         'user_type'
-    ];
+    ]; 
 
     /**
      * The attributes that should be hidden for arrays.
@@ -66,12 +66,17 @@ const ADMIN_PENDING = 0;
     //         $type = 'CLIENT';
     //     }
     // }
-
+ 
     public function activities(){
         return $this->hasOne(ActivityLog::class)->latest();
     }
 
     public function candidate(){
         return $this->hasOne(Candidate::class, 'user_id', 'id');
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->firstname . ' ' . $this->lastname;
     }
 }

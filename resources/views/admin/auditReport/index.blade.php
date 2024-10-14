@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="col">
                                         <p class="text-black mb-0 fw-semibold">Total Verification</p>
-                                        <h1 class="m-0 text-black">1,245</h1>
+                                        <h1 class="m-0 text-black">{{ $totalReports }}</h1>
                                     </div>
                                    
                                 </div>
@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="col">
                                         <p class="text-black mb-0 fw-semibold">Successful  Verification</p>
-                                        <h1 class="m-0 text-black">600</h1>
+                                        <h1 class="m-0 text-black">{{ $totalSuccess }}</h1>
                                     </div>
                                     
                                 </div>
@@ -88,7 +88,7 @@
                                     </div>
                                     <div class="col">
                                         <p class="text-black mb-0 fw-semibold">Failed  Verification</p>
-                                        <h1 class="m-0 text-black">245</h1>
+                                        <h1 class="m-0 text-black">{{ $totalFailed }}</h1>
                                     </div>
                                     
                                 </div>
@@ -106,7 +106,7 @@
                                     </div>
                                     <div class="col">
                                         <p class="text-black mb-0 fw-semibold">Pending  Verification</p>
-                                        <h1 class="m-0 text-black">400</h1>
+                                        <h1 class="m-0 text-black">{{ $totalPending }}</h1>
                                     </div>
                                     
                                 </div>
@@ -136,7 +136,7 @@
                             <div class="row d-flex justify-content-center">
                                 <div class="col-auto align-self-center">
                                     <div class="report-main-icon bg-light-alt">
-                                        <h1 class="m-0 text-black">2,345</h1> 
+                                        <h1 class="m-0 text-black"> {{ $totalUser }}</h1> 
                                     </div>
                                 </div>
                                 <div class="col">
@@ -146,11 +146,12 @@
                             </div>
                             <br>
                             <div class="mt-3">
-                                <p>586 - Log of Users </p>
-                                <p>655 - Active Users </p>
-                                <p>674 - Recently Registered Users</p>
-                                <p>430 - Inactive Users </p>
+                                <p>{{ $logOfUsers }} - Log of Users</p>
+                                <p>{{ $activeUsers }} - Active Users</p>
+                                <p>{{ $recentlyRegisteredUsers }} - Recently Registered Users</p>
+                                <p>{{ $inactiveUsers }} - Inactive Users</p>
                             </div>
+                            
                         </div><!--end card-body--> 
                     </div>
                 </div>
@@ -175,7 +176,7 @@
                     <div class="p-2">
                         <button type="button" class="card btn btn-outline-secondary">YTD</button>
                     </div>
-                </div>
+                </div> 
                
                 <div class="col-auto d-flex justify-content-between"> 
            
@@ -186,126 +187,61 @@
                     <div class="col-md-2 text-end">
                         <button type="button" class="btn btn-primary" style="background-color: #0E2554" data-bs-toggle="modal" data-bs-target="#tradingdrop">Export Report <i data-feather="download" class="align-self-end download-icon"></i></button>
                     </div>
-                </div>
+                </div> 
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table  class="table table-striped table-hover dt-responsive  " style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                            <thead>
-                                <tr>
-                                    <th class="px-2 py-3">S/N</th>
-                                    <th class="px-2 py-3">Reference</th>
-                                    <th class="px-2 py-3">Name</th>
-                                    <th class="px-2 py-3">Fee</th>
-
-                                    <th class="px-2 py-3">Verified by</th>
-
-                                    <th class="px-2 py-3">Status</th>
-
-                                    <th class="px-2 py-3">Initiated At</th>
-                                    <th class="px-2 py-3">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="px-0 py-0">
-                                        <a class="table-link" href="">
-                                            <div class="px-2 py-3">1</div>
-                                        </a>
-                                    </td>
-                                    <td class="px-0 py-0">
-                                        <a class="table-link" href="#">
-                                            <div class="px-2 py-3">5bbaWSx8pDq1gBTfLT404</div>
-                                        </a>
-                                    </td>
-                                    <td class="px-0 py-0">
-                                        <a class="table-link" href="#">
-                                            <div class="px-2 py-3">John Doe</div>
-                                        </a>
-                                    </td>
-                                    
-                                    <td class="px-0 py-0">
-                                        <a class="table-link" href="#">
-                                            <div class="px-2 py-3">N20,000.00</div>
-                                        </a>
-                                    </td>
-                                    <td class="px-0 py-0">
-                                        <a class="table-link" href="#">
-                                            <div class="px-2 py-3">John</div>
-                                        </a>
-                                    </td>
-                                    <td class="px-0 py-0">
-                                        <a class="table-link" href="#">
-                                            <div class="px-2 py-3">
-                                                <span class="badge badge-soft-success">Successful</span>
-                                            </div>
-                                        </a>
-                                    </td>
-                                    <td class="px-0 py-0">
-                                        <a class="table-link" href="#">
-                                            <div class="px-2 py-3">2024-9-11</div>
-                                        </a>
-                                    </td>
-
-                                    <td class="px-0 py-0">
-                                        <a class="table-link" href="#">
-                                            <div class="px-2 py-3">
-                                                <a href="#">View Details</a>
-                                           
-                                            </div>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="px-0 py-0">
-                                        <a class="table-link" href="">
-                                            <div class="px-2 py-3">2</div>
-                                        </a>
-                                    </td>
-                                    <td class="px-0 py-0">
-                                        <a class="table-link" href="#">
-                                            <div class="px-2 py-3">5bbaWSx8pDq1gBTfLT404</div>
-                                        </a>
-                                    </td>
-                                    <td class="px-0 py-0">
-                                        <a class="table-link" href="#">
-                                            <div class="px-2 py-3">John Doe</div>
-                                        </a>
-                                    </td>
-                                   
-                                    <td class="px-0 py-0">
-                                        <a class="table-link" href="#">
-                                            <div class="px-2 py-3">N20</div>
-                                        </a>
-                                    </td>
-                                    <td class="px-0 py-0">
-                                        <a class="table-link" href="#">
-                                            <div class="px-2 py-3">Joo</div>
-                                        </a>
-                                    </td>
-                                    <td class="px-0 py-0">
-                                        <a class="table-link" href="#">
-                                            <div class="px-2 py-3">
-                                                <span class="badge badge-soft-warning">Found</span>
-                                            </div>
-                                        </a>
-                                    </td>
-                                    <td class="px-0 py-0">
-                                        <a class="table-link" href="#">
-                                            <div class="px-2 py-3">2024-09-11</div>
-                                        </a>
-                                    </td>
-                                    <td class="px-0 py-0">
-                                        <a class="table-link" href="#">
-                                            <div class="px-2 py-3">
-                                                <a href="#">View Details</a>
-                                           
-                                            </div>
-                                        </a>
-                                    </td>
-                                </tr>
-                               
-                            </tbody>
-                        </table>
+                    <table id="datatable-buttons" class="table table-striped table-hover dt-responsive nowrap " style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th class="px-2 py-3">S/N</th>
+                                <th class="px-2 py-3">Transaction Reference</th>
+                                <th class="px-2 py-3">Status</th>
+                                <th class="px-2 py-3">Amount (&#x20A6;)</th>
+                                <th class="px-2 py-3">Transaction Type</th>
+                                <th class="px-2 py-3">Transaction Date</th>
+                                <th class="px-2 py-3">Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($transactions as $trans)
+                            <tr>
+                                <td class="px-0 py-0"><a class="table-link" href="{{route('user.transaction', $trans->id)}}"><div class="px-2 py-3">{{$loop->iteration}}</div></a></td>
+                                <td class="px-0 py-0"><a class="table-link" href="{{route('user.transaction', $trans->id)}}"><div class="px-2 py-3">{{$trans->ref}}</div></a></td>
+                                <td class="px-0 py-0"><a class="table-link" href="{{route('user.transaction', $trans->id)}}"><div class="px-2 py-3">@if($trans->status == 'processing')
+                                    <span class="badge badge-soft-purple"> {{ucwords($trans->status)}}</span>
+                                    @elseif($trans->status == 'successful')
+                                    <span class="badge badge-soft-success"> {{ucwords($trans->status)}}</span>
+                                    @elseif($trans->status == 'reversed')
+                                    <span class="badge badge-soft-dark"> {{ucwords($trans->status)}}</span>
+                                    @elseif($trans->status == 'failed')
+                                    <span class="badge badge-soft-danger"> {{ucwords($trans->status)}}</span>
+                                    @elseif($trans->status == 'declined')
+                                    <span class="badge badge-soft-warning"> {{ucwords($trans->status)}}</span>
+                                    @else
+                                    <span class="badge badge-soft-secondary"> {{ucwords($trans->status)}}</span>
+                                    @endif
+                                    </div>
+                                    </a>
+                                </td>
+                                <td class="px-0 py-0"><a class="table-link" href="{{route('user.transaction', $trans->id)}}"><div class="px-2 py-3">{{moneyFormat($trans->amount, 'NG')}}</div></a></td>
+                                <td class="px-0 py-0"><a class="table-link" href="{{route('user.transaction', $trans->id)}}"><div class="px-2 py-3">@if($trans->type == 'credit')
+                                    <span class="badge badge-soft-success rounded-circle me-2 px-1 py-1 fw-bold">
+                                        <i class="mdi mdi-arrow-up font-10"></i>
+                                    </span>
+                                    @else
+                                    <span class="btn btn-soft-success btn-icon-circle btn-icon-circle-sm mr-2">
+                                        <i class="mdi mdi-arrow-down font-16"></i>
+                                    </span> 
+                                    @endif
+                                    {{ucwords($trans->type)}}
+                                    </div></a>
+                                </td>
+                                <td class="px-0 py-0"><a class="table-link" href="{{route('user.transaction', $trans->id)}}"><div class="px-2 py-3">{{date('jS F Y, h:iA', strtotime($trans->created_at))}}</div></a></td>
+                                <td class="px-0 py-0"><a class="table-link" href="{{route('user.transaction', $trans->id)}}"><div class="px-2 py-3">{{$trans->purpose}}</div></a></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                     </div>
                 </div>
                 
@@ -317,50 +253,52 @@
         </div> <!-- end col -->
 
     </div>                  
-
-
-<script>
-    var ctx = document.getElementById('groupedBarChart').getContext('2d');
     
-    var labels = @json($labels);
-    var data2023 = @json($data2023);
-    var data2024 = @json($data2024);
-    var data2025 = @json($data2025); 
 
-    var groupedBarChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [
-                {
-                    label: 'Identity Verification',
-                    data: data2023,
-                    backgroundColor: '#68DBF2',
-                    borderWidth: 1
-                },
-                {
-                    label: 'Business Verification',
-                    data: data2024,
-                    backgroundColor: '#0E2554',
-                    borderWidth: 1
-                },
-                {
-                    label: 'Address Verification',
-                    data: data2025,
-                    backgroundColor: '#0034FF',  
-                    borderWidth: 1
-                }
-            ]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+    <script>
+        var ctx = document.getElementById('groupedBarChart').getContext('2d');
+        
+        // Use the data values passed from the controller
+        var labels = @json($labels);
+        var data2023 = @json($data2023);
+        var data2024 = @json($data2024);
+        var data2025 = @json($data2025); 
+    
+        var groupedBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Identity Verification',
+                        data: data2023,
+                        backgroundColor: '#68DBF2',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Business Verification',
+                        data: data2024,
+                        backgroundColor: '#0E2554',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Address Verification',
+                        data: data2025,
+                        backgroundColor: '#0034FF',  
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
-    });
-</script>
+        });
+    </script>
+    
 <!-- Include necessary JS (jQuery, Moment.js, Bootstrap, and Date Range Picker) -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
@@ -386,6 +324,6 @@
             // Reset the input field to the default placeholder
             $(this).val('Start Date - End Date');
         });
-    });
+    }); 
 </script>
 @endsection

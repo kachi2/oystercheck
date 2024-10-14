@@ -9,7 +9,7 @@ class AddressVerificationDetail extends Model
 {
     use HasFactory;
 
-
+ 
     protected $fillable = [
         'address_verification_id',
         'reference_id',

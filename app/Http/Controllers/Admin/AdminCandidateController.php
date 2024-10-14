@@ -17,7 +17,7 @@ class AdminCandidateController extends Controller
         $candidate['rejected'] = Candidate::where(['status'=>'rejected'])->get();
         return view('admin.candidates.index', $candidate);
     }
-
+ 
     public function candidateDetails($id){
         $data['verified'] = Candidate::where([ 'status'=>'verified'])->get();
         $data['rejected'] = Candidate::where([ 'status'=>'rejected'])->get();  

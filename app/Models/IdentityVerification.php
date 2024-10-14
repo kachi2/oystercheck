@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+ 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +9,7 @@ class IdentityVerification extends Model
 {
     use HasFactory;
 
-
+ 
     protected $fillable = [
 
         'verification_id', 'ref', 'service_reference', 'user_id', 'fee', 'discount', 'status', 'first_name', 'last_name', 'pin'

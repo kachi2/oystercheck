@@ -16,7 +16,7 @@ class AdminBusinessController extends Controller
 
     public function businessIndex($slug){
         $slug = Verification::where(['slug' => $slug])->first();
-        if ($slug) {
+        if ($slug) { 
             if ($slug->slug == 'cac') {
                 $data['slug'] = $slug;
                 $data['success'] = CacVerification::where(['status' => 'found', 'verification_id' => $slug->id, 'is_sandbox' => $this->sandboxData()])->get();

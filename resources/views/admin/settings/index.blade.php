@@ -25,7 +25,7 @@
       transform: translate(-50%, -50%);
     }
 </style>
-
+ 
 <div class="page-content">
     <div class="container-fluid">
         <div class="row"> 

@@ -5,7 +5,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="page-title-box">
-                                <div class="row">
+                                <div class="row"> 
                                     <div class="col">
                                         <h4 class="page-title">All Administrators</h4>
                                         <ol class="breadcrumb">
@@ -48,7 +48,7 @@
                                 <th>Action</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody> 
                             @foreach ($admins as $admin )
                                <tr>
                                 <td>{{$admin->user->name}}</td>

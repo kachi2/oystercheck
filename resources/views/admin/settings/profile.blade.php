@@ -40,33 +40,29 @@
 
     <div class="row">
         <div class="col-md-3">
-            <h5>Profile Details </h5>
+            <h5>Profile Details <snap class="badge badge-primary">{{$admin->role->name}}</snap> </h5>
         </div>
         <div class="col-md-9">
-            <form action="" method="POST">
+            <form action="{{ route('form_profileUpdate') }}" method="POST">
+                @csrf
                 <div class="row ">
                 
                     <div class="mb-3">
-                        <label for="floatingInput" class="form-label">First Name</label>
-                        <input type="text" class="form-control"  value="" name="name" id="floatingInput" placeholder="Enter First Name">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="floatingInput" class="form-label">Last Name</label>
-                        <input type="text" class="form-control"  value="" name="name" id="floatingInput" placeholder="Enter Last Name">
+                        <label for="floatingInput" class="form-label">Full Name</label>
+                        <input type="text" class="form-control"  value="{{ $admin->user->name }}" name="name" id="floatingInput" placeholder="Enter First Name">
                     </div>
 
                     <div class="mb-3">
                         <label for="floatingInput" class="form-label">Email Name</label>
-                        <input type="email" class="form-control"  value="" name="name" id="floatingInput" placeholder="Enter Email">
+                        <input type="email" class="form-control"  value="{{ $admin->user->email }}" name="email" id="floatingInput" placeholder="Enter Email">
                     </div>
 
                     <div class="mb-3">
                         <label for="floatingInput" class="form-label">Phone Number</label>
-                        <input type="text" class="form-control"  value="" name="name" id="floatingInput" placeholder="Phone Number">
+                        <input type="text" class="form-control"  value="{{ $admin->company_phone }}" name="company_phone" id="floatingInput" placeholder="Phone Number">
                     </div>
 
-                    <div class="row mt-4">
+                    <div class="row mt-4"> 
                         <div class="col-sm-12 d-grid">
                         <button type="submit" class="btn btn-primary btn-lg submitbtn" style="background-color: #0E2554">Save change</button>
                         </div>

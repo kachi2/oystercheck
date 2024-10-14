@@ -13,7 +13,7 @@ use App\Models\Wallet;
 use App\Traits\GenerateRef;
 use Illuminate\Support\Facades\DB;
 use App\Traits\sandbox;
-use App\Models\User;
+use App\Models\User; 
 
 class SanctionPepController extends Controller
 {

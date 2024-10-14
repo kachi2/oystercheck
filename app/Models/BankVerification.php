@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class BankVerification extends Model
-{
+{ 
     use HasFactory;
 
     protected $table = 'bank_account_verifications';

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Verification;
-use App\Models\{BankVerification, BvnVerification,NipVerification, PvcVerification, NinVerification, NdlVerification, PhoneVerification, ImageVerification};
+use App\Models\{BankVerification, BvnVerification,NipVerification, PvcVerification, NinVerification, NdlVerification, PhoneVerification, ImageVerification, EmployeeReference};
 use App\Models\IdentityVerification;
 
 class AdminIdentityController extends Controller
@@ -64,11 +64,17 @@ class AdminIdentityController extends Controller
                 $data['pending'] = PhoneVerification::where(['status' => 'pending', 'verification_id' => $slug->id, 'is_sandbox' => $this->sandboxData()])->get();
                 $data['logs'] = PhoneVerification::where(['verification_id' => $slug->id, 'is_sandbox' => $this->sandboxData()])->latest()->get();
                 return view('admin.verifications.verify', $data);
+            }elseif ($slug->slug == 'employer-reference') {
+                $data['success'] = EmployeeReference::where(['status' => 'found', 'verification_id' => $slug->id, 'is_sandbox' => $this->sandboxData()])->get();
+                $data['failed'] =  EmployeeReference::where(['status' => 'not_found', 'verification_id' => $slug->id, 'is_sandbox' => $this->sandboxData()])->get();
+                $data['pending'] = EmployeeReference::where(['status' => 'pending', 'verification_id' => $slug->id, 'is_sandbox' => $this->sandboxData()])->get();
+                $data['logs'] = EmployeeReference::where(['verification_id' => $slug->id, 'is_sandbox' => $this->sandboxData()])->latest()->get();
+                return view('admin.verifications.verify', $data);
             }
         } else {
             return back();
         }
-    }  
+    }   
 
     public function verificationReport($slug, $verificationId){
         $verificationId = decrypt($verificationId);

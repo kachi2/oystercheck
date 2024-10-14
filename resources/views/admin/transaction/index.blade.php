@@ -53,105 +53,96 @@
                 <div class="card">
                     
                     <div class="card-body p-2">
-                        <div class="col-auto d-flex justify-content-between"> 
+                        <div class="col-auto d-flex justify-content-between">
                             <div class="form-group col-md-3 d-flex">
                                 <h4>Transaction History</h4>
                             </div>
                             <div class="col-md-2 text-end p-2">
-                                <button type="button" class=" btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#tradingdrop">
-                                    <i data-feather="download" class="align-self-end download-icon"></i> Download </button>
+                                <form action="{{ route('admin.transactions.download') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-outline-primary">
+                                        <i data-feather="download" class="align-self-end download-icon"></i> Download
+                                    </button>
+                                </form>
                             </div>
                         </div>
+                        
 
-                        <div class="row">
+                        <div class="row" >
                             <div class="card">
-                                <div class="card-body " >
-                                    <a href="#" class="" data-bs-toggle="modal" data-bs-target="#depositdrop">
-                                        <div class="pb-3 d-flex justify-content-between">
-                                            <div class="row d-flex justify-content-center">
-                                                <div class="col-auto align-self-center">
-                                                    <div class="report-main-icon bg-light-alt">
-                                                        <div class="circle">
-                                                            <i class="fas fa-arrow-right"></i>
+                                <div class="card-body">
+                                    @foreach($transactions as $transaction)
+                                        <a href="#" class="" data-bs-toggle="modal" data-bs-target="#depositdrop{{ $transaction->id }}">
+                                            <div class="pb-3 d-flex justify-content-between">
+                                                <div class="row d-flex justify-content-center">
+                                                    <div class="col-auto align-self-center">
+                                                        <div class="report-main-icon bg-light-alt">
+                                                            <div class="circle">
+                                                                <i class="fas {{ $transaction->type == 'deposit' ? 'fa-arrow-right' : 'fa-arrow-left' }}"></i>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col">
-                                                    <p class="text-black mb-0 fw-semibold">Deposit - Successful</p>
-                                                    <p class="m-0 text-black">12/09/2024- Thru</p>
-                                                </div>
-                                            </div>
-                                            <div class="">
-                                                <h5 class="text-black mb-0 fw-semibold">$4,000</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="" data-bs-toggle="modal" data-bs-target="#depositdrop">
-                                        <div class="pb-3 d-flex justify-content-between">
-                                            <div class="row d-flex justify-content-center">
-                                                <div class="col-auto align-self-center">
-                                                    <div class="report-main-icon bg-light-alt">
-                                                        <div class="circle">
-                                                            <i class="fas fa-arrow-right"></i>
-                                                        </div>
+                                                    <div class="col">
+                                                        <p class="text-black mb-0 fw-semibold">
+                                                            {{ ucfirst($transaction->type) }} - {{ ucfirst($transaction->status) }}
+                                                        </p>
+                                                        <p class="m-0 text-black">{{ $transaction->created_at->format('d/m/Y') }} - Thru</p>
                                                     </div>
                                                 </div>
-                                                <div class="col">
-                                                    <p class="text-black mb-0 fw-semibold">Deposit - Successful</p>
-                                                    <p class="m-0 text-black">12/09/2024- Thru</p>
+                                                <div>
+                                                    <h5 class="text-black mb-0 fw-semibold">
+                                                        {{moneyFormat($transaction->amount, 'NG')}}
+                                                    </h5>
                                                 </div>
                                             </div>
-                                            <div class="">
-                                                <h5 class="text-black mb-0 fw-semibold">$4,000</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <a href="#" class="" data-bs-toggle="modal" data-bs-target="#depositdrop">
-                                        <div class="pb-3 d-flex justify-content-between">
-                                            <div class="row d-flex justify-content-center">
-                                                <div class="col-auto align-self-center">
-                                                    <div class="report-main-icon bg-light-alt">
-                                                        <div class="circle">
-                                                            <i class="fas fa-arrow-right"></i>
+                                        </a>
+                        
+                                        <div class="modal fade" id="depositdrop{{ $transaction->id }}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tradingdropLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <center>
+                                                            <div class="circle" style="background-color: #0E2554">
+                                                                <i class="fas fas fa-check" style="color: #fff"></i>
+                                                            </div>
+                                                            <h4>{{moneyFormat($transaction->amount, 'NG')}}</h4>
+                                                        </center>
+                                                        <h4>Wallet Details</h4>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div><h5>Type</h5></div>
+                                                            <div><p>{{ ucfirst($transaction->type) }}</p></div>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div><h5>Transaction Number</h5></div>
+                                                            <div class="d-flex">
+                                                                <p>{{ $transaction->ref }}</p>
+                                                                <i data-feather="copy" class="ms-2" style="width: 18px; color:#10B076"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div><h5>Transaction Date</h5></div>
+                                                            <div class="d-flex">
+                                                                <p>{{ $transaction->created_at->format('M d, Y h:i:s A') }}</p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col">
-                                                    <p class="text-black mb-0 fw-semibold">Deposit - Successful</p>
-                                                    <p class="m-0 text-black">12/09/2024- Thru</p>
-                                                </div>
-                                            </div>
-                                            <div class="">
-                                                <h5 class="text-black mb-0 fw-semibold">$4,000</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <a href="#" class="" data-bs-toggle="modal" data-bs-target="#depositdrop">
-                                        <div class="pb-3 d-flex justify-content-between">
-                                            <div class="row d-flex justify-content-center">
-                                                <div class="col-auto align-self-center">
-                                                    <div class="report-main-icon bg-light-alt">
-                                                        <div class="circle">
-                                                            <i class="fas fa-arrow-right"></i>
-                                                        </div>
+                                                    <div class="modal-footer">
+                                                        
                                                     </div>
                                                 </div>
-                                                <div class="col">
-                                                    <p class="text-black mb-0 fw-semibold">Deposit - Successful</p>
-                                                    <p class="m-0 text-black">12/09/2024- Thru</p>
-                                                </div>
-                                            </div>
-                                            <div class="">
-                                                <h5 class="text-black mb-0 fw-semibold">$4,000</h5>
                                             </div>
                                         </div>
-                                    </a>
+                                    @endforeach
+                        
+                                    {{-- <div class="mt-3"> 
+                                        {{ $transactions->links() }}
+                                    </div> --}}
                                 </div>
-
                             </div>
+                            
                         </div>
+                        
+                        
                     </div>
                 </div>
             </div>
@@ -159,49 +150,9 @@
         </div> <!-- end col -->
 
         <hr/>
-    </div>     
+    </div>      
 
-     <!-- Modal -->
-     <div class="modal  fade" id="depositdrop"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="tradingdropLabel" aria-hidden="true">
-        <div class="modal-dialog  modal-dialog-centered">
-        <div class="modal-content">
-            
-            <div class="modal-body ">
-                <center>
-                    <div class="circle" style="background-color: #0E2554">
-                        <i class="fas fas fa-check" style="color: #fff"></i>
-                    </div>
-                    <h4>#4,000.00
-                </center>
-                <h4>Wellet details</h4>
-                <div class="d-flex justify-content-between">
-                    <div><h5>Type</h5> </div>
-                    <div><p>Identity Verification</p></div>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <div class="d-flex">
-                        <h5>Transaction number</h5> 
-                    </div>
-                    <div class="d-flex">
-                        <p>234245fgdg547448gghehyrjki </p> 
-                        <i data-feather="copy" class="ms-2" style="width: 18px; color:#10B076"></i>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <div class="d-flex">
-                        <h5>Transaction Date</h5> 
-                    </div>
-                    <div class="d-flex">
-                        <p>Sep 12th,2024 02:45:34 </p> 
-                    </div>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-        </div>
-    </div>
+    
 
 
 @endsection

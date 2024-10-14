@@ -5,12 +5,12 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="page-title-box">
-                                <div class="row">
+                                <div class="row"> 
                                     <div class="col">
                                         <h4 class="page-title">{{$slug->name}}</h4>
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"></li>
-                                        </ol>
+                                        </ol> 
                                     </div><!--end col-->
                                     <div class="col-auto align-self-center">
                                         <a href="#" class="btn btn-sm btn-outline-primary" id="Dash_Date">
@@ -51,25 +51,42 @@
                             <tr>
                                 <th>SN</th>
                                 <th>Candidate Id</th>
+                                <th>Name</th>
+                                <th>Email</th>
                                 <th>Verified by</th>
                                 <th>Fee</th>
-                                <th>Status</th>
+                                <th>Status</th> 
                                 <th>Date</th>
                                  <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                        @foreach ($logs as $trans )
-                            <tr>
-                                <td>{{$trans->id}}</td>
+                                @foreach ($logs as $index => $trans )
+                                <tr> 
+                                <td>{{ $index + 1 }}</td>
                                 <td>{{$trans->service_reference}}</td>
-                                <td>{{$trans->user->name}}</td>
-                                <td>{{$trans->fee}}</td>
+                                <td>{{$trans->last_name}} {{$trans->first_name}} </td>
+                                <td>{{$trans->email}}</td>
+                                <td style="white-space: nowrap">
+                                    @foreach ($trans->addressVerificationDetail as $detail)
+                                        @php
+                                            $agentDetails = json_decode( $detail->agent )
+                                        @endphp
+                                        {{ $agentDetails->lastName }} {{ $agentDetails->firstName }}
+                                    @endforeach
+                                </td>
+                                <td>
+                                    <p>₦{{ number_format($trans->verification->fee, 2) }}</p>
+                                </td>
                                 <td>@if($trans->status == 'successful') <span class="text-success"> {{$trans->status}}</span> @elseif($trans->status == 'pending')<span class="text-warning"> {{$trans->status}}</span>  @else <span class="text-danger"> {{$trans->status}}</span> @endif  </td>
-                                <td>{{$trans->created_at}}</td>
-                                <td> @if($trans->status == 'successful')
-                                <a href="{{route('verify.details', encrypt($trans->id))}}">View Details</a>
-                                 @endif
+                                <td>
+                                    {{ \Carbon\Carbon::parse($trans->created_at)->format('jS F Y, h:ia') }}
+
+
+                                </td>
+                                <td> 
+                                    <a href="{{ url('admin/address/details/' . encrypt($trans->id)) }}">View Details</a>
+                                    {{-- <a href="{{ route('address.details', encrypt($trans->id)) }}">View Details</a> --}}
                                 </td>
                             </tr>
                              @endforeach

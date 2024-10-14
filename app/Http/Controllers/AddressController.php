@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
  
 use App\Events\AddressVerificationCreated;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
 use App\Models\AddressVerification;
 use App\Models\AddressVerificationDetail;
 use App\Models\Verification;
@@ -36,7 +36,7 @@ class AddressController extends Controller
   public function AddressIndex($slug)
   {
     $data = $this->generateAddressReport($slug);
-    return view('users.address.index', $data);
+    return view('users.address.index', $data); 
   }
 
   public function showCreateCandidate($slug)

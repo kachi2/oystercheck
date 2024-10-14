@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AddressVerification extends Model
 {
-    use HasFactory;
+    use HasFactory; 
 
     protected $fillable = [
         'verification_id',
@@ -26,7 +26,7 @@ class AddressVerification extends Model
         'expected_report_date',
         'candidate_id',
         'is_sandbox'
-    ];
+    ]; 
 
     public function user(){
         return $this->belongsTo(User::class);
@@ -34,7 +34,7 @@ class AddressVerification extends Model
 
     public function verification(){
         return $this->belongsTo(Verification::class, 'verification_id', 'id');
-    }
+    } 
 
     public function addressVerificationDetail()
     {

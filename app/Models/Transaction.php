@@ -9,7 +9,7 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
+    protected $fillable = [ 
         'ref',
         'user_id',
         'external_ref',
@@ -23,7 +23,7 @@ class Transaction extends Model
         'payment_method',
        
     ];
-
+ 
     public function user(){
         return $this->belongsTo(User::class);
     }

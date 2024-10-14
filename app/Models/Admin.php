@@ -28,7 +28,7 @@ class Admin extends Authenticatable
     use HasFactory;
     protected $fillable = [
         'user_id', 'name', 'company_name', 'company_email', 'company_phone', 'role_id'
-    ];
+    ]; 
 
     public function user(){
         return $this->belongsTo(User::class);

@@ -15,6 +15,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', '
     Route::get('/business/{slug}', [AdminBusinessController::class, 'businessIndex'])->name('businessIndex');
     Route::get('/business/{slug}/{verificationId}', [AdminBusinessController::class, 'businessDetails'])->name('showBusinessReport');
     Route::get('/address/{slug}', [AdminAddressController::class, 'AddressIndex'])->name('addressIndex');
+    Route::get('/address/details/{id}', [AdminAddressController::class, 'AddressDetails'])->name('details');
+
     Route::get('/candidate', [AdminCandidateController::class, 'getVerify'])->name('candidate.index');
     Route::get('/candidate/index', [AdminCandidateController::class, 'CandidateIndex'])->name('candidate.index');
     Route::get('/candidate/details/{id}', [AdminCandidateController::class, 'CandidateDetails'])->name('candidate.details');
@@ -37,12 +39,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', '
     // Route::post('/candidate/document/verified/{id}', [AdminCandidateController::class, 'VerifyCandidatep'])->name('VerifyCandidatep');
     // Route::get('/client/company/details/{id}', [AdminCandidateController::class, 'VerifyCandidate'])->name('VerifyCandidate');
     Route::get('/candidate/index', [AdminCandidateController::class, 'CandidateIndex'])->name('VerifyCandidate');
-    Route::get('/reports', [AdminController::class, 'UserReports'])->name('users.report'); 
+    Route::get('/reports', [AdminController::class, 'UserReports'])->name('users.report');  
     Route::get('/reports/get/', [AdminController::class, 'getReports'])->name('users.getReports');
     Route::get('/activity', [AdminController::class, 'UserActivity'])->name('users.activity'); 
 
     Route::get('/profile', [AdminController::class, 'Profile'])->name('user.profile'); 
     Route::get('/transactions', [AdminController::class, 'getTransaction'])->name('user.transactions');
+    Route::post('/transactions/download', [AdminController::class, 'download'])->name('transactions.download');
     Route::post('/profile/update', [AdminController::class, 'StorePersonalInfo'])->name('form_profileUpdate');
     Route::post('/password/update', [AdminController::class, 'UpdatePassword'])->name('form_PasswordeUpdate');
     Route::post('/basic/information/update', [AdminController::class, 'UpdateBusinessInfo'])->name('basic_information');

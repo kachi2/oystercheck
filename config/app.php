@@ -183,7 +183,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -239,7 +239,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Cloudinary' => CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary::class,
         'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
-        
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

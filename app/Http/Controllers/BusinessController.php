@@ -6,7 +6,7 @@ use App\Models\{CacVerification, TinVerification};
 use Illuminate\Support\Facades\{DB, Session, Validator};
 use App\Models\Verification;
 use App\Models\Transaction;
-use App\Traits\GenerateRef;
+use App\Traits\GenerateRef; 
 use Illuminate\Http\Request;
 use App\Traits\generateHeaderReports;
 use App\Models\User;
